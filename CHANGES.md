@@ -1,6 +1,6 @@
 # Changelog
 
-AR3 v2, rebuilt form scratch for the Nebius × NVIDIA Global AI Hackathon.
+AR3 v2, rebuilt from scratch for the Nebius × NVIDIA Global AI Hackathon.
 
 ## 26-20-2026
 
