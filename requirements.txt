@@ -1,0 +1,5 @@
+openai==3.39.0
+pydantic==2.14.1
+python-dotenv==1.2.4
+streamlit==1.66.1
+pytest==9.1.1
