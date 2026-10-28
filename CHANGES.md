@@ -18,3 +18,4 @@ AR3 v2, rebuilt from scratch for the Nebius × NVIDIA Global AI Hackathon.
 
 - schemas.py: enums, FailedPayment and Decision with Pydantic validation
 - tests/test_schemas.py: 5 tests (negative/zero amount, "CASH", confidence 1.7 rejected); all pass
+- smoke_test.py: live Nemotron call via Token Factory returns valid JSON; found exact model IDs; enable_thinking on vs off compared

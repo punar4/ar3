@@ -37,3 +37,5 @@ Each entry: what I tried, what happened, and a suggested fix.
 - **Tried:** `max_tokens=10` on `nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B` (first seen in the Nebius course, module 1, Exercise 1).
 - **Happened:** `content` was `None` with `finish_reason: length`. Nemotron reasons before answering and the reasoning tokens count toward `max_tokens`, so all 10 went to reasoning. That's expected for reasoning models, but nothing in the docs or the response explains it. An app that parses JSON (like AR3) would silently fail on every call.
 - **Fix:** Document on the model page and API docs that reasoning tokens count toward `max_tokens`; show how to turn thinking off (`enable_thinking: False`) or read `reasoning_content`; signal clearly when only reasoning was produced.
+
+- **Tested (Oct 29):** `enable_thinking: False` works on Token Factory: same prompt went from 14.0 s / 405 tokens to 2.5 s / 145 tokens. But the answer changed and got more confident (0.85 → 0.95), so the trade-off between speed and reasoning quality is worth documenting too.
