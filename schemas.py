@@ -80,3 +80,5 @@ class Decision(BaseModel):
     source: Source
     wait_minutes: int | None = Field(default=None, ge=0)   # only for RETRY_SCHEDULED
     overrides: list[str] = Field(default_factory=list)     # safety checks that changed the decision
+    next_acquirer: str | None = None       # for RETRY_ALT_ACQUIRER: which acquirer to retry through
+    idempotency_key: str | None = None     # for retries: unique key so a retry can't charge twice

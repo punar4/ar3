@@ -17,3 +17,5 @@ RETRY_CAP = 3                    # on attempt 3 or later, no more retries
 MIN_WAIT_MINUTES = 15            # scheduled retries wait at least this long
 HIGH_VALUE_PAISE = 5_000_000     # ₹50,000
 HIGH_VALUE_MIN_WAIT_MINUTES = 30
+
+ACQUIRERS = ["ACQ_A", "ACQ_B", "ACQ_C"]   # the merchant's acquirers (placeholder names)

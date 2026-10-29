@@ -29,4 +29,5 @@ AR3 v2, rebuilt from scratch for the Nebius × NVIDIA Global AI Hackathon.
 - llm.py: two-tier Nemotron diagnosis (Nano fast tier, then Ultra if the answer is invalid or below 0.7 confidence, then human review); every failure falls back safely
 - tests/test_llm.py: 9 tests with a fake model (escalation, timeouts, invented action REROUTE_TO_CARD rejected, confidence 1.7 rejected); all pass
 - live_check.py: real Nemotron run; vague UPI U30 now goes fast (unsure, 0.30) → Ultra (unsure, 0.35) → human review, instead of N1's confident "hard decline"
-- policy.py: 7 independent safety checks that can override any decision; 10 tests, all pass
+- policy.py: 7 independent safety checks that can override any decision, from rules or Nemotron; every override is recorded; 10 tests, all pass
+- engine.py: the full flow (rules → Nemotron → safety checks → retry details), with idempotency keys, alternate-acquirer choice and a rules-only mode for the evaluation baseline; 5 end-to-end tests, all pass (43 total)
