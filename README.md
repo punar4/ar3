@@ -6,11 +6,13 @@ An open-source layer that works out why a UPI or card payment failed and recomme
 
 AR3 v2 is in progress for the Nebius × NVIDIA Global AI Hackathon (submission Oct 30, 2026). See CHANGES.md for progress.
 
-Done so far:
-- `schemas.py`: the data shapes for a failed payment and a decision, validated with Pydantic, with tests
-- `smoke_test.py`: a live call to NVIDIA Nemotron through Nebius Token Factory that returns valid JSON
+Working now (43 tests passing):
+- `rules.py`: known card and UPI error codes decided instantly, with different actions at checkout and on recurring payments
+- `llm.py`: unclear errors go to Nemotron on Nebius Token Factory, fast model first, Ultra if the answer is invalid or unsure, human review if both fail
+- `policy.py`: 7 independent safety checks that can override any decision
+- `engine.py`: the full flow, end to end
 
-Being built: the rule table, the two-tier Nemotron diagnosis, the safety checks, the engine and the demo.
+Being built: the labelled test set and evaluation, and the demo.
 
 ## The problem
 
@@ -29,7 +31,7 @@ Same failed payment (UPI error U30, "debit failed"), same model (`nvidia/NVIDIA-
 
 The faster answer was more confident and probably wrong: "debit failed" is too vague to call a permanent decline. That's why AR3 never lets the model decide alone. One example isn't a conclusion; the full evaluation will measure this across the test set.
 
-## How AR3 will decide (design)
+## How AR3 decides
 
 1. Known error codes go to a rule table: instant, free and predictable.
 2. Unclear errors go to NVIDIA Nemotron on Nebius Token Factory: a fast model first, Ultra only when it's unsure.
@@ -50,6 +52,8 @@ Requires Python 3.14.
 Copy `.env.example` to `.env` and add your Nebius Token Factory API key.
 
 To check your key works: `python smoke_test.py` (lists the Nemotron models and makes one live call).
+
+Run the tests (no API key needed): `pytest`
 
 ## License
 
