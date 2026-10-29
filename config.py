@@ -12,3 +12,8 @@ ULTRA_THINKING = True    # Ultra: reasoning on; it only sees hard cases
 CONFIDENCE_THRESHOLD = 0.7    # below this, escalate (fast -> Ultra -> human review)
 LLM_MAX_TOKENS = 4000         # generous: reasoning tokens count toward this (FEEDBACK #7)
 LLM_TIMEOUT_SECONDS = 60
+
+RETRY_CAP = 3                    # on attempt 3 or later, no more retries
+MIN_WAIT_MINUTES = 15            # scheduled retries wait at least this long
+HIGH_VALUE_PAISE = 5_000_000     # ₹50,000
+HIGH_VALUE_MIN_WAIT_MINUTES = 30
