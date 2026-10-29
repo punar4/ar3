@@ -20,3 +20,12 @@ AR3 v2, rebuilt from scratch for the Nebius × NVIDIA Global AI Hackathon.
 - tests/test_schemas.py: 5 tests (negative/zero amount, "CASH", confidence 1.7 rejected); all pass
 - smoke_test.py: live Nemotron call via Token Factory returns valid JSON; found exact model IDs; enable_thinking on vs off compared
 - README: status updated; first finding (reasoning on vs off) added
+
+## 2026-10-29
+
+- rules.py: rule table for known card and UPI error codes, with different actions for live checkout and recurring payments; unknown codes go to Nemotron
+- tests/test_rules.py: 14 tests (5 codes × 2 channels, unknown code, per-method codes, waits, normalisation); all pass
+- config.py: model IDs, thinking settings and the 0.7 confidence threshold in one place
+- llm.py: two-tier Nemotron diagnosis (Nano fast tier, then Ultra if the answer is invalid or below 0.7 confidence, then human review); every failure falls back safely
+- tests/test_llm.py: 9 tests with a fake model (escalation, timeouts, invented action REROUTE_TO_CARD rejected, confidence 1.7 rejected); all pass
+- live_check.py: real Nemotron run; vague UPI U30 now goes fast (unsure, 0.30) → Ultra (unsure, 0.35) → human review, instead of N1's confident "hard decline"
