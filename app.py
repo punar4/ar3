@@ -393,7 +393,8 @@ with tab_batch:
         view["category"] = view["category"].map(lambda s: CATEGORY_TEXT.get(s, s))
         if "expected" in view:
             view["expected"] = view["expected"].map(lambda s: ACTION_TEXT.get(s, s))
-        st.dataframe(view, width="stretch", hide_index=True, column_config={
+        event = st.dataframe(view, width="stretch", hide_index=True, on_select="rerun",
+                             selection_mode="single-row", key="batch_table", column_config={
             "payment_id": st.column_config.TextColumn("Payment"),
             "amount": st.column_config.TextColumn("Amount"),
             "method": st.column_config.TextColumn("Method"),
@@ -406,6 +407,15 @@ with tab_batch:
             "correct": st.column_config.CheckboxColumn("Correct"),
             "reason": st.column_config.TextColumn("Reason", width="large"),
         })
+        picked = event.selection.rows
+        if picked:
+            r = view.iloc[picked[0]]
+            st.markdown(f"""<div class="ar3 ar3-result"><div class="ar3-kicker">{html.escape(str(r['payment_id']))}
+ · {html.escape(str(r['error_code']))} · {r['amount']}</div>
+<div class="ar3-action" style="font-size:1.2rem">{html.escape(str(r['action']))}</div>
+<p class="ar3-why">{html.escape(str(r['reason']))}</p></div>""", unsafe_allow_html=True)
+        else:
+            st.caption("Select a row to read its full reason.")
         st.download_button("Download decisions (CSV)", view.to_csv(index=False), "ar3_decisions.csv",
                            "text/csv")
 
