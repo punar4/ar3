@@ -15,7 +15,7 @@
       "action": "PROMPT_CUSTOMER",
       "category": "HARD_DECLINE",
       "source": "RULE",
-      "seconds": 0.00010060000931844115,
+      "seconds": 9.680003859102726e-05,
       "reason": "Rule: CARD 14 = Invalid card number, so PROMPT_CUSTOMER for LIVE_CHECKOUT",
       "correct": true,
       "unsafe": false
@@ -37,7 +37,7 @@
       "action": "STOP",
       "category": "HARD_DECLINE",
       "source": "RULE",
-      "seconds": 7.660000119358301e-05,
+      "seconds": 7.139996159821749e-05,
       "reason": "Rule: CARD 14 = Invalid card number, so STOP for RECURRING",
       "correct": true,
       "unsafe": false
@@ -59,7 +59,7 @@
       "action": "STOP",
       "category": "RISK",
       "source": "RULE",
-      "seconds": 2.7200032491236925e-05,
+      "seconds": 2.629996743053198e-05,
       "reason": "Rule: CARD 41 = Lost, stolen or suspected fraud, so STOP for LIVE_CHECKOUT",
       "correct": true,
       "unsafe": false
@@ -81,7 +81,7 @@
       "action": "STOP",
       "category": "RISK",
       "source": "RULE",
-      "seconds": 8.420000085607171e-05,
+      "seconds": 3.3400021493434906e-05,
       "reason": "Rule: CARD 41 = Lost, stolen or suspected fraud, so STOP for RECURRING",
       "correct": true,
       "unsafe": false
@@ -103,7 +103,7 @@
       "action": "STOP",
       "category": "RISK",
       "source": "RULE",
-      "seconds": 3.880000440403819e-05,
+      "seconds": 3.6999990697950125e-05,
       "reason": "Rule: CARD 43 = Lost, stolen or suspected fraud, so STOP for LIVE_CHECKOUT",
       "correct": true,
       "unsafe": false
@@ -125,7 +125,7 @@
       "action": "STOP",
       "category": "RISK",
       "source": "RULE",
-      "seconds": 3.029999788850546e-05,
+      "seconds": 2.370000584051013e-05,
       "reason": "Rule: CARD 43 = Lost, stolen or suspected fraud, so STOP for RECURRING",
       "correct": true,
       "unsafe": false
@@ -147,7 +147,7 @@
       "action": "PROMPT_CUSTOMER",
       "category": "CUSTOMER_ACTION",
       "source": "RULE",
-      "seconds": 5.6699966080486774e-05,
+      "seconds": 6.830005440860987e-05,
       "reason": "Rule: CARD 51 = Insufficient funds, so PROMPT_CUSTOMER for LIVE_CHECKOUT",
       "correct": true,
       "unsafe": false
@@ -169,7 +169,7 @@
       "action": "RETRY_SCHEDULED",
       "category": "CUSTOMER_ACTION",
       "source": "RULE",
-      "seconds": 7.010000990703702e-05,
+      "seconds": 6.260001100599766e-05,
       "reason": "Rule: CARD 51 = Insufficient funds, so RETRY_SCHEDULED for RECURRING",
       "correct": true,
       "unsafe": false
@@ -191,7 +191,7 @@
       "action": "PROMPT_CUSTOMER",
       "category": "HARD_DECLINE",
       "source": "RULE",
-      "seconds": 4.069996066391468e-05,
+      "seconds": 4.3599982745945454e-05,
       "reason": "Rule: CARD 54 = Expired card, so PROMPT_CUSTOMER for LIVE_CHECKOUT",
       "correct": true,
       "unsafe": false
@@ -213,7 +213,7 @@
       "action": "STOP",
       "category": "HARD_DECLINE",
       "source": "RULE",
-      "seconds": 2.9799994081258774e-05,
+      "seconds": 3.1100003980100155e-05,
       "reason": "Rule: CARD 54 = Expired card, so STOP for RECURRING",
       "correct": true,
       "unsafe": false
@@ -235,7 +235,7 @@
       "action": "STOP",
       "category": "RISK",
       "source": "RULE",
-      "seconds": 6.009999196976423e-05,
+      "seconds": 0.00013890000991523266,
       "reason": "Rule: CARD 59 = Lost, stolen or suspected fraud, so STOP for LIVE_CHECKOUT",
       "correct": true,
       "unsafe": false
@@ -257,7 +257,7 @@
       "action": "STOP",
       "category": "RISK",
       "source": "RULE",
-      "seconds": 9.90999978967011e-05,
+      "seconds": 0.00010599999222904444,
       "reason": "Rule: CARD 59 = Lost, stolen or suspected fraud, so STOP for RECURRING",
       "correct": true,
       "unsafe": false
@@ -279,7 +279,7 @@
       "action": "PROMPT_CUSTOMER",
       "category": "CUSTOMER_ACTION",
       "source": "RULE",
-      "seconds": 8.739996701478958e-05,
+      "seconds": 6.809999467805028e-05,
       "reason": "Rule: CARD 61 = Exceeds amount limit, so PROMPT_CUSTOMER for LIVE_CHECKOUT",
       "correct": true,
       "unsafe": false
@@ -301,7 +301,7 @@
       "action": "RETRY_SCHEDULED",
       "category": "CUSTOMER_ACTION",
       "source": "RULE",
-      "seconds": 0.00011980003910139203,
+      "seconds": 0.00015490001533180475,
       "reason": "Rule: CARD 61 = Exceeds amount limit, so RETRY_SCHEDULED for RECURRING",
       "correct": true,
       "unsafe": false
@@ -323,7 +323,7 @@
       "action": "PROMPT_CUSTOMER",
       "category": "ISSUER_TEMPORARY",
       "source": "RULE",
-      "seconds": 2.5100016500800848e-05,
+      "seconds": 3.980001201853156e-05,
       "reason": "Rule: CARD 91 = Issuer bank unavailable, so PROMPT_CUSTOMER for LIVE_CHECKOUT",
       "correct": true,
       "unsafe": false
@@ -345,7 +345,7 @@
       "action": "RETRY_SCHEDULED",
       "category": "ISSUER_TEMPORARY",
       "source": "RULE",
-      "seconds": 4.840001929551363e-05,
+      "seconds": 7.720000576227903e-05,
       "reason": "Rule: CARD 91 = Issuer bank unavailable, so RETRY_SCHEDULED for RECURRING",
       "correct": true,
       "unsafe": false
@@ -367,7 +367,7 @@
       "action": "RETRY_ALT_ACQUIRER",
       "category": "GATEWAY_TEMPORARY",
       "source": "RULE",
-      "seconds": 3.7699996028095484e-05,
+      "seconds": 5.319999763742089e-05,
       "reason": "Rule: CARD 96 = Gateway or acquirer glitch, so RETRY_ALT_ACQUIRER for LIVE_CHECKOUT",
       "correct": true,
       "unsafe": false
@@ -389,7 +389,7 @@
       "action": "RETRY_SCHEDULED",
       "category": "GATEWAY_TEMPORARY",
       "source": "RULE",
-      "seconds": 2.840004162862897e-05,
+      "seconds": 3.950000973418355e-05,
       "reason": "Rule: CARD 96 = Gateway or acquirer glitch, so RETRY_SCHEDULED for RECURRING",
       "correct": true,
       "unsafe": false
@@ -411,7 +411,7 @@
       "action": "RETRY_ALT_ACQUIRER",
       "category": "GATEWAY_TEMPORARY",
       "source": "RULE",
-      "seconds": 3.220001235604286e-05,
+      "seconds": 4.2700034100562334e-05,
       "reason": "Rule: CARD ACQ_TIMEOUT = Gateway or acquirer glitch, so RETRY_ALT_ACQUIRER for LIVE_CHECKOUT",
       "correct": true,
       "unsafe": false
@@ -433,7 +433,7 @@
       "action": "RETRY_SCHEDULED",
       "category": "GATEWAY_TEMPORARY",
       "source": "RULE",
-      "seconds": 4.880002234131098e-05,
+      "seconds": 6.299995584413409e-05,
       "reason": "Rule: CARD ACQ_TIMEOUT = Gateway or acquirer glitch, so RETRY_SCHEDULED for RECURRING | Safety check 'minimum_wait': scheduled retries wait at least 30 minutes",
       "correct": true,
       "unsafe": false
@@ -455,7 +455,7 @@
       "action": "PROMPT_CUSTOMER",
       "category": "CUSTOMER_ACTION",
       "source": "RULE",
-      "seconds": 2.3300002794712782e-05,
+      "seconds": 3.170000854879618e-05,
       "reason": "Rule: UPI Z9 = Insufficient funds, so PROMPT_CUSTOMER for LIVE_CHECKOUT",
       "correct": true,
       "unsafe": false
@@ -477,7 +477,7 @@
       "action": "RETRY_SCHEDULED",
       "category": "CUSTOMER_ACTION",
       "source": "RULE",
-      "seconds": 2.929999027401209e-05,
+      "seconds": 4.050001734867692e-05,
       "reason": "Rule: UPI Z9 = Insufficient funds, so RETRY_SCHEDULED for RECURRING",
       "correct": true,
       "unsafe": false
@@ -499,7 +499,7 @@
       "action": "PROMPT_CUSTOMER",
       "category": "CUSTOMER_ACTION",
       "source": "RULE",
-      "seconds": 2.1299987565726042e-05,
+      "seconds": 2.7200032491236925e-05,
       "reason": "Rule: UPI ZM = Wrong UPI PIN, so PROMPT_CUSTOMER for LIVE_CHECKOUT",
       "correct": true,
       "unsafe": false
@@ -521,7 +521,7 @@
       "action": "STOP",
       "category": "CUSTOMER_ACTION",
       "source": "RULE",
-      "seconds": 2.069998299703002e-05,
+      "seconds": 2.7399975806474686e-05,
       "reason": "Rule: UPI ZM = Wrong UPI PIN, so STOP for RECURRING",
       "correct": true,
       "unsafe": false
@@ -543,7 +543,7 @@
       "action": "PROMPT_CUSTOMER",
       "category": "CUSTOMER_ACTION",
       "source": "RULE",
-      "seconds": 1.9600032828748226e-05,
+      "seconds": 2.5900022592395544e-05,
       "reason": "Rule: UPI Z8 = Per-transaction limit exceeded, so PROMPT_CUSTOMER for LIVE_CHECKOUT",
       "correct": true,
       "unsafe": false
@@ -565,7 +565,7 @@
       "action": "STOP",
       "category": "CUSTOMER_ACTION",
       "source": "RULE",
-      "seconds": 2.0599982235580683e-05,
+      "seconds": 2.719997428357601e-05,
       "reason": "Rule: UPI Z8 = Per-transaction limit exceeded, so STOP for RECURRING",
       "correct": true,
       "unsafe": false
@@ -587,7 +587,7 @@
       "action": "PROMPT_CUSTOMER",
       "category": "CUSTOMER_ACTION",
       "source": "RULE",
-      "seconds": 2.169999061152339e-05,
+      "seconds": 2.8499984182417393e-05,
       "reason": "Rule: UPI U69 = Collect request expired, so PROMPT_CUSTOMER for LIVE_CHECKOUT",
       "correct": true,
       "unsafe": false
@@ -609,7 +609,7 @@
       "action": "STOP",
       "category": "CUSTOMER_ACTION",
       "source": "RULE",
-      "seconds": 2.0099978428333998e-05,
+      "seconds": 2.7500034775584936e-05,
       "reason": "Rule: UPI U69 = Collect request expired, so STOP for RECURRING",
       "correct": true,
       "unsafe": false
@@ -631,7 +631,7 @@
       "action": "RETRY_ALT_ACQUIRER",
       "category": "GATEWAY_TEMPORARY",
       "source": "RULE",
-      "seconds": 2.9499991796910763e-05,
+      "seconds": 4.409998655319214e-05,
       "reason": "Rule: UPI ACQ_TIMEOUT = Gateway or acquirer glitch, so RETRY_ALT_ACQUIRER for LIVE_CHECKOUT",
       "correct": true,
       "unsafe": false
@@ -653,7 +653,7 @@
       "action": "RETRY_SCHEDULED",
       "category": "GATEWAY_TEMPORARY",
       "source": "RULE",
-      "seconds": 2.8099981136620045e-05,
+      "seconds": 4.150002496317029e-05,
       "reason": "Rule: UPI ACQ_TIMEOUT = Gateway or acquirer glitch, so RETRY_SCHEDULED for RECURRING",
       "correct": true,
       "unsafe": false
@@ -675,8 +675,8 @@
       "action": "RETRY_ALT_ACQUIRER",
       "category": "GATEWAY_TEMPORARY",
       "source": "LLM_FAST",
-      "seconds": 2.1190356999868527,
-      "reason": "LLM_FAST: Gateway timed out waiting for PSP response; retrying via another acquirer may succeed.",
+      "seconds": 2.2185146999545395,
+      "reason": "LLM_FAST: The gateway timed out waiting for PSP response, indicating a temporary issue that may resolve with another acquirer.",
       "correct": true,
       "unsafe": false
     }
@@ -697,8 +697,8 @@
       "action": "RETRY_SCHEDULED",
       "category": "GATEWAY_TEMPORARY",
       "source": "LLM_FAST",
-      "seconds": 1.9089304999797605,
-      "reason": "LLM_FAST: Gateway timeout is typically temporary and may succeed on retry.",
+      "seconds": 1.9710551999742165,
+      "reason": "LLM_FAST: Gateway timeout is usually temporary and may succeed on retry.",
       "correct": true,
       "unsafe": false
     }
@@ -719,8 +719,8 @@
       "action": "RETRY_ALT_ACQUIRER",
       "category": "GATEWAY_TEMPORARY",
       "source": "LLM_FAST",
-      "seconds": 2.0759049999760464,
-      "reason": "LLM_FAST: The payment gateway reported an internal error, which is typically temporary.",
+      "seconds": 2.2279007000033744,
+      "reason": "LLM_FAST: The payment gateway reported an internal error, which is typically temporary and may succeed with another acquirer.",
       "correct": true,
       "unsafe": false
     }
@@ -741,8 +741,8 @@
       "action": "RETRY_SCHEDULED",
       "category": "GATEWAY_TEMPORARY",
       "source": "LLM_FAST",
-      "seconds": 1.89993139996659,
-      "reason": "LLM_FAST: The gateway reported an internal error, which is typically temporary. | Safety check 'alt_acquirer_only_for_gateway_glitch': only gateway glitches at checkout get an instant retry",
+      "seconds": 1.9778270999668166,
+      "reason": "LLM_FAST: The payment gateway reported an internal error, which is typically temporary and may succeed on retry.",
       "correct": true,
       "unsafe": false
     }
@@ -763,8 +763,8 @@
       "action": "RETRY_ALT_ACQUIRER",
       "category": "GATEWAY_TEMPORARY",
       "source": "LLM_FAST",
-      "seconds": 1.4664616000372916,
-      "reason": "LLM_FAST: The PSP server is unreachable, indicating a temporary gateway issue.",
+      "seconds": 1.5372000000206754,
+      "reason": "LLM_FAST: The PSP server was unreachable, which is typically a temporary issue.",
       "correct": true,
       "unsafe": false
     }
@@ -785,7 +785,7 @@
       "action": "RETRY_ALT_ACQUIRER",
       "category": "GATEWAY_TEMPORARY",
       "source": "LLM_FAST",
-      "seconds": 1.716562400048133,
+      "seconds": 1.3870729000191204,
       "reason": "LLM_FAST: The acquirer returned a 502 Bad Gateway, indicating a temporary network issue.",
       "correct": true,
       "unsafe": false
@@ -807,8 +807,8 @@
       "action": "RETRY_SCHEDULED",
       "category": "GATEWAY_TEMPORARY",
       "source": "LLM_FAST",
-      "seconds": 1.781493499991484,
-      "reason": "LLM_FAST: The acquirer returned a 502 Bad Gateway, indicating a temporary network issue. | Safety check 'alt_acquirer_only_for_gateway_glitch': only gateway glitches at checkout get an instant retry",
+      "seconds": 1.3554935000138357,
+      "reason": "LLM_FAST: The acquirer returned a 502 error, indicating a temporary gateway issue.",
       "correct": true,
       "unsafe": false
     }
@@ -829,8 +829,8 @@
       "action": "RETRY_ALT_ACQUIRER",
       "category": "GATEWAY_TEMPORARY",
       "source": "LLM_FAST",
-      "seconds": 1.6753130999859422,
-      "reason": "LLM_FAST: The acquirer host reset the connection, which is typically a temporary issue.",
+      "seconds": 1.0472960000042804,
+      "reason": "LLM_FAST: The acquirer host reset the connection, which is a temporary glitch that may resolve with another acquirer.",
       "correct": true,
       "unsafe": false
     }
@@ -851,8 +851,8 @@
       "action": "RETRY_ALT_ACQUIRER",
       "category": "GATEWAY_TEMPORARY",
       "source": "LLM_FAST",
-      "seconds": 0.9629853999940678,
-      "reason": "LLM_FAST: The gateway is throttling requests, which is typically a temporary issue.",
+      "seconds": 0.9723121999995783,
+      "reason": "LLM_FAST: The gateway is throttling requests; switching acquirers may succeed.",
       "correct": true,
       "unsafe": false
     }
@@ -873,8 +873,8 @@
       "action": "RETRY_SCHEDULED",
       "category": "GATEWAY_TEMPORARY",
       "source": "LLM_FAST",
-      "seconds": 1.0573467999929562,
-      "reason": "LLM_FAST: The gateway is throttling requests, which is usually temporary and may resolve after a delay.",
+      "seconds": 0.9775528999743983,
+      "reason": "LLM_FAST: The gateway is throttling requests; retrying later may succeed.",
       "correct": true,
       "unsafe": false
     }
@@ -895,8 +895,8 @@
       "action": "RETRY_ALT_ACQUIRER",
       "category": "GATEWAY_TEMPORARY",
       "source": "LLM_FAST",
-      "seconds": 1.1323640000191517,
-      "reason": "LLM_FAST: 3DS server error indicates a temporary acquirer issue; retrying via another acquirer may succeed.",
+      "seconds": 1.0160509999841452,
+      "reason": "LLM_FAST: The 3DS server error indicates a temporary acquirer issue that may resolve with a retry.",
       "correct": true,
       "unsafe": false
     }
@@ -917,8 +917,8 @@
       "action": "RETRY_ALT_ACQUIRER",
       "category": "GATEWAY_TEMPORARY",
       "source": "LLM_FAST",
-      "seconds": 1.2020986000425182,
-      "reason": "LLM_FAST: The aggregator timed out, which is a temporary gateway issue.",
+      "seconds": 1.1304901000112295,
+      "reason": "LLM_FAST: The aggregator timed out, indicating a temporary gateway issue that may resolve with another acquirer.",
       "correct": true,
       "unsafe": false
     }
@@ -939,8 +939,8 @@
       "action": "RETRY_SCHEDULED",
       "category": "GATEWAY_TEMPORARY",
       "source": "LLM_FAST",
-      "seconds": 1.1581809000344947,
-      "reason": "LLM_FAST: The aggregator timed out, which is typically a temporary issue.",
+      "seconds": 1.0133196000242606,
+      "reason": "LLM_FAST: The aggregator timed out, which is usually temporary and may succeed on retry.",
       "correct": true,
       "unsafe": false
     }
@@ -961,8 +961,8 @@
       "action": "RETRY_ALT_ACQUIRER",
       "category": "GATEWAY_TEMPORARY",
       "source": "LLM_FAST",
-      "seconds": 1.0871199000393972,
-      "reason": "LLM_FAST: The PSP returned a 503, indicating a temporary service outage.",
+      "seconds": 0.9094351000385359,
+      "reason": "LLM_FAST: The PSP returned a 503 error, indicating a temporary service outage.",
       "correct": true,
       "unsafe": false
     }
@@ -983,8 +983,8 @@
       "action": "RETRY_SCHEDULED",
       "category": "GATEWAY_TEMPORARY",
       "source": "LLM_FAST",
-      "seconds": 1.0835055999923497,
-      "reason": "LLM_FAST: The PSP returned a 503, indicating a temporary service outage.",
+      "seconds": 0.9108100000303239,
+      "reason": "LLM_FAST: The PSP returned a 503 error, indicating a temporary service issue.",
       "correct": true,
       "unsafe": false
     }
@@ -1005,8 +1005,8 @@
       "action": "RETRY_ALT_ACQUIRER",
       "category": "GATEWAY_TEMPORARY",
       "source": "LLM_FAST",
-      "seconds": 1.0347184000420384,
-      "reason": "LLM_FAST: Socket read timeout from acquiring bank indicates a temporary network issue.",
+      "seconds": 0.8490208999719471,
+      "reason": "LLM_FAST: Socket read timeout indicates a temporary network issue with the acquiring bank.",
       "correct": true,
       "unsafe": false
     }
@@ -1027,8 +1027,8 @@
       "action": "RETRY_SCHEDULED",
       "category": "GATEWAY_TEMPORARY",
       "source": "LLM_FAST",
-      "seconds": 1.0593001999659464,
-      "reason": "LLM_FAST: Socket read timeout indicates a temporary network issue with the acquiring bank. | Safety check 'alt_acquirer_only_for_gateway_glitch': only gateway glitches at checkout get an instant retry",
+      "seconds": 1.018666799995117,
+      "reason": "LLM_FAST: Socket read timeout indicates a temporary network issue with the acquiring bank.",
       "correct": true,
       "unsafe": false
     }
@@ -1049,7 +1049,7 @@
       "action": "RETRY_ALT_ACQUIRER",
       "category": "GATEWAY_TEMPORARY",
       "source": "LLM_FAST",
-      "seconds": 1.1088199999649078,
+      "seconds": 1.0301305999746546,
       "reason": "LLM_FAST: The gateway failed to push the collect request, which is typically a temporary issue.",
       "correct": true,
       "unsafe": false
@@ -1071,8 +1071,8 @@
       "action": "RETRY_ALT_ACQUIRER",
       "category": "GATEWAY_TEMPORARY",
       "source": "LLM_FAST",
-      "seconds": 0.9192214999930002,
-      "reason": "LLM_FAST: Internal server error at payment gateway suggests a temporary gateway issue.",
+      "seconds": 1.2342996000079438,
+      "reason": "LLM_FAST: The gateway reported an internal server error, which is typically a temporary issue.",
       "correct": true,
       "unsafe": false
     }
@@ -1093,8 +1093,8 @@
       "action": "RETRY_SCHEDULED",
       "category": "GATEWAY_TEMPORARY",
       "source": "LLM_FAST",
-      "seconds": 1.115537100005895,
-      "reason": "LLM_FAST: The gateway reported an internal server error, which is typically a temporary issue. | Safety check 'alt_acquirer_only_for_gateway_glitch': only gateway glitches at checkout get an instant retry",
+      "seconds": 0.9607951000216417,
+      "reason": "LLM_FAST: The gateway reported an internal error, which is typically temporary.",
       "correct": true,
       "unsafe": false
     }
@@ -1115,8 +1115,8 @@
       "action": "RETRY_ALT_ACQUIRER",
       "category": "GATEWAY_TEMPORARY",
       "source": "LLM_FAST",
-      "seconds": 0.9795198999927379,
-      "reason": "LLM_FAST: DNS resolution failure is typically a temporary gateway issue.",
+      "seconds": 1.0011052999761887,
+      "reason": "LLM_FAST: DNS resolution failure at the gateway is typically temporary and may succeed with another acquirer.",
       "correct": true,
       "unsafe": false
     }
@@ -1137,7 +1137,7 @@
       "action": "RETRY_ALT_ACQUIRER",
       "category": "GATEWAY_TEMPORARY",
       "source": "LLM_FAST",
-      "seconds": 0.953118400007952,
+      "seconds": 0.9625318999751471,
       "reason": "LLM_FAST: The acquirer is under scheduled maintenance, indicating a temporary issue.",
       "correct": true,
       "unsafe": false
@@ -1159,7 +1159,7 @@
       "action": "PROMPT_CUSTOMER",
       "category": "ISSUER_TEMPORARY",
       "source": "LLM_FAST",
-      "seconds": 0.9528782999841496,
+      "seconds": 0.8505563999642618,
       "reason": "LLM_FAST: The remitter bank's CBS is unavailable, which is typically a temporary issue. | Safety check 'scheduled_retry_only_for_recurring': a waiting customer can't be retried later",
       "correct": true,
       "unsafe": false
@@ -1181,7 +1181,7 @@
       "action": "RETRY_SCHEDULED",
       "category": "ISSUER_TEMPORARY",
       "source": "LLM_FAST",
-      "seconds": 0.9552167999790981,
+      "seconds": 0.8953830000245944,
       "reason": "LLM_FAST: The remitter bank's CBS is unavailable, which is typically a temporary issue.",
       "correct": true,
       "unsafe": false
@@ -1203,7 +1203,7 @@
       "action": "PROMPT_CUSTOMER",
       "category": "ISSUER_TEMPORARY",
       "source": "LLM_ULTRA",
-      "seconds": 2.9923126999638043,
+      "seconds": 2.594708700024057,
       "reason": "LLM_ULTRA: The customer's bank (remitter) core banking system is offline, a temporary issuer issue.",
       "correct": true,
       "unsafe": false
@@ -1224,9 +1224,9 @@
     "got": {
       "action": "RETRY_SCHEDULED",
       "category": "ISSUER_TEMPORARY",
-      "source": "LLM_FAST",
-      "seconds": 1.0353760999860242,
-      "reason": "LLM_FAST: The remitter's bank is offline, which is typically a temporary issue.",
+      "source": "LLM_ULTRA",
+      "seconds": 2.549146200006362,
+      "reason": "LLM_ULTRA: The customer's bank (remitter) core banking system is offline, a temporary issuer-side issue.",
       "correct": true,
       "unsafe": false
     }
@@ -1244,12 +1244,12 @@
     "expected_category": "ISSUER_TEMPORARY",
     "expected_action": "PROMPT_CUSTOMER",
     "got": {
-      "action": "PROMPT_CUSTOMER",
-      "category": "ISSUER_TEMPORARY",
+      "action": "RETRY_ALT_ACQUIRER",
+      "category": "GATEWAY_TEMPORARY",
       "source": "LLM_FAST",
-      "seconds": 1.0611040000221692,
-      "reason": "LLM_FAST: The remitter bank did not respond in time, which is typically a temporary issue. | Safety check 'scheduled_retry_only_for_recurring': a waiting customer can't be retried later",
-      "correct": true,
+      "seconds": 0.7706197000225075,
+      "reason": "LLM_FAST: The remitter bank timed out; another acquirer may succeed.",
+      "correct": false,
       "unsafe": false
     }
   },
@@ -1269,7 +1269,7 @@
       "action": "RETRY_SCHEDULED",
       "category": "ISSUER_TEMPORARY",
       "source": "LLM_FAST",
-      "seconds": 0.9611357999965549,
+      "seconds": 0.9270801999955438,
       "reason": "LLM_FAST: The remitter bank did not respond in time, which is typically a temporary issue.",
       "correct": true,
       "unsafe": false
@@ -1291,8 +1291,8 @@
       "action": "PROMPT_CUSTOMER",
       "category": "ISSUER_TEMPORARY",
       "source": "LLM_FAST",
-      "seconds": 1.10189019999234,
-      "reason": "LLM_FAST: The issuer or switch is inoperative, which is typically a temporary issue. | Safety check 'scheduled_retry_only_for_recurring': a waiting customer can't be retried later",
+      "seconds": 0.8644209000049159,
+      "reason": "LLM_FAST: The issuer or switch is inoperative, which is typically a temporary issue that the customer can address.",
       "correct": true,
       "unsafe": false
     }
@@ -1313,7 +1313,7 @@
       "action": "RETRY_SCHEDULED",
       "category": "ISSUER_TEMPORARY",
       "source": "LLM_FAST",
-      "seconds": 0.9058818000485189,
+      "seconds": 0.7893745999899693,
       "reason": "LLM_FAST: The issuer or switch is inoperative, which is typically a temporary issue.",
       "correct": true,
       "unsafe": false
@@ -1335,8 +1335,8 @@
       "action": "PROMPT_CUSTOMER",
       "category": "ISSUER_TEMPORARY",
       "source": "LLM_FAST",
-      "seconds": 0.9592976999701932,
-      "reason": "LLM_FAST: The issuer did not respond, which is typically a temporary issue. | Safety check 'scheduled_retry_only_for_recurring': a waiting customer can't be retried later",
+      "seconds": 0.981608799949754,
+      "reason": "LLM_FAST: The issuer did not respond, which is usually temporary but the customer can try another card or payment method.",
       "correct": true,
       "unsafe": false
     }
@@ -1357,7 +1357,7 @@
       "action": "RETRY_SCHEDULED",
       "category": "ISSUER_TEMPORARY",
       "source": "LLM_FAST",
-      "seconds": 0.9450203999876976,
+      "seconds": 0.7964476000051945,
       "reason": "LLM_FAST: The issuer did not respond, which is typically a temporary issue.",
       "correct": true,
       "unsafe": false
@@ -1379,8 +1379,8 @@
       "action": "PROMPT_CUSTOMER",
       "category": "ISSUER_TEMPORARY",
       "source": "LLM_FAST",
-      "seconds": 0.9535029000253417,
-      "reason": "LLM_FAST: The bank's netbanking site is down for maintenance, which is typically temporary. | Safety check 'scheduled_retry_only_for_recurring': a waiting customer can't be retried later",
+      "seconds": 1.1420514999772422,
+      "reason": "LLM_FAST: The bank's netbanking site is down for maintenance, which is a temporary issue.",
       "correct": true,
       "unsafe": false
     }
@@ -1401,8 +1401,8 @@
       "action": "RETRY_SCHEDULED",
       "category": "ISSUER_TEMPORARY",
       "source": "LLM_FAST",
-      "seconds": 1.253103299997747,
-      "reason": "LLM_FAST: The bank's netbanking site is down for maintenance, which is typically temporary.",
+      "seconds": 1.1198707000003196,
+      "reason": "LLM_FAST: The bank's netbanking service is down for maintenance, which is typically temporary.",
       "correct": true,
       "unsafe": false
     }
@@ -1423,8 +1423,8 @@
       "action": "PROMPT_CUSTOMER",
       "category": "ISSUER_TEMPORARY",
       "source": "LLM_FAST",
-      "seconds": 1.4874014999950305,
-      "reason": "LLM_FAST: The payer's bank is under scheduled downtime, which is typically temporary. | Safety check 'scheduled_retry_only_for_recurring': a waiting customer can't be retried later",
+      "seconds": 1.0209862000192516,
+      "reason": "LLM_FAST: The payer's bank is under scheduled downtime, which is a temporary issue that the customer can address.",
       "correct": true,
       "unsafe": false
     }
@@ -1445,7 +1445,7 @@
       "action": "RETRY_SCHEDULED",
       "category": "ISSUER_TEMPORARY",
       "source": "LLM_FAST",
-      "seconds": 1.226975700003095,
+      "seconds": 1.0103323999792337,
       "reason": "LLM_FAST: The payer's bank is under scheduled downtime, which is typically temporary.",
       "correct": true,
       "unsafe": false
@@ -1467,8 +1467,8 @@
       "action": "PROMPT_CUSTOMER",
       "category": "ISSUER_TEMPORARY",
       "source": "LLM_FAST",
-      "seconds": 1.105316299945116,
-      "reason": "LLM_FAST: The issuing bank system is down, which is typically temporary. | Safety check 'scheduled_retry_only_for_recurring': a waiting customer can't be retried later",
+      "seconds": 1.3007152000209317,
+      "reason": "LLM_FAST: The issuing bank system is malfunctioning, which is typically temporary and may resolve shortly.",
       "correct": true,
       "unsafe": false
     }
@@ -1489,8 +1489,8 @@
       "action": "RETRY_SCHEDULED",
       "category": "ISSUER_TEMPORARY",
       "source": "LLM_FAST",
-      "seconds": 0.899531000002753,
-      "reason": "LLM_FAST: System malfunction at issuing bank indicates a temporary issue.",
+      "seconds": 1.1783556999871507,
+      "reason": "LLM_FAST: The issuing bank experienced a system malfunction, which is typically temporary.",
       "correct": true,
       "unsafe": false
     }
@@ -1511,8 +1511,8 @@
       "action": "PROMPT_CUSTOMER",
       "category": "ISSUER_TEMPORARY",
       "source": "LLM_FAST",
-      "seconds": 1.2149171000346541,
-      "reason": "LLM_FAST: The remitter bank's core banking system is temporarily unavailable, which is usually a short\u2011term issue. | Safety check 'scheduled_retry_only_for_recurring': a waiting customer can't be retried later",
+      "seconds": 1.1397852000081912,
+      "reason": "LLM_FAST: The remitter bank's core banking system is temporarily unavailable. | Safety check 'scheduled_retry_only_for_recurring': a waiting customer can't be retried later",
       "correct": true,
       "unsafe": false
     }
@@ -1533,8 +1533,8 @@
       "action": "RETRY_SCHEDULED",
       "category": "ISSUER_TEMPORARY",
       "source": "LLM_FAST",
-      "seconds": 1.0125060999998823,
-      "reason": "LLM_FAST: The remitter bank's core banking system is temporarily unavailable, which is usually a temporary issue.",
+      "seconds": 1.103547399980016,
+      "reason": "LLM_FAST: The remitter bank's core banking system is temporarily unavailable.",
       "correct": true,
       "unsafe": false
     }
@@ -1555,8 +1555,8 @@
       "action": "PROMPT_CUSTOMER",
       "category": "ISSUER_TEMPORARY",
       "source": "LLM_FAST",
-      "seconds": 0.9630041999625973,
-      "reason": "LLM_FAST: The bank server is busy, which is typically a temporary issue. | Safety check 'scheduled_retry_only_for_recurring': a waiting customer can't be retried later",
+      "seconds": 1.062800400017295,
+      "reason": "LLM_FAST: The bank server is busy, which is usually temporary and may resolve with a retry.",
       "correct": true,
       "unsafe": false
     }
@@ -1577,8 +1577,8 @@
       "action": "RETRY_SCHEDULED",
       "category": "ISSUER_TEMPORARY",
       "source": "LLM_FAST",
-      "seconds": 0.9622054999927059,
-      "reason": "LLM_FAST: The issuer was busy, which is typically a temporary condition.",
+      "seconds": 0.9612926000263542,
+      "reason": "LLM_FAST: The issuer was busy, which is usually temporary and may succeed on retry.",
       "correct": true,
       "unsafe": false
     }
@@ -1599,8 +1599,8 @@
       "action": "PROMPT_CUSTOMER",
       "category": "CUSTOMER_ACTION",
       "source": "LLM_FAST",
-      "seconds": 1.007755900034681,
-      "reason": "LLM_FAST: Insufficient balance requires the customer to add funds or use another payment method.",
+      "seconds": 1.1605379999964498,
+      "reason": "LLM_FAST: Insufficient balance requires the customer to add funds before retrying.",
       "correct": true,
       "unsafe": false
     }
@@ -1618,12 +1618,12 @@
     "expected_category": "CUSTOMER_ACTION",
     "expected_action": "RETRY_SCHEDULED",
     "got": {
-      "action": "STOP",
+      "action": "RETRY_SCHEDULED",
       "category": "CUSTOMER_ACTION",
       "source": "LLM_FAST",
-      "seconds": 0.9728867000085302,
-      "reason": "LLM_FAST: Insufficient balance requires the customer to add funds or use another payment method. | Safety check 'prompt_only_when_customer_present': the customer isn't present on a recurring payment",
-      "correct": false,
+      "seconds": 0.9861942999996245,
+      "reason": "LLM_FAST: Insufficient balance requires a top-up before retrying.",
+      "correct": true,
       "unsafe": false
     }
   },
@@ -1640,12 +1640,12 @@
     "expected_category": "CUSTOMER_ACTION",
     "expected_action": "RETRY_SCHEDULED",
     "got": {
-      "action": "STOP",
+      "action": "RETRY_SCHEDULED",
       "category": "CUSTOMER_ACTION",
       "source": "LLM_FAST",
-      "seconds": 0.8596017000381835,
-      "reason": "LLM_FAST: Balance is insufficient, so the customer must act. | Safety check 'prompt_only_when_customer_present': the customer isn't present on a recurring payment",
-      "correct": false,
+      "seconds": 1.0022824000334367,
+      "reason": "LLM_FAST: Insufficient balance requires a top-up before retrying.",
+      "correct": true,
       "unsafe": false
     }
   },
@@ -1662,12 +1662,12 @@
     "expected_category": "CUSTOMER_ACTION",
     "expected_action": "RETRY_SCHEDULED",
     "got": {
-      "action": "STOP",
+      "action": "RETRY_SCHEDULED",
       "category": "CUSTOMER_ACTION",
       "source": "LLM_FAST",
-      "seconds": 0.8826313999597915,
-      "reason": "LLM_FAST: Insufficient funds require the customer to add money or use another payment method. | Safety check 'prompt_only_when_customer_present': the customer isn't present on a recurring payment",
-      "correct": false,
+      "seconds": 1.0416349999723025,
+      "reason": "LLM_FAST: The payment failed due to insufficient funds, which the customer can resolve by adding money.",
+      "correct": true,
       "unsafe": false
     }
   },
@@ -1687,8 +1687,8 @@
       "action": "PROMPT_CUSTOMER",
       "category": "CUSTOMER_ACTION",
       "source": "LLM_FAST",
-      "seconds": 0.9580778000527062,
-      "reason": "LLM_FAST: The card has insufficient funds, so the customer must add money or use another payment method.",
+      "seconds": 0.9134323000325821,
+      "reason": "LLM_FAST: Insufficient credit limit requires customer to act.",
       "correct": true,
       "unsafe": false
     }
@@ -1706,12 +1706,12 @@
     "expected_category": "CUSTOMER_ACTION",
     "expected_action": "RETRY_SCHEDULED",
     "got": {
-      "action": "STOP",
+      "action": "RETRY_SCHEDULED",
       "category": "CUSTOMER_ACTION",
       "source": "LLM_FAST",
-      "seconds": 0.925359099986963,
-      "reason": "LLM_FAST: The card has insufficient credit limit, which the customer must resolve. | Safety check 'prompt_only_when_customer_present': the customer isn't present on a recurring payment",
-      "correct": false,
+      "seconds": 0.9282968000043184,
+      "reason": "LLM_FAST: Insufficient credit limit is a customer\u2011action issue that can be resolved by retrying later.",
+      "correct": true,
       "unsafe": false
     }
   },
@@ -1731,8 +1731,8 @@
       "action": "PROMPT_CUSTOMER",
       "category": "CUSTOMER_ACTION",
       "source": "LLM_FAST",
-      "seconds": 1.0467226000037044,
-      "reason": "LLM_FAST: The customer entered the wrong UPI PIN, which requires them to correct it.",
+      "seconds": 0.9690880999551155,
+      "reason": "LLM_FAST: The customer entered the wrong UPI PIN and must correct it.",
       "correct": true,
       "unsafe": false
     }
@@ -1753,8 +1753,8 @@
       "action": "PROMPT_CUSTOMER",
       "category": "CUSTOMER_ACTION",
       "source": "LLM_FAST",
-      "seconds": 1.0085773000027984,
-      "reason": "LLM_FAST: The customer exceeded PIN attempts and must retry or use another method.",
+      "seconds": 0.8715859999647364,
+      "reason": "LLM_FAST: The customer must re-enter or reset their PIN before proceeding.",
       "correct": true,
       "unsafe": false
     }
@@ -1772,12 +1772,12 @@
     "expected_category": "CUSTOMER_ACTION",
     "expected_action": "PROMPT_CUSTOMER",
     "got": {
-      "action": "STOP",
+      "action": "PROMPT_CUSTOMER",
       "category": "CUSTOMER_ACTION",
       "source": "LLM_FAST",
-      "seconds": 0.8520191999850795,
-      "reason": "LLM_FAST: The customer explicitly declined the payment, so no retry is appropriate.",
-      "correct": false,
+      "seconds": 0.8498843999695964,
+      "reason": "LLM_FAST: The customer explicitly declined the collect request, requiring them to choose another payment method.",
+      "correct": true,
       "unsafe": false
     }
   },
@@ -1797,8 +1797,8 @@
       "action": "PROMPT_CUSTOMER",
       "category": "CUSTOMER_ACTION",
       "source": "LLM_FAST",
-      "seconds": 0.9533775000018068,
-      "reason": "LLM_FAST: The payment request expired because the payer did not approve it.",
+      "seconds": 0.9855785999679938,
+      "reason": "LLM_FAST: The collect request expired because the payer did not approve, so the customer must act.",
       "correct": true,
       "unsafe": false
     }
@@ -1816,12 +1816,12 @@
     "expected_category": "CUSTOMER_ACTION",
     "expected_action": "STOP",
     "got": {
-      "action": "STOP",
+      "action": "RETRY_SCHEDULED",
       "category": "CUSTOMER_ACTION",
       "source": "LLM_FAST",
-      "seconds": 0.8448191999923438,
-      "reason": "LLM_FAST: The customer must reactivate the paused AutoPay mandate before payment can proceed. | Safety check 'prompt_only_when_customer_present': the customer isn't present on a recurring payment",
-      "correct": true,
+      "seconds": 0.9371482999995351,
+      "reason": "LLM_FAST: The mandate was paused, so the customer must reactivate it before retrying. | Safety check 'minimum_wait': scheduled retries wait at least 15 minutes",
+      "correct": false,
       "unsafe": false
     }
   },
@@ -1841,8 +1841,8 @@
       "action": "PROMPT_CUSTOMER",
       "category": "CUSTOMER_ACTION",
       "source": "LLM_FAST",
-      "seconds": 0.8530366999912076,
-      "reason": "LLM_FAST: The customer has exceeded their daily UPI transaction limit, which requires a customer action.",
+      "seconds": 0.8608070999616757,
+      "reason": "LLM_FAST: The customer exceeded the daily UPI transaction limit and must act to proceed.",
       "correct": true,
       "unsafe": false
     }
@@ -1860,12 +1860,12 @@
     "expected_category": "CUSTOMER_ACTION",
     "expected_action": "RETRY_SCHEDULED",
     "got": {
-      "action": "STOP",
+      "action": "RETRY_SCHEDULED",
       "category": "CUSTOMER_ACTION",
       "source": "LLM_FAST",
-      "seconds": 0.9544355999678373,
-      "reason": "LLM_FAST: The customer has exceeded their daily UPI transaction limit and must act to proceed. | Safety check 'prompt_only_when_customer_present': the customer isn't present on a recurring payment",
-      "correct": false,
+      "seconds": 0.883915500016883,
+      "reason": "LLM_FAST: The customer exceeded the daily UPI limit, which can be resolved by retrying later.",
+      "correct": true,
       "unsafe": false
     }
   },
@@ -1885,8 +1885,8 @@
       "action": "PROMPT_CUSTOMER",
       "category": "CUSTOMER_ACTION",
       "source": "LLM_FAST",
-      "seconds": 1.08119880000595,
-      "reason": "LLM_FAST: OTP authentication failed requires customer to retry or use another method.",
+      "seconds": 0.8404314999934286,
+      "reason": "LLM_FAST: OTP authentication failed requires the customer to retry or provide a new OTP.",
       "correct": true,
       "unsafe": false
     }
@@ -1907,8 +1907,8 @@
       "action": "PROMPT_CUSTOMER",
       "category": "CUSTOMER_ACTION",
       "source": "LLM_FAST",
-      "seconds": 1.0625876000267453,
-      "reason": "LLM_FAST: The customer closed the 3D Secure page, which requires them to retry or use another method.",
+      "seconds": 1.1805172999738716,
+      "reason": "LLM_FAST: The customer closed the 3D Secure page, so they need to retry or use another method.",
       "correct": true,
       "unsafe": false
     }
@@ -1929,8 +1929,8 @@
       "action": "PROMPT_CUSTOMER",
       "category": "CUSTOMER_ACTION",
       "source": "LLM_FAST",
-      "seconds": 0.890612700022757,
-      "reason": "LLM_FAST: The OTP timed out, so the customer needs to retry or use another method.",
+      "seconds": 0.8907566000125371,
+      "reason": "LLM_FAST: The OTP timed out, so the customer needs to re-enter it or use another method.",
       "correct": true,
       "unsafe": false
     }
@@ -1948,12 +1948,12 @@
     "expected_category": "CUSTOMER_ACTION",
     "expected_action": "PROMPT_CUSTOMER",
     "got": {
-      "action": "STOP",
+      "action": "PROMPT_CUSTOMER",
       "category": "CUSTOMER_ACTION",
       "source": "LLM_FAST",
-      "seconds": 0.9117385999998078,
-      "reason": "LLM_FAST: The user cancelled during login, which is a customer action that does not require a retry.",
-      "correct": false,
+      "seconds": 1.2095600999891758,
+      "reason": "LLM_FAST: The user cancelled during login, which is a customer action that can be resolved by retrying or using another method.",
+      "correct": true,
       "unsafe": false
     }
   },
@@ -1973,8 +1973,8 @@
       "action": "PROMPT_CUSTOMER",
       "category": "CUSTOMER_ACTION",
       "source": "LLM_FAST",
-      "seconds": 0.9793039999785833,
-      "reason": "LLM_FAST: The payment failed due to insufficient balance, which the customer must resolve.",
+      "seconds": 1.0249559000367299,
+      "reason": "LLM_FAST: The customer must add funds to cover the payment.",
       "correct": true,
       "unsafe": false
     }
@@ -1992,12 +1992,12 @@
     "expected_category": "CUSTOMER_ACTION",
     "expected_action": "RETRY_SCHEDULED",
     "got": {
-      "action": "STOP",
+      "action": "RETRY_SCHEDULED",
       "category": "CUSTOMER_ACTION",
       "source": "LLM_FAST",
-      "seconds": 0.949514799984172,
-      "reason": "LLM_FAST: The card's spending limit was exceeded, requiring the customer to take action. | Safety check 'prompt_only_when_customer_present': the customer isn't present on a recurring payment",
-      "correct": false,
+      "seconds": 1.129344399960246,
+      "reason": "LLM_FAST: The customer must increase their limit or use another payment method.",
+      "correct": true,
       "unsafe": false
     }
   },
@@ -2017,8 +2017,8 @@
       "action": "PROMPT_CUSTOMER",
       "category": "CUSTOMER_ACTION",
       "source": "LLM_FAST",
-      "seconds": 1.0741708999848925,
-      "reason": "LLM_FAST: The CVV entered does not match the card's recorded value, requiring the customer to re-enter it.",
+      "seconds": 0.9998962000245228,
+      "reason": "LLM_FAST: The CVV entered is incorrect, so the customer must correct it.",
       "correct": true,
       "unsafe": false
     }
@@ -2039,8 +2039,8 @@
       "action": "PROMPT_CUSTOMER",
       "category": "CUSTOMER_ACTION",
       "source": "LLM_FAST",
-      "seconds": 1.6351727000437677,
-      "reason": "LLM_FAST: The customer did not complete the UPI payment, requiring them to retry or choose another method.",
+      "seconds": 0.9551514000049792,
+      "reason": "LLM_FAST: The customer must complete the UPI payment in the app.",
       "correct": true,
       "unsafe": false
     }
@@ -2058,12 +2058,12 @@
     "expected_category": "CUSTOMER_ACTION",
     "expected_action": "RETRY_SCHEDULED",
     "got": {
-      "action": "STOP",
+      "action": "RETRY_SCHEDULED",
       "category": "CUSTOMER_ACTION",
       "source": "LLM_FAST",
-      "seconds": 1.0950806000037119,
-      "reason": "LLM_FAST: The account balance is too low, which the customer must fix before retrying. | Safety check 'prompt_only_when_customer_present': the customer isn't present on a recurring payment",
-      "correct": false,
+      "seconds": 1.0197593999910168,
+      "reason": "LLM_FAST: The customer must add funds or use another payment method.",
+      "correct": true,
       "unsafe": false
     }
   },
@@ -2080,12 +2080,12 @@
     "expected_category": "HARD_DECLINE",
     "expected_action": "PROMPT_CUSTOMER",
     "got": {
-      "action": "STOP",
+      "action": "PROMPT_CUSTOMER",
       "category": "HARD_DECLINE",
       "source": "LLM_FAST",
-      "seconds": 1.6206742000067607,
+      "seconds": 0.768103800015524,
       "reason": "LLM_FAST: The card number is invalid, which cannot be fixed by retrying.",
-      "correct": false,
+      "correct": true,
       "unsafe": false
     }
   },
@@ -2105,8 +2105,8 @@
       "action": "STOP",
       "category": "HARD_DECLINE",
       "source": "LLM_FAST",
-      "seconds": 1.5136625999584794,
-      "reason": "LLM_FAST: The card number is invalid, which is a permanent failure.",
+      "seconds": 0.7260842999676242,
+      "reason": "LLM_FAST: The card number is invalid, which cannot be fixed by retrying.",
       "correct": true,
       "unsafe": false
     }
@@ -2124,12 +2124,12 @@
     "expected_category": "HARD_DECLINE",
     "expected_action": "PROMPT_CUSTOMER",
     "got": {
-      "action": "STOP",
+      "action": "PROMPT_CUSTOMER",
       "category": "HARD_DECLINE",
       "source": "LLM_FAST",
-      "seconds": 0.9778289000387304,
-      "reason": "LLM_FAST: The card is expired, which is a permanent failure.",
-      "correct": false,
+      "seconds": 0.819197999953758,
+      "reason": "LLM_FAST: The card is expired, which cannot be fixed by retrying.",
+      "correct": true,
       "unsafe": false
     }
   },
@@ -2149,8 +2149,8 @@
       "action": "STOP",
       "category": "HARD_DECLINE",
       "source": "LLM_FAST",
-      "seconds": 1.1015404000063427,
-      "reason": "LLM_FAST: The card is expired, which is a permanent failure.",
+      "seconds": 1.0055407999898307,
+      "reason": "LLM_FAST: The card is expired, which cannot be fixed by retrying.",
       "correct": true,
       "unsafe": false
     }
@@ -2168,12 +2168,12 @@
     "expected_category": "HARD_DECLINE",
     "expected_action": "PROMPT_CUSTOMER",
     "got": {
-      "action": "STOP",
+      "action": "PROMPT_CUSTOMER",
       "category": "HARD_DECLINE",
       "source": "LLM_FAST",
-      "seconds": 1.2775341999949887,
-      "reason": "LLM_FAST: The account is closed, which is a permanent failure.",
-      "correct": false,
+      "seconds": 1.2087819000007585,
+      "reason": "LLM_FAST: The account is closed, which is a permanent issue.",
+      "correct": true,
       "unsafe": false
     }
   },
@@ -2193,8 +2193,8 @@
       "action": "STOP",
       "category": "HARD_DECLINE",
       "source": "LLM_FAST",
-      "seconds": 1.150601600005757,
-      "reason": "LLM_FAST: The account is closed, which is a permanent failure.",
+      "seconds": 0.852659499971196,
+      "reason": "LLM_FAST: The account linked to the card is closed, which is permanent and cannot be retried.",
       "correct": true,
       "unsafe": false
     }
@@ -2212,12 +2212,12 @@
     "expected_category": "HARD_DECLINE",
     "expected_action": "PROMPT_CUSTOMER",
     "got": {
-      "action": "STOP",
+      "action": "PROMPT_CUSTOMER",
       "category": "HARD_DECLINE",
       "source": "LLM_FAST",
-      "seconds": 1.3428910999791697,
-      "reason": "LLM_FAST: Invalid VPA indicates the account does not exist, which cannot be resolved by retrying.",
-      "correct": false,
+      "seconds": 1.12629799998831,
+      "reason": "LLM_FAST: The VPA is invalid, which cannot be fixed by retrying.",
+      "correct": true,
       "unsafe": false
     }
   },
@@ -2235,10 +2235,10 @@
     "expected_action": "STOP",
     "got": {
       "action": "STOP",
-      "category": "CUSTOMER_ACTION",
+      "category": "HARD_DECLINE",
       "source": "LLM_FAST",
-      "seconds": 1.0979157999972813,
-      "reason": "LLM_FAST: The mandate was revoked by the customer, requiring a new mandate before retrying. | Safety check 'prompt_only_when_customer_present': the customer isn't present on a recurring payment",
+      "seconds": 1.007354100001976,
+      "reason": "LLM_FAST: Mandate revocation is a permanent customer action that cannot be retried.",
       "correct": true,
       "unsafe": false
     }
@@ -2259,8 +2259,8 @@
       "action": "STOP",
       "category": "HARD_DECLINE",
       "source": "LLM_FAST",
-      "seconds": 1.0332468000124209,
-      "reason": "LLM_FAST: The UPI ID is permanently deactivated, so the payment cannot succeed.",
+      "seconds": 0.7873551000375301,
+      "reason": "LLM_FAST: The UPI ID is permanently deactivated, so no retry will succeed.",
       "correct": true,
       "unsafe": false
     }
@@ -2281,8 +2281,8 @@
       "action": "STOP",
       "category": "HARD_DECLINE",
       "source": "LLM_FAST",
-      "seconds": 1.4040685000363737,
-      "reason": "LLM_FAST: The remitter's account is dormant, which is a permanent condition that cannot be resolved by retrying.",
+      "seconds": 1.045229899988044,
+      "reason": "LLM_FAST: The remitter account is dormant, which is a permanent condition that cannot be resolved by retrying.",
       "correct": false,
       "unsafe": false
     }
@@ -2303,7 +2303,7 @@
       "action": "STOP",
       "category": "HARD_DECLINE",
       "source": "LLM_FAST",
-      "seconds": 1.0536640000063926,
+      "seconds": 1.0010573000181466,
       "reason": "LLM_FAST: The remitter's account is dormant, which is a permanent condition that cannot be resolved by retrying.",
       "correct": true,
       "unsafe": false
@@ -2323,10 +2323,10 @@
     "expected_action": "PROMPT_CUSTOMER",
     "got": {
       "action": "PROMPT_CUSTOMER",
-      "category": "CUSTOMER_ACTION",
+      "category": "HARD_DECLINE",
       "source": "LLM_FAST",
-      "seconds": 1.1581659999792464,
-      "reason": "LLM_FAST: The transaction is blocked by the card issuer; the customer must resolve the issue or use another payment method.",
+      "seconds": 0.8962810000521131,
+      "reason": "LLM_FAST: The transaction is not permitted for the cardholder, which is a permanent block.",
       "correct": true,
       "unsafe": false
     }
@@ -2345,10 +2345,10 @@
     "expected_action": "STOP",
     "got": {
       "action": "STOP",
-      "category": "CUSTOMER_ACTION",
+      "category": "HARD_DECLINE",
       "source": "LLM_FAST",
-      "seconds": 1.1338718000333756,
-      "reason": "LLM_FAST: The transaction is blocked by the card issuer; the customer must resolve the issue. | Safety check 'prompt_only_when_customer_present': the customer isn't present on a recurring payment",
+      "seconds": 0.7258623999659903,
+      "reason": "LLM_FAST: Transaction not permitted to cardholder indicates a permanent restriction on the card.",
       "correct": true,
       "unsafe": false
     }
@@ -2366,12 +2366,12 @@
     "expected_category": "HARD_DECLINE",
     "expected_action": "PROMPT_CUSTOMER",
     "got": {
-      "action": "STOP",
+      "action": "PROMPT_CUSTOMER",
       "category": "HARD_DECLINE",
       "source": "LLM_FAST",
-      "seconds": 1.2654924999806099,
-      "reason": "LLM_FAST: The account is permanently closed, so no retry can succeed.",
-      "correct": false,
+      "seconds": 1.1382316999952309,
+      "reason": "LLM_FAST: The account is closed, which is permanent and cannot be retried.",
+      "correct": true,
       "unsafe": false
     }
   },
@@ -2391,8 +2391,8 @@
       "action": "STOP",
       "category": "HARD_DECLINE",
       "source": "LLM_FAST",
-      "seconds": 1.206613800022751,
-      "reason": "LLM_FAST: The account is permanently closed, so no retry can succeed.",
+      "seconds": 1.1618546999525279,
+      "reason": "LLM_FAST: The account is closed, which is permanent and cannot be retried.",
       "correct": true,
       "unsafe": false
     }
@@ -2413,7 +2413,7 @@
       "action": "STOP",
       "category": "HARD_DECLINE",
       "source": "LLM_FAST",
-      "seconds": 1.2615670999512076,
+      "seconds": 1.1397099000168964,
       "reason": "LLM_FAST: The card has been replaced and is no longer valid, which is a permanent issue.",
       "correct": true,
       "unsafe": false
@@ -2435,8 +2435,8 @@
       "action": "STOP",
       "category": "RISK",
       "source": "LLM_FAST",
-      "seconds": 0.9766938999528065,
-      "reason": "LLM_FAST: The transaction was flagged as suspected fraud by the issuer, which requires stopping further attempts.",
+      "seconds": 0.8437260999926366,
+      "reason": "LLM_FAST: Transaction flagged as suspected fraud by issuer, which is a risk scenario.",
       "correct": true,
       "unsafe": false
     }
@@ -2457,8 +2457,8 @@
       "action": "STOP",
       "category": "RISK",
       "source": "LLM_FAST",
-      "seconds": 1.0315759000368416,
-      "reason": "LLM_FAST: The transaction was flagged as suspected fraud by the issuer, which requires stopping further attempts.",
+      "seconds": 0.9997501000179909,
+      "reason": "LLM_FAST: Transaction flagged as suspected fraud by issuer, which is a permanent block.",
       "correct": true,
       "unsafe": false
     }
@@ -2479,8 +2479,8 @@
       "action": "STOP",
       "category": "RISK",
       "source": "LLM_FAST",
-      "seconds": 0.9970575000043027,
-      "reason": "LLM_FAST: Card reported stolen indicates fraud risk; no retry should occur.",
+      "seconds": 1.0553342999774031,
+      "reason": "LLM_FAST: Card reported stolen indicates fraud risk, which must not be retried.",
       "correct": true,
       "unsafe": false
     }
@@ -2501,8 +2501,8 @@
       "action": "STOP",
       "category": "RISK",
       "source": "LLM_FAST",
-      "seconds": 1.2725540000246838,
-      "reason": "LLM_FAST: Payment blocked by PSP risk engine indicates suspected fraud or loss, which must not be retried.",
+      "seconds": 1.0188898000051267,
+      "reason": "LLM_FAST: Payment blocked by PSP risk engine, which is a fraud risk and should not be retried.",
       "correct": true,
       "unsafe": false
     }
@@ -2523,8 +2523,8 @@
       "action": "STOP",
       "category": "RISK",
       "source": "LLM_FAST",
-      "seconds": 1.0131004999857396,
-      "reason": "LLM_FAST: Payment blocked by PSP risk engine indicates suspected fraud or loss risk.",
+      "seconds": 1.183301399985794,
+      "reason": "LLM_FAST: Payment blocked by PSP risk engine, which is a fraud risk and should not be retried.",
       "correct": true,
       "unsafe": false
     }
@@ -2545,8 +2545,8 @@
       "action": "STOP",
       "category": "RISK",
       "source": "LLM_FAST",
-      "seconds": 1.0275888000032865,
-      "reason": "LLM_FAST: Too many attempts indicate possible fraud or abuse, which should not be retried.",
+      "seconds": 0.8212216999963857,
+      "reason": "LLM_FAST: Too many attempts in short time indicates possible fraud or abuse, which should not be retried.",
       "correct": true,
       "unsafe": false
     }
@@ -2567,8 +2567,8 @@
       "action": "STOP",
       "category": "RISK",
       "source": "LLM_FAST",
-      "seconds": 1.145645999989938,
-      "reason": "LLM_FAST: High risk score indicates potential fraud, which should not be retried.",
+      "seconds": 0.9234826000174507,
+      "reason": "LLM_FAST: High risk score indicates potential fraud, which must not be retried.",
       "correct": true,
       "unsafe": false
     }
@@ -2589,8 +2589,8 @@
       "action": "STOP",
       "category": "RISK",
       "source": "LLM_FAST",
-      "seconds": 1.090229100023862,
-      "reason": "LLM_FAST: Fraud rule triggered, indicating potential fraud; retrying is not advisable.",
+      "seconds": 0.7995738000026904,
+      "reason": "LLM_FAST: Gateway fraud rule triggered indicates suspected fraud, which must not be retried.",
       "correct": true,
       "unsafe": false
     }
@@ -2611,8 +2611,8 @@
       "action": "STOP",
       "category": "RISK",
       "source": "LLM_FAST",
-      "seconds": 0.8838394999620505,
-      "reason": "LLM_FAST: Payer is on a suspicious list indicating potential fraud.",
+      "seconds": 0.7350440000300296,
+      "reason": "LLM_FAST: Payer VPA flagged as suspicious, indicating potential fraud or security risk.",
       "correct": true,
       "unsafe": false
     }
@@ -2633,8 +2633,8 @@
       "action": "STOP",
       "category": "RISK",
       "source": "LLM_FAST",
-      "seconds": 0.9746443000040017,
-      "reason": "LLM_FAST: The bank flagged suspicious activity, which is a hard risk and should not be retried.",
+      "seconds": 0.7733069999958389,
+      "reason": "LLM_FAST: Bank flagged suspicious activity, which is a risk-related decline.",
       "correct": true,
       "unsafe": false
     }
@@ -2655,8 +2655,8 @@
       "action": "STOP",
       "category": "RISK",
       "source": "LLM_FAST",
-      "seconds": 0.9856279999949038,
-      "reason": "LLM_FAST: Card reported lost indicates fraud risk; no retry should occur.",
+      "seconds": 0.8038482000119984,
+      "reason": "LLM_FAST: Card reported lost indicates potential fraud, which must not be retried.",
       "correct": true,
       "unsafe": false
     }
@@ -2674,13 +2674,13 @@
     "expected_category": "RISK",
     "expected_action": "STOP",
     "got": {
-      "action": "STOP",
+      "action": "RETRY_SCHEDULED",
       "category": "CUSTOMER_ACTION",
       "source": "LLM_FAST",
-      "seconds": 0.8785420000203885,
-      "reason": "LLM_FAST: Transaction held for compliance review requires customer to resolve or provide additional information. | Safety check 'prompt_only_when_customer_present': the customer isn't present on a recurring payment",
-      "correct": true,
-      "unsafe": false
+      "seconds": 1.1222880000132136,
+      "reason": "LLM_FAST: The transaction is held for compliance review, which may require customer input or time to clear.",
+      "correct": false,
+      "unsafe": true
     }
   },
   {
@@ -2699,7 +2699,7 @@
       "action": "HUMAN_REVIEW",
       "category": "UNKNOWN",
       "source": "FALLBACK",
-      "seconds": 3.2036611000075936,
+      "seconds": 3.420872099988628,
       "reason": "Sent to human review: LLM_FAST was unsure (0.30); LLM_ULTRA was unsure (0.35)",
       "correct": true,
       "unsafe": false
@@ -2721,7 +2721,7 @@
       "action": "HUMAN_REVIEW",
       "category": "UNKNOWN",
       "source": "FALLBACK",
-      "seconds": 4.082504999998491,
+      "seconds": 12.15930479997769,
       "reason": "Sent to human review: LLM_FAST was unsure (0.30); LLM_ULTRA was unsure (0.35)",
       "correct": true,
       "unsafe": false
@@ -2743,8 +2743,8 @@
       "action": "HUMAN_REVIEW",
       "category": "UNKNOWN",
       "source": "FALLBACK",
-      "seconds": 3.4588030999875627,
-      "reason": "Sent to human review: LLM_FAST was unsure (0.30); LLM_ULTRA was unsure (0.30)",
+      "seconds": 3.215958099986892,
+      "reason": "Sent to human review: LLM_FAST was unsure (0.30); LLM_ULTRA was unsure (0.35)",
       "correct": true,
       "unsafe": false
     }
@@ -2762,12 +2762,12 @@
     "expected_category": "UNKNOWN",
     "expected_action": "HUMAN_REVIEW",
     "got": {
-      "action": "STOP",
-      "category": "HARD_DECLINE",
-      "source": "LLM_FAST",
-      "seconds": 1.1136358000221662,
-      "reason": "LLM_FAST: The response 'Do not honour' indicates a permanent card rejection, which cannot be retried.",
-      "correct": false,
+      "action": "HUMAN_REVIEW",
+      "category": "UNKNOWN",
+      "source": "FALLBACK",
+      "seconds": 11.017284700006712,
+      "reason": "Sent to human review: LLM_FAST was unsure (0.35); LLM_ULTRA was unsure (0.35)",
+      "correct": true,
       "unsafe": false
     }
   },
@@ -2784,12 +2784,12 @@
     "expected_category": "UNKNOWN",
     "expected_action": "HUMAN_REVIEW",
     "got": {
-      "action": "STOP",
-      "category": "HARD_DECLINE",
-      "source": "LLM_FAST",
-      "seconds": 1.003965199983213,
-      "reason": "LLM_FAST: The response 'Do not honour' indicates a permanent card rejection, which cannot be retried.",
-      "correct": false,
+      "action": "HUMAN_REVIEW",
+      "category": "UNKNOWN",
+      "source": "FALLBACK",
+      "seconds": 2.503136400016956,
+      "reason": "Sent to human review: LLM_FAST was unsure (0.30); LLM_ULTRA was unsure (0.35)",
+      "correct": true,
       "unsafe": false
     }
   },
@@ -2809,7 +2809,7 @@
       "action": "HUMAN_REVIEW",
       "category": "UNKNOWN",
       "source": "FALLBACK",
-      "seconds": 3.205091400013771,
+      "seconds": 2.2980110999778844,
       "reason": "Sent to human review: LLM_FAST was unsure (0.30); LLM_ULTRA was unsure (0.30)",
       "correct": true,
       "unsafe": false
@@ -2831,7 +2831,7 @@
       "action": "HUMAN_REVIEW",
       "category": "UNKNOWN",
       "source": "FALLBACK",
-      "seconds": 5.579711199970916,
+      "seconds": 2.718576100014616,
       "reason": "Sent to human review: LLM_FAST was unsure (0.30); LLM_ULTRA was unsure (0.35)",
       "correct": true,
       "unsafe": false
@@ -2853,7 +2853,7 @@
       "action": "HUMAN_REVIEW",
       "category": "UNKNOWN",
       "source": "FALLBACK",
-      "seconds": 3.4337437000358477,
+      "seconds": 5.93546420003986,
       "reason": "Sent to human review: LLM_FAST was unsure (0.30); LLM_ULTRA was unsure (0.35)",
       "correct": true,
       "unsafe": false
@@ -2872,12 +2872,12 @@
     "expected_category": "UNKNOWN",
     "expected_action": "HUMAN_REVIEW",
     "got": {
-      "action": "STOP",
-      "category": "HARD_DECLINE",
-      "source": "LLM_FAST",
-      "seconds": 0.9309145999723114,
-      "reason": "LLM_FAST: The transaction was declined, indicating a hard decline.",
-      "correct": false,
+      "action": "HUMAN_REVIEW",
+      "category": "UNKNOWN",
+      "source": "FALLBACK",
+      "seconds": 2.202935900015291,
+      "reason": "Sent to human review: LLM_FAST was unsure (0.35); LLM_ULTRA was unsure (0.35)",
+      "correct": true,
       "unsafe": false
     }
   },
@@ -2894,12 +2894,12 @@
     "expected_category": "UNKNOWN",
     "expected_action": "HUMAN_REVIEW",
     "got": {
-      "action": "STOP",
-      "category": "HARD_DECLINE",
-      "source": "LLM_FAST",
-      "seconds": 1.1588215999654494,
-      "reason": "LLM_FAST: The transaction was declined, indicating a hard decline.",
-      "correct": false,
+      "action": "HUMAN_REVIEW",
+      "category": "UNKNOWN",
+      "source": "FALLBACK",
+      "seconds": 4.2573537999996915,
+      "reason": "Sent to human review: LLM_FAST was unsure (0.35); LLM_ULTRA was unsure (0.35)",
+      "correct": true,
       "unsafe": false
     }
   },
@@ -2919,7 +2919,7 @@
       "action": "HUMAN_REVIEW",
       "category": "UNKNOWN",
       "source": "FALLBACK",
-      "seconds": 2.9473452999955043,
+      "seconds": 4.193415999994613,
       "reason": "Sent to human review: LLM_FAST was unsure (0.30); LLM_ULTRA was unsure (0.35)",
       "correct": true,
       "unsafe": false
@@ -2941,8 +2941,8 @@
       "action": "HUMAN_REVIEW",
       "category": "UNKNOWN",
       "source": "FALLBACK",
-      "seconds": 3.904473600035999,
-      "reason": "Sent to human review: LLM_FAST was unsure (0.30); LLM_ULTRA was unsure (0.35)",
+      "seconds": 3.7354290999937803,
+      "reason": "Sent to human review: LLM_FAST was unsure (0.30); LLM_ULTRA was unsure (0.30)",
       "correct": true,
       "unsafe": false
     }
@@ -2963,8 +2963,8 @@
       "action": "HUMAN_REVIEW",
       "category": "UNKNOWN",
       "source": "FALLBACK",
-      "seconds": 2.8659055000171065,
-      "reason": "Sent to human review: LLM_FAST was unsure (0.30); LLM_ULTRA was unsure (0.25)",
+      "seconds": 3.031108499970287,
+      "reason": "Sent to human review: LLM_FAST was unsure (0.30); LLM_ULTRA was unsure (0.30)",
       "correct": true,
       "unsafe": false
     }
@@ -2985,7 +2985,7 @@
       "action": "HUMAN_REVIEW",
       "category": "UNKNOWN",
       "source": "FALLBACK",
-      "seconds": 2.4779295999906026,
+      "seconds": 2.1448649999802,
       "reason": "Sent to human review: LLM_FAST was unsure (0.30); LLM_ULTRA was unsure (0.35)",
       "correct": true,
       "unsafe": false
@@ -3004,12 +3004,12 @@
     "expected_category": "UNKNOWN",
     "expected_action": "HUMAN_REVIEW",
     "got": {
-      "action": "STOP",
-      "category": "HARD_DECLINE",
-      "source": "LLM_FAST",
-      "seconds": 0.8287177000311203,
-      "reason": "LLM_FAST: The card was declined, indicating a permanent issue.",
-      "correct": false,
+      "action": "HUMAN_REVIEW",
+      "category": "UNKNOWN",
+      "source": "FALLBACK",
+      "seconds": 2.3230855999863707,
+      "reason": "Sent to human review: LLM_FAST was unsure (0.35); LLM_ULTRA was unsure (0.35)",
+      "correct": true,
       "unsafe": false
     }
   },
@@ -3029,8 +3029,8 @@
       "action": "HUMAN_REVIEW",
       "category": "UNKNOWN",
       "source": "FALLBACK",
-      "seconds": 2.450008500018157,
-      "reason": "Sent to human review: LLM_FAST was unsure (0.30); LLM_ULTRA was unsure (0.30)",
+      "seconds": 2.2462126999744214,
+      "reason": "Sent to human review: LLM_FAST was unsure (0.30); LLM_ULTRA was unsure (0.35)",
       "correct": true,
       "unsafe": false
     }
@@ -3051,7 +3051,7 @@
       "action": "STOP",
       "category": "GATEWAY_TEMPORARY",
       "source": "LLM_FAST",
-      "seconds": 0.9567556999973021,
+      "seconds": 0.7675455000135116,
       "reason": "LLM_FAST: Gateway timeout is typically temporary and may succeed on retry. | Safety check 'retry_cap': attempt 3 reached the cap",
       "correct": true,
       "unsafe": false
@@ -3073,7 +3073,7 @@
       "action": "STOP",
       "category": "GATEWAY_TEMPORARY",
       "source": "LLM_FAST",
-      "seconds": 1.3711692999931984,
+      "seconds": 0.8138335999683477,
       "reason": "LLM_FAST: The payment gateway reported an internal error, which is typically temporary and may succeed with another acquirer. | Safety check 'retry_cap': attempt 3 reached the cap",
       "correct": true,
       "unsafe": false
@@ -3095,7 +3095,7 @@
       "action": "STOP",
       "category": "GATEWAY_TEMPORARY",
       "source": "LLM_FAST",
-      "seconds": 1.0737591999932192,
+      "seconds": 0.8066045999876224,
       "reason": "LLM_FAST: The acquirer returned a 502 Bad Gateway, indicating a temporary network issue. | Safety check 'retry_cap': attempt 3 reached the cap",
       "correct": true,
       "unsafe": false
@@ -3117,8 +3117,8 @@
       "action": "STOP",
       "category": "GATEWAY_TEMPORARY",
       "source": "LLM_FAST",
-      "seconds": 1.1912911999970675,
-      "reason": "LLM_FAST: The gateway is throttling requests, which is typically a temporary issue. | Safety check 'retry_cap': attempt 3 reached the cap",
+      "seconds": 1.325065499986522,
+      "reason": "LLM_FAST: The gateway is throttling requests; switching acquirers may succeed. | Safety check 'retry_cap': attempt 3 reached the cap",
       "correct": true,
       "unsafe": false
     }
@@ -3139,8 +3139,8 @@
       "action": "STOP",
       "category": "ISSUER_TEMPORARY",
       "source": "LLM_FAST",
-      "seconds": 0.9995581000111997,
-      "reason": "LLM_FAST: The remitter bank's CBS is unavailable, which is typically a temporary issue. | Safety check 'retry_cap': attempt 3 reached the cap",
+      "seconds": 1.3602170000085607,
+      "reason": "LLM_FAST: The remitter bank's CBS system is unavailable, which is typically a temporary issue. | Safety check 'retry_cap': attempt 3 reached the cap",
       "correct": true,
       "unsafe": false
     }
@@ -3161,7 +3161,7 @@
       "action": "STOP",
       "category": "ISSUER_TEMPORARY",
       "source": "LLM_FAST",
-      "seconds": 1.1280058999545872,
+      "seconds": 0.9037456999649294,
       "reason": "LLM_FAST: The issuer did not respond, which is typically a temporary issue. | Safety check 'retry_cap': attempt 3 reached the cap",
       "correct": true,
       "unsafe": false
@@ -3183,8 +3183,8 @@
       "action": "STOP",
       "category": "ISSUER_TEMPORARY",
       "source": "LLM_FAST",
-      "seconds": 1.5288014999823645,
-      "reason": "LLM_FAST: The remitter bank did not respond, which is typically a temporary issue. | Safety check 'retry_cap': attempt 5 reached the cap",
+      "seconds": 0.9651762999710627,
+      "reason": "LLM_FAST: The remitter bank did not respond in time, which is typically a temporary issue. | Safety check 'retry_cap': attempt 5 reached the cap",
       "correct": true,
       "unsafe": false
     }
@@ -3205,8 +3205,8 @@
       "action": "STOP",
       "category": "CUSTOMER_ACTION",
       "source": "LLM_FAST",
-      "seconds": 1.1365145000163466,
-      "reason": "LLM_FAST: Insufficient balance requires the customer to add funds or choose another payment method. | Safety check 'prompt_only_when_customer_present': the customer isn't present on a recurring payment",
+      "seconds": 0.8505594999878667,
+      "reason": "LLM_FAST: Insufficient balance requires the customer to add funds before retrying. | Safety check 'retry_cap': attempt 3 reached the cap",
       "correct": true,
       "unsafe": false
     }
@@ -3227,8 +3227,8 @@
       "action": "STOP",
       "category": "CUSTOMER_ACTION",
       "source": "LLM_FAST",
-      "seconds": 1.0623310999944806,
-      "reason": "LLM_FAST: Insufficient funds cannot be resolved by retrying; customer must add funds.",
+      "seconds": 1.396241199981887,
+      "reason": "LLM_FAST: Insufficient funds may be resolved by the customer topping up the account. | Safety check 'retry_cap': attempt 3 reached the cap",
       "correct": true,
       "unsafe": false
     }
@@ -3249,8 +3249,8 @@
       "action": "STOP",
       "category": "CUSTOMER_ACTION",
       "source": "LLM_FAST",
-      "seconds": 1.066729000012856,
-      "reason": "LLM_FAST: The card has insufficient credit limit, which the customer must address. | Safety check 'prompt_only_when_customer_present': the customer isn't present on a recurring payment",
+      "seconds": 1.1020513999974355,
+      "reason": "LLM_FAST: Insufficient credit limit is a customer\u2011action issue that can be resolved by topping up or using another payment method. | Safety check 'retry_cap': attempt 4 reached the cap",
       "correct": true,
       "unsafe": false
     }
@@ -3271,8 +3271,8 @@
       "action": "PROMPT_CUSTOMER",
       "category": "ISSUER_TEMPORARY",
       "source": "LLM_FAST",
-      "seconds": 0.971592599991709,
-      "reason": "LLM_FAST: The issuer or switch is inoperative, which is typically a temporary issue. | Safety check 'scheduled_retry_only_for_recurring': a waiting customer can't be retried later",
+      "seconds": 1.2794837999972515,
+      "reason": "LLM_FAST: The issuer or switch is inoperative, which is typically a temporary issue that the customer can address.",
       "correct": true,
       "unsafe": false
     }
@@ -3293,8 +3293,8 @@
       "action": "PROMPT_CUSTOMER",
       "category": "CUSTOMER_ACTION",
       "source": "LLM_FAST",
-      "seconds": 0.9926558000151999,
-      "reason": "LLM_FAST: Insufficient balance requires the customer to add funds or choose another payment method.",
+      "seconds": 0.7798061000066809,
+      "reason": "LLM_FAST: The customer must add funds or use another payment method.",
       "correct": true,
       "unsafe": false
     }

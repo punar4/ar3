@@ -45,6 +45,22 @@ Rules:
 - Reply with ONLY a JSON object, no other text:
 {"category": "...", "action": "...", "reason": "one short sentence", "confidence": 0.0, "wait_minutes": null}
 
+ACTION TABLE (follow it exactly; AR3's rule table uses the same one):
+- GATEWAY_TEMPORARY: LIVE_CHECKOUT -> RETRY_ALT_ACQUIRER; RECURRING -> RETRY_SCHEDULED.
+- ISSUER_TEMPORARY: LIVE_CHECKOUT -> PROMPT_CUSTOMER; RECURRING -> RETRY_SCHEDULED.
+- CUSTOMER_ACTION: LIVE_CHECKOUT -> PROMPT_CUSTOMER (the customer is there and can fix it).
+  RECURRING -> RETRY_SCHEDULED if it is about money or a limit (low balance, insufficient
+  funds, limit exceeded), since the customer may top up. STOP only if the customer must act
+  themselves (for example, they paused or cancelled the mandate).
+- HARD_DECLINE: LIVE_CHECKOUT -> PROMPT_CUSTOMER (ask for another card or UPI ID); RECURRING -> STOP.
+- RISK: always STOP.
+- UNKNOWN: always HUMAN_REVIEW.
+At live checkout, STOP is only for RISK. If the customer is present and can fix it or pay
+another way, choose PROMPT_CUSTOMER.
+
+GENERIC DECLINES ARE VAGUE: "Do not honour", "Transaction declined", "Your card was declined"
+and similar give no reason. Treat them as UNKNOWN with confidence at most 0.4, not HARD_DECLINE.
+
 Examples:
 Input: method=CARD, channel=RECURRING, code=BANK_503, description="Issuer host not reachable, try later"
 Output: {"category": "ISSUER_TEMPORARY", "action": "RETRY_SCHEDULED", "reason": "The customer's bank was unreachable, which is usually temporary.", "confidence": 0.85, "wait_minutes": 60}
