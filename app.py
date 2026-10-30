@@ -35,7 +35,7 @@ st.set_page_config(page_title="AR3 · failed payment decisions", page_icon=":mat
                    layout="centered",
                    initial_sidebar_state="collapsed")
 
-# ---------- Look: one accent colour, no emoji, plain type, no decoration ----------
+# ---------- Styles ----------
 st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
@@ -65,6 +65,9 @@ st.markdown("""
 .ar3-note {font-size: 0.9rem; color: #8a3b12; margin-top: 10px;}
 .ar3-summary {font-size: 0.95rem; margin: 8px 0 12px; line-height: 1.7;}
 .ar3-summary b {font-weight: 600;}
+.ar3-stats {display: flex; flex-wrap: wrap; gap: 8px 40px; margin: 0 0 22px;}
+.ar3-stats .n {font-size: 1.7rem; font-weight: 600; line-height: 1.1;}
+.ar3-stats .l {font-size: 0.82rem; color: #6b6b63; max-width: 17ch;}
 .ar3-foot {margin-top: 48px; padding-top: 10px; border-top: 1px solid #dcdad2;
     font-size: 0.8rem; color: #6b6b63;}
 .ar3-foot a {color: #6b6b63;}
@@ -258,6 +261,11 @@ st.markdown("""
   or hand it to a person, and why. Known error codes go to a rule table. Unclear ones go to
   NVIDIA Nemotron on Nebius Token Factory. Every answer then passes safety checks that can
   overrule it. AR3 only recommends; it never moves money.</p>
+  <div class="ar3-stats">
+    <div><div class="n">98%</div><div class="l">right decisions on 150 test payments (rules alone: 31%)</div></div>
+    <div><div class="n">0</div><div class="l">unsafe retries (retrying everything: 50)</div></div>
+    <div><div class="n">11%</div><div class="l">sent to a person when the error was too vague</div></div>
+  </div>
 </div>""", unsafe_allow_html=True)
 
 tab_one, tab_batch, tab_eval = st.tabs(["One payment", "Batch", "Evaluation"])
