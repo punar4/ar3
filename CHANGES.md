@@ -29,5 +29,20 @@ AR3 v2, rebuilt from scratch for the Nebius × NVIDIA Global AI Hackathon.
 - llm.py: two-tier Nemotron diagnosis (Nano fast tier, then Ultra if the answer is invalid or below 0.7 confidence, then human review); every failure falls back safely
 - tests/test_llm.py: 9 tests with a fake model (escalation, timeouts, invented action REROUTE_TO_CARD rejected, confidence 1.7 rejected); all pass
 - live_check.py: real Nemotron run; vague UPI U30 now goes fast (unsure, 0.30) → Ultra (unsure, 0.35) → human review, instead of N1's confident "hard decline"
-- policy.py: 7 independent safety checks that can override any decision, from rules or Nemotron; every override is recorded; 10 tests, all pass
+- policy.py: 8 independent safety checks that can override any decision, from rules or Nemotron; every override is recorded; 10 tests, all pass
 - engine.py: the full flow (rules → Nemotron → safety checks → retry details), with idempotency keys, alternate-acquirer choice and a rules-only mode for the evaluation baseline; 5 end-to-end tests, all pass (43 total)
+
+## 2026-10-30 (afternoon)
+- make_testset.py: first labelled test set, 69 failed payments (30 known codes x both channels, 39 messy hand-written errors)
+- evaluate.py: same cases for every policy (retry-everything, rules-only, full AR3), counts unsafe actions, compares Nemotron tiers (--tiers), saves results/eval.md and results/full_decisions.json
+- First run: AR3 94% correct vs 51% rules-only and 35% retry-everything; 0 unsafe vs 22
+
+## 2026-10-30 (evening)
+- Test set grown from 69 to 150 cases (30 known codes, 120 messy; 55 UPI, 51 card, 14 netbanking).
+- Eval v1: 87% correct, 0 unsafe. All 20 errors were over-cautious stops: the prompt lacked the action table.
+- Prompt v2: added the action table and "generic declines are vague". 97%, but 1 unsafe: a misdiagnosis slipped past a check that trusts the model's category.
+- Added two checks that read the error text itself (risk words, dead-card words). 98%, 0 unsafe, 45 tests.
+- Note: the guards were written after seeing failures on this test set; a held-out set is planned for v2.1.
+- policy.py now has 10 safety checks (added risk_words_never_retried and dead_words_never_retried)
+- Tiers on 120 messy cases: Nano (reasoning off) 97%, Nano (reasoning on) 96%, Ultra 94%; Ultra was ~2x slower with more tokens, so it stays an escalation-only tier (1% of decisions)
+- Windows Smart App Control blocks pytest.exe; run tests with `python -m pytest`
