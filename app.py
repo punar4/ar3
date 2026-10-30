@@ -27,8 +27,8 @@ from engine import decide  # noqa: E402
 from rules import apply_rules  # noqa: E402
 from schemas import Channel, FailedPayment, Method  # noqa: E402
 
-DAILY_LLM_CAP = 300      # protects the credits on the public demo
-MAX_BATCH_ROWS = 200
+DAILY_LLM_CAP = 100      # protects the credits on the public demo
+MAX_BATCH_ROWS = 50
 REPO_URL = "https://github.com/punar4/ar3"
 
 st.set_page_config(page_title="AR3 · failed payment decisions", page_icon=":material/account_balance:",
@@ -79,6 +79,16 @@ st.markdown("""
 .ar3-stats {display: flex; flex-wrap: wrap; gap: 8px 40px; margin: 0 0 22px;}
 .ar3-stats .n {font-size: 1.7rem; font-weight: 600; line-height: 1.1;}
 .ar3-stats .l {font-size: 0.85rem; color: #6b6b63; max-width: 26ch; line-height: 1.4;}
+.ar3-table-wrap {max-height: 560px; overflow: auto; border: 1px solid #dcdad2; border-radius: 4px;}
+.ar3-table {border-collapse: collapse; width: 100%; font-size: 0.86rem; table-layout: fixed;}
+.ar3-table th {position: sticky; top: 0; background: #eeece5; text-align: left; font-weight: 600;
+    padding: 8px 12px; border-bottom: 1px solid #c9c7bd; white-space: nowrap;}
+.ar3-table td {padding: 8px 12px; border-bottom: 1px solid #e6e4dc; vertical-align: top; line-height: 1.45;}
+.ar3-table td {overflow-wrap: anywhere;}
+.ar3-table th:nth-child(1) {width: 9%;} .ar3-table th:nth-child(2) {width: 10%;}
+.ar3-table th:nth-child(3) {width: 11%;} .ar3-table th:nth-child(4) {width: 16%;}
+.ar3-table th:nth-child(5) {width: 12%;} .ar3-table th.m {width: 8%;}
+.ar3-tnote {color: #1f5f46; font-size: 0.8rem; margin-top: 3px;}
 .ar3-foot {margin-top: 48px; padding-top: 10px; border-top: 1px solid #dcdad2;
     font-size: 0.8rem; color: #6b6b63;}
 .ar3-foot a {color: #6b6b63;}
@@ -400,30 +410,26 @@ with tab_batch:
         view["category"] = view["category"].map(lambda s: CATEGORY_TEXT.get(s, s))
         if "expected" in view:
             view["expected"] = view["expected"].map(lambda s: ACTION_TEXT.get(s, s))
-        event = st.dataframe(
-            view, width="stretch", hide_index=True, on_select="rerun", selection_mode="single-row",
-            key="batch_table",
-            column_order=["payment_id", "amount", "error_code", "action", "decided_by", "correct", "reason"],
-            column_config={
-                "payment_id": st.column_config.TextColumn("Payment", width="small"),
-                "amount": st.column_config.TextColumn("Amount", width="small"),
-                "error_code": st.column_config.TextColumn("Code", width="small"),
-                "action": st.column_config.TextColumn("Recommendation", width=170),
-                "decided_by": st.column_config.TextColumn("Decided by", width=110),
-                "correct": st.column_config.CheckboxColumn("Correct", width="small"),
-                "reason": st.column_config.TextColumn("Reason", width="large",
-                                                      help="Select a row to read the full reason"),
-            })
-        picked = event.selection.rows
-        if picked:
-            r = view.iloc[picked[0]]
-            st.markdown(f"""<div class="ar3 ar3-result"><div class="ar3-kicker">{html.escape(str(r['payment_id']))}
- · {html.escape(str(r['error_code']))} · {r['amount']}</div>
-<div class="ar3-action" style="font-size:1.2rem">{html.escape(str(r['action']))}</div>
-<p class="ar3-why">{html.escape(str(r['full_reason'])).replace(" | ", "<br>")}</p></div>""",
-                        unsafe_allow_html=True)
-        else:
-            st.caption("Select a row to read its full reason.")
+        cols = [("payment_id", "Payment"), ("amount", "Amount"), ("error_code", "Code"),
+                ("action", "Recommendation"), ("decided_by", "Decided by")]
+        if "correct" in view:
+            cols.append(("correct", "Correct"))
+        head = "".join(f"<th class='{'m' if key == 'correct' else ''}'>{label}</th>"
+                       for key, label in cols) + "<th>Reason</th>"
+        body = []
+        for _, r in view.iterrows():
+            cells = []
+            for key, _ in cols:
+                val = r[key]
+                if key == "correct":
+                    val = "yes" if val else "no"
+                cells.append(f"<td>{html.escape(str(val))}</td>")
+            main, notes = split_reason(str(r["full_reason"]))
+            note_html = "".join(f"<div class='ar3-tnote'>{html.escape(n)}</div>" for n in notes)
+            cells.append(f"<td>{html.escape(short_reason(main))}{note_html}</td>")
+            body.append("<tr>" + "".join(cells) + "</tr>")
+        st.markdown(f"<div class='ar3 ar3-table-wrap'><table class='ar3-table'><thead><tr>{head}</tr></thead>"
+                    f"<tbody>{''.join(body)}</tbody></table></div>", unsafe_allow_html=True)
         st.download_button("Download decisions (CSV)", view.to_csv(index=False), "ar3_decisions.csv",
                            "text/csv")
 
