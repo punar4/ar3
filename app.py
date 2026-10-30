@@ -40,7 +40,7 @@ st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap');
 #MainMenu, footer, [data-testid="stHeaderActionElements"] {display: none;}
-.block-container {padding-top: 2.5rem; max-width: 880px;}
+.block-container {padding-top: 2.5rem; max-width: 1040px;}
 .ar3, .ar3 * {font-family: inherit; color: #1b1b18;}
 .ar3 code, .ar3 .mono {font-family: 'IBM Plex Mono', monospace; font-size: 0.85em;
     background: none; padding: 0; color: #3d3d38;}
@@ -202,6 +202,12 @@ def split_reason(reason: str) -> tuple[str, list[str]]:
     return main, notes
 
 
+def short_reason(reason: str) -> str:
+    """'Rule: CARD 14 = Invalid card number, so STOP for RECURRING' -> 'Invalid card number'."""
+    m = re.match(r"^Rule: \S+ \S+ = (.+?), so ", reason)
+    return m.group(1) if m else reason
+
+
 def trail(d: dict, payment: FailedPayment, capped: bool) -> list[tuple[str, str, bool]]:
     """The path the payment took, as (step, what happened, changed the decision?)."""
     code = html.escape(payment.error_code)
@@ -356,7 +362,7 @@ with tab_batch:
             rows.append(dict(payment_id=p.payment_id, amount_paise=p.amount_paise, method=p.method.value,
                              channel=p.channel.value, error_code=p.error_code, action=d["action"],
                              category=d["category"], decided_by=d["source"],
-                             reason=split_reason(d["reason"])[0]))
+                             reason=short_reason(split_reason(d["reason"])[0]), full_reason=d["reason"]))
             progress.progress(n / max(len(payments), 1), text=f"Decided {n} of {len(payments)}")
         progress.empty()
         if row_errors:
@@ -372,7 +378,8 @@ with tab_batch:
                                  action=got.get("action"), category=got.get("category"),
                                  decided_by=got.get("source"), expected=c.get("expected_action"),
                                  correct=got.get("correct"),
-                                 reason=split_reason(got.get("reason") or "")[0]))
+                                 reason=short_reason(split_reason(got.get("reason") or "")[0]),
+                                 full_reason=got.get("reason") or ""))
 
     if rows:
         df = pd.DataFrame(rows)
@@ -393,27 +400,28 @@ with tab_batch:
         view["category"] = view["category"].map(lambda s: CATEGORY_TEXT.get(s, s))
         if "expected" in view:
             view["expected"] = view["expected"].map(lambda s: ACTION_TEXT.get(s, s))
-        event = st.dataframe(view, width="stretch", hide_index=True, on_select="rerun",
-                             selection_mode="single-row", key="batch_table", column_config={
-            "payment_id": st.column_config.TextColumn("Payment"),
-            "amount": st.column_config.TextColumn("Amount"),
-            "method": st.column_config.TextColumn("Method"),
-            "channel": st.column_config.TextColumn("Channel"),
-            "error_code": st.column_config.TextColumn("Error code"),
-            "action": st.column_config.TextColumn("Recommendation", width="medium"),
-            "category": st.column_config.TextColumn("Diagnosis"),
-            "decided_by": st.column_config.TextColumn("Decided by"),
-            "expected": st.column_config.TextColumn("Expected"),
-            "correct": st.column_config.CheckboxColumn("Correct"),
-            "reason": st.column_config.TextColumn("Reason", width="large"),
-        })
+        event = st.dataframe(
+            view, width="stretch", hide_index=True, on_select="rerun", selection_mode="single-row",
+            key="batch_table",
+            column_order=["payment_id", "amount", "error_code", "action", "decided_by", "correct", "reason"],
+            column_config={
+                "payment_id": st.column_config.TextColumn("Payment", width="small"),
+                "amount": st.column_config.TextColumn("Amount", width="small"),
+                "error_code": st.column_config.TextColumn("Code", width="small"),
+                "action": st.column_config.TextColumn("Recommendation", width=170),
+                "decided_by": st.column_config.TextColumn("Decided by", width=110),
+                "correct": st.column_config.CheckboxColumn("Correct", width="small"),
+                "reason": st.column_config.TextColumn("Reason", width="large",
+                                                      help="Select a row to read the full reason"),
+            })
         picked = event.selection.rows
         if picked:
             r = view.iloc[picked[0]]
             st.markdown(f"""<div class="ar3 ar3-result"><div class="ar3-kicker">{html.escape(str(r['payment_id']))}
  · {html.escape(str(r['error_code']))} · {r['amount']}</div>
 <div class="ar3-action" style="font-size:1.2rem">{html.escape(str(r['action']))}</div>
-<p class="ar3-why">{html.escape(str(r['reason']))}</p></div>""", unsafe_allow_html=True)
+<p class="ar3-why">{html.escape(str(r['full_reason'])).replace(" | ", "<br>")}</p></div>""",
+                        unsafe_allow_html=True)
         else:
             st.caption("Select a row to read its full reason.")
         st.download_button("Download decisions (CSV)", view.to_csv(index=False), "ar3_decisions.csv",
