@@ -66,3 +66,16 @@ def test_safe_rule_decision_is_untouched():
     safe = dec(C.CUSTOMER_ACTION, Action.RETRY_SCHEDULED, confidence=1.0, wait=4320, source=Source.RULE)
     d = apply_policy(pay(), safe)
     assert d == safe and d.overrides == []
+
+
+def test_risk_words_stop_a_retry_even_if_model_misdiagnosed():
+    p = pay().model_copy(update={"error_code": "AML_HOLD",
+                                 "error_description": "Transaction held for compliance review"})
+    d = apply_policy(p, dec(C.ISSUER_TEMPORARY, Action.RETRY_SCHEDULED, wait=60))
+    assert d.action == Action.STOP and "risk_words_never_retried" in d.overrides
+
+def test_dead_words_stop_a_retry_even_if_model_misdiagnosed():
+    p = pay().model_copy(update={"error_code": "TXN_NOT_PERMITTED",
+                                 "error_description": "Transaction not permitted to cardholder"})
+    d = apply_policy(p, dec(C.ISSUER_TEMPORARY, Action.RETRY_SCHEDULED, wait=60))
+    assert d.action == Action.STOP and "dead_words_never_retried" in d.overrides

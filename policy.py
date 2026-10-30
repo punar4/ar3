@@ -36,6 +36,30 @@ def risk_never_retried(p: FailedPayment, d: Decision) -> Decision | None:
                          action=Action.STOP, wait_minutes=None)
     return None
 
+RISK_WORDS = ("fraud", "suspicious", "suspected", "stolen", "reported lost",
+              "compliance", "aml", "risk", "velocity")
+
+def risk_words_never_retried(p: FailedPayment, d: Decision) -> Decision | None:
+    text = f"{p.error_code} {p.error_description}".lower()
+    hit = next((w for w in RISK_WORDS if w in text), None)
+    if hit and d.action not in {Action.STOP, Action.HUMAN_REVIEW}:
+        return _override(d, "risk_words_never_retried", f"error text mentions '{hit}': never retry or prompt",
+                         action=Action.STOP, wait_minutes=None)
+    return None
+
+
+DEAD_WORDS = ("expired", "is closed", "account closed", "invalid", "not valid", "not permitted",
+              "revoked", "deactivated", "dormant", "no longer", "does not exist")
+
+
+def dead_words_never_retried(p: FailedPayment, d: Decision) -> Decision | None:
+    text = f"{p.error_code} {p.error_description}".lower()
+    hit = next((w for w in DEAD_WORDS if w in text), None)
+    if hit and d.action in RETRIES:
+        return _override(d, "dead_words_never_retried", f"error text says '{hit}': retrying can't work",
+                         action=Action.STOP, wait_minutes=None)
+    return None
+
 
 def hard_decline_never_retried(p: FailedPayment, d: Decision) -> Decision | None:
     if d.category == FailureCategory.HARD_DECLINE and d.action in RETRIES:
@@ -95,7 +119,9 @@ def minimum_wait(p: FailedPayment, d: Decision) -> Decision | None:
 CHECKS: list[Check] = [
     low_confidence,
     risk_never_retried,
+    risk_words_never_retried,
     hard_decline_never_retried,
+    dead_words_never_retried,
     alt_acquirer_only_for_gateway_glitch,
     scheduled_retry_only_for_recurring,
     prompt_only_when_customer_present,
