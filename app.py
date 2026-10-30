@@ -38,10 +38,10 @@ st.set_page_config(page_title="AR3 · failed payment decisions", page_icon=":mat
 # ---------- Styles ----------
 st.markdown("""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap');
 #MainMenu, footer, [data-testid="stHeaderActionElements"] {display: none;}
 .block-container {padding-top: 2.5rem; max-width: 880px;}
-.ar3, .ar3 * {font-family: 'IBM Plex Sans', sans-serif; color: #1b1b18;}
+.ar3, .ar3 * {font-family: inherit; color: #1b1b18;}
 .ar3 code, .ar3 .mono {font-family: 'IBM Plex Mono', monospace; font-size: 0.85em;
     background: none; padding: 0; color: #3d3d38;}
 .ar3-head {display: flex; align-items: baseline; gap: 14px; margin-bottom: 4px;}
@@ -57,17 +57,28 @@ st.markdown("""
     margin: 0 0 16px; font-size: 0.92rem;}
 .ar3-facts dt {color: #6b6b63;}
 .ar3-facts dd {margin: 0;}
-.ar3-trail {list-style: none; padding: 0; margin: 0; font-size: 0.92rem;
-    border-left: 1px solid #c9c7bd;}
-.ar3-trail li {padding: 3px 0 3px 14px;}
-.ar3-trail .step {display: inline-block; min-width: 9.5rem; color: #6b6b63;}
+.ar3-trail {list-style: none; padding: 0 0 0 4px; margin: 0; font-size: 0.92rem;}
+.ar3-trail li {position: relative; padding: 4px 0 10px 22px; border-left: 1px solid #c9c7bd;}
+.ar3-trail li:last-child {border-left-color: transparent;}
+.ar3-trail li::before {content: ""; position: absolute; left: -5px; top: 8px; width: 9px; height: 9px;
+    border-radius: 50%; background: #f7f6f2; border: 1px solid #8f8d84;}
+.ar3-trail li.hit::before {background: #1f5f46; border-color: #1f5f46;}
+.ar3-tone {display: inline-block; width: 10px; height: 10px; border-radius: 2px;
+    margin-right: 10px; vertical-align: 0.15em;}
+.tone-go {background: #1f5f46;} .tone-stop {background: #9b2c1d;} .tone-person {background: #b07a12;}
+[data-testid="stMarkdownContainer"] table {border-collapse: collapse; font-size: 0.88rem; margin: 6px 0 18px;}
+[data-testid="stMarkdownContainer"] th {text-align: left; font-weight: 600; border-bottom: 1.5px solid #1b1b18;
+    padding: 6px 14px 6px 0; background: none;}
+[data-testid="stMarkdownContainer"] td {border: none; border-bottom: 1px solid #e2e0d8; padding: 6px 14px 6px 0;}
+[data-testid="stMarkdownContainer"] h2 {font-size: 1.15rem; font-weight: 600; margin-top: 18px;}
+.ar3-trail .step {display: inline-block; min-width: 8.5rem; color: #6b6b63;}
 .ar3-trail .changed {color: #1f5f46; font-weight: 500;}
 .ar3-note {font-size: 0.9rem; color: #8a3b12; margin-top: 10px;}
 .ar3-summary {font-size: 0.95rem; margin: 8px 0 12px; line-height: 1.7;}
 .ar3-summary b {font-weight: 600;}
 .ar3-stats {display: flex; flex-wrap: wrap; gap: 8px 40px; margin: 0 0 22px;}
 .ar3-stats .n {font-size: 1.7rem; font-weight: 600; line-height: 1.1;}
-.ar3-stats .l {font-size: 0.82rem; color: #6b6b63; max-width: 17ch;}
+.ar3-stats .l {font-size: 0.85rem; color: #6b6b63; max-width: 26ch; line-height: 1.4;}
 .ar3-foot {margin-top: 48px; padding-top: 10px; border-top: 1px solid #dcdad2;
     font-size: 0.8rem; color: #6b6b63;}
 .ar3-foot a {color: #6b6b63;}
@@ -95,6 +106,8 @@ SOURCE_TEXT = {
     "LLM_ULTRA": "Nemotron Ultra",
     "FALLBACK": "No confident answer",
 }
+TONE = {"RETRY_ALT_ACQUIRER": "tone-go", "RETRY_SCHEDULED": "tone-go", "PROMPT_CUSTOMER": "tone-go",
+        "STOP": "tone-stop", "HUMAN_REVIEW": "tone-person"}
 SAFE_NEXT_STEP = {"RETRY_ALT_ACQUIRER", "RETRY_SCHEDULED", "PROMPT_CUSTOMER"}
 
 PRESETS = {
@@ -192,7 +205,7 @@ def split_reason(reason: str) -> tuple[str, list[str]]:
 def trail(d: dict, payment: FailedPayment, capped: bool) -> list[tuple[str, str, bool]]:
     """The path the payment took, as (step, what happened, changed the decision?)."""
     code = html.escape(payment.error_code)
-    nano, ultra = config.FAST_MODEL.split("/")[-1], config.ULTRA_MODEL.split("/")[-1]
+    nano, ultra = "Nemotron Nano", "Nemotron Ultra"
     steps = []
     if d["source"] == "RULE":
         steps.append(("Rule table", f"matched {payment.method.value} <code>{code}</code>", True))
@@ -201,15 +214,15 @@ def trail(d: dict, payment: FailedPayment, capped: bool) -> list[tuple[str, str,
         if capped:
             steps.append(("Nemotron", "skipped: today's demo limit is used up", False))
         elif d["source"] == "LLM_FAST":
-            steps.append((f"<code>{nano}</code>",
-                          f"{d['category']}, confidence {d['confidence']:.2f}", True))
+            steps.append((nano,
+                          f"<code>{d['category']}</code>, confidence {d['confidence']:.2f}", True))
         elif d["source"] == "LLM_ULTRA":
-            steps.append((f"<code>{nano}</code>", "unsure or invalid, escalated", False))
-            steps.append((f"<code>{ultra}</code>",
-                          f"{d['category']}, confidence {d['confidence']:.2f}", True))
+            steps.append((nano, "unsure or invalid, escalated", False))
+            steps.append((ultra,
+                          f"<code>{d['category']}</code>, confidence {d['confidence']:.2f}", True))
         else:
-            steps.append((f"<code>{nano}</code>", "unsure or invalid, escalated", False))
-            steps.append((f"<code>{ultra}</code>", "unsure or invalid", False))
+            steps.append((nano, "unsure or invalid, escalated", False))
+            steps.append((ultra, "unsure or invalid", False))
     _, notes = split_reason(d["reason"])
     if notes:
         for n in notes:
@@ -234,7 +247,7 @@ def show_decision(d: dict, payment: FailedPayment, capped: bool) -> None:
 
     facts_html = "".join(f"<dt>{k}</dt><dd>{v}</dd>" for k, v in facts)
     trail_html = "".join(
-        f"<li><span class='step'>{step}</span>"
+        f"<li class='{'hit' if changed else ''}'><span class='step'>{step}</span>"
         f"<span class='{'changed' if changed else ''}'>{what}</span></li>"
         for step, what, changed in trail(d, payment, capped))
     note = ("<div class='ar3-note'>Today's demo limit for model calls is used up, so this unknown "
@@ -243,7 +256,7 @@ def show_decision(d: dict, payment: FailedPayment, capped: bool) -> None:
     st.markdown(f"""
 <div class="ar3 ar3-result">
   <div class="ar3-kicker">Recommendation</div>
-  <div class="ar3-action">{ACTION_TEXT.get(d['action'], d['action'])}
+  <div class="ar3-action"><span class="ar3-tone {TONE.get(d['action'], 'tone-person')}"></span>{ACTION_TEXT.get(d['action'], d['action'])}
     <span class="when">{wait_text(d.get('wait_minutes'))}</span></div>
   <p class="ar3-why">{html.escape(why)}</p>
   <dl class="ar3-facts">{facts_html}</dl>
@@ -371,13 +384,28 @@ with tab_batch:
 <b>{int((df['action'] == 'HUMAN_REVIEW').sum())}</b> sent to a person.</div>""",
                     unsafe_allow_html=True)
 
-        chosen = st.multiselect("Show", list(ACTION_TEXT), default=list(ACTION_TEXT),
-                                format_func=lambda a: ACTION_TEXT[a])
+        chosen = st.pills("Show", list(ACTION_TEXT), selection_mode="multi", default=list(ACTION_TEXT),
+                          format_func=lambda a: ACTION_TEXT[a]) or []
         view = df[df["action"].isin(chosen)].copy()
         view.insert(1, "amount", view.pop("amount_paise").map(rupees))
         view["action"] = view["action"].map(ACTION_TEXT)
         view["decided_by"] = view["decided_by"].map(lambda s: SOURCE_TEXT.get(s, s))
-        st.dataframe(view, width="stretch", hide_index=True)
+        view["category"] = view["category"].map(lambda s: CATEGORY_TEXT.get(s, s))
+        if "expected" in view:
+            view["expected"] = view["expected"].map(lambda s: ACTION_TEXT.get(s, s))
+        st.dataframe(view, width="stretch", hide_index=True, column_config={
+            "payment_id": st.column_config.TextColumn("Payment"),
+            "amount": st.column_config.TextColumn("Amount"),
+            "method": st.column_config.TextColumn("Method"),
+            "channel": st.column_config.TextColumn("Channel"),
+            "error_code": st.column_config.TextColumn("Error code"),
+            "action": st.column_config.TextColumn("Recommendation", width="medium"),
+            "category": st.column_config.TextColumn("Diagnosis"),
+            "decided_by": st.column_config.TextColumn("Decided by"),
+            "expected": st.column_config.TextColumn("Expected"),
+            "correct": st.column_config.CheckboxColumn("Correct"),
+            "reason": st.column_config.TextColumn("Reason", width="large"),
+        })
         st.download_button("Download decisions (CSV)", view.to_csv(index=False), "ar3_decisions.csv",
                            "text/csv")
 
