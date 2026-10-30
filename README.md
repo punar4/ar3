@@ -4,7 +4,7 @@
 
 AR3 is an open-source decision layer for failed UPI and card payments. Known error codes are decided by a rule table. Messy, vague errors are diagnosed by NVIDIA Nemotron on Nebius Token Factory. Independent safety checks have the final say. AR3 recommends the next step with a reason; it never moves money.
 
-[Live demo](https://ar3-payments.streamlit.app) · [Video](VIDEO_URL) · [Results](#results) · [How it decides](#how-ar3-decides) · [Run it](#run-it)
+[Live demo](https://ar3-payments.streamlit.app) · [Video](https://www.youtube.com/watch?v=apM7ogyRBzQ) · [Results](#results) · [How it decides](#how-ar3-decides) · [Run it](#run-it)
 
 ![Python 3.14](https://img.shields.io/badge/python-3.14-blue) ![NVIDIA Nemotron](https://img.shields.io/badge/NVIDIA-Nemotron-76B900) ![Nebius Token Factory](https://img.shields.io/badge/Nebius-Token%20Factory-black) ![Tests](https://img.shields.io/badge/tests-45%20passing-brightgreen) ![License: MIT](https://img.shields.io/badge/license-MIT-lightgrey)
 
@@ -63,6 +63,8 @@ These fixes were found on the same test set they are measured on, so this is not
 When a UPI or card payment fails, gateways already retry. But many failures come back vague, like UPI's U30 "debit failed", and nobody knows *why*. Retrying blindly wastes money and annoys banks and customers. Giving up loses the sale.
 
 **Who it's for:** Indian subscription businesses that collect through UPI AutoPay and cards, often across more than one gateway, and need a consistent, explainable answer to "what do we do with this failed payment?"
+
+**Talking to the people who'd use it:** I reached out to 29 people, including 22 founders across 17 Indian fintech and consumer startups that collect payments (among them Juspay, Jar, Rupifi, Drona Pay, Fundly.ai, Credfix and topmate.io), plus employees at several of them. No replies to the question yet; their answers will shape v2.1.
 
 ## The finding that shaped AR3
 
