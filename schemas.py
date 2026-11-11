@@ -19,6 +19,7 @@ class Method(StrEnum):
     UPI = "UPI"
     CARD = "CARD"
     NETBANKING = "NETBANKING"
+    PAYPAL = "PAYPAL"            # PayPal Orders API (checkout) and PayPal subscriptions
 
 
 class FailureCategory(StrEnum):

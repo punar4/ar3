@@ -54,6 +54,35 @@ RULES: dict[tuple[Method, str], Rule] = {
     (Method.UPI, "ACQ_TIMEOUT"): _GATEWAY_GLITCH,
     # Generic codes like UPI U30 ("debit failed") are left out on purpose:
     # their cause is unclear, so they go to Nemotron.
+    # PayPal (Orders API v2 error "issue" codes) -
+    (Method.PAYPAL, "INSTRUMENT_DECLINED"): Rule(
+        "Funding source declined; PayPal says send the buyer back to pick another",
+        FailureCategory.CUSTOMER_ACTION, Action.PROMPT_CUSTOMER, Action.STOP),
+    (Method.PAYPAL, "PAYER_ACTION_REQUIRED"): Rule(
+        "The buyer must complete a step on PayPal first",
+        FailureCategory.CUSTOMER_ACTION, Action.PROMPT_CUSTOMER, Action.STOP),
+    (Method.PAYPAL, "ORDER_NOT_APPROVED"): Rule(
+        "The buyer has not approved the order yet",
+        FailureCategory.CUSTOMER_ACTION, Action.PROMPT_CUSTOMER, Action.STOP),
+    (Method.PAYPAL, "PAYER_CANNOT_PAY"): Rule(
+        "This PayPal account can't pay for this order",
+        FailureCategory.HARD_DECLINE, Action.PROMPT_CUSTOMER, Action.STOP),
+    (Method.PAYPAL, "TRANSACTION_REFUSED"): Rule(
+        "PayPal refused the transaction", FailureCategory.RISK, Action.STOP, Action.STOP),
+    (Method.PAYPAL, "COMPLIANCE_VIOLATION"): _RISK,
+    (Method.PAYPAL, "ORDER_ALREADY_CAPTURED"): Rule(
+        "Already captured: the money was taken, a retry would charge twice",
+        FailureCategory.HARD_DECLINE, Action.STOP, Action.STOP),
+    (Method.PAYPAL, "DUPLICATE_INVOICE_ID"): Rule(
+        "Invoice ID already paid: a retry could be a duplicate charge",
+        FailureCategory.HARD_DECLINE, Action.STOP, Action.STOP),
+    (Method.PAYPAL, "MAX_NUMBER_OF_PAYMENT_ATTEMPTS_EXCEEDED"): Rule(
+        "PayPal's attempt limit reached", FailureCategory.HARD_DECLINE, Action.STOP, Action.STOP),
+    (Method.PAYPAL, "PAYEE_ACCOUNT_RESTRICTED"): Rule(
+        "The merchant's PayPal account is restricted: a person must fix it",
+        FailureCategory.UNKNOWN, Action.HUMAN_REVIEW, Action.HUMAN_REVIEW),
+    (Method.PAYPAL, "INTERNAL_SERVER_ERROR"): _GATEWAY_GLITCH,   # PayPal 5xx: safe to retry
+    (Method.PAYPAL, "SERVICE_UNAVAILABLE"): _GATEWAY_GLITCH,
 }
 
 

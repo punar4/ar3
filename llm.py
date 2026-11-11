@@ -21,7 +21,7 @@ log = logging.getLogger(__name__)
 # A function that takes (model, prompt, thinking) and returns the model's raw reply text.
 AskFn = Callable[[str, str, bool | None], str]
 
-SYSTEM_PROMPT = """You diagnose failed UPI and card payments for AR3, a payment-failure decision engine.
+SYSTEM_PROMPT = """You diagnose failed UPI, card and PayPal payments for AR3, a payment-failure decision engine.
 You only recommend. You never move money. Fixed rules and safety checks review your answer.
 
 Pick ONE category:
@@ -55,6 +55,8 @@ ACTION TABLE (follow it exactly; AR3's rule table uses the same one):
 - HARD_DECLINE: LIVE_CHECKOUT -> PROMPT_CUSTOMER (ask for another card or UPI ID); RECURRING -> STOP.
 - RISK: always STOP.
 - UNKNOWN: always HUMAN_REVIEW.
+PAYPAL: the code is a PayPal Orders API error. RETRY_ALT_ACQUIRER means "retry the same PayPal call
+safely with the same request id"; PayPal has no other acquirer.
 At live checkout, STOP is only for RISK. If the customer is present and can fix it or pay
 another way, choose PROMPT_CUSTOMER.
 

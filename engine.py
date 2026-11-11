@@ -7,7 +7,7 @@ import config
 from llm import AskFn, ask_nemotron, diagnose
 from policy import RETRIES, apply_policy
 from rules import apply_rules
-from schemas import Action, Decision, FailedPayment, FailureCategory, Source
+from schemas import Action, Decision, FailedPayment, FailureCategory, Method, Source
 
 
 def _no_rule_decision(payment: FailedPayment) -> Decision:
@@ -28,6 +28,15 @@ def _add_retry_details(payment: FailedPayment, decision: Decision) -> Decision:
         return decision
 
     key = f"{payment.payment_id}:attempt-{payment.attempt_number + 1}"
+
+    if decision.action == Action.RETRY_ALT_ACQUIRER and payment.method == Method.PAYPAL:
+        # PayPal is the processor: retry the same PayPal call, with a PayPal-Request-Id
+        # so PayPal itself guarantees it can't run twice.
+        return decision.model_copy(update={
+            "next_acquirer": "PAYPAL",
+            "idempotency_key": key,
+            "reason": f"{decision.reason} | Retry through PayPal with PayPal-Request-Id {key}",
+        })
 
     if decision.action == Action.RETRY_ALT_ACQUIRER:
         others = [a for a in config.ACQUIRERS if a != payment.acquirer]
