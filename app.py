@@ -54,9 +54,42 @@ if "token" in _qp and "PayerID" in _qp:
 st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 #MainMenu, footer, [data-testid="stHeaderActionElements"] {display: none;}
+html, body, .stApp, .stApp p, .stApp label, .stApp button, .stApp input, .stApp textarea,
+[data-testid="stMarkdownContainer"], .stApp [data-baseweb="select"] {
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif !important;}
+.stApp {background: #f4f3ee;}
+[data-testid="stVerticalBlockBorderWrapper"]:has(> div > [data-testid="stVerticalBlock"] .ar3-step) {
+    background: #ffffff; border: 1px solid #e3e1d8 !important; border-radius: 14px !important;
+    box-shadow: 0 1px 2px rgba(27,27,24,0.04), 0 4px 16px rgba(27,27,24,0.04); padding: 6px 8px;}
+.stButton > button, .stDownloadButton > button, .stLinkButton > a {
+    border-radius: 10px; font-weight: 500; border: 1px solid #cfccc1; padding: 0.45rem 1rem;}
+.stButton > button[kind="primary"] {background: #1f5f46; border-color: #1f5f46; color: #fff;}
+.stButton > button[kind="primary"]:hover {background: #174a36; border-color: #174a36; color: #fff;}
+.stTabs [data-baseweb="tab-list"] {gap: 6px; border-bottom: 1px solid #dcdad2;}
+.stTabs [data-baseweb="tab"] {font-weight: 500; padding: 8px 14px; border-radius: 8px 8px 0 0;}
+.stTabs [aria-selected="true"] {color: #1f5f46 !important;}
+.stTabs [data-baseweb="tab-highlight"] {background-color: #1f5f46 !important;}
+[data-baseweb="input"], [data-baseweb="select"] > div {border-radius: 10px !important;}
+.ar3-step {display: flex; align-items: center; gap: 12px; margin: 2px 0 8px;}
+.ar3-step .num {width: 28px; height: 28px; border-radius: 50%; display: inline-flex; align-items: center;
+    justify-content: center; font-weight: 600; font-size: 0.85rem; background: #ecebe4; color: #3d3d38;}
+.ar3-step .num.done {background: #1f5f46; color: #fff;}
+.ar3-step .t {font-weight: 600; font-size: 1.05rem;}
+.ar3-progress {display: flex; gap: 8px; margin: 0 0 14px;}
+.ar3-progress .s {flex: 1; display: flex; align-items: center; gap: 8px; font-size: 0.85rem;
+    color: #8f8d84; padding-top: 8px; border-top: 3px solid #dcdad2;}
+.ar3-progress .s span {font-weight: 600;}
+.ar3-progress .s.on {color: #1f5f46; border-top-color: #1f5f46;}
+.ar3-meta {display: flex; align-items: center; gap: 10px; margin: 4px 0 10px; font-size: 0.95rem;}
+.ar3-meta .pill {font-size: 0.75rem; font-weight: 600; letter-spacing: 0.04em; padding: 2px 10px;
+    border-radius: 999px; background: #e7f1ec; color: #1f5f46;}
+.ar3-captures {display: flex; align-items: center; gap: 14px; margin: 12px 0 4px; padding: 12px 16px;
+    border-radius: 12px; background: #e7f1ec;}
+.ar3-captures .n {font-size: 2rem; font-weight: 700; color: #1f5f46; line-height: 1;}
 .block-container {padding-top: 2.5rem; max-width: 1040px;}
-.ar3, .ar3 * {font-family: inherit; color: #1b1b18;}
+.ar3, .ar3 * {color: #1b1b18;}
 .ar3 code, .ar3 .mono {font-family: 'IBM Plex Mono', monospace; font-size: 0.85em;
     background: none; padding: 0; color: #3d3d38;}
 .ar3-head {display: flex; align-items: baseline; gap: 14px; margin-bottom: 4px;}
@@ -327,142 +360,167 @@ CHANNEL_HELP = ("LIVE_CHECKOUT: the customer is waiting on the payment page. "
                 "RECURRING: a subscription or AutoPay debit; the customer isn't there.")
 
 
+def step_head(n: int, title: str, done: bool) -> None:
+    st.markdown(f"<div class='ar3-step'><span class='num {'done' if done else ''}'>{n}</span>"
+                f"<span class='t'>{title}</span></div>", unsafe_allow_html=True)
+
+
+def progress_bar(stage: int) -> None:
+    """Create, Fail, Decide, Act: how far this order has got."""
+    names = ["Create", "Fail", "Decide", "Act"]
+    items = "".join(f"<div class='s {'on' if i < stage else ''}'><span>{i + 1}</span>{n}</div>"
+                    for i, n in enumerate(names))
+    st.markdown(f"<div class='ar3-progress'>{items}</div>", unsafe_allow_html=True)
+
+
 def paypal_tab() -> None:
     st.markdown("<div class='ar3'><p class='ar3-why'>A real PayPal sandbox order, a real PayPal "
                 "failure, and AR3's decision. Nothing is charged without a named person approving "
                 "it.</p></div>", unsafe_allow_html=True)
     st.session_state.setdefault("pp_results", [])
+    bar = st.empty()
 
     # Step 1: create the order
-    st.markdown("<div class='ar3-kicker'>Step 1 · Create a sandbox order</div>",
-                unsafe_allow_html=True)
-    amount = st.text_input("Amount (USD)", "49.99", key="pp_amount_input")
-    if st.button("Create order", key="pp_create"):
-        try:
-            order = pp.create_order(amount, reference_id="ar3-demo")
-        except (pp.PayPalError, RuntimeError) as err:
-            st.error(f"PayPal: {err}")
-        else:
-            st.session_state.pp_order = order
-            st.session_state.pp_amount = amount
-            st.session_state.pp_results = []
-            for key in ("pp_error", "pp_decision", "pp_plan"):
-                st.session_state.pop(key, None)
-
-    order = st.session_state.get("pp_order")
-    if order:
-        st.markdown(f"Order <span class='mono'>{html.escape(order['id'])}</span> · status "
-                    f"<span class='mono'>{html.escape(order.get('status', ''))}</span>",
-                    unsafe_allow_html=True)
-        link = pp.approve_link(order)
-        if link:
-            st.link_button("Open as test buyer (optional)", link)
-            st.caption("Approve it as the sandbox buyer if you want the retry at the end to "
-                       "really capture the money.")
-
-    # Step 2: make the payment fail
-    if order:
-        st.markdown("<div class='ar3-kicker' style='margin-top:20px'>Step 2 · Make the payment "
-                    "fail</div>", unsafe_allow_html=True)
-        label = st.selectbox("Failure", list(FAILURE_OPTIONS), key="pp_failure")
-        c1, c2 = st.columns([1.4, 0.6])
-        channel = c1.selectbox("Channel", [c.value for c in Channel], key="pp_channel",
-                               help=CHANNEL_HELP)
-        attempt = c2.number_input("Attempt", min_value=1, value=1, key="pp_attempt")
-        st.caption("Real = PayPal's sandbox returns this error on purpose (negative testing). "
-                   "Simulated = PayPal can't produce it on demand, so AR3 receives a PayPal-style "
-                   "error to show Nemotron's part.")
-
-        if st.button("Capture payment", key="pp_capture"):
-            choice = FAILURE_OPTIONS[label]
-            e = None
-            if choice[0] == "real":
-                try:
-                    pp.capture_order(order["id"], mock_error=choice[1])
-                except pp.PayPalError as err:
-                    e = err
-                except RuntimeError as err:
-                    st.error(f"PayPal: {err}")
-            else:
-                e = pp.PayPalError(422, "UNPROCESSABLE_ENTITY", choice[1], choice[2], None,
-                                   {"simulated": True, "issue": choice[1],
-                                    "description": choice[2]})
-            if e is not None:
-                st.session_state.pp_error = e
-                st.session_state.pp_channel_used = channel
-                st.session_state.pp_attempt_used = attempt
-                st.session_state.pp_results = []
-                for key in ("pp_decision", "pp_plan"):
-                    st.session_state.pop(key, None)
-
-    e = st.session_state.get("pp_error")
-    if order and e:
-        st.error(f"PayPal said {e.status}: {e.issue}")
-        with st.expander("PayPal's response"):
-            st.json(e.raw)
-
-    # Step 3: AR3 decides
-    if order and e:
-        st.markdown("<div class='ar3-kicker' style='margin-top:20px'>Step 3 · AR3 decides</div>",
-                    unsafe_allow_html=True)
-        payment = from_paypal_error(e, order["id"], st.session_state.get("pp_amount", amount),
-                                    channel=Channel(st.session_state.get("pp_channel_used",
-                                                                        Channel.LIVE_CHECKOUT.value)),
-                                    attempt_number=st.session_state.get("pp_attempt_used", 1))
-        if "pp_decision" not in st.session_state:          # decide once per failure, not on every rerun
-            st.session_state.pp_decision, st.session_state.pp_capped = run(payment)
-        decision = st.session_state.pp_decision
-        show_decision(decision, payment, st.session_state.pp_capped)
-        d = Decision.model_validate({k: v for k, v in decision.items() if k != "seconds"})
-        st.session_state.pp_plan = actions.plan(d, order)
-
-    # Step 4: approve and act
-    p = st.session_state.get("pp_plan")
-    if order and p:
-        st.markdown("<div class='ar3-kicker' style='margin-top:20px'>Step 4 · Approve and act</div>",
-                    unsafe_allow_html=True)
-        st.markdown(f"**{html.escape(p.title)}**")
-        if p.paypal_call:
-            st.code(p.paypal_call)
-        else:
-            st.caption("No PayPal call: AR3 never retries this kind of failure.")
-        if p.request_id:
-            st.markdown(f"PayPal-Request-Id: <span class='mono'>{html.escape(p.request_id)}</span>",
-                        unsafe_allow_html=True)
-        if p.customer_link:
-            st.link_button("Link for the buyer", p.customer_link)
-        if p.run_at:
-            st.markdown(f"Runs at <span class='mono'>{html.escape(p.run_at)}</span>",
-                        unsafe_allow_html=True)
-
-        who = st.text_input("Approved by", placeholder="your name", key="pp_who")
-        # Buttons stay enabled: a disabled button only wakes up after the text box loses focus,
-        # which looks broken. The name is checked on click instead (execute() checks it too).
-        if st.button("Approve and run", key="pp_approve"):
-            if who.strip():
-                st.session_state.pp_results.append(actions.execute(p, order["id"], approved_by=who))
-            else:
-                st.warning("Type the approver's name first. AR3 never acts without one.")
-        if p.action == Action.RETRY_ALT_ACQUIRER and st.session_state.pp_results:
-            if st.button("Send the same retry again", key="pp_again") and who.strip():
-                st.session_state.pp_results.append(actions.execute(p, order["id"], approved_by=who))
-
-        for r in st.session_state.pp_results:
-            (st.success if r.ok else st.warning)(f"{r.summary} · approved by {r.approved_by} at {r.at}")
-            if r.paypal_response:
-                with st.expander("PayPal's response"):
-                    st.json(r.paypal_response)
-
-        if st.session_state.pp_results:
+    with st.container(border=True):
+        order = st.session_state.get("pp_order")
+        step_head(1, "Create a sandbox order", bool(order))
+        c1, c2 = st.columns([1, 1], vertical_alignment="bottom")
+        amount = c1.text_input("Amount (USD)", "49.99", key="pp_amount_input")
+        if c2.button("Create order", key="pp_create", type="primary", width="stretch"):
             try:
-                fresh = pp.get_order(order["id"])
+                order = pp.create_order(amount, reference_id="ar3-demo")
             except (pp.PayPalError, RuntimeError) as err:
                 st.error(f"PayPal: {err}")
             else:
-                captures = sum(len(u.get("payments", {}).get("captures", []))
-                               for u in fresh.get("purchase_units", []))
-                st.markdown(f"Captures on this order: <b>{captures}</b>", unsafe_allow_html=True)
-                st.caption("Same PayPal-Request-Id, so PayPal never charges twice.")
+                st.session_state.pp_order = order
+                st.session_state.pp_amount = amount
+                st.session_state.pp_results = []
+                for key in ("pp_error", "pp_decision", "pp_plan"):
+                    st.session_state.pop(key, None)
+
+        order = st.session_state.get("pp_order")
+        if order:
+            st.markdown(f"<div class='ar3-meta'>Order <span class='mono'>{html.escape(order['id'])}</span>"
+                        f"<span class='pill'>{html.escape(order.get('status', ''))}</span></div>",
+                        unsafe_allow_html=True)
+            link = pp.approve_link(order)
+            if link:
+                st.link_button("Open as test buyer (optional)", link)
+                st.caption("Approve it as the sandbox buyer if you want the retry at the end to "
+                           "really capture the money.")
+
+    # Step 2: make the payment fail
+    e = st.session_state.get("pp_error")
+    if order:
+        with st.container(border=True):
+            step_head(2, "Make the payment fail", bool(e))
+            label = st.selectbox("Failure", list(FAILURE_OPTIONS), key="pp_failure")
+            c1, c2 = st.columns([1.4, 0.6])
+            channel = c1.selectbox("Channel", [c.value for c in Channel], key="pp_channel",
+                                   help=CHANNEL_HELP)
+            attempt = c2.number_input("Attempt", min_value=1, value=1, key="pp_attempt")
+            st.caption("Real = PayPal's sandbox returns this error on purpose (negative testing). "
+                       "Simulated = PayPal can't produce it on demand, so AR3 receives a PayPal-style "
+                       "error to show Nemotron's part.")
+
+            if st.button("Capture payment", key="pp_capture", type="primary"):
+                choice = FAILURE_OPTIONS[label]
+                e = None
+                if choice[0] == "real":
+                    try:
+                        pp.capture_order(order["id"], mock_error=choice[1])
+                    except pp.PayPalError as err:
+                        e = err
+                    except RuntimeError as err:
+                        st.error(f"PayPal: {err}")
+                else:
+                    e = pp.PayPalError(422, "UNPROCESSABLE_ENTITY", choice[1], choice[2], None,
+                                       {"simulated": True, "issue": choice[1],
+                                        "description": choice[2]})
+                if e is not None:
+                    st.session_state.pp_error = e
+                    st.session_state.pp_channel_used = channel
+                    st.session_state.pp_attempt_used = attempt
+                    st.session_state.pp_results = []
+                    for key in ("pp_decision", "pp_plan"):
+                        st.session_state.pop(key, None)
+
+            e = st.session_state.get("pp_error")
+            if e:
+                st.error(f"PayPal said {e.status}: {e.issue}")
+                with st.expander("PayPal's response"):
+                    st.json(e.raw)
+
+    # Step 3: AR3 decides
+    if order and e:
+        with st.container(border=True):
+            step_head(3, "AR3 decides", True)
+            payment = from_paypal_error(e, order["id"], st.session_state.get("pp_amount", amount),
+                                        channel=Channel(st.session_state.get("pp_channel_used",
+                                                                            Channel.LIVE_CHECKOUT.value)),
+                                        attempt_number=st.session_state.get("pp_attempt_used", 1))
+            if "pp_decision" not in st.session_state:      # decide once per failure, not on every rerun
+                st.session_state.pp_decision, st.session_state.pp_capped = run(payment)
+            decision = st.session_state.pp_decision
+            show_decision(decision, payment, st.session_state.pp_capped)
+            d = Decision.model_validate({k: v for k, v in decision.items() if k != "seconds"})
+            st.session_state.pp_plan = actions.plan(d, order)
+
+    # Step 4: approve and act
+    p = st.session_state.get("pp_plan") if (order and e) else None
+    if p:
+        with st.container(border=True):
+            step_head(4, "Approve and act", bool(st.session_state.pp_results))
+            st.markdown(f"**{html.escape(p.title)}**")
+            if p.paypal_call:
+                st.code(p.paypal_call)
+            else:
+                st.caption("No PayPal call: AR3 never retries this kind of failure.")
+            if p.request_id:
+                st.markdown(f"PayPal-Request-Id: <span class='mono'>{html.escape(p.request_id)}</span>",
+                            unsafe_allow_html=True)
+            if p.customer_link:
+                st.link_button("Link for the buyer", p.customer_link)
+            if p.run_at:
+                st.markdown(f"Runs at <span class='mono'>{html.escape(p.run_at)}</span>",
+                            unsafe_allow_html=True)
+
+            who = st.text_input("Approved by", placeholder="your name", key="pp_who")
+            # Buttons stay enabled: a disabled button only wakes up after the text box loses focus,
+            # which looks broken. The name is checked on click instead (execute() checks it too).
+            b1, b2 = st.columns([1, 1])
+            if b1.button("Approve and run", key="pp_approve", type="primary", width="stretch"):
+                if who.strip():
+                    st.session_state.pp_results.append(actions.execute(p, order["id"], approved_by=who))
+                else:
+                    st.warning("Type the approver's name first. AR3 never acts without one.")
+            if p.action == Action.RETRY_ALT_ACQUIRER and st.session_state.pp_results:
+                if b2.button("Send the same retry again", key="pp_again", width="stretch") \
+                        and who.strip():
+                    st.session_state.pp_results.append(actions.execute(p, order["id"], approved_by=who))
+
+            for r in st.session_state.pp_results:
+                (st.success if r.ok else st.warning)(f"{r.summary} · approved by {r.approved_by} at {r.at}")
+                if r.paypal_response:
+                    with st.expander("PayPal's response"):
+                        st.json(r.paypal_response)
+
+            if st.session_state.pp_results:
+                try:
+                    fresh = pp.get_order(order["id"])
+                except (pp.PayPalError, RuntimeError) as err:
+                    st.error(f"PayPal: {err}")
+                else:
+                    captures = sum(len(u.get("payments", {}).get("captures", []))
+                                   for u in fresh.get("purchase_units", []))
+                    st.markdown(f"<div class='ar3-captures'><span class='n'>{captures}</span>"
+                                f"<span>capture{'s' if captures != 1 else ''} on this order. Same "
+                                f"PayPal-Request-Id, so PayPal never charges twice.</span></div>",
+                                unsafe_allow_html=True)
+
+    stage = 4 if st.session_state.pp_results else 3 if p else 2 if (order and e) else 1 if order else 0
+    with bar:
+        progress_bar(stage)
 
 
 # ---------- Batch queue ----------
