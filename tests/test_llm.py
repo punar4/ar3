@@ -133,3 +133,29 @@ def test_money_problem_on_recurring_retries_later_with_default_wait():
                     "confidence": 0.9, "wait_minutes": None})
     d = llm.diagnose(payment(), fake(fast=r))
     assert d.action == Action.RETRY_SCHEDULED and d.wait_minutes == 1440
+
+
+# ---------- could_succeed_later replaces customer_must_act (Nov 12, later) ----------
+def test_could_succeed_later_true_on_recurring_schedules_a_retry():
+    r = json.dumps({"category": "CUSTOMER_ACTION", "could_succeed_later": True, "reason": "money may arrive",
+                    "confidence": 0.9, "wait_minutes": None})
+    d = llm.diagnose(payment(), fake(fast=r))
+    assert d.action == Action.RETRY_SCHEDULED and d.wait_minutes == 1440
+
+
+def test_could_succeed_later_false_on_recurring_stops():
+    r = json.dumps({"category": "CUSTOMER_ACTION", "could_succeed_later": False, "reason": "needs consent",
+                    "confidence": 0.9, "wait_minutes": None})
+    assert llm.diagnose(payment(), fake(fast=r)).action == Action.STOP
+
+
+def test_new_field_wins_over_old_field():
+    r = json.dumps({"category": "CUSTOMER_ACTION", "could_succeed_later": True, "customer_must_act": True,
+                    "reason": "x", "confidence": 0.9, "wait_minutes": None})
+    assert llm.diagnose(payment(), fake(fast=r)).action == Action.RETRY_SCHEDULED
+
+
+def test_risk_still_stops_even_if_model_says_it_could_succeed_later():
+    r = json.dumps({"category": "RISK", "could_succeed_later": True, "reason": "fraud",
+                    "confidence": 0.9, "wait_minutes": None})
+    assert llm.diagnose(payment(), fake(fast=r)).action == Action.STOP

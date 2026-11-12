@@ -27,32 +27,37 @@ You only recommend. You never move money. Fixed rules and safety checks review y
 Pick ONE category:
 - HARD_DECLINE: the card or account can't work (invalid, expired, closed). Retrying never helps.
 - RISK: lost, stolen or suspected fraud. Never retry.
-- CUSTOMER_ACTION: the customer must act (low balance, wrong PIN, limit reached, request expired).
+- CUSTOMER_ACTION: the block is on the customer's side (low balance, wrong PIN, limit reached, request expired).
 - ISSUER_TEMPORARY: the customer's bank is down or timing out for now.
 - GATEWAY_TEMPORARY: the gateway or acquirer had a temporary glitch.
 - UNKNOWN: the cause isn't clear from the information given.
 
-Then answer ONE yes/no question, customer_must_act:
-- true if only the customer doing something themselves can fix it (authenticate, re-enter a code,
-  give consent again, reactivate a cancelled or paused mandate or agreement).
-- false if it may fix itself with time or money (bank back up, balance topped up, limit resets),
-  or if nothing the customer does can fix it.
+Then answer ONE yes/no question, could_succeed_later:
+"If AR3 retried this same payment later, with nobody opening an app or a bank page,
+could it go through?"
+- true when the blocker can clear on its own over time: money arrives in the account,
+  a daily or monthly limit resets, a bank or gateway comes back up. The customer may help
+  (by adding money), but no one has to log in, approve or re-enter anything for a retry to work.
+- false when a retry can only work after a person actively does something: authenticate (OTP,
+  PIN, 3-D Secure), give consent again, approve a new request, or reactivate a cancelled or
+  paused mandate or agreement. Also false when nothing can ever fix it (closed account, fraud).
+Decide from what the error says is blocking, not from who could speed it up.
 You do NOT choose the action. AR3's code picks it from your category, the channel and
-customer_must_act, using the table below.
+could_succeed_later, using the table below.
 
 Rules:
 - A vague error (like "transaction failed") is not proof of a hard decline. If the text doesn't show the cause, choose UNKNOWN with HUMAN_REVIEW, or a temporary category with low confidence.
 - confidence = how likely your category is correct, from 0 to 1. Be honest. Low confidence is fine.
 - Reply with ONLY a JSON object, no other text:
-{"category": "...", "customer_must_act": false, "reason": "one short sentence", "confidence": 0.0, "wait_minutes": null}
+{"category": "...", "could_succeed_later": true, "reason": "one short sentence", "confidence": 0.0, "wait_minutes": null}
 wait_minutes: for temporary or money problems, how long before a retry could work (null otherwise).
 
 ACTION TABLE (AR3 applies it in code; it is here so you know what your answer leads to):
 - GATEWAY_TEMPORARY: LIVE_CHECKOUT -> RETRY_ALT_ACQUIRER; RECURRING -> RETRY_SCHEDULED.
 - ISSUER_TEMPORARY: LIVE_CHECKOUT -> PROMPT_CUSTOMER; RECURRING -> RETRY_SCHEDULED.
 - CUSTOMER_ACTION: LIVE_CHECKOUT -> PROMPT_CUSTOMER (the customer is there and can fix it).
-  RECURRING -> RETRY_SCHEDULED if customer_must_act is false (money or a limit: they may top up);
-  STOP if customer_must_act is true (the customer isn't there to do it).
+  RECURRING -> RETRY_SCHEDULED if could_succeed_later is true;
+  STOP if could_succeed_later is false (a person must act and the customer isn't there).
 - HARD_DECLINE: LIVE_CHECKOUT -> PROMPT_CUSTOMER (ask for another card or UPI ID); RECURRING -> STOP.
 - RISK: always STOP.
 - UNKNOWN: always HUMAN_REVIEW.
@@ -64,24 +69,31 @@ and similar give no reason. Treat them as UNKNOWN with confidence at most 0.4, n
 
 Examples:
 Input: method=CARD, channel=RECURRING, code=BANK_503, description="Issuer host not reachable, try later"
-Output: {"category": "ISSUER_TEMPORARY", "customer_must_act": false, "reason": "The customer's bank was unreachable, which is usually temporary.", "confidence": 0.85, "wait_minutes": 60}
+Output: {"category": "ISSUER_TEMPORARY", "could_succeed_later": true, "reason": "The customer's bank was unreachable, which is usually temporary.", "confidence": 0.85, "wait_minutes": 60}
 
 Input: method=UPI, channel=LIVE_CHECKOUT, code=PG_E102, description="Request timed out at acquirer"
-Output: {"category": "GATEWAY_TEMPORARY", "customer_must_act": false, "reason": "The acquirer timed out; another acquirer may succeed.", "confidence": 0.8, "wait_minutes": null}
+Output: {"category": "GATEWAY_TEMPORARY", "could_succeed_later": true, "reason": "The acquirer timed out; another acquirer may succeed.", "confidence": 0.8, "wait_minutes": null}
 
 Input: method=UPI, channel=RECURRING, code=E999, description="Transaction failed"
-Output: {"category": "UNKNOWN", "customer_must_act": false, "reason": "The error gives no cause, so a person should decide.", "confidence": 0.35, "wait_minutes": null}
+Output: {"category": "UNKNOWN", "could_succeed_later": false, "reason": "The error gives no cause, so a person should decide.", "confidence": 0.35, "wait_minutes": null}
 """
 
 
 class ModelReply(BaseModel):
     """The part of a decision the model fills in. Code adds payment_id and source."""
     category: FailureCategory
-    customer_must_act: bool = False
+    could_succeed_later: bool | None = None   # the question the model answers (Nov 12)
+    customer_must_act: bool = False           # older name, still accepted; used only if the above is missing
     action: str | None = None   # ignored: AR3's code picks the action from the category (action_for)
     reason: str = Field(min_length=1)
     confidence: float = Field(ge=0.0, le=1.0)
     wait_minutes: int | None = Field(default=None, ge=0)
+
+    def must_act(self) -> bool:
+        """True when a retry can only work after a person acts (the input action_for needs)."""
+        if self.could_succeed_later is not None:
+            return not self.could_succeed_later
+        return self.customer_must_act
 
 
 _client: OpenAI | None = None
@@ -175,7 +187,7 @@ def action_for(category: FailureCategory, channel: Channel, customer_must_act: b
 
 def _decision(payment: FailedPayment, reply: ModelReply, source: Source, note: str = "",
               confidence: float | None = None) -> Decision:
-    action = action_for(reply.category, payment.channel, reply.customer_must_act)
+    action = action_for(reply.category, payment.channel, reply.must_act())
     wait = (reply.wait_minutes or DEFAULT_WAIT.get(reply.category)) if action == Action.RETRY_SCHEDULED else None
     return Decision(
         payment_id=payment.payment_id,
