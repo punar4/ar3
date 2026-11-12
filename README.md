@@ -4,7 +4,7 @@
 
 AR3 (**A**ssess, then **R**etry, **R**eroute or **R**efuse) is an open-source decision layer for failed payments. When a PayPal capture fails, it diagnoses why, picks one of five safe next steps with a reason, and, once a named person approves, carries it out through the PayPal Orders API with a `PayPal-Request-Id`, so a repeated retry returns the first result instead of capturing again (PayPal keeps the key for 6 hours). Known error codes go to a rule table. Unclear ones go to NVIDIA Nemotron on Nebius Token Factory, read twice. Independent safety checks have the final say.
 
-[Live demo](https://ar3-paypal.onrender.com/) · [Video](<VIDEO_URL>) · [PayPal results](#paypal-results) · [How it decides](#how-ar3-decides) · [Run it](#run-it) · [MCP tool](docs/mcp.md)
+[Live demo](https://ar3-paypal.onrender.com/) · [Video](https://youtu.be/xibzvzKGmOY) · [PayPal results](#paypal-results) · [How it decides](#how-ar3-decides) · [Run it](#run-it) · [MCP tool](docs/mcp.md)
 
 ![Python 3.12+](https://img.shields.io/badge/python-3.12%2B-blue) ![PayPal Orders API v2](https://img.shields.io/badge/PayPal-Orders%20API%20v2-003087) ![NVIDIA Nemotron](https://img.shields.io/badge/NVIDIA-Nemotron-76B900) ![Nebius Token Factory](https://img.shields.io/badge/Nebius-Token%20Factory-black) ![Tests](https://img.shields.io/badge/tests-74%20passing-brightgreen) ![License: MIT](https://img.shields.io/badge/license-MIT-lightgrey)
 
