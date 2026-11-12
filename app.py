@@ -146,7 +146,7 @@ html, body, .stApp, .stApp p, .stApp label, .stApp button, .stApp input, .stApp 
 ACTION_TEXT = {
     "RETRY_ALT_ACQUIRER": "Retry now through another acquirer",
     "RETRY_SCHEDULED": "Retry later",
-    "PROMPT_CUSTOMER": "Ask the customer to try again",
+    "PROMPT_CUSTOMER": "Ask the customer to fix it or pay another way",
     "STOP": "Stop. Don't retry",
     "HUMAN_REVIEW": "Send to a person",
 }
