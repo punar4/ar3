@@ -19,13 +19,20 @@ from pydantic import ValidationError
 try:
     if "NEBIUS_API_KEY" in st.secrets:
         os.environ["NEBIUS_API_KEY"] = st.secrets["NEBIUS_API_KEY"]
+    if "PAYPAL_CLIENT_ID" in st.secrets:
+        os.environ["PAYPAL_CLIENT_ID"] = st.secrets["PAYPAL_CLIENT_ID"]
+    if "PAYPAL_CLIENT_SECRET" in st.secrets:
+        os.environ["PAYPAL_CLIENT_SECRET"] = st.secrets["PAYPAL_CLIENT_SECRET"]
 except Exception:
     pass  # no secrets file locally, that's fine
 
+import actions  # noqa: E402
 import config  # noqa: E402  (imported after the key is set)
+import paypal_client as pp  # noqa: E402
 from engine import decide  # noqa: E402
+from paypal_adapter import from_paypal_error  # noqa: E402
 from rules import apply_rules  # noqa: E402
-from schemas import Channel, FailedPayment, Method  # noqa: E402
+from schemas import Action, Channel, Decision, FailedPayment, Method  # noqa: E402
 
 DAILY_LLM_CAP = 100      # protects the credits on the public demo
 MAX_BATCH_ROWS = 50
@@ -232,13 +239,22 @@ def trail(d: dict, payment: FailedPayment, capped: bool) -> list[tuple[str, str,
         elif d["source"] == "LLM_FAST":
             steps.append((nano,
                           f"<code>{d['category']}</code>, confidence {d['confidence']:.2f}", True))
+            if "two independent reads agreed" in d["reason"]:
+                steps.append((f"{nano} (2nd read)", "reasoning on: same cause, so it's trusted", False))
         elif d["source"] == "LLM_ULTRA":
-            steps.append((nano, "unsure or invalid, escalated", False))
+            if "broke a tie" in d["reason"]:
+                steps.append((nano, "two reads disagreed on the cause, escalated", False))
+            else:
+                steps.append((nano, "unsure or invalid, escalated", False))
             steps.append((ultra,
                           f"<code>{d['category']}</code>, confidence {d['confidence']:.2f}", True))
         else:
-            steps.append((nano, "unsure or invalid, escalated", False))
-            steps.append((ultra, "unsure or invalid", False))
+            if "disagreed" in d["reason"]:
+                steps.append((nano, "two reads disagreed on the cause, escalated", False))
+                steps.append((ultra, "didn't settle it", False))
+            else:
+                steps.append((nano, "unsure or invalid, escalated", False))
+                steps.append((ultra, "unsure or invalid", False))
     _, notes = split_reason(d["reason"])
     if notes:
         for n in notes:
@@ -256,10 +272,14 @@ def show_decision(d: dict, payment: FailedPayment, capped: bool) -> None:
         ("Decided by", SOURCE_TEXT.get(d["source"], d["source"])),
         ("Time", f"{d.get('seconds', 0):.2f} s"),
     ]
-    if d.get("next_acquirer"):
+    via_paypal = d.get("next_acquirer") == "PAYPAL"
+    if d.get("next_acquirer") and not via_paypal:
         facts.append(("Next acquirer", f"<span class='mono'>{html.escape(d['next_acquirer'])}</span>"))
     if d.get("idempotency_key"):
-        facts.append(("Idempotency key", f"<span class='mono'>{html.escape(d['idempotency_key'])}</span>"))
+        facts.append(("PayPal-Request-Id" if via_paypal else "Idempotency key",
+                      f"<span class='mono'>{html.escape(d['idempotency_key'])}</span>"))
+    action_text = ("Retry now through PayPal, safely" if via_paypal
+                   else ACTION_TEXT.get(d["action"], d["action"]))
 
     facts_html = "".join(f"<dt>{k}</dt><dd>{v}</dd>" for k, v in facts)
     trail_html = "".join(
@@ -272,7 +292,7 @@ def show_decision(d: dict, payment: FailedPayment, capped: bool) -> None:
     st.markdown(f"""
 <div class="ar3 ar3-result">
   <div class="ar3-kicker">Recommendation</div>
-  <div class="ar3-action"><span class="ar3-tone {TONE.get(d['action'], 'tone-person')}"></span>{ACTION_TEXT.get(d['action'], d['action'])}
+  <div class="ar3-action"><span class="ar3-tone {TONE.get(d['action'], 'tone-person')}"></span>{action_text}
     <span class="when">{wait_text(d.get('wait_minutes'))}</span></div>
   <p class="ar3-why">{html.escape(why)}</p>
   <dl class="ar3-facts">{facts_html}</dl>
@@ -281,15 +301,166 @@ def show_decision(d: dict, payment: FailedPayment, capped: bool) -> None:
 </div>""", unsafe_allow_html=True)
 
 
+# ---------- PayPal tab ----------
+FAILURE_OPTIONS = {
+    "Card or account declined (INSTRUMENT_DECLINED)": ("real", "INSTRUMENT_DECLINED"),
+    "Buyer must act (PAYER_ACTION_REQUIRED)": ("real", "PAYER_ACTION_REQUIRED"),
+    "PayPal refused it (TRANSACTION_REFUSED)": ("real", "TRANSACTION_REFUSED"),
+    "Already captured (ORDER_ALREADY_CAPTURED)": ("real", "ORDER_ALREADY_CAPTURED"),
+    "PayPal server error (INTERNAL_SERVER_ERROR)": ("real", "INTERNAL_SERVER_ERROR"),
+    "Unclear processor decline, goes to Nemotron (simulated)":
+        ("sim", "PROCESSOR_DECLINED", "Declined by processor: 0500 DO_NOT_HONOR"),
+    "Bank says limit exceeded, goes to Nemotron (simulated)":
+        ("sim", "5130", "Exceeds the card's withdrawal amount limit"),
+    "Expired card on a subscription, goes to Nemotron (simulated)":
+        ("sim", "5400", "EXPIRED_CARD"),
+}
+CHANNEL_HELP = ("LIVE_CHECKOUT: the customer is waiting on the payment page. "
+                "RECURRING: a subscription or AutoPay debit; the customer isn't there.")
+
+
+def paypal_tab() -> None:
+    st.markdown("<div class='ar3'><p class='ar3-why'>A real PayPal sandbox order, a real PayPal "
+                "failure, and AR3's decision. Nothing is charged without a named person approving "
+                "it.</p></div>", unsafe_allow_html=True)
+    st.session_state.setdefault("pp_results", [])
+
+    # Step 1: create the order
+    st.markdown("<div class='ar3-kicker'>Step 1 · Create a sandbox order</div>",
+                unsafe_allow_html=True)
+    amount = st.text_input("Amount (USD)", "49.99", key="pp_amount_input")
+    if st.button("Create order", key="pp_create"):
+        try:
+            order = pp.create_order(amount, reference_id="ar3-demo")
+        except (pp.PayPalError, RuntimeError) as err:
+            st.error(f"PayPal: {err}")
+        else:
+            st.session_state.pp_order = order
+            st.session_state.pp_amount = amount
+            st.session_state.pp_results = []
+            for key in ("pp_error", "pp_decision", "pp_plan"):
+                st.session_state.pop(key, None)
+
+    order = st.session_state.get("pp_order")
+    if order:
+        st.markdown(f"Order <span class='mono'>{html.escape(order['id'])}</span> · status "
+                    f"<span class='mono'>{html.escape(order.get('status', ''))}</span>",
+                    unsafe_allow_html=True)
+        link = pp.approve_link(order)
+        if link:
+            st.link_button("Open as test buyer (optional)", link)
+            st.caption("Approve it as the sandbox buyer if you want the retry at the end to "
+                       "really capture the money.")
+
+    # Step 2: make the payment fail
+    if order:
+        st.markdown("<div class='ar3-kicker' style='margin-top:20px'>Step 2 · Make the payment "
+                    "fail</div>", unsafe_allow_html=True)
+        label = st.selectbox("Failure", list(FAILURE_OPTIONS), key="pp_failure")
+        c1, c2 = st.columns([1.4, 0.6])
+        channel = c1.selectbox("Channel", [c.value for c in Channel], key="pp_channel",
+                               help=CHANNEL_HELP)
+        attempt = c2.number_input("Attempt", min_value=1, value=1, key="pp_attempt")
+        st.caption("Real = PayPal's sandbox returns this error on purpose (negative testing). "
+                   "Simulated = PayPal can't produce it on demand, so AR3 receives a PayPal-style "
+                   "error to show Nemotron's part.")
+
+        if st.button("Capture payment", key="pp_capture"):
+            choice = FAILURE_OPTIONS[label]
+            e = None
+            if choice[0] == "real":
+                try:
+                    pp.capture_order(order["id"], mock_error=choice[1])
+                except pp.PayPalError as err:
+                    e = err
+                except RuntimeError as err:
+                    st.error(f"PayPal: {err}")
+            else:
+                e = pp.PayPalError(422, "UNPROCESSABLE_ENTITY", choice[1], choice[2], None,
+                                   {"simulated": True, "issue": choice[1],
+                                    "description": choice[2]})
+            if e is not None:
+                st.session_state.pp_error = e
+                st.session_state.pp_channel_used = channel
+                st.session_state.pp_attempt_used = attempt
+                st.session_state.pp_results = []
+                for key in ("pp_decision", "pp_plan"):
+                    st.session_state.pop(key, None)
+
+    e = st.session_state.get("pp_error")
+    if order and e:
+        st.error(f"PayPal said {e.status}: {e.issue}")
+        with st.expander("PayPal's response"):
+            st.json(e.raw)
+
+    # Step 3: AR3 decides
+    if order and e:
+        st.markdown("<div class='ar3-kicker' style='margin-top:20px'>Step 3 · AR3 decides</div>",
+                    unsafe_allow_html=True)
+        payment = from_paypal_error(e, order["id"], st.session_state.get("pp_amount", amount),
+                                    channel=Channel(st.session_state.get("pp_channel_used",
+                                                                        Channel.LIVE_CHECKOUT.value)),
+                                    attempt_number=st.session_state.get("pp_attempt_used", 1))
+        if "pp_decision" not in st.session_state:          # decide once per failure, not on every rerun
+            st.session_state.pp_decision, st.session_state.pp_capped = run(payment)
+        decision = st.session_state.pp_decision
+        show_decision(decision, payment, st.session_state.pp_capped)
+        d = Decision.model_validate({k: v for k, v in decision.items() if k != "seconds"})
+        st.session_state.pp_plan = actions.plan(d, order)
+
+    # Step 4: approve and act
+    p = st.session_state.get("pp_plan")
+    if order and p:
+        st.markdown("<div class='ar3-kicker' style='margin-top:20px'>Step 4 · Approve and act</div>",
+                    unsafe_allow_html=True)
+        st.markdown(f"**{html.escape(p.title)}**")
+        if p.paypal_call:
+            st.code(p.paypal_call)
+        else:
+            st.caption("No PayPal call: AR3 never retries this kind of failure.")
+        if p.request_id:
+            st.markdown(f"PayPal-Request-Id: <span class='mono'>{html.escape(p.request_id)}</span>",
+                        unsafe_allow_html=True)
+        if p.customer_link:
+            st.link_button("Link for the buyer", p.customer_link)
+        if p.run_at:
+            st.markdown(f"Runs at <span class='mono'>{html.escape(p.run_at)}</span>",
+                        unsafe_allow_html=True)
+
+        who = st.text_input("Approved by", placeholder="your name", key="pp_who")
+        if st.button("Approve and run", key="pp_approve", disabled=not who.strip()):
+            st.session_state.pp_results.append(actions.execute(p, order["id"], approved_by=who))
+        if p.action == Action.RETRY_ALT_ACQUIRER and st.session_state.pp_results:
+            if st.button("Send the same retry again", key="pp_again", disabled=not who.strip()):
+                st.session_state.pp_results.append(actions.execute(p, order["id"], approved_by=who))
+
+        for r in st.session_state.pp_results:
+            (st.success if r.ok else st.warning)(f"{r.summary} · approved by {r.approved_by} at {r.at}")
+            if r.paypal_response:
+                with st.expander("PayPal's response"):
+                    st.json(r.paypal_response)
+
+        if st.session_state.pp_results:
+            try:
+                fresh = pp.get_order(order["id"])
+            except (pp.PayPalError, RuntimeError) as err:
+                st.error(f"PayPal: {err}")
+            else:
+                captures = sum(len(u.get("payments", {}).get("captures", []))
+                               for u in fresh.get("purchase_units", []))
+                st.markdown(f"Captures on this order: <b>{captures}</b>", unsafe_allow_html=True)
+                st.caption("Same PayPal-Request-Id, so PayPal never charges twice.")
+
+
 # ---------- Page ----------
 st.markdown("""
 <div class="ar3">
   <div class="ar3-head"><span class="ar3-name">AR3</span>
-    <span class="ar3-sub">a decision layer for failed UPI and card payments</span></div>
+    <span class="ar3-sub">a decision layer for failed UPI, card and PayPal payments</span></div>
   <p class="ar3-lede">Give it a failed payment. It says whether to retry, ask the customer, stop,
   or hand it to a person, and why. Known error codes go to a rule table. Unclear ones go to
   NVIDIA Nemotron on Nebius Token Factory. Every answer then passes safety checks that can
-  overrule it. AR3 only recommends; it never moves money.</p>
+  overrule it. For PayPal, AR3 can also act through PayPal's sandbox, but only after a person approves.</p>
   <div class="ar3-stats">
     <div><div class="n">98%</div><div class="l">right decisions on 150 test payments (rules alone: 31%)</div></div>
     <div><div class="n">0</div><div class="l">unsafe retries (retrying everything: 50)</div></div>
@@ -297,7 +468,11 @@ st.markdown("""
   </div>
 </div>""", unsafe_allow_html=True)
 
-tab_one, tab_batch, tab_eval = st.tabs(["One payment", "Batch", "Evaluation"])
+tab_pp, tab_one, tab_batch, tab_eval = st.tabs(["PayPal (live sandbox)", "One payment", "Batch", "Evaluation"])
+
+# ---------- Tab 0: PayPal (live sandbox) ----------
+with tab_pp:
+    paypal_tab()
 
 # ---------- Tab 1: one payment ----------
 with tab_one:
@@ -451,8 +626,8 @@ with tab_eval:
 c = llm_counter()
 st.markdown(f"""
 <div class="ar3 ar3-foot">
-  Fast tier <span class="mono">{config.FAST_MODEL}</span> · escalates to
-  <span class="mono">{config.ULTRA_MODEL}</span> below confidence {config.CONFIDENCE_THRESHOLD}<br>
+  Fast tier <span class="mono">{config.FAST_MODEL}</span>, read twice (reasoning off and on) · escalates to
+  <span class="mono">{config.ULTRA_MODEL}</span> if unsure or if the two reads disagree<br>
   Model calls today on this demo: {c['calls']} of {DAILY_LLM_CAP} ·
   <a href="{REPO_URL}">Source on GitHub</a>
 </div>""", unsafe_allow_html=True)

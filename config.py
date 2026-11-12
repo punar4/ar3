@@ -9,6 +9,8 @@ FAST_THINKING = False    # fast tier: reasoning off (2.5 s vs 14 s in N1); revis
 ULTRA_THINKING = True    # Ultra: reasoning on; it only sees hard cases
                          # None = don't send the switch at all
 
+SECOND_READ = True       # ask Nano twice (reasoning off, then on); if the two reads disagree on the
+                         # cause, the case is uncertain whatever confidence the model printed
 CONFIDENCE_THRESHOLD = 0.7    # below this, escalate (fast -> Ultra -> human review)
 LLM_MAX_TOKENS = 4000         # generous: reasoning tokens count toward this (FEEDBACK #7)
 LLM_TIMEOUT_SECONDS = 60

@@ -151,31 +151,57 @@ def _try_tier(ask: AskFn, model: str, thinking: bool | None, prompt: str) -> Mod
     return parse_reply(raw)
 
 
+def _decision(payment: FailedPayment, reply: ModelReply, source: Source, note: str = "",
+              confidence: float | None = None) -> Decision:
+    return Decision(
+        payment_id=payment.payment_id,
+        category=reply.category,
+        action=reply.action,
+        reason=f"{source}: {reply.reason}" + (f" ({note})" if note else ""),
+        confidence=reply.confidence if confidence is None else confidence,
+        source=source,
+        wait_minutes=reply.wait_minutes,
+    )
+
+
 def diagnose(payment: FailedPayment, ask: AskFn = ask_nemotron) -> Decision:
-    """Fast Nemotron -> Ultra if needed -> HUMAN_REVIEW if both fail or are unsure."""
+    """Nano -> a second Nano read -> Ultra as tie-breaker -> HUMAN_REVIEW.
+
+    A model's self-reported confidence isn't evidence (N1: same payment, reasoning on vs off,
+    opposite answers, both confident). So a confident Nano answer is checked by a second,
+    independent read. If the two disagree on the cause, Ultra must side with one of them,
+    or a person decides.
+    """
     prompt = describe(payment)
-    notes = []
-    tiers = [
-        (config.FAST_MODEL, config.FAST_THINKING, Source.LLM_FAST),
-        (config.ULTRA_MODEL, config.ULTRA_THINKING, Source.LLM_ULTRA),
-    ]
-    for model, thinking, source in tiers:
-        reply = _try_tier(ask, model, thinking, prompt)
-        if reply is None:
-            notes.append(f"{source} gave no valid answer")
-            continue
-        if reply.confidence < config.CONFIDENCE_THRESHOLD:
-            notes.append(f"{source} was unsure ({reply.confidence:.2f})")
-            continue
-        return Decision(
-            payment_id=payment.payment_id,
-            category=reply.category,
-            action=reply.action,
-            reason=f"{source}: {reply.reason}",
-            confidence=reply.confidence,
-            source=source,
-            wait_minutes=reply.wait_minutes,
-        )
+    notes: list[str] = []
+    candidates: set = set()   # causes proposed by Nano reads that disagreed
+
+    first = _try_tier(ask, config.FAST_MODEL, config.FAST_THINKING, prompt)
+    if first is None:
+        notes.append(f"{Source.LLM_FAST} gave no valid answer")
+    elif first.confidence < config.CONFIDENCE_THRESHOLD:
+        notes.append(f"{Source.LLM_FAST} was unsure ({first.confidence:.2f})")
+    elif not config.SECOND_READ:
+        return _decision(payment, first, Source.LLM_FAST)
+    else:
+        second = _try_tier(ask, config.FAST_MODEL, not config.FAST_THINKING, prompt)
+        if second is not None and second.category == first.category:
+            return _decision(payment, first, Source.LLM_FAST, "two independent reads agreed",
+                             confidence=min(first.confidence, second.confidence))
+        other = second.category if second is not None else "no valid answer"
+        notes.append(f"two Nano reads disagreed ({first.category} vs {other})")
+        candidates = {first.category} | ({second.category} if second is not None else set())
+
+    ultra = _try_tier(ask, config.ULTRA_MODEL, config.ULTRA_THINKING, prompt)
+    if ultra is None:
+        notes.append(f"{Source.LLM_ULTRA} gave no valid answer")
+    elif ultra.confidence < config.CONFIDENCE_THRESHOLD:
+        notes.append(f"{Source.LLM_ULTRA} was unsure ({ultra.confidence:.2f})")
+    elif candidates and ultra.category not in candidates:
+        notes.append(f"{Source.LLM_ULTRA} gave a third answer ({ultra.category})")
+    else:
+        return _decision(payment, ultra, Source.LLM_ULTRA,
+                         "broke a tie between Nano reads" if candidates else "")
 
     return Decision(
         payment_id=payment.payment_id,

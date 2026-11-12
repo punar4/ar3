@@ -36,7 +36,7 @@ def test_confident_fast_answer_is_used():
     ask = fake(fast=reply(0.9))
     decision = llm.diagnose(payment(), ask)
     assert decision.source == Source.LLM_FAST
-    assert ask.calls == [config.FAST_MODEL]          # Ultra never called
+    assert ask.calls == [config.FAST_MODEL, config.FAST_MODEL]   # two Nano reads agreed; Ultra never called
 
 
 def test_garbage_from_fast_escalates_to_ultra():
@@ -83,3 +83,37 @@ def test_json_inside_code_fence_is_parsed():
 def test_no_api_client_created_when_using_a_fake():
     llm.diagnose(payment(), fake(fast=reply(0.9)))
     assert llm._client is None                        # starts fine with no key
+
+# ---------- Second read (Nov 12): disagreement = uncertainty ----------
+def by_thinking(first, second, ultra=None):
+    """Fake model whose Nano answer depends on whether reasoning is on."""
+    calls = []
+
+    def ask(model, prompt, thinking):
+        calls.append((model, thinking))
+        if model == config.ULTRA_MODEL:
+            return ultra
+        return second if thinking != config.FAST_THINKING else first
+
+    ask.calls = calls
+    return ask
+
+
+def test_disagreeing_reads_go_to_ultra_which_must_pick_one():
+    ask = by_thinking(reply(0.9, category="ISSUER_TEMPORARY"), reply(0.9, "STOP", "HARD_DECLINE"),
+                      ultra=reply(0.9, "STOP", "HARD_DECLINE"))
+    d = llm.diagnose(payment(), ask)
+    assert d.source == Source.LLM_ULTRA and d.category == "HARD_DECLINE"
+    assert len(ask.calls) == 3
+
+
+def test_third_different_answer_goes_to_a_person():
+    ask = by_thinking(reply(0.9, category="ISSUER_TEMPORARY"), reply(0.9, "STOP", "HARD_DECLINE"),
+                      ultra=reply(0.95, "STOP", "RISK"))
+    d = llm.diagnose(payment(), ask)
+    assert d.action == Action.HUMAN_REVIEW and "disagreed" in d.reason
+
+
+def test_agreeing_reads_use_the_lower_confidence():
+    ask = by_thinking(reply(0.95), reply(0.75))
+    assert llm.diagnose(payment(), ask).confidence == 0.75
