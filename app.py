@@ -501,31 +501,39 @@ def queue_grid(view: pd.DataFrame, raw_action: pd.Series) -> None:
     saved = st.session_state.get("batch_status", {})
     queue = pd.DataFrame({
         "Payment": view["payment_id"],
-        "Amount (₹)": view["amount"],
-        "Method": view["method"],
-        "Channel": view["channel"],
         "Error": view["error_code"],
         "Recommendation": view["action"],
+        "Reason": view["reason"],
+        "Amount (₹)": view["amount"],
+        "Method": view["method"],
+        "Channel": view["channel"].map({"LIVE_CHECKOUT": "Checkout", "RECURRING": "Recurring"})
+                                  .fillna(view["channel"]),
         "Decided by": view["decided_by"],
         "Confidence": view["confidence"].map(lambda v: f"{v:.2f}" if pd.notna(v) else "—"),
-        "Reason": view["reason"],
         "action": raw_action.values,   # hidden; only the row colour reads it
     })
     queue["Status"] = [saved.get(pid, "New") for pid in queue["Payment"]]
     builder = GridOptionsBuilder.from_dataframe(queue)
-    builder.configure_default_column(flex=1, sortable=True, filter=True, resizable=True)
+    builder.configure_default_column(sortable=True, filter=True, resizable=True)
     builder.configure_column("action", hide=True)
-    builder.configure_column("Reason", wrapText=True, autoHeight=True, flex=2)
+    for col, width in [("Payment", 100), ("Amount (₹)", 120), ("Method", 95), ("Channel", 115),
+                       ("Error", 110), ("Decided by", 130), ("Confidence", 105), ("Status", 115)]:
+        builder.configure_column(col, width=width, minWidth=width)
+    builder.configure_column("Recommendation", minWidth=190, flex=1, pinned="left",
+                             wrapText=True, autoHeight=True)
+    builder.configure_column("Reason", minWidth=260, flex=2, wrapText=True, autoHeight=True)
     builder.configure_column("Status", editable=True, cellEditor="agSelectCellEditor",
-                             cellEditorParams={"values": QUEUE_STATUS})
+                             cellEditorParams={"values": QUEUE_STATUS}, pinned="right")
     builder.configure_pagination(paginationAutoPageSize=False, paginationPageSize=20)
     options = builder.build()
     options["getRowStyle"] = JsCode(ROW_STYLE)
-    grid = AgGrid(queue, gridOptions=options, theme="alpine", fit_columns_on_grid_load=True,
+    grid = AgGrid(queue, gridOptions=options, theme="alpine", height=560,
                   allow_unsafe_jscode=True, update_on=["cellValueChanged"], key="batch_grid")
     data = pd.DataFrame(grid["data"]) if grid.get("data") is not None else queue
     st.session_state.batch_status = dict(zip(data["Payment"], data["Status"]))
-    st.download_button("Download decisions (CSV)", data.to_csv(index=False),
+    st.caption("Green: a safe next step. Red: stopped. Amber: sent to a person. "
+               "Click a Status cell to mark a row Approved, Done or Rejected.")
+    st.download_button("Download decisions (CSV)", data.drop(columns=["action"], errors="ignore").to_csv(index=False),
                        "ar3_decisions.csv", "text/csv")
 
 
@@ -539,9 +547,9 @@ st.markdown("""
   NVIDIA Nemotron on Nebius Token Factory. Every answer then passes safety checks that can
   overrule it. For PayPal, AR3 can also act through PayPal's sandbox, but only after a person approves.</p>
   <div class="ar3-stats">
-    <div><div class="n">98%</div><div class="l">right decisions on 150 test payments (rules alone: 31%)</div></div>
-    <div><div class="n">0</div><div class="l">unsafe retries (retrying everything: 50)</div></div>
-    <div><div class="n">11%</div><div class="l">sent to a person when the error was too vague</div></div>
+    <div><div class="n">94&ndash;97%</div><div class="l">right decisions on 31 held-out PayPal failures no rule covers (rules alone: 5 of 31)</div></div>
+    <div><div class="n">99%</div><div class="l">right decisions on 150 UPI and card test payments (rules alone: 31%)</div></div>
+    <div><div class="n">0</div><div class="l">unsafe retries in every run (retrying everything: 11 PayPal, 50 UPI/card)</div></div>
   </div>
 </div>""", unsafe_allow_html=True)
 
@@ -669,6 +677,17 @@ with tab_batch:
 
 # ---------- Tab 3: evaluation ----------
 with tab_eval:
+    pp_eval = Path("results/paypal_eval.md")
+    if pp_eval.exists():
+        st.markdown(pp_eval.read_text(encoding="utf-8"))
+    for label, name in [("PayPal, first held-out run (before the design changes)",
+                         "paypal_eval_v1_before_fixes.md"),
+                        ("PayPal, after the second read", "paypal_eval_v2_second_read.md")]:
+        old = Path("results") / name
+        if old.exists():
+            with st.expander(f"Earlier: {label}"):
+                st.markdown(old.read_text(encoding="utf-8"))
+    st.markdown("---")
     eval_path = Path("results/eval.md")
     if eval_path.exists():
         st.markdown(eval_path.read_text(encoding="utf-8"))

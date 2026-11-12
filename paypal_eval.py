@@ -125,12 +125,12 @@ def main() -> None:
         "| | Retry everything once | Rules only | AR3 with Nemotron |",
         "| --- | --- | --- | --- |",
         f"| Correct decisions | {retry_all_correct}/{n} | {rules_only_correct}/{n} | "
-        f"{' / '.join(f'{a:.0%}' for a in acc)} |",
-        f"| Unsafe actions | {retry_all_unsafe} | 0 | {' / '.join(map(str, unsafe_counts))} |",
+        f"{', '.join(f'{a:.0%} (run {i})' for i, a in enumerate(acc, 1))} |",
+        f"| Unsafe actions | {retry_all_unsafe} | 0 | {', '.join(f'{u} (run {i})' for i, u in enumerate(unsafe_counts, 1))} |",
         f"| Sent to a person | 0% | 100% | {sum(x['action'] == A.HUMAN_REVIEW for x in first) / n:.0%} |",
         "",
         f"Diagnosis accuracy (run 1): {sum(x['diag_correct'] for x in first) / n:.0%}. "
-        f"Who decided: {dict(sources)}. Median time: {statistics.median(x['seconds'] for x in first):.1f} s.",
+        f"Who decided: {', '.join(f'{getattr(k, 'value', k)} {v}' for k, v in sources.most_common())}. Median time: {statistics.median(x['seconds'] for x in first):.1f} s.",
         f"Confidence when the diagnosis was wrong: {sorted(wrong_conf) or 'none'}",
     ]
     if runs > 1:
