@@ -39,7 +39,7 @@ DAILY_LLM_CAP = 100      # protects the credits on the public demo
 MAX_BATCH_ROWS = 50
 REPO_URL = "https://github.com/punar4/ar3"
 
-st.set_page_config(page_title="AR3 · failed payment decisions", page_icon=":material/account_balance:",
+st.set_page_config(page_title="AR3 · failed payment decisions", page_icon="assets/favicon.png",
                    layout="centered",
                    initial_sidebar_state="collapsed")
 
