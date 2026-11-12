@@ -436,10 +436,15 @@ def paypal_tab() -> None:
                         unsafe_allow_html=True)
 
         who = st.text_input("Approved by", placeholder="your name", key="pp_who")
-        if st.button("Approve and run", key="pp_approve", disabled=not who.strip()):
-            st.session_state.pp_results.append(actions.execute(p, order["id"], approved_by=who))
+        # Buttons stay enabled: a disabled button only wakes up after the text box loses focus,
+        # which looks broken. The name is checked on click instead (execute() checks it too).
+        if st.button("Approve and run", key="pp_approve"):
+            if who.strip():
+                st.session_state.pp_results.append(actions.execute(p, order["id"], approved_by=who))
+            else:
+                st.warning("Type the approver's name first. AR3 never acts without one.")
         if p.action == Action.RETRY_ALT_ACQUIRER and st.session_state.pp_results:
-            if st.button("Send the same retry again", key="pp_again", disabled=not who.strip()):
+            if st.button("Send the same retry again", key="pp_again") and who.strip():
                 st.session_state.pp_results.append(actions.execute(p, order["id"], approved_by=who))
 
         for r in st.session_state.pp_results:
