@@ -24,6 +24,7 @@ def _never_called(*args):
     ("ORDER_ALREADY_CAPTURED", Channel.LIVE_CHECKOUT, Action.STOP),
     ("DUPLICATE_INVOICE_ID", Channel.RECURRING, Action.STOP),
     ("PAYEE_ACCOUNT_RESTRICTED", Channel.LIVE_CHECKOUT, Action.HUMAN_REVIEW),
+    ("HTTP_403", Channel.LIVE_CHECKOUT, Action.HUMAN_REVIEW),
     ("INTERNAL_SERVER_ERROR", Channel.RECURRING, Action.RETRY_SCHEDULED),
 ])
 def test_paypal_rules(issue, channel, expected):

@@ -1,22 +1,29 @@
-"""Live sandbox check for paypal_client.py. Run: python paypal_check.py
+"""Live sandbox check: real PayPal errors -> AR3 decisions. Run: python paypal_check.py
 
-1. logs in, 2. creates a $49.99 order, 3. forces two real PayPal errors on capture,
-4. prints the approval link for the US test buyer.
+Creates one $49.99 order, forces each PayPal error on capture (sandbox negative testing),
+and runs it through AR3 with rules only (no Nemotron calls, so no credits used).
 """
 
 import paypal_client as pp
+from engine import decide
+from paypal_adapter import from_paypal_error
 
-print("1. Login:", "ok" if pp.get_token() else "failed")
+CODES = ["INSTRUMENT_DECLINED", "PAYER_ACTION_REQUIRED", "TRANSACTION_REFUSED",
+         "ORDER_ALREADY_CAPTURED", "DUPLICATE_INVOICE_ID", "PAYER_CANNOT_PAY",
+         "INTERNAL_SERVER_ERROR"]
 
-order = pp.create_order("49.99", reference_id="ar3-check-1", request_id="ar3-check-1:create")
-print("2. Order:", order["id"], order["status"])
+print("Login:", "ok" if pp.get_token() else "failed")
+order = pp.create_order("49.99", reference_id="ar3-check-2", request_id="ar3-check-2:create")
+print("Order:", order["id"], order["status"], "| approve:", pp.approve_link(order))
+print()
 
-for code in ("INSTRUMENT_DECLINED", "TRANSACTION_REFUSED"):
+for code in CODES:
     try:
         pp.capture_order(order["id"], mock_error=code)
-        print(f"3. {code}: no error (unexpected)")
+        print(f"{code:<26} PayPal returned no error (unexpected)")
+        continue
     except pp.PayPalError as e:
-        print(f"3. {code}: status={e.status} issue={e.issue} debug_id={e.debug_id}")
-        print("   message:", e.description[:120])
-
-print("4. Buyer approval link:", pp.approve_link(order))
+        err = e
+    d = decide(from_paypal_error(err, order["id"], "49.99"), use_llm=False)
+    got = "ok " if err.issue == code else f"PayPal sent {err.issue} ({err.status})"
+    print(f"{code:<26} {got} -> {d.action} ({d.source})")

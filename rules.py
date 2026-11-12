@@ -24,6 +24,8 @@ class Rule:
 _RISK = Rule("Lost, stolen or suspected fraud", FailureCategory.RISK, Action.STOP, Action.STOP)
 _GATEWAY_GLITCH = Rule("Gateway or acquirer glitch", FailureCategory.GATEWAY_TEMPORARY,
                        Action.RETRY_ALT_ACQUIRER, Action.RETRY_SCHEDULED, 15)
+_MERCHANT_SETUP = Rule("Merchant's PayPal app not logged in or not permitted: a person must fix the setup",
+                       FailureCategory.UNKNOWN, Action.HUMAN_REVIEW, Action.HUMAN_REVIEW)
 
 RULES: dict[tuple[Method, str], Rule] = {
     # Cards (ISO 8583 response codes) -
@@ -81,6 +83,13 @@ RULES: dict[tuple[Method, str], Rule] = {
     (Method.PAYPAL, "PAYEE_ACCOUNT_RESTRICTED"): Rule(
         "The merchant's PayPal account is restricted: a person must fix it",
         FailureCategory.UNKNOWN, Action.HUMAN_REVIEW, Action.HUMAN_REVIEW),
+    # 401/403 = the merchant's app isn't logged in or isn't allowed: an account setup problem,
+    # not the buyer and not fraud (Nemotron once called a bare 403 "fraud" at 0.9 confidence).
+    (Method.PAYPAL, "HTTP_401"): _MERCHANT_SETUP,
+    (Method.PAYPAL, "HTTP_403"): _MERCHANT_SETUP,
+    (Method.PAYPAL, "AUTHENTICATION_FAILURE"): _MERCHANT_SETUP,
+    (Method.PAYPAL, "NOT_AUTHORIZED"): _MERCHANT_SETUP,
+    (Method.PAYPAL, "PERMISSION_DENIED"): _MERCHANT_SETUP,
     (Method.PAYPAL, "INTERNAL_SERVER_ERROR"): _GATEWAY_GLITCH,   # PayPal 5xx: safe to retry
     (Method.PAYPAL, "SERVICE_UNAVAILABLE"): _GATEWAY_GLITCH,
 }
