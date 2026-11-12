@@ -3,11 +3,11 @@
 
 | | Retry everything once | Rules only | AR3 with Nemotron |
 | --- | --- | --- | --- |
-| Correct decisions | 8/31 | 5/31 | 97% / 94% |
-| Unsafe actions | 11 | 0 | 0 / 0 |
+| Correct decisions | 8/31 | 5/31 | 97% (run 1), 94% (run 2) |
+| Unsafe actions | 11 | 0 | 0 (run 1), 0 (run 2) |
 | Sent to a person | 0% | 100% | 16% |
 
-Diagnosis accuracy (run 1): 97%. Who decided: {<Source.LLM_FAST: 'LLM_FAST'>: 20, <Source.LLM_ULTRA: 'LLM_ULTRA'>: 6, <Source.FALLBACK: 'FALLBACK'>: 5}. Median time: 5.2 s.
+Diagnosis accuracy (run 1): 97%. Who decided: LLM_FAST 20, LLM_ULTRA 6, FALLBACK 5. Median time: 5.2 s.
 Confidence when the diagnosis was wrong: [0.9]
 Same action in every run: 28/31 cases.
 
