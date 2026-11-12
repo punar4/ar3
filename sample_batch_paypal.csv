@@ -1,0 +1,11 @@
+payment_id,amount_paise,method,channel,error_code,error_description,attempt_number,acquirer
+paypal_001,499900,PAYPAL,LIVE_CHECKOUT,INSTRUMENT_DECLINED,The instrument presented was either declined by the processor or bank.,1,PAYPAL
+paypal_002,129900,PAYPAL,LIVE_CHECKOUT,TRANSACTION_REFUSED,PayPal refused the transaction.,1,PAYPAL
+paypal_003,249900,PAYPAL,LIVE_CHECKOUT,INTERNAL_SERVER_ERROR,An internal server error occurred.,1,PAYPAL
+paypal_004,99900,PAYPAL,RECURRING,ORDER_ALREADY_CAPTURED,Order already captured.,1,PAYPAL
+paypal_005,159900,PAYPAL,LIVE_CHECKOUT,PAYER_ACTION_REQUIRED,Payer must complete a step on the PayPal site first.,1,PAYPAL
+paypal_006,79900,PAYPAL,RECURRING,INSTRUMENT_DECLINED,The funding source was declined.,2,PAYPAL
+paypal_007,199900,PAYPAL,RECURRING,INTERNAL_SERVER_ERROR,Something went wrong on our end. Please try again.,2,PAYPAL
+paypal_008,49900,PAYPAL,LIVE_CHECKOUT,CAPTURE_FAILED,We could not complete your payment. Please try again.,1,PAYPAL
+paypal_009,74900,PAYPAL,RECURRING,UNPROCESSABLE_ENTITY,The requested action could not be performed.,1,PAYPAL
+paypal_010,349900,PAYPAL,LIVE_CHECKOUT,TRANSACTION_DECLINED,The transaction was declined.,1,PAYPAL

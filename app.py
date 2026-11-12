@@ -505,7 +505,7 @@ def paypal_tab() -> None:
                     with st.expander("PayPal's response"):
                         st.json(r.paypal_response)
 
-            if st.session_state.pp_results:
+            if st.session_state.pp_results and p.request_id:
                 try:
                     fresh = pp.get_order(order["id"])
                 except (pp.PayPalError, RuntimeError) as err:
@@ -579,10 +579,10 @@ def queue_grid(view: pd.DataFrame, raw_action: pd.Series) -> None:
     builder = GridOptionsBuilder.from_dataframe(queue)
     builder.configure_default_column(sortable=True, filter=True, resizable=True)
     builder.configure_column("action", hide=True)
-    for col, width in [("Payment", 100), ("Amount (₹)", 120), ("Method", 95), ("Channel", 115),
-                       ("Error", 110), ("Decided by", 130), ("Confidence", 105), ("Status", 115)]:
+    for col, width in [("Payment", 115), ("Amount (₹)", 120), ("Method", 95), ("Channel", 115),
+                       ("Error", 170), ("Decided by", 130), ("Confidence", 105), ("Status", 115)]:
         builder.configure_column(col, width=width, minWidth=width)
-    builder.configure_column("Recommendation", minWidth=190, flex=1, pinned="left",
+    builder.configure_column("Recommendation", minWidth=270, flex=1, pinned="left",
                              wrapText=True, autoHeight=True)
     builder.configure_column("Reason", minWidth=260, flex=2, wrapText=True, autoHeight=True)
     builder.configure_column("Status", editable=True, cellEditor="agSelectCellEditor",
