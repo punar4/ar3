@@ -64,10 +64,12 @@ def test_timeout_on_both_tiers_goes_to_human_review():
     assert llm.diagnose(payment(), ask).action == Action.HUMAN_REVIEW
 
 
-def test_invented_action_is_rejected():
+def test_invented_action_is_ignored_code_picks_the_action():
     bad = reply(0.99, action="REROUTE_TO_CARD")       # v1's flaw: switching the payment method
     ask = fake(fast=bad, ultra=bad)
-    assert llm.diagnose(payment(), ask).action == Action.HUMAN_REVIEW
+    d = llm.diagnose(payment(), ask)
+    assert d.action == Action.RETRY_SCHEDULED          # ISSUER_TEMPORARY + RECURRING, from the table
+    assert d.action != "REROUTE_TO_CARD"
 
 
 def test_confidence_above_one_is_rejected():
@@ -117,3 +119,17 @@ def test_third_different_answer_goes_to_a_person():
 def test_agreeing_reads_use_the_lower_confidence():
     ask = by_thinking(reply(0.95), reply(0.75))
     assert llm.diagnose(payment(), ask).confidence == 0.75
+
+
+# ---------- The model diagnoses, the code decides (Nov 12) ----------
+def test_customer_must_act_on_recurring_stops():
+    r = json.dumps({"category": "CUSTOMER_ACTION", "customer_must_act": True, "reason": "needs 3DS",
+                    "confidence": 0.9, "wait_minutes": None})
+    assert llm.diagnose(payment(), fake(fast=r)).action == Action.STOP
+
+
+def test_money_problem_on_recurring_retries_later_with_default_wait():
+    r = json.dumps({"category": "CUSTOMER_ACTION", "customer_must_act": False, "reason": "low balance",
+                    "confidence": 0.9, "wait_minutes": None})
+    d = llm.diagnose(payment(), fake(fast=r))
+    assert d.action == Action.RETRY_SCHEDULED and d.wait_minutes == 1440

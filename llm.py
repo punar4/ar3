@@ -13,7 +13,7 @@ from openai import OpenAI
 from pydantic import BaseModel, Field, ValidationError
 
 import config
-from schemas import Action, Decision, FailedPayment, FailureCategory, Source
+from schemas import Action, Channel, Decision, FailedPayment, FailureCategory, Source
 
 load_dotenv()
 log = logging.getLogger(__name__)
@@ -32,53 +32,53 @@ Pick ONE category:
 - GATEWAY_TEMPORARY: the gateway or acquirer had a temporary glitch.
 - UNKNOWN: the cause isn't clear from the information given.
 
-Pick ONE action:
-- RETRY_ALT_ACQUIRER: retry now through another acquirer. Only for GATEWAY_TEMPORARY at LIVE_CHECKOUT.
-- RETRY_SCHEDULED: retry later. Only for RECURRING payments. Set wait_minutes.
-- PROMPT_CUSTOMER: ask the customer to fix it or use another method. Only at LIVE_CHECKOUT.
-- STOP: do not retry.
-- HUMAN_REVIEW: you are not sure; a person decides.
+Then answer ONE yes/no question, customer_must_act:
+- true if only the customer doing something themselves can fix it (authenticate, re-enter a code,
+  give consent again, reactivate a cancelled or paused mandate or agreement).
+- false if it may fix itself with time or money (bank back up, balance topped up, limit resets),
+  or if nothing the customer does can fix it.
+You do NOT choose the action. AR3's code picks it from your category, the channel and
+customer_must_act, using the table below.
 
 Rules:
 - A vague error (like "transaction failed") is not proof of a hard decline. If the text doesn't show the cause, choose UNKNOWN with HUMAN_REVIEW, or a temporary category with low confidence.
 - confidence = how likely your category is correct, from 0 to 1. Be honest. Low confidence is fine.
 - Reply with ONLY a JSON object, no other text:
-{"category": "...", "action": "...", "reason": "one short sentence", "confidence": 0.0, "wait_minutes": null}
+{"category": "...", "customer_must_act": false, "reason": "one short sentence", "confidence": 0.0, "wait_minutes": null}
+wait_minutes: for temporary or money problems, how long before a retry could work (null otherwise).
 
-ACTION TABLE (follow it exactly; AR3's rule table uses the same one):
+ACTION TABLE (AR3 applies it in code; it is here so you know what your answer leads to):
 - GATEWAY_TEMPORARY: LIVE_CHECKOUT -> RETRY_ALT_ACQUIRER; RECURRING -> RETRY_SCHEDULED.
 - ISSUER_TEMPORARY: LIVE_CHECKOUT -> PROMPT_CUSTOMER; RECURRING -> RETRY_SCHEDULED.
 - CUSTOMER_ACTION: LIVE_CHECKOUT -> PROMPT_CUSTOMER (the customer is there and can fix it).
-  RECURRING -> RETRY_SCHEDULED if it is about money or a limit (low balance, insufficient
-  funds, limit exceeded), since the customer may top up. STOP only if the customer must act
-  themselves (for example, they paused or cancelled the mandate).
+  RECURRING -> RETRY_SCHEDULED if customer_must_act is false (money or a limit: they may top up);
+  STOP if customer_must_act is true (the customer isn't there to do it).
 - HARD_DECLINE: LIVE_CHECKOUT -> PROMPT_CUSTOMER (ask for another card or UPI ID); RECURRING -> STOP.
 - RISK: always STOP.
 - UNKNOWN: always HUMAN_REVIEW.
 PAYPAL: the code is a PayPal Orders API error. RETRY_ALT_ACQUIRER means "retry the same PayPal call
 safely with the same request id"; PayPal has no other acquirer.
-At live checkout, STOP is only for RISK. If the customer is present and can fix it or pay
-another way, choose PROMPT_CUSTOMER.
 
 GENERIC DECLINES ARE VAGUE: "Do not honour", "Transaction declined", "Your card was declined"
 and similar give no reason. Treat them as UNKNOWN with confidence at most 0.4, not HARD_DECLINE.
 
 Examples:
 Input: method=CARD, channel=RECURRING, code=BANK_503, description="Issuer host not reachable, try later"
-Output: {"category": "ISSUER_TEMPORARY", "action": "RETRY_SCHEDULED", "reason": "The customer's bank was unreachable, which is usually temporary.", "confidence": 0.85, "wait_minutes": 60}
+Output: {"category": "ISSUER_TEMPORARY", "customer_must_act": false, "reason": "The customer's bank was unreachable, which is usually temporary.", "confidence": 0.85, "wait_minutes": 60}
 
 Input: method=UPI, channel=LIVE_CHECKOUT, code=PG_E102, description="Request timed out at acquirer"
-Output: {"category": "GATEWAY_TEMPORARY", "action": "RETRY_ALT_ACQUIRER", "reason": "The acquirer timed out; another acquirer may succeed.", "confidence": 0.8, "wait_minutes": null}
+Output: {"category": "GATEWAY_TEMPORARY", "customer_must_act": false, "reason": "The acquirer timed out; another acquirer may succeed.", "confidence": 0.8, "wait_minutes": null}
 
 Input: method=UPI, channel=RECURRING, code=E999, description="Transaction failed"
-Output: {"category": "UNKNOWN", "action": "HUMAN_REVIEW", "reason": "The error gives no cause, so a person should decide.", "confidence": 0.35, "wait_minutes": null}
+Output: {"category": "UNKNOWN", "customer_must_act": false, "reason": "The error gives no cause, so a person should decide.", "confidence": 0.35, "wait_minutes": null}
 """
 
 
 class ModelReply(BaseModel):
     """The part of a decision the model fills in. Code adds payment_id and source."""
     category: FailureCategory
-    action: Action
+    customer_must_act: bool = False
+    action: str | None = None   # ignored: AR3's code picks the action from the category (action_for)
     reason: str = Field(min_length=1)
     confidence: float = Field(ge=0.0, le=1.0)
     wait_minutes: int | None = Field(default=None, ge=0)
@@ -151,16 +151,40 @@ def _try_tier(ask: AskFn, model: str, thinking: bool | None, prompt: str) -> Mod
     return parse_reply(raw)
 
 
+DEFAULT_WAIT = {FailureCategory.GATEWAY_TEMPORARY: 15, FailureCategory.ISSUER_TEMPORARY: 60,
+                FailureCategory.CUSTOMER_ACTION: 1440}
+
+
+def action_for(category: FailureCategory, channel: Channel, customer_must_act: bool) -> Action:
+    """The action table, in code: the model diagnoses, AR3 decides (same table as rules.py)."""
+    live = channel == Channel.LIVE_CHECKOUT
+    if category == FailureCategory.RISK:
+        return Action.STOP
+    if category == FailureCategory.UNKNOWN:
+        return Action.HUMAN_REVIEW
+    if category == FailureCategory.GATEWAY_TEMPORARY:
+        return Action.RETRY_ALT_ACQUIRER if live else Action.RETRY_SCHEDULED
+    if live:   # issuer down, customer can fix it, dead card: the customer is there to act
+        return Action.PROMPT_CUSTOMER
+    if category == FailureCategory.HARD_DECLINE:
+        return Action.STOP
+    if category == FailureCategory.CUSTOMER_ACTION and customer_must_act:
+        return Action.STOP
+    return Action.RETRY_SCHEDULED
+
+
 def _decision(payment: FailedPayment, reply: ModelReply, source: Source, note: str = "",
               confidence: float | None = None) -> Decision:
+    action = action_for(reply.category, payment.channel, reply.customer_must_act)
+    wait = (reply.wait_minutes or DEFAULT_WAIT.get(reply.category)) if action == Action.RETRY_SCHEDULED else None
     return Decision(
         payment_id=payment.payment_id,
         category=reply.category,
-        action=reply.action,
+        action=action,
         reason=f"{source}: {reply.reason}" + (f" ({note})" if note else ""),
         confidence=reply.confidence if confidence is None else confidence,
         source=source,
-        wait_minutes=reply.wait_minutes,
+        wait_minutes=wait,
     )
 
 
