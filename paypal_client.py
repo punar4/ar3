@@ -87,6 +87,11 @@ def _call(method: str, path: str, *, body=None, request_id=None, mock_error=None
     return r.json() if r.content else {}
 
 
+def return_url() -> str:
+    """Where PayPal sends the buyer after approving: RETURN_URL, else this Render site, else local."""
+    return os.getenv("RETURN_URL") or os.getenv("RENDER_EXTERNAL_URL") or "http://localhost:8501"
+
+
 def create_order(amount_usd: str, reference_id: str, request_id: str | None = None) -> dict:
     """Create a checkout order the buyer must approve. amount_usd is a string like "49.99"."""
     body = {
@@ -95,9 +100,15 @@ def create_order(amount_usd: str, reference_id: str, request_id: str | None = No
             "reference_id": reference_id,
             "amount": {"currency_code": "USD", "value": amount_usd},
         }],
+        # Pay Now makes PayPal show a final "Pay Now" button and then send the
+        # buyer back to us, instead of looping on the review page.
+        "application_context": {
+            "user_action": "PAY_NOW",
+            "return_url": return_url(),
+            "cancel_url": return_url(),
+        },
     }
     return _call("POST", "/v2/checkout/orders", body=body, request_id=request_id)
-
 
 def capture_order(order_id: str, request_id: str | None = None, mock_error: str | None = None) -> dict:
     """Take the money for an approved order. Raises PayPalError if PayPal refuses."""

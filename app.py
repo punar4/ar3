@@ -14,6 +14,7 @@ from pathlib import Path
 import pandas as pd
 import streamlit as st
 from pydantic import ValidationError
+from st_aggrid import AgGrid, GridOptionsBuilder, JsCode
 
 # The API key: Streamlit Cloud secrets first; locally, llm.py loads it from .env
 try:
@@ -41,6 +42,13 @@ REPO_URL = "https://github.com/punar4/ar3"
 st.set_page_config(page_title="AR3 · failed payment decisions", page_icon=":material/account_balance:",
                    layout="centered",
                    initial_sidebar_state="collapsed")
+
+# PayPal sends the buyer back here after they approve (?token=<order id>&PayerID=...)
+_qp = st.query_params
+if "token" in _qp and "PayerID" in _qp:
+    st.markdown("### Payment approved")
+    st.write(f"PayPal order {_qp['token']} is approved. You can close this tab and go back to AR3.")
+    st.stop()
 
 # ---------- Styles ----------
 st.markdown("""
@@ -452,6 +460,75 @@ def paypal_tab() -> None:
                 st.caption("Same PayPal-Request-Id, so PayPal never charges twice.")
 
 
+# ---------- Batch queue ----------
+QUEUE_STATUS = ["New", "Approved", "Done", "Rejected"]
+ROW_STYLE = """
+function(params) {
+  var a = params.data.action;
+  if (a === 'STOP') { return {'background-color': '#fdecec'}; }
+  if (a === 'HUMAN_REVIEW') { return {'background-color': '#fff6e0'}; }
+  return {'background-color': '#eaf7ee'};
+}
+"""
+
+
+def html_table(view: pd.DataFrame) -> None:
+    """The plain HTML table the Batch tab used before the grid. Kept, but no longer called."""
+    cols = [("payment_id", "Payment"), ("amount", "Amount"), ("error_code", "Code"),
+            ("action", "Recommendation"), ("decided_by", "Decided by")]
+    if "correct" in view:
+        cols.append(("correct", "Correct"))
+    head = "".join(f"<th class='{'m' if key == 'correct' else ''}'>{label}</th>"
+                   for key, label in cols) + "<th>Reason</th>"
+    body = []
+    for _, r in view.iterrows():
+        cells = []
+        for key, _ in cols:
+            val = r[key]
+            if key == "correct":
+                val = "yes" if val else "no"
+            cells.append(f"<td>{html.escape(str(val))}</td>")
+        main, notes = split_reason(str(r["full_reason"]))
+        note_html = "".join(f"<div class='ar3-tnote'>{html.escape(n)}</div>" for n in notes)
+        cells.append(f"<td>{html.escape(short_reason(main))}{note_html}</td>")
+        body.append("<tr>" + "".join(cells) + "</tr>")
+    st.markdown(f"<div class='ar3 ar3-table-wrap'><table class='ar3-table'><thead><tr>{head}</tr></thead>"
+                f"<tbody>{''.join(body)}</tbody></table></div>", unsafe_allow_html=True)
+
+
+def queue_grid(view: pd.DataFrame, raw_action: pd.Series) -> None:
+    """AR3's recovery queue: one row per payment, colour-coded, with an editable Status."""
+    saved = st.session_state.get("batch_status", {})
+    queue = pd.DataFrame({
+        "Payment": view["payment_id"],
+        "Amount (₹)": view["amount"],
+        "Method": view["method"],
+        "Channel": view["channel"],
+        "Error": view["error_code"],
+        "Recommendation": view["action"],
+        "Decided by": view["decided_by"],
+        "Confidence": view["confidence"].map(lambda v: f"{v:.2f}" if pd.notna(v) else "—"),
+        "Reason": view["reason"],
+        "action": raw_action.values,   # hidden; only the row colour reads it
+    })
+    queue["Status"] = [saved.get(pid, "New") for pid in queue["Payment"]]
+    builder = GridOptionsBuilder.from_dataframe(queue)
+    builder.configure_default_column(flex=1, sortable=True, filter=True, resizable=True)
+    builder.configure_column("action", hide=True)
+    builder.configure_column("Reason", wrapText=True, autoHeight=True, flex=2)
+    builder.configure_column("Status", editable=True, cellEditor="agSelectCellEditor",
+                             cellEditorParams={"values": QUEUE_STATUS})
+    builder.configure_pagination(paginationAutoPageSize=False, paginationPageSize=20)
+    options = builder.build()
+    options["getRowStyle"] = JsCode(ROW_STYLE)
+    grid = AgGrid(queue, gridOptions=options, theme="alpine", fit_columns_on_grid_load=True,
+                  allow_unsafe_jscode=True, update_on=["cellValueChanged"], key="batch_grid")
+    data = pd.DataFrame(grid["data"]) if grid.get("data") is not None else queue
+    st.session_state.batch_status = dict(zip(data["Payment"], data["Status"]))
+    st.download_button("Download decisions (CSV)", data.to_csv(index=False),
+                       "ar3_decisions.csv", "text/csv")
+
+
 # ---------- Page ----------
 st.markdown("""
 <div class="ar3">
@@ -547,6 +624,7 @@ with tab_batch:
             rows.append(dict(payment_id=p.payment_id, amount_paise=p.amount_paise, method=p.method.value,
                              channel=p.channel.value, error_code=p.error_code, action=d["action"],
                              category=d["category"], decided_by=d["source"],
+                             confidence=d.get("confidence"),
                              reason=short_reason(split_reason(d["reason"])[0]), full_reason=d["reason"]))
             progress.progress(n / max(len(payments), 1), text=f"Decided {n} of {len(payments)}")
         progress.empty()
@@ -561,7 +639,8 @@ with tab_batch:
                 rows.append(dict(payment_id=c["payment_id"], amount_paise=c["amount_paise"],
                                  method=c["method"], channel=c["channel"], error_code=c["error_code"],
                                  action=got.get("action"), category=got.get("category"),
-                                 decided_by=got.get("source"), expected=c.get("expected_action"),
+                                 decided_by=got.get("source"), confidence=got.get("confidence"),
+                                 expected=c.get("expected_action"),
                                  correct=got.get("correct"),
                                  reason=short_reason(split_reason(got.get("reason") or "")[0]),
                                  full_reason=got.get("reason") or ""))
@@ -580,33 +659,13 @@ with tab_batch:
                           format_func=lambda a: ACTION_TEXT[a]) or []
         view = df[df["action"].isin(chosen)].copy()
         view.insert(1, "amount", view.pop("amount_paise").map(rupees))
-        view["action"] = view["action"].map(ACTION_TEXT)
+        raw_action = view["action"]
+        view["action"] = raw_action.map(ACTION_TEXT)
         view["decided_by"] = view["decided_by"].map(lambda s: SOURCE_TEXT.get(s, s))
         view["category"] = view["category"].map(lambda s: CATEGORY_TEXT.get(s, s))
         if "expected" in view:
             view["expected"] = view["expected"].map(lambda s: ACTION_TEXT.get(s, s))
-        cols = [("payment_id", "Payment"), ("amount", "Amount"), ("error_code", "Code"),
-                ("action", "Recommendation"), ("decided_by", "Decided by")]
-        if "correct" in view:
-            cols.append(("correct", "Correct"))
-        head = "".join(f"<th class='{'m' if key == 'correct' else ''}'>{label}</th>"
-                       for key, label in cols) + "<th>Reason</th>"
-        body = []
-        for _, r in view.iterrows():
-            cells = []
-            for key, _ in cols:
-                val = r[key]
-                if key == "correct":
-                    val = "yes" if val else "no"
-                cells.append(f"<td>{html.escape(str(val))}</td>")
-            main, notes = split_reason(str(r["full_reason"]))
-            note_html = "".join(f"<div class='ar3-tnote'>{html.escape(n)}</div>" for n in notes)
-            cells.append(f"<td>{html.escape(short_reason(main))}{note_html}</td>")
-            body.append("<tr>" + "".join(cells) + "</tr>")
-        st.markdown(f"<div class='ar3 ar3-table-wrap'><table class='ar3-table'><thead><tr>{head}</tr></thead>"
-                    f"<tbody>{''.join(body)}</tbody></table></div>", unsafe_allow_html=True)
-        st.download_button("Download decisions (CSV)", view.to_csv(index=False), "ar3_decisions.csv",
-                           "text/csv")
+        queue_grid(view, raw_action)
 
 # ---------- Tab 3: evaluation ----------
 with tab_eval:
