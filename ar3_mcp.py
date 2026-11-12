@@ -30,6 +30,7 @@ def agent_instruction(decision: dict) -> str:
         return f"Retry {when}{same_id}."
     return "Do not retry; a person will review it."
 
+
 @mcp.tool()
 def decide_failed_payment(error_code: str, error_description: str = "", method: str = "PAYPAL",
                           channel: str = "LIVE_CHECKOUT", attempt_number: int = 1,
