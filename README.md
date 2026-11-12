@@ -2,9 +2,9 @@
 
 **PayPal tells you what failed. AR3 decides what to do about it, safely, for merchants and for AI agents, and acts only after a person approves.**
 
-AR3 is an open-source decision layer for failed payments. When a PayPal capture fails, it diagnoses why, picks one of five safe next steps with a reason, and, once a named person approves, carries it out through the PayPal Orders API with a `PayPal-Request-Id`, so a repeated retry can never charge twice. Known error codes go to a rule table. Unclear ones go to NVIDIA Nemotron on Nebius Token Factory, read twice. Independent safety checks have the final say.
+AR3 (**A**ssess, then **R**etry, **R**eroute or **R**efuse) is an open-source decision layer for failed payments. When a PayPal capture fails, it diagnoses why, picks one of five safe next steps with a reason, and, once a named person approves, carries it out through the PayPal Orders API with a `PayPal-Request-Id`, so a repeated retry returns the first result instead of capturing again (PayPal keeps the key for 6 hours). Known error codes go to a rule table. Unclear ones go to NVIDIA Nemotron on Nebius Token Factory, read twice. Independent safety checks have the final say.
 
-[Live demo](<RENDER_URL>) · [Video](<VIDEO_URL>) · [PayPal results](#paypal-results) · [How it decides](#how-ar3-decides) · [Run it](#run-it) · [MCP tool](docs/mcp.md)
+[Live demo](https://ar3-paypal.onrender.com/) · [Video](<VIDEO_URL>) · [PayPal results](#paypal-results) · [How it decides](#how-ar3-decides) · [Run it](#run-it) · [MCP tool](docs/mcp.md)
 
 ![Python 3.12+](https://img.shields.io/badge/python-3.12%2B-blue) ![PayPal Orders API v2](https://img.shields.io/badge/PayPal-Orders%20API%20v2-003087) ![NVIDIA Nemotron](https://img.shields.io/badge/NVIDIA-Nemotron-76B900) ![Nebius Token Factory](https://img.shields.io/badge/Nebius-Token%20Factory-black) ![Tests](https://img.shields.io/badge/tests-74%20passing-brightgreen) ![License: MIT](https://img.shields.io/badge/license-MIT-lightgrey)
 
@@ -16,14 +16,14 @@ AR3 is an open-source decision layer for failed payments. When a PayPal capture 
 
 A failed PayPal capture comes back as an error like `INSTRUMENT_DECLINED`, `TRANSACTION_REFUSED` or a 500. PayPal reports what failed; the merchant, or more and more an AI shopping agent acting for a customer, still has to decide what to do next. Retry now? Ask the buyer to pick another way to pay? Never retry? Get it wrong and you either lose a sale that a safe retry would have saved, or you retry something you should not: a refused or suspected-fraud payment, an order that is already captured, or the same capture twice.
 
-**Who it's for:** merchants on PayPal checkout and subscriptions, and builders of AI agents that pay on a customer's behalf and need a safe answer to "my payment failed, what now?"
+**Who it's for:** merchants using PayPal checkout (the Orders API), and builders of AI agents that pay on a customer's behalf and need a safe answer to "my payment failed, what now?"
 
 ### What happens in the demo (PayPal sandbox, live)
 
 1. **Create** a real sandbox order (`POST /v2/checkout/orders`). Optionally approve it as the sandbox buyer.
 2. **Fail** the capture on purpose with PayPal's negative testing (`PayPal-Mock-Response`): server error, declined instrument, refused transaction, already captured, buyer action required. Three further PayPal-style errors are simulated to show Nemotron's part.
 3. **Decide.** AR3 diagnoses the failure and shows the action, the reason, who decided (rule table or Nemotron) and every safety check it passed.
-4. **Approve and act.** Nothing happens until a named person approves. Then AR3 retries the capture with `PayPal-Request-Id: <order>:attempt-N`, or sends the buyer back to PayPal, or stops. Send the same retry again, and PayPal returns the same capture: **Captures on this order: 1**.
+4. **Approve and act.** Nothing happens until a named person approves. Then AR3 retries the capture with `PayPal-Request-Id: <order>:attempt-N`, or sends the buyer back to PayPal, or stops. Send the same retry again, and PayPal replays the first capture instead of making a second one: **Captures on this order: 1**, and no error.
 
 ### PayPal APIs used, and where
 
@@ -39,7 +39,7 @@ A failed PayPal capture comes back as an error like `INSTRUMENT_DECLINED`, `TRAN
 
 ### The AI part
 
-- **Rules first.** 17 PayPal error codes are decided by the rule table, instantly and for free.
+- **Rules first.** 17 PayPal error cases are decided by the rule table, instantly and for free.
 - **Nemotron for the rest.** Unknown or vague errors go to Nemotron Nano, read **twice** (reasoning off, then on). If the two reads agree on the cause, AR3 uses it. If they disagree, Nemotron Ultra must pick one of the two; if it can't, a person decides.
 - **The model diagnoses, code decides.** The model names the cause and answers one question: could a later retry work without anyone acting? AR3's code turns that into the action. The model can't pick an action that contradicts the table.
 - **Safety checks** can overrule any decision, and every override is shown.
@@ -48,7 +48,7 @@ Why read twice: a model's confidence is not evidence. In testing, Nemotron calle
 
 ### For AI agents (MCP)
 
-`ar3_mcp.py` runs AR3 as a Model Context Protocol server with one tool, `decide_failed_payment`. An agent calls it before retrying a failed payment and gets the decision plus one plain instruction, such as "Do not retry this payment." or "Retry once now with the same PayPal-Request-Id: ...". Setup: [docs/mcp.md](docs/mcp.md).
+`ar3_mcp.py` runs AR3 as a Model Context Protocol server with one tool, `decide_failed_payment`. An agent calls it before retrying a failed payment and gets the decision plus one plain instruction, such as "Do not retry this payment." or "Retry once now with the same PayPal-Request-Id: ...". `agent_demo.py` shows it with a scripted MCP client standing in for a shopping agent: `python agent_demo.py`. Setup for an MCP host such as Claude Desktop: [docs/mcp.md](docs/mcp.md).
 
 ### PayPal results
 
@@ -75,8 +75,9 @@ Why read twice: a model's confidence is not evidence. In testing, Nemotron calle
 
 ### Known limitations (PayPal)
 
+- **Orders API only.** PayPal Subscriptions already retries failed subscription payments on its own schedule; AR3 covers Orders API captures and does not replace that.
 - **Scheduled retries are recorded, not run.** "Retry later" produces a plan with a time; there is no background job that fires it.
-- **Small, author-written eval.** 31 PayPal cases; the fixes were general but the set was viewed. 1-2 cases still get the wrong action.
+- **Small, author-written eval.** 31 PayPal cases; the fixes were general but the set was viewed. 1-2 cases still get the wrong action; none unsafe.
 - **Sandbox only.** Not run on live PayPal traffic or real merchant data.
 - **USD to INR is approximate** (a fixed rate) where AR3's rupee thresholds apply.
 - **Approval is a typed name**, not real authentication.
@@ -281,9 +282,9 @@ Copy `.env.example` to `.env` and add your Nebius Token Factory API key. For the
 | --- | --- |
 | `python -m pytest` | Runs all 74 tests (no API keys needed; the model and PayPal are faked) |
 | `python paypal_check.py` | Creates a sandbox order and forces seven real PayPal failures |
-| `python paypal_flow.py` | The full PayPal story: fail, decide, approve, retry twice, one capture |
 | `python paypal_eval.py --runs 2` | The 31-case held-out PayPal evaluation |
 | `python ar3_mcp.py` | Starts AR3 as an MCP server (see docs/mcp.md) |
+| `python agent_demo.py` | A scripted MCP client asks AR3 about three failed PayPal payments |
 | `python smoke_test.py` | Lists the Nemotron models and makes one live call |
 | `python live_check.py` | Runs the full two-tier diagnosis on two real payments |
 | `python make_testset.py` | Rebuilds the 150-case test set |
@@ -317,6 +318,7 @@ One failed payment per row, as CSV or JSON (the demo's Batch tab has a template)
 | `paypal_adapter.py` | Turns a PayPal error into AR3's input |
 | `actions.py` | Plans an action; carries it out only with a named approver |
 | `ar3_mcp.py` | AR3 as an MCP tool for AI agents |
+| `agent_demo.py` | A scripted MCP client calling that tool |
 | `paypal_eval.py` | The held-out PayPal evaluation |
 | `policy.py` | Independent safety checks |
 | `engine.py` | The full flow: rules → Nemotron → safety checks |

@@ -515,7 +515,7 @@ def paypal_tab() -> None:
                                    for u in fresh.get("purchase_units", []))
                     st.markdown(f"<div class='ar3-captures'><span class='n'>{captures}</span>"
                                 f"<span>capture{'s' if captures != 1 else ''} on this order. Same "
-                                f"PayPal-Request-Id, so PayPal never charges twice.</span></div>",
+                                f"PayPal-Request-Id, so PayPal replayed the first capture instead of making a second one.</span></div>",
                                 unsafe_allow_html=True)
 
     stage = 4 if st.session_state.pp_results else 3 if p else 2 if (order and e) else 1 if order else 0
@@ -604,7 +604,7 @@ def queue_grid(view: pd.DataFrame, raw_action: pd.Series) -> None:
 st.markdown("""
 <div class="ar3">
   <div class="ar3-head"><span class="ar3-name">AR3</span>
-    <span class="ar3-sub">a decision layer for failed UPI, card and PayPal payments</span></div>
+    <span class="ar3-sub">Assess, then Retry, Reroute or Refuse: a decision layer for failed UPI, card and PayPal payments</span></div>
   <p class="ar3-lede">Give it a failed payment. It says whether to retry, ask the customer, stop,
   or hand it to a person, and why. Known error codes go to a rule table. Unclear ones go to
   NVIDIA Nemotron on Nebius Token Factory. Every answer then passes safety checks that can
