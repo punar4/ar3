@@ -150,6 +150,7 @@ ACTION_TEXT = {
     "STOP": "Stop. Don't retry",
     "HUMAN_REVIEW": "Send to a person",
 }
+
 CATEGORY_TEXT = {
     "GATEWAY_TEMPORARY": "Gateway or acquirer glitch",
     "ISSUER_TEMPORARY": "Customer's bank is temporarily down",
