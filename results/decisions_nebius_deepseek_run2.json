@@ -1,0 +1,5778 @@
+{
+  "meta": {
+    "provider": "nebius",
+    "fast_model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+    "ultra_model": "zai-org/GLM-5.3-Flash",
+    "thinking_style": "reasoning_effort",
+    "label": "nebius_deepseek_run2",
+    "run_at": "2026-11-16T22:08:53+00:00"
+  },
+  "cases": [
+    {
+      "kind": "known",
+      "payment_id": "tc_001",
+      "amount_paise": 49900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "14",
+      "error_description": "Invalid card number",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "HARD_DECLINE",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "HARD_DECLINE",
+        "source": "RULE",
+        "seconds": 0.0001020999625325203,
+        "reason": "Rule: CARD 14 = Invalid card number, so PROMPT_CUSTOMER for LIVE_CHECKOUT",
+        "calls": [],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "known",
+      "payment_id": "tc_002",
+      "amount_paise": 129900,
+      "method": "CARD",
+      "channel": "RECURRING",
+      "error_code": "14",
+      "error_description": "Invalid card number",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "HARD_DECLINE",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "HARD_DECLINE",
+        "source": "RULE",
+        "seconds": 9.220000356435776e-05,
+        "reason": "Rule: CARD 14 = Invalid card number, so STOP for RECURRING",
+        "calls": [],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "known",
+      "payment_id": "tc_003",
+      "amount_paise": 19900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "41",
+      "error_description": "Lost, stolen or suspected fraud",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "RISK",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "RISK",
+        "source": "RULE",
+        "seconds": 4.179985262453556e-05,
+        "reason": "Rule: CARD 41 = Lost, stolen or suspected fraud, so STOP for LIVE_CHECKOUT",
+        "calls": [],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "known",
+      "payment_id": "tc_004",
+      "amount_paise": 6000000,
+      "method": "CARD",
+      "channel": "RECURRING",
+      "error_code": "41",
+      "error_description": "Lost, stolen or suspected fraud",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "RISK",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "RISK",
+        "source": "RULE",
+        "seconds": 3.3800024539232254e-05,
+        "reason": "Rule: CARD 41 = Lost, stolen or suspected fraud, so STOP for RECURRING",
+        "calls": [],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "known",
+      "payment_id": "tc_005",
+      "amount_paise": 49900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "43",
+      "error_description": "Lost, stolen or suspected fraud",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "RISK",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "RISK",
+        "source": "RULE",
+        "seconds": 8.919998072087765e-05,
+        "reason": "Rule: CARD 43 = Lost, stolen or suspected fraud, so STOP for LIVE_CHECKOUT",
+        "calls": [],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "known",
+      "payment_id": "tc_006",
+      "amount_paise": 129900,
+      "method": "CARD",
+      "channel": "RECURRING",
+      "error_code": "43",
+      "error_description": "Lost, stolen or suspected fraud",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "RISK",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "RISK",
+        "source": "RULE",
+        "seconds": 3.469991497695446e-05,
+        "reason": "Rule: CARD 43 = Lost, stolen or suspected fraud, so STOP for RECURRING",
+        "calls": [],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "known",
+      "payment_id": "tc_007",
+      "amount_paise": 19900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "51",
+      "error_description": "Insufficient funds",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "CUSTOMER_ACTION",
+        "source": "RULE",
+        "seconds": 7.090019062161446e-05,
+        "reason": "Rule: CARD 51 = Insufficient funds, so PROMPT_CUSTOMER for LIVE_CHECKOUT",
+        "calls": [],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "known",
+      "payment_id": "tc_008",
+      "amount_paise": 6000000,
+      "method": "CARD",
+      "channel": "RECURRING",
+      "error_code": "51",
+      "error_description": "Insufficient funds",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "RETRY_SCHEDULED",
+      "got": {
+        "action": "RETRY_SCHEDULED",
+        "category": "CUSTOMER_ACTION",
+        "source": "RULE",
+        "seconds": 9.909993968904018e-05,
+        "reason": "Rule: CARD 51 = Insufficient funds, so RETRY_SCHEDULED for RECURRING",
+        "calls": [],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "known",
+      "payment_id": "tc_009",
+      "amount_paise": 49900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "54",
+      "error_description": "Expired card",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "HARD_DECLINE",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "HARD_DECLINE",
+        "source": "RULE",
+        "seconds": 4.320009611546993e-05,
+        "reason": "Rule: CARD 54 = Expired card, so PROMPT_CUSTOMER for LIVE_CHECKOUT",
+        "calls": [],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "known",
+      "payment_id": "tc_010",
+      "amount_paise": 129900,
+      "method": "CARD",
+      "channel": "RECURRING",
+      "error_code": "54",
+      "error_description": "Expired card",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "HARD_DECLINE",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "HARD_DECLINE",
+        "source": "RULE",
+        "seconds": 3.979983739554882e-05,
+        "reason": "Rule: CARD 54 = Expired card, so STOP for RECURRING",
+        "calls": [],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "known",
+      "payment_id": "tc_011",
+      "amount_paise": 19900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "59",
+      "error_description": "Lost, stolen or suspected fraud",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "RISK",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "RISK",
+        "source": "RULE",
+        "seconds": 8.79000872373581e-05,
+        "reason": "Rule: CARD 59 = Lost, stolen or suspected fraud, so STOP for LIVE_CHECKOUT",
+        "calls": [],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "known",
+      "payment_id": "tc_012",
+      "amount_paise": 6000000,
+      "method": "CARD",
+      "channel": "RECURRING",
+      "error_code": "59",
+      "error_description": "Lost, stolen or suspected fraud",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "RISK",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "RISK",
+        "source": "RULE",
+        "seconds": 4.42001037299633e-05,
+        "reason": "Rule: CARD 59 = Lost, stolen or suspected fraud, so STOP for RECURRING",
+        "calls": [],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "known",
+      "payment_id": "tc_013",
+      "amount_paise": 49900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "61",
+      "error_description": "Exceeds amount limit",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "CUSTOMER_ACTION",
+        "source": "RULE",
+        "seconds": 8.579995483160019e-05,
+        "reason": "Rule: CARD 61 = Exceeds amount limit, so PROMPT_CUSTOMER for LIVE_CHECKOUT",
+        "calls": [],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "known",
+      "payment_id": "tc_014",
+      "amount_paise": 129900,
+      "method": "CARD",
+      "channel": "RECURRING",
+      "error_code": "61",
+      "error_description": "Exceeds amount limit",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "RETRY_SCHEDULED",
+      "got": {
+        "action": "RETRY_SCHEDULED",
+        "category": "CUSTOMER_ACTION",
+        "source": "RULE",
+        "seconds": 9.110011160373688e-05,
+        "reason": "Rule: CARD 61 = Exceeds amount limit, so RETRY_SCHEDULED for RECURRING",
+        "calls": [],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "known",
+      "payment_id": "tc_015",
+      "amount_paise": 19900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "91",
+      "error_description": "Issuer bank unavailable",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "ISSUER_TEMPORARY",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "ISSUER_TEMPORARY",
+        "source": "RULE",
+        "seconds": 2.9799994081258774e-05,
+        "reason": "Rule: CARD 91 = Issuer bank unavailable, so PROMPT_CUSTOMER for LIVE_CHECKOUT",
+        "calls": [],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "known",
+      "payment_id": "tc_016",
+      "amount_paise": 6000000,
+      "method": "CARD",
+      "channel": "RECURRING",
+      "error_code": "91",
+      "error_description": "Issuer bank unavailable",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "ISSUER_TEMPORARY",
+      "expected_action": "RETRY_SCHEDULED",
+      "got": {
+        "action": "RETRY_SCHEDULED",
+        "category": "ISSUER_TEMPORARY",
+        "source": "RULE",
+        "seconds": 4.619988612830639e-05,
+        "reason": "Rule: CARD 91 = Issuer bank unavailable, so RETRY_SCHEDULED for RECURRING",
+        "calls": [],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "known",
+      "payment_id": "tc_017",
+      "amount_paise": 49900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "96",
+      "error_description": "Gateway or acquirer glitch",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "GATEWAY_TEMPORARY",
+      "expected_action": "RETRY_ALT_ACQUIRER",
+      "got": {
+        "action": "RETRY_ALT_ACQUIRER",
+        "category": "GATEWAY_TEMPORARY",
+        "source": "RULE",
+        "seconds": 4.360009916126728e-05,
+        "reason": "Rule: CARD 96 = Gateway or acquirer glitch, so RETRY_ALT_ACQUIRER for LIVE_CHECKOUT",
+        "calls": [],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "known",
+      "payment_id": "tc_018",
+      "amount_paise": 129900,
+      "method": "CARD",
+      "channel": "RECURRING",
+      "error_code": "96",
+      "error_description": "Gateway or acquirer glitch",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "GATEWAY_TEMPORARY",
+      "expected_action": "RETRY_SCHEDULED",
+      "got": {
+        "action": "RETRY_SCHEDULED",
+        "category": "GATEWAY_TEMPORARY",
+        "source": "RULE",
+        "seconds": 3.569992259144783e-05,
+        "reason": "Rule: CARD 96 = Gateway or acquirer glitch, so RETRY_SCHEDULED for RECURRING",
+        "calls": [],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "known",
+      "payment_id": "tc_019",
+      "amount_paise": 19900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "ACQ_TIMEOUT",
+      "error_description": "Gateway or acquirer glitch",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "GATEWAY_TEMPORARY",
+      "expected_action": "RETRY_ALT_ACQUIRER",
+      "got": {
+        "action": "RETRY_ALT_ACQUIRER",
+        "category": "GATEWAY_TEMPORARY",
+        "source": "RULE",
+        "seconds": 3.8700178265571594e-05,
+        "reason": "Rule: CARD ACQ_TIMEOUT = Gateway or acquirer glitch, so RETRY_ALT_ACQUIRER for LIVE_CHECKOUT",
+        "calls": [],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "known",
+      "payment_id": "tc_020",
+      "amount_paise": 6000000,
+      "method": "CARD",
+      "channel": "RECURRING",
+      "error_code": "ACQ_TIMEOUT",
+      "error_description": "Gateway or acquirer glitch",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "GATEWAY_TEMPORARY",
+      "expected_action": "RETRY_SCHEDULED",
+      "got": {
+        "action": "RETRY_SCHEDULED",
+        "category": "GATEWAY_TEMPORARY",
+        "source": "RULE",
+        "seconds": 5.3900061175227165e-05,
+        "reason": "Rule: CARD ACQ_TIMEOUT = Gateway or acquirer glitch, so RETRY_SCHEDULED for RECURRING | Safety check 'minimum_wait': scheduled retries wait at least 30 minutes",
+        "calls": [],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "known",
+      "payment_id": "tc_021",
+      "amount_paise": 49900,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "Z9",
+      "error_description": "Insufficient funds",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "CUSTOMER_ACTION",
+        "source": "RULE",
+        "seconds": 2.9700109735131264e-05,
+        "reason": "Rule: UPI Z9 = Insufficient funds, so PROMPT_CUSTOMER for LIVE_CHECKOUT",
+        "calls": [],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "known",
+      "payment_id": "tc_022",
+      "amount_paise": 129900,
+      "method": "UPI",
+      "channel": "RECURRING",
+      "error_code": "Z9",
+      "error_description": "Insufficient funds",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "RETRY_SCHEDULED",
+      "got": {
+        "action": "RETRY_SCHEDULED",
+        "category": "CUSTOMER_ACTION",
+        "source": "RULE",
+        "seconds": 4.1899969801306725e-05,
+        "reason": "Rule: UPI Z9 = Insufficient funds, so RETRY_SCHEDULED for RECURRING",
+        "calls": [],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "known",
+      "payment_id": "tc_023",
+      "amount_paise": 19900,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "ZM",
+      "error_description": "Wrong UPI PIN",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "CUSTOMER_ACTION",
+        "source": "RULE",
+        "seconds": 2.950010821223259e-05,
+        "reason": "Rule: UPI ZM = Wrong UPI PIN, so PROMPT_CUSTOMER for LIVE_CHECKOUT",
+        "calls": [],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "known",
+      "payment_id": "tc_024",
+      "amount_paise": 6000000,
+      "method": "UPI",
+      "channel": "RECURRING",
+      "error_code": "ZM",
+      "error_description": "Wrong UPI PIN",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "CUSTOMER_ACTION",
+        "source": "RULE",
+        "seconds": 2.8399983420968056e-05,
+        "reason": "Rule: UPI ZM = Wrong UPI PIN, so STOP for RECURRING",
+        "calls": [],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "known",
+      "payment_id": "tc_025",
+      "amount_paise": 49900,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "Z8",
+      "error_description": "Per-transaction limit exceeded",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "CUSTOMER_ACTION",
+        "source": "RULE",
+        "seconds": 2.9399991035461426e-05,
+        "reason": "Rule: UPI Z8 = Per-transaction limit exceeded, so PROMPT_CUSTOMER for LIVE_CHECKOUT",
+        "calls": [],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "known",
+      "payment_id": "tc_026",
+      "amount_paise": 129900,
+      "method": "UPI",
+      "channel": "RECURRING",
+      "error_code": "Z8",
+      "error_description": "Per-transaction limit exceeded",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "CUSTOMER_ACTION",
+        "source": "RULE",
+        "seconds": 2.559996210038662e-05,
+        "reason": "Rule: UPI Z8 = Per-transaction limit exceeded, so STOP for RECURRING",
+        "calls": [],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "known",
+      "payment_id": "tc_027",
+      "amount_paise": 19900,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "U69",
+      "error_description": "Collect request expired",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "CUSTOMER_ACTION",
+        "source": "RULE",
+        "seconds": 2.969987690448761e-05,
+        "reason": "Rule: UPI U69 = Collect request expired, so PROMPT_CUSTOMER for LIVE_CHECKOUT",
+        "calls": [],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "known",
+      "payment_id": "tc_028",
+      "amount_paise": 6000000,
+      "method": "UPI",
+      "channel": "RECURRING",
+      "error_code": "U69",
+      "error_description": "Collect request expired",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "CUSTOMER_ACTION",
+        "source": "RULE",
+        "seconds": 2.5900080800056458e-05,
+        "reason": "Rule: UPI U69 = Collect request expired, so STOP for RECURRING",
+        "calls": [],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "known",
+      "payment_id": "tc_029",
+      "amount_paise": 49900,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "ACQ_TIMEOUT",
+      "error_description": "Gateway or acquirer glitch",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "GATEWAY_TEMPORARY",
+      "expected_action": "RETRY_ALT_ACQUIRER",
+      "got": {
+        "action": "RETRY_ALT_ACQUIRER",
+        "category": "GATEWAY_TEMPORARY",
+        "source": "RULE",
+        "seconds": 3.600004129111767e-05,
+        "reason": "Rule: UPI ACQ_TIMEOUT = Gateway or acquirer glitch, so RETRY_ALT_ACQUIRER for LIVE_CHECKOUT",
+        "calls": [],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "known",
+      "payment_id": "tc_030",
+      "amount_paise": 129900,
+      "method": "UPI",
+      "channel": "RECURRING",
+      "error_code": "ACQ_TIMEOUT",
+      "error_description": "Gateway or acquirer glitch",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "GATEWAY_TEMPORARY",
+      "expected_action": "RETRY_SCHEDULED",
+      "got": {
+        "action": "RETRY_SCHEDULED",
+        "category": "GATEWAY_TEMPORARY",
+        "source": "RULE",
+        "seconds": 3.529991954565048e-05,
+        "reason": "Rule: UPI ACQ_TIMEOUT = Gateway or acquirer glitch, so RETRY_SCHEDULED for RECURRING",
+        "calls": [],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_031",
+      "amount_paise": 19900,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "PG_TIMEOUT",
+      "error_description": "Gateway timed out waiting for PSP response",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "GATEWAY_TEMPORARY",
+      "expected_action": "RETRY_ALT_ACQUIRER",
+      "got": {
+        "action": "RETRY_ALT_ACQUIRER",
+        "category": "GATEWAY_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 4.818455199943855,
+        "reason": "LLM_FAST: The gateway timed out waiting for the PSP, a temporary glitch that may clear on retry. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 2.165800499962643,
+            "valid": true,
+            "prompt_tokens": 1128,
+            "completion_tokens": 62,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 2.6523218001239,
+            "valid": true,
+            "prompt_tokens": 1153,
+            "completion_tokens": 94,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_032",
+      "amount_paise": 6000000,
+      "method": "UPI",
+      "channel": "RECURRING",
+      "error_code": "PG_TIMEOUT",
+      "error_description": "Gateway timed out waiting for PSP response",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "GATEWAY_TEMPORARY",
+      "expected_action": "RETRY_SCHEDULED",
+      "got": {
+        "action": "RETRY_SCHEDULED",
+        "category": "GATEWAY_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 5.490443699993193,
+        "reason": "LLM_FAST: The gateway timed out waiting for the PSP, a temporary glitch that can clear on retry. (two independent reads agreed) | Safety check 'minimum_wait': scheduled retries wait at least 30 minutes",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 2.8001005998812616,
+            "valid": true,
+            "prompt_tokens": 1129,
+            "completion_tokens": 62,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 2.6897877999581397,
+            "valid": true,
+            "prompt_tokens": 1154,
+            "completion_tokens": 94,
+            "cached_tokens": 1152
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_033",
+      "amount_paise": 49900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "PG_E102",
+      "error_description": "Payment gateway internal error, please retry",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "GATEWAY_TEMPORARY",
+      "expected_action": "RETRY_ALT_ACQUIRER",
+      "got": {
+        "action": "RETRY_ALT_ACQUIRER",
+        "category": "GATEWAY_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 3.4361014999449253,
+        "reason": "LLM_FAST: The gateway reported an internal error and explicitly asks to retry, which is a temporary glitch. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 1.8863103999756277,
+            "valid": true,
+            "prompt_tokens": 1127,
+            "completion_tokens": 61,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.5493758998345584,
+            "valid": true,
+            "prompt_tokens": 1152,
+            "completion_tokens": 98,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_034",
+      "amount_paise": 129900,
+      "method": "CARD",
+      "channel": "RECURRING",
+      "error_code": "PG_E102",
+      "error_description": "Payment gateway internal error, please retry",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "GATEWAY_TEMPORARY",
+      "expected_action": "RETRY_SCHEDULED",
+      "got": {
+        "action": "RETRY_SCHEDULED",
+        "category": "GATEWAY_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 3.5448616999201477,
+        "reason": "LLM_FAST: The gateway reported an internal error and explicitly asks to retry, which is a temporary glitch. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 1.926703300094232,
+            "valid": true,
+            "prompt_tokens": 1128,
+            "completion_tokens": 62,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.6177618000656366,
+            "valid": true,
+            "prompt_tokens": 1153,
+            "completion_tokens": 107,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_035",
+      "amount_paise": 19900,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "PSP_UNAVAILABLE",
+      "error_description": "PSP server not reachable",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "GATEWAY_TEMPORARY",
+      "expected_action": "RETRY_ALT_ACQUIRER",
+      "got": {
+        "action": "RETRY_ALT_ACQUIRER",
+        "category": "GATEWAY_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 1.8564888001419604,
+        "reason": "LLM_FAST: The PSP server was unreachable, a temporary gateway-side glitch that may clear on retry. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 0.898354799952358,
+            "valid": true,
+            "prompt_tokens": 1129,
+            "completion_tokens": 62,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 0.9575716000981629,
+            "valid": true,
+            "prompt_tokens": 1154,
+            "completion_tokens": 104,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_036",
+      "amount_paise": 6000000,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "ACQ_502",
+      "error_description": "Acquirer returned HTTP 502 Bad Gateway",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "GATEWAY_TEMPORARY",
+      "expected_action": "RETRY_ALT_ACQUIRER",
+      "got": {
+        "action": "RETRY_ALT_ACQUIRER",
+        "category": "GATEWAY_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 2.2178699001669884,
+        "reason": "LLM_FAST: The acquirer returned a 502 Bad Gateway, a temporary gateway glitch that can clear on retry. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 1.4591719000600278,
+            "valid": true,
+            "prompt_tokens": 1129,
+            "completion_tokens": 64,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 0.7583233998157084,
+            "valid": true,
+            "prompt_tokens": 1154,
+            "completion_tokens": 93,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_037",
+      "amount_paise": 49900,
+      "method": "CARD",
+      "channel": "RECURRING",
+      "error_code": "ACQ_502",
+      "error_description": "Acquirer returned HTTP 502 Bad Gateway",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "GATEWAY_TEMPORARY",
+      "expected_action": "RETRY_SCHEDULED",
+      "got": {
+        "action": "RETRY_SCHEDULED",
+        "category": "GATEWAY_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 2.2615107998717576,
+        "reason": "LLM_FAST: The acquirer returned a 502 bad gateway, a temporary glitch that can clear on retry. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 1.171070900047198,
+            "valid": true,
+            "prompt_tokens": 1128,
+            "completion_tokens": 63,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.0899923001416028,
+            "valid": true,
+            "prompt_tokens": 1153,
+            "completion_tokens": 98,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_038",
+      "amount_paise": 129900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "ACQ_CONN_RESET",
+      "error_description": "Connection reset by acquirer host",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "GATEWAY_TEMPORARY",
+      "expected_action": "RETRY_ALT_ACQUIRER",
+      "got": {
+        "action": "RETRY_ALT_ACQUIRER",
+        "category": "GATEWAY_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 4.588214699877426,
+        "reason": "LLM_FAST: The acquirer host reset the connection, a temporary glitch that another acquirer may avoid. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 1.1682531000114977,
+            "valid": true,
+            "prompt_tokens": 1129,
+            "completion_tokens": 60,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 3.4195831001270562,
+            "valid": true,
+            "prompt_tokens": 1154,
+            "completion_tokens": 106,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_039",
+      "amount_paise": 19900,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "GW_RATE_LIMIT",
+      "error_description": "Too many requests to PSP, throttled by gateway",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "GATEWAY_TEMPORARY",
+      "expected_action": "RETRY_ALT_ACQUIRER",
+      "got": {
+        "action": "RETRY_ALT_ACQUIRER",
+        "category": "GATEWAY_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 2.1342076000291854,
+        "reason": "LLM_FAST: The gateway throttled the request, which clears on its own after a short wait. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 1.0573579999618232,
+            "valid": true,
+            "prompt_tokens": 1133,
+            "completion_tokens": 59,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.0764182000420988,
+            "valid": true,
+            "prompt_tokens": 1158,
+            "completion_tokens": 111,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_040",
+      "amount_paise": 6000000,
+      "method": "UPI",
+      "channel": "RECURRING",
+      "error_code": "GW_RATE_LIMIT",
+      "error_description": "Too many requests to PSP, throttled by gateway",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "GATEWAY_TEMPORARY",
+      "expected_action": "RETRY_SCHEDULED",
+      "got": {
+        "action": "RETRY_SCHEDULED",
+        "category": "GATEWAY_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 3.2206705999560654,
+        "reason": "LLM_FAST: The gateway throttled the request due to rate limiting, which clears on its own after a short wait. (two independent reads agreed) | Safety check 'minimum_wait': scheduled retries wait at least 30 minutes",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 0.6553333001211286,
+            "valid": true,
+            "prompt_tokens": 1134,
+            "completion_tokens": 63,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 2.5648443000391126,
+            "valid": true,
+            "prompt_tokens": 1159,
+            "completion_tokens": 136,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_041",
+      "amount_paise": 49900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "3DS_SERVER_ERR",
+      "error_description": "3DS server error at acquirer, authentication not started",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "GATEWAY_TEMPORARY",
+      "expected_action": "RETRY_ALT_ACQUIRER",
+      "got": {
+        "action": "RETRY_ALT_ACQUIRER",
+        "category": "GATEWAY_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 2.8735948000103235,
+        "reason": "LLM_FAST: The 3DS server error at the acquirer is a temporary glitch before authentication even started. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 0.9859698000364006,
+            "valid": true,
+            "prompt_tokens": 1133,
+            "completion_tokens": 61,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.887119699968025,
+            "valid": true,
+            "prompt_tokens": 1158,
+            "completion_tokens": 166,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_042",
+      "amount_paise": 129900,
+      "method": "NETBANKING",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "NB_GW_TIMEOUT",
+      "error_description": "Aggregator timed out before reaching the bank",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "GATEWAY_TEMPORARY",
+      "expected_action": "RETRY_ALT_ACQUIRER",
+      "got": {
+        "action": "RETRY_ALT_ACQUIRER",
+        "category": "GATEWAY_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 2.5310028998646885,
+        "reason": "LLM_FAST: The aggregator timed out before reaching the bank, a temporary gateway glitch that can clear on retry. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 1.3527130999136716,
+            "valid": true,
+            "prompt_tokens": 1135,
+            "completion_tokens": 63,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.177876700181514,
+            "valid": true,
+            "prompt_tokens": 1160,
+            "completion_tokens": 94,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_043",
+      "amount_paise": 19900,
+      "method": "NETBANKING",
+      "channel": "RECURRING",
+      "error_code": "NB_GW_TIMEOUT",
+      "error_description": "Aggregator timed out before reaching the bank",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "GATEWAY_TEMPORARY",
+      "expected_action": "RETRY_SCHEDULED",
+      "got": {
+        "action": "RETRY_SCHEDULED",
+        "category": "GATEWAY_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 2.432277800049633,
+        "reason": "LLM_FAST: The aggregator timed out before reaching the bank, a temporary gateway glitch that can clear on retry. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 1.6861596999224275,
+            "valid": true,
+            "prompt_tokens": 1134,
+            "completion_tokens": 64,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 0.7457041000016034,
+            "valid": true,
+            "prompt_tokens": 1159,
+            "completion_tokens": 96,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_044",
+      "amount_paise": 6000000,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "PSP_5XX",
+      "error_description": "PSP returned 503 Service Unavailable",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "GATEWAY_TEMPORARY",
+      "expected_action": "RETRY_ALT_ACQUIRER",
+      "got": {
+        "action": "RETRY_ALT_ACQUIRER",
+        "category": "GATEWAY_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 2.148561399895698,
+        "reason": "LLM_FAST: The PSP returned a 503, a temporary gateway outage that can clear on its own. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 1.2067519999109209,
+            "valid": true,
+            "prompt_tokens": 1131,
+            "completion_tokens": 60,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 0.9413882000371814,
+            "valid": true,
+            "prompt_tokens": 1156,
+            "completion_tokens": 86,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_045",
+      "amount_paise": 49900,
+      "method": "UPI",
+      "channel": "RECURRING",
+      "error_code": "PSP_5XX",
+      "error_description": "PSP returned 503 Service Unavailable",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "GATEWAY_TEMPORARY",
+      "expected_action": "RETRY_SCHEDULED",
+      "got": {
+        "action": "RETRY_SCHEDULED",
+        "category": "GATEWAY_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 4.91801070002839,
+        "reason": "LLM_FAST: The PSP returned a 503, a temporary gateway outage that can clear on its own. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 2.864605800015852,
+            "valid": true,
+            "prompt_tokens": 1130,
+            "completion_tokens": 60,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 2.0530457000713795,
+            "valid": true,
+            "prompt_tokens": 1155,
+            "completion_tokens": 97,
+            "cached_tokens": 1152
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_046",
+      "amount_paise": 129900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "ACQ_SOCKET_TIMEOUT",
+      "error_description": "Socket read timeout from acquiring bank",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "GATEWAY_TEMPORARY",
+      "expected_action": "RETRY_ALT_ACQUIRER",
+      "got": {
+        "action": "RETRY_ALT_ACQUIRER",
+        "category": "GATEWAY_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 2.578198199858889,
+        "reason": "LLM_FAST: The acquiring bank socket timed out, a temporary connectivity glitch that may clear on retry. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 1.2953156000003219,
+            "valid": true,
+            "prompt_tokens": 1131,
+            "completion_tokens": 61,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.282427600119263,
+            "valid": true,
+            "prompt_tokens": 1156,
+            "completion_tokens": 151,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_047",
+      "amount_paise": 19900,
+      "method": "CARD",
+      "channel": "RECURRING",
+      "error_code": "ACQ_SOCKET_TIMEOUT",
+      "error_description": "Socket read timeout from acquiring bank",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "GATEWAY_TEMPORARY",
+      "expected_action": "RETRY_SCHEDULED",
+      "got": {
+        "action": "RETRY_SCHEDULED",
+        "category": "GATEWAY_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 2.7164320999290794,
+        "reason": "LLM_FAST: The acquiring bank socket timed out, a temporary connectivity glitch that can clear on retry. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 0.992138999979943,
+            "valid": true,
+            "prompt_tokens": 1130,
+            "completion_tokens": 61,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.7230301999952644,
+            "valid": true,
+            "prompt_tokens": 1155,
+            "completion_tokens": 118,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_048",
+      "amount_paise": 6000000,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "COLLECT_PUSH_FAIL",
+      "error_description": "Gateway failed to push collect request to PSP",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "GATEWAY_TEMPORARY",
+      "expected_action": "RETRY_ALT_ACQUIRER",
+      "got": {
+        "action": "RETRY_ALT_ACQUIRER",
+        "category": "GATEWAY_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 2.875941999955103,
+        "reason": "LLM_FAST: The gateway failed to push the collect request to the PSP, a temporary glitch that can clear on retry. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 1.2683879998512566,
+            "valid": true,
+            "prompt_tokens": 1132,
+            "completion_tokens": 64,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.6071134000085294,
+            "valid": true,
+            "prompt_tokens": 1157,
+            "completion_tokens": 129,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_049",
+      "amount_paise": 49900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "GW_INTERNAL",
+      "error_description": "Internal server error at payment gateway",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "GATEWAY_TEMPORARY",
+      "expected_action": "RETRY_ALT_ACQUIRER",
+      "got": {
+        "action": "RETRY_ALT_ACQUIRER",
+        "category": "GATEWAY_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 3.5371860000304878,
+        "reason": "LLM_FAST: The gateway hit an internal server error, which is typically a temporary glitch. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 1.888402400072664,
+            "valid": true,
+            "prompt_tokens": 1126,
+            "completion_tokens": 58,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.6483827999327332,
+            "valid": true,
+            "prompt_tokens": 1151,
+            "completion_tokens": 111,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_050",
+      "amount_paise": 129900,
+      "method": "CARD",
+      "channel": "RECURRING",
+      "error_code": "GW_INTERNAL",
+      "error_description": "Internal server error at payment gateway",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "GATEWAY_TEMPORARY",
+      "expected_action": "RETRY_SCHEDULED",
+      "got": {
+        "action": "RETRY_SCHEDULED",
+        "category": "GATEWAY_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 3.543197900056839,
+        "reason": "LLM_FAST: The gateway hit an internal server error, which is typically a temporary glitch that can clear on retry. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 1.226304000010714,
+            "valid": true,
+            "prompt_tokens": 1127,
+            "completion_tokens": 64,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 2.3163436001632363,
+            "valid": true,
+            "prompt_tokens": 1152,
+            "completion_tokens": 101,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_051",
+      "amount_paise": 19900,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "PSP_DNS_FAIL",
+      "error_description": "Gateway could not resolve PSP host",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "GATEWAY_TEMPORARY",
+      "expected_action": "RETRY_ALT_ACQUIRER",
+      "got": {
+        "action": "RETRY_ALT_ACQUIRER",
+        "category": "GATEWAY_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 3.3738624998368323,
+        "reason": "LLM_FAST: The gateway failed to resolve the PSP host, a temporary DNS/network glitch that can clear on its own. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 2.558426900068298,
+            "valid": true,
+            "prompt_tokens": 1128,
+            "completion_tokens": 65,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 0.8151031997986138,
+            "valid": true,
+            "prompt_tokens": 1153,
+            "completion_tokens": 88,
+            "cached_tokens": 1152
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_052",
+      "amount_paise": 6000000,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "ACQ_MAINT",
+      "error_description": "Acquirer under scheduled maintenance",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "GATEWAY_TEMPORARY",
+      "expected_action": "RETRY_ALT_ACQUIRER",
+      "got": {
+        "action": "RETRY_ALT_ACQUIRER",
+        "category": "GATEWAY_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 3.2151269998867065,
+        "reason": "LLM_FAST: The acquirer is in scheduled maintenance, which will clear on its own. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 1.4763946998864412,
+            "valid": true,
+            "prompt_tokens": 1127,
+            "completion_tokens": 57,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.73839920014143,
+            "valid": true,
+            "prompt_tokens": 1152,
+            "completion_tokens": 83,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_053",
+      "amount_paise": 49900,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "BANK_503",
+      "error_description": "Remitter bank CBS not available",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "ISSUER_TEMPORARY",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "ISSUER_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 2.1574087000917643,
+        "reason": "LLM_FAST: The remitter bank's core banking system is unavailable, which is usually temporary. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 1.399184500100091,
+            "valid": true,
+            "prompt_tokens": 1126,
+            "completion_tokens": 58,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 0.7579262000508606,
+            "valid": true,
+            "prompt_tokens": 1151,
+            "completion_tokens": 113,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_054",
+      "amount_paise": 129900,
+      "method": "UPI",
+      "channel": "RECURRING",
+      "error_code": "BANK_503",
+      "error_description": "Remitter bank CBS not available",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "ISSUER_TEMPORARY",
+      "expected_action": "RETRY_SCHEDULED",
+      "got": {
+        "action": "RETRY_SCHEDULED",
+        "category": "ISSUER_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 4.059565000003204,
+        "reason": "LLM_FAST: The remitter bank's core banking system is temporarily unavailable, which should clear on its own. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 0.769857499981299,
+            "valid": true,
+            "prompt_tokens": 1127,
+            "completion_tokens": 61,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 3.289274799870327,
+            "valid": true,
+            "prompt_tokens": 1152,
+            "completion_tokens": 97,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_055",
+      "amount_paise": 19900,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "XY",
+      "error_description": "Remitter CBS offline",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "ISSUER_TEMPORARY",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "ISSUER_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 2.1917963000014424,
+        "reason": "LLM_FAST: The remitter's bank (CBS) is offline, which is a temporary bank-side outage. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 0.8967269000131637,
+            "valid": true,
+            "prompt_tokens": 1122,
+            "completion_tokens": 62,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.294771800050512,
+            "valid": true,
+            "prompt_tokens": 1147,
+            "completion_tokens": 137,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_056",
+      "amount_paise": 6000000,
+      "method": "UPI",
+      "channel": "RECURRING",
+      "error_code": "XY",
+      "error_description": "Remitter CBS offline",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "ISSUER_TEMPORARY",
+      "expected_action": "RETRY_SCHEDULED",
+      "got": {
+        "action": "RETRY_SCHEDULED",
+        "category": "ISSUER_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 2.765119400108233,
+        "reason": "LLM_FAST: The remitter's core banking system is offline, which is a temporary bank-side outage. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 0.8867708998732269,
+            "valid": true,
+            "prompt_tokens": 1123,
+            "completion_tokens": 60,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.877721499884501,
+            "valid": true,
+            "prompt_tokens": 1148,
+            "completion_tokens": 137,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_057",
+      "amount_paise": 49900,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "RB_TIMEOUT",
+      "error_description": "Remitter bank did not respond in time",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "ISSUER_TEMPORARY",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "ISSUER_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 4.052941299974918,
+        "reason": "LLM_FAST: The customer's bank did not respond in time, which is usually temporary. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 2.6341148999053985,
+            "valid": true,
+            "prompt_tokens": 1129,
+            "completion_tokens": 57,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.4183928000275046,
+            "valid": true,
+            "prompt_tokens": 1154,
+            "completion_tokens": 139,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_058",
+      "amount_paise": 129900,
+      "method": "UPI",
+      "channel": "RECURRING",
+      "error_code": "RB_TIMEOUT",
+      "error_description": "Remitter bank did not respond in time",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "ISSUER_TEMPORARY",
+      "expected_action": "RETRY_SCHEDULED",
+      "got": {
+        "action": "RETRY_SCHEDULED",
+        "category": "ISSUER_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 3.7784560001455247,
+        "reason": "LLM_FAST: The remitter bank timed out, which is usually a temporary outage that can clear on its own. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 1.0562193000223488,
+            "valid": true,
+            "prompt_tokens": 1130,
+            "completion_tokens": 62,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 2.7216640999540687,
+            "valid": true,
+            "prompt_tokens": 1155,
+            "completion_tokens": 104,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_059",
+      "amount_paise": 19900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "ISS_UNAVAIL",
+      "error_description": "Issuer or switch inoperative",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "ISSUER_TEMPORARY",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "ISSUER_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 3.342863099882379,
+        "reason": "LLM_FAST: The card issuer or switch is inoperative, which is typically a temporary outage. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 2.0026440999936312,
+            "valid": true,
+            "prompt_tokens": 1127,
+            "completion_tokens": 58,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.3397833001799881,
+            "valid": true,
+            "prompt_tokens": 1152,
+            "completion_tokens": 86,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_060",
+      "amount_paise": 6000000,
+      "method": "CARD",
+      "channel": "RECURRING",
+      "error_code": "ISS_UNAVAIL",
+      "error_description": "Issuer or switch inoperative",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "ISSUER_TEMPORARY",
+      "expected_action": "RETRY_SCHEDULED",
+      "got": {
+        "action": "RETRY_SCHEDULED",
+        "category": "ISSUER_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 2.832085199886933,
+        "reason": "LLM_FAST: The issuer or switch is inoperative, which is typically a temporary outage that can clear on its own. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 1.5336106999311596,
+            "valid": true,
+            "prompt_tokens": 1128,
+            "completion_tokens": 63,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.2979866999667138,
+            "valid": true,
+            "prompt_tokens": 1153,
+            "completion_tokens": 86,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_061",
+      "amount_paise": 49900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "ISS_TIMEOUT",
+      "error_description": "Issuer did not respond to authorisation request",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "ISSUER_TEMPORARY",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "ISSUER_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 3.6110320000443608,
+        "reason": "LLM_FAST: The customer's bank did not respond to the authorisation request, which is typically a temporary outage. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 2.4406262999400496,
+            "valid": true,
+            "prompt_tokens": 1129,
+            "completion_tokens": 62,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.1695829997770488,
+            "valid": true,
+            "prompt_tokens": 1154,
+            "completion_tokens": 85,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_062",
+      "amount_paise": 129900,
+      "method": "CARD",
+      "channel": "RECURRING",
+      "error_code": "ISS_TIMEOUT",
+      "error_description": "Issuer did not respond to authorisation request",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "ISSUER_TEMPORARY",
+      "expected_action": "RETRY_SCHEDULED",
+      "got": {
+        "action": "RETRY_SCHEDULED",
+        "category": "ISSUER_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 2.274461399996653,
+        "reason": "LLM_FAST: The customer's bank did not respond to the authorization request, which is typically a temporary outage. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 1.1683984000701457,
+            "valid": true,
+            "prompt_tokens": 1130,
+            "completion_tokens": 61,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.1055250999052078,
+            "valid": true,
+            "prompt_tokens": 1155,
+            "completion_tokens": 85,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_063",
+      "amount_paise": 19900,
+      "method": "NETBANKING",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "NB_BANK_DOWN",
+      "error_description": "Bank's netbanking site is down for maintenance",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "ISSUER_TEMPORARY",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "ISSUER_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 4.02011079993099,
+        "reason": "LLM_FAST: The customer's bank netbanking site is down for maintenance, which should clear on its own. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 2.546582099981606,
+            "valid": true,
+            "prompt_tokens": 1134,
+            "completion_tokens": 62,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.4730936998967081,
+            "valid": true,
+            "prompt_tokens": 1159,
+            "completion_tokens": 88,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_064",
+      "amount_paise": 6000000,
+      "method": "NETBANKING",
+      "channel": "RECURRING",
+      "error_code": "NB_BANK_DOWN",
+      "error_description": "Bank's netbanking site is down for maintenance",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "ISSUER_TEMPORARY",
+      "expected_action": "RETRY_SCHEDULED",
+      "got": {
+        "action": "RETRY_SCHEDULED",
+        "category": "ISSUER_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 2.7728227998595685,
+        "reason": "LLM_FAST: The customer's bank netbanking site is down for maintenance, which should clear on its own. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 1.7158009000122547,
+            "valid": true,
+            "prompt_tokens": 1135,
+            "completion_tokens": 62,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.0565529998857528,
+            "valid": true,
+            "prompt_tokens": 1160,
+            "completion_tokens": 94,
+            "cached_tokens": 1152
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_065",
+      "amount_paise": 49900,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "BANK_MAINT",
+      "error_description": "Payer bank under scheduled downtime",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "ISSUER_TEMPORARY",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "ISSUER_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 2.3597715999931097,
+        "reason": "LLM_FAST: The payer's bank is in scheduled downtime, which clears on its own. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 0.8352389000356197,
+            "valid": true,
+            "prompt_tokens": 1127,
+            "completion_tokens": 57,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.524130699923262,
+            "valid": true,
+            "prompt_tokens": 1152,
+            "completion_tokens": 89,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_066",
+      "amount_paise": 129900,
+      "method": "UPI",
+      "channel": "RECURRING",
+      "error_code": "BANK_MAINT",
+      "error_description": "Payer bank under scheduled downtime",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "ISSUER_TEMPORARY",
+      "expected_action": "RETRY_SCHEDULED",
+      "got": {
+        "action": "RETRY_SCHEDULED",
+        "category": "ISSUER_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 3.8336150001268834,
+        "reason": "LLM_FAST: The payer's bank is in scheduled downtime, which will clear on its own. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 1.3963438000064343,
+            "valid": true,
+            "prompt_tokens": 1128,
+            "completion_tokens": 58,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 2.436812700005248,
+            "valid": true,
+            "prompt_tokens": 1153,
+            "completion_tokens": 89,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_067",
+      "amount_paise": 19900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "ISS_SYS_ERR",
+      "error_description": "System malfunction at issuing bank",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "ISSUER_TEMPORARY",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "ISSUER_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 2.0849164000246674,
+        "reason": "LLM_FAST: The issuing bank had a system malfunction, which is typically temporary. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 0.8747575001325458,
+            "valid": true,
+            "prompt_tokens": 1126,
+            "completion_tokens": 55,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.2097726000938565,
+            "valid": true,
+            "prompt_tokens": 1151,
+            "completion_tokens": 93,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_068",
+      "amount_paise": 6000000,
+      "method": "CARD",
+      "channel": "RECURRING",
+      "error_code": "ISS_SYS_ERR",
+      "error_description": "System malfunction at issuing bank",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "ISSUER_TEMPORARY",
+      "expected_action": "RETRY_SCHEDULED",
+      "got": {
+        "action": "RETRY_SCHEDULED",
+        "category": "ISSUER_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 2.5042054001241922,
+        "reason": "LLM_FAST: The issuing bank had a system malfunction, which is typically temporary and can clear on its own. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 0.910605400102213,
+            "valid": true,
+            "prompt_tokens": 1127,
+            "completion_tokens": 61,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.5932628998998553,
+            "valid": true,
+            "prompt_tokens": 1152,
+            "completion_tokens": 86,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_069",
+      "amount_paise": 49900,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "RB_CBS_ERR",
+      "error_description": "Remitter bank core banking error, try after some time",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "ISSUER_TEMPORARY",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "ISSUER_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 2.727257200051099,
+        "reason": "LLM_FAST: The remitter bank's core banking system had a temporary error and advises retrying later. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 1.13153520016931,
+            "valid": true,
+            "prompt_tokens": 1133,
+            "completion_tokens": 60,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.5953902998007834,
+            "valid": true,
+            "prompt_tokens": 1158,
+            "completion_tokens": 155,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_070",
+      "amount_paise": 129900,
+      "method": "UPI",
+      "channel": "RECURRING",
+      "error_code": "RB_CBS_ERR",
+      "error_description": "Remitter bank core banking error, try after some time",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "ISSUER_TEMPORARY",
+      "expected_action": "RETRY_SCHEDULED",
+      "got": {
+        "action": "RETRY_SCHEDULED",
+        "category": "ISSUER_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 3.282474299892783,
+        "reason": "LLM_FAST: The remitter bank's core banking system had a temporary error and the message advises retrying later. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 1.5498355000745505,
+            "valid": true,
+            "prompt_tokens": 1134,
+            "completion_tokens": 62,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.7319706999696791,
+            "valid": true,
+            "prompt_tokens": 1159,
+            "completion_tokens": 102,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_071",
+      "amount_paise": 19900,
+      "method": "NETBANKING",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "NB_503",
+      "error_description": "Bank server busy, please try later",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "ISSUER_TEMPORARY",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "ISSUER_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 1.7883077999576926,
+        "reason": "LLM_FAST: The customer's bank server is busy, which is usually temporary. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 0.5944384001195431,
+            "valid": true,
+            "prompt_tokens": 1129,
+            "completion_tokens": 55,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.1932252999395132,
+            "valid": true,
+            "prompt_tokens": 1154,
+            "completion_tokens": 104,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_072",
+      "amount_paise": 6000000,
+      "method": "CARD",
+      "channel": "RECURRING",
+      "error_code": "ISS_BUSY",
+      "error_description": "Issuer busy, retry later",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "ISSUER_TEMPORARY",
+      "expected_action": "RETRY_SCHEDULED",
+      "got": {
+        "action": "RETRY_SCHEDULED",
+        "category": "ISSUER_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 2.2864955000113696,
+        "reason": "LLM_FAST: The issuer is busy, which is a temporary condition that can clear on its own. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 1.4228699000086635,
+            "valid": true,
+            "prompt_tokens": 1128,
+            "completion_tokens": 59,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 0.8632904998958111,
+            "valid": true,
+            "prompt_tokens": 1153,
+            "completion_tokens": 91,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_073",
+      "amount_paise": 49900,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "INSUFF_BAL",
+      "error_description": "Payer account has insufficient balance",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "CUSTOMER_ACTION",
+        "source": "LLM_FAST",
+        "seconds": 2.591339699923992,
+        "reason": "LLM_FAST: The payer's account lacks funds, which can clear once money is added. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 1.1512770000845194,
+            "valid": true,
+            "prompt_tokens": 1128,
+            "completion_tokens": 54,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.4396788000594825,
+            "valid": true,
+            "prompt_tokens": 1153,
+            "completion_tokens": 223,
+            "cached_tokens": 1152
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_074",
+      "amount_paise": 129900,
+      "method": "UPI",
+      "channel": "RECURRING",
+      "error_code": "INSUFF_BAL",
+      "error_description": "Payer account has insufficient balance",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "RETRY_SCHEDULED",
+      "got": {
+        "action": "RETRY_SCHEDULED",
+        "category": "CUSTOMER_ACTION",
+        "source": "LLM_FAST",
+        "seconds": 4.175800299970433,
+        "reason": "LLM_FAST: The payer's account lacks funds, which can clear once money is added. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 2.6379626002162695,
+            "valid": true,
+            "prompt_tokens": 1129,
+            "completion_tokens": 56,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.5373709998093545,
+            "valid": true,
+            "prompt_tokens": 1154,
+            "completion_tokens": 146,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_075",
+      "amount_paise": 19900,
+      "method": "UPI",
+      "channel": "RECURRING",
+      "error_code": "MANDATE_BAL",
+      "error_description": "Mandate execution failed: balance insufficient",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "RETRY_SCHEDULED",
+      "got": {
+        "action": "RETRY_SCHEDULED",
+        "category": "CUSTOMER_ACTION",
+        "source": "LLM_FAST",
+        "seconds": 2.7352967001497746,
+        "reason": "LLM_FAST: The mandate failed only because the account balance was insufficient, which can clear once money arrives. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 1.378410100005567,
+            "valid": true,
+            "prompt_tokens": 1128,
+            "completion_tokens": 59,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.3563694001641124,
+            "valid": true,
+            "prompt_tokens": 1153,
+            "completion_tokens": 153,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_076",
+      "amount_paise": 6000000,
+      "method": "NETBANKING",
+      "channel": "RECURRING",
+      "error_code": "NSF",
+      "error_description": "Not sufficient funds in the linked account",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "RETRY_SCHEDULED",
+      "got": {
+        "action": "RETRY_SCHEDULED",
+        "category": "CUSTOMER_ACTION",
+        "source": "LLM_FAST",
+        "seconds": 2.3220162000507116,
+        "reason": "LLM_FAST: The linked account lacks funds, which can be resolved when money arrives without any login or approval. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 0.9326339000836015,
+            "valid": true,
+            "prompt_tokens": 1129,
+            "completion_tokens": 60,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.3889413999859244,
+            "valid": true,
+            "prompt_tokens": 1154,
+            "completion_tokens": 145,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_077",
+      "amount_paise": 49900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "LOW_FUNDS",
+      "error_description": "Insufficient credit limit on card",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "CUSTOMER_ACTION",
+        "source": "LLM_FAST",
+        "seconds": 2.678432899992913,
+        "reason": "LLM_FAST: The card's credit limit is insufficient, which can clear if the customer frees up or repays limit. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 1.0288611999712884,
+            "valid": true,
+            "prompt_tokens": 1127,
+            "completion_tokens": 61,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.6491083998698741,
+            "valid": true,
+            "prompt_tokens": 1152,
+            "completion_tokens": 181,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_078",
+      "amount_paise": 129900,
+      "method": "CARD",
+      "channel": "RECURRING",
+      "error_code": "LOW_FUNDS",
+      "error_description": "Insufficient credit limit on card",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "RETRY_SCHEDULED",
+      "got": {
+        "action": "RETRY_SCHEDULED",
+        "category": "CUSTOMER_ACTION",
+        "source": "LLM_FAST",
+        "seconds": 2.5717923000920564,
+        "reason": "LLM_FAST: The card's credit limit is insufficient, which can clear once the limit resets or is freed up. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 1.4261769999284297,
+            "valid": true,
+            "prompt_tokens": 1128,
+            "completion_tokens": 62,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.145118199987337,
+            "valid": true,
+            "prompt_tokens": 1153,
+            "completion_tokens": 141,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_079",
+      "amount_paise": 19900,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "WRONG_PIN",
+      "error_description": "Incorrect UPI PIN entered",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "CUSTOMER_ACTION",
+        "source": "LLM_FAST",
+        "seconds": 2.4464205000549555,
+        "reason": "LLM_FAST: The customer entered the wrong UPI PIN, which requires them to re-enter the correct PIN. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 1.1770240999758244,
+            "valid": true,
+            "prompt_tokens": 1127,
+            "completion_tokens": 59,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.2689306000247598,
+            "valid": true,
+            "prompt_tokens": 1152,
+            "completion_tokens": 173,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_080",
+      "amount_paise": 6000000,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "PIN_TRIES",
+      "error_description": "Number of PIN tries exceeded",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "CUSTOMER_ACTION",
+        "source": "LLM_FAST",
+        "seconds": 3.0806636998895556,
+        "reason": "LLM_FAST: The customer exceeded their UPI PIN attempts, which requires them to reset or re-authenticate before any retry can work. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 0.999466700013727,
+            "valid": true,
+            "prompt_tokens": 1127,
+            "completion_tokens": 65,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 2.0808435999788344,
+            "valid": true,
+            "prompt_tokens": 1152,
+            "completion_tokens": 149,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_081",
+      "amount_paise": 49900,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "TXN_DECLINED_BY_USER",
+      "error_description": "Customer declined the collect request",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "CUSTOMER_ACTION",
+        "source": "LLM_FAST",
+        "seconds": 2.269772500032559,
+        "reason": "LLM_FAST: The customer actively declined the UPI collect request, so a retry needs them to approve a new request. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 0.6599706998094916,
+            "valid": true,
+            "prompt_tokens": 1130,
+            "completion_tokens": 61,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.6093697000760585,
+            "valid": true,
+            "prompt_tokens": 1155,
+            "completion_tokens": 234,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_082",
+      "amount_paise": 129900,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "COLLECT_EXPIRED",
+      "error_description": "Collect request expired, payer did not approve",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "CUSTOMER_ACTION",
+        "source": "LLM_FAST",
+        "seconds": 4.839978799922392,
+        "reason": "LLM_FAST: The collect request expired because the payer never approved it, so a new request and approval are needed. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 2.1027957999613136,
+            "valid": true,
+            "prompt_tokens": 1132,
+            "completion_tokens": 59,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 2.7367742001079023,
+            "valid": true,
+            "prompt_tokens": 1157,
+            "completion_tokens": 173,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_083",
+      "amount_paise": 19900,
+      "method": "UPI",
+      "channel": "RECURRING",
+      "error_code": "MANDATE_PAUSED",
+      "error_description": "Customer has paused the AutoPay mandate",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "CUSTOMER_ACTION",
+        "source": "LLM_FAST",
+        "seconds": 2.2317212999332696,
+        "reason": "LLM_FAST: The customer paused the AutoPay mandate, so a retry only works after they reactivate it. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 0.8649422000162303,
+            "valid": true,
+            "prompt_tokens": 1130,
+            "completion_tokens": 59,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.3664168000686914,
+            "valid": true,
+            "prompt_tokens": 1155,
+            "completion_tokens": 102,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_084",
+      "amount_paise": 6000000,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "DAILY_LIMIT",
+      "error_description": "Payer has exceeded daily UPI transaction limit",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "CUSTOMER_ACTION",
+        "source": "LLM_FAST",
+        "seconds": 2.9238454001024365,
+        "reason": "LLM_FAST: The payer hit their daily UPI limit, which resets on its own. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 0.9339266999159008,
+            "valid": true,
+            "prompt_tokens": 1132,
+            "completion_tokens": 57,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.9894229001365602,
+            "valid": true,
+            "prompt_tokens": 1157,
+            "completion_tokens": 139,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_085",
+      "amount_paise": 49900,
+      "method": "UPI",
+      "channel": "RECURRING",
+      "error_code": "DAILY_LIMIT",
+      "error_description": "Payer has exceeded daily UPI transaction limit",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "RETRY_SCHEDULED",
+      "got": {
+        "action": "RETRY_SCHEDULED",
+        "category": "CUSTOMER_ACTION",
+        "source": "LLM_FAST",
+        "seconds": 2.695726200006902,
+        "reason": "LLM_FAST: The payer's daily UPI limit resets on its own, so a later retry can succeed without anyone logging in. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 1.4757916999515146,
+            "valid": true,
+            "prompt_tokens": 1131,
+            "completion_tokens": 66,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.2194220998790115,
+            "valid": true,
+            "prompt_tokens": 1156,
+            "completion_tokens": 94,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_086",
+      "amount_paise": 129900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "OTP_FAILED",
+      "error_description": "OTP authentication failed",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "CUSTOMER_ACTION",
+        "source": "LLM_FAST",
+        "seconds": 2.5791577000636607,
+        "reason": "LLM_FAST: OTP authentication failed, which requires the customer to actively re-authenticate. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 0.7078817998990417,
+            "valid": true,
+            "prompt_tokens": 1125,
+            "completion_tokens": 55,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.8708893000148237,
+            "valid": true,
+            "prompt_tokens": 1150,
+            "completion_tokens": 151,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_087",
+      "amount_paise": 19900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "3DS_ABANDONED",
+      "error_description": "Customer closed the 3D Secure page",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "CUSTOMER_ACTION",
+        "source": "LLM_FAST",
+        "seconds": 3.3923566001467407,
+        "reason": "LLM_FAST: The customer abandoned 3-D Secure authentication, which requires them to actively complete it. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 1.6884994998108596,
+            "valid": true,
+            "prompt_tokens": 1131,
+            "completion_tokens": 56,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.7035542000085115,
+            "valid": true,
+            "prompt_tokens": 1156,
+            "completion_tokens": 179,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_088",
+      "amount_paise": 6000000,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "OTP_TIMEOUT",
+      "error_description": "OTP not entered within time",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "CUSTOMER_ACTION",
+        "source": "LLM_FAST",
+        "seconds": 4.072983699850738,
+        "reason": "LLM_FAST: The customer did not enter the OTP in time; a retry requires them to actively authenticate again. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 1.4121342999860644,
+            "valid": true,
+            "prompt_tokens": 1128,
+            "completion_tokens": 60,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 2.659840299980715,
+            "valid": true,
+            "prompt_tokens": 1153,
+            "completion_tokens": 124,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_089",
+      "amount_paise": 49900,
+      "method": "NETBANKING",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "NB_USER_CANCEL",
+      "error_description": "User cancelled at bank login page",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "CUSTOMER_ACTION",
+        "source": "LLM_FAST",
+        "seconds": 4.333451299928129,
+        "reason": "LLM_FAST: The customer actively cancelled at the bank login page, so a retry needs them to authenticate again. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 1.5545606999658048,
+            "valid": true,
+            "prompt_tokens": 1130,
+            "completion_tokens": 59,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 2.778578999917954,
+            "valid": true,
+            "prompt_tokens": 1155,
+            "completion_tokens": 128,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_090",
+      "amount_paise": 129900,
+      "method": "NETBANKING",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "NB_LOW_BAL",
+      "error_description": "Insufficient balance in account",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "CUSTOMER_ACTION",
+        "source": "LLM_FAST",
+        "seconds": 3.285114400088787,
+        "reason": "LLM_FAST: The account has insufficient balance, which can clear once the customer adds money. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 1.5959302999544889,
+            "valid": true,
+            "prompt_tokens": 1131,
+            "completion_tokens": 54,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.6887715000193566,
+            "valid": true,
+            "prompt_tokens": 1156,
+            "completion_tokens": 187,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_091",
+      "amount_paise": 19900,
+      "method": "CARD",
+      "channel": "RECURRING",
+      "error_code": "LIMIT_EXCEEDED",
+      "error_description": "Card's spending limit exceeded for the month",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "RETRY_SCHEDULED",
+      "got": {
+        "action": "RETRY_SCHEDULED",
+        "category": "CUSTOMER_ACTION",
+        "source": "LLM_FAST",
+        "seconds": 3.077413799939677,
+        "reason": "LLM_FAST: The card's monthly spending limit will reset on its own, allowing a later retry. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 1.131202300079167,
+            "valid": true,
+            "prompt_tokens": 1130,
+            "completion_tokens": 59,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.9457271001301706,
+            "valid": true,
+            "prompt_tokens": 1155,
+            "completion_tokens": 203,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_092",
+      "amount_paise": 6000000,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "CVV_MISMATCH",
+      "error_description": "Incorrect CVV entered",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "CUSTOMER_ACTION",
+        "source": "LLM_FAST",
+        "seconds": 2.2459962000139058,
+        "reason": "LLM_FAST: The customer entered the wrong CVV and must re-enter the correct one. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 0.9814706000033766,
+            "valid": true,
+            "prompt_tokens": 1128,
+            "completion_tokens": 55,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.2640456999652088,
+            "valid": true,
+            "prompt_tokens": 1153,
+            "completion_tokens": 217,
+            "cached_tokens": 1152
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_093",
+      "amount_paise": 49900,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "APP_TIMEOUT",
+      "error_description": "Customer did not complete payment in UPI app",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "CUSTOMER_ACTION",
+        "source": "LLM_FAST",
+        "seconds": 2.5352520998567343,
+        "reason": "LLM_FAST: The customer did not complete the payment in the UPI app, so a retry needs them to actively approve it again. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 0.7824669999536127,
+            "valid": true,
+            "prompt_tokens": 1130,
+            "completion_tokens": 64,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.752392099937424,
+            "valid": true,
+            "prompt_tokens": 1155,
+            "completion_tokens": 161,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_094",
+      "amount_paise": 129900,
+      "method": "UPI",
+      "channel": "RECURRING",
+      "error_code": "BAL_LOW_AUTOPAY",
+      "error_description": "AutoPay debit failed: account balance too low",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "RETRY_SCHEDULED",
+      "got": {
+        "action": "RETRY_SCHEDULED",
+        "category": "CUSTOMER_ACTION",
+        "source": "LLM_FAST",
+        "seconds": 5.639024699805304,
+        "reason": "LLM_FAST: The account balance was too low, which can clear on its own once money arrives. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 3.802873899927363,
+            "valid": true,
+            "prompt_tokens": 1134,
+            "completion_tokens": 58,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.8356757001020014,
+            "valid": true,
+            "prompt_tokens": 1159,
+            "completion_tokens": 143,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_095",
+      "amount_paise": 19900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "INV_CARD",
+      "error_description": "Card number is not valid",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "HARD_DECLINE",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "HARD_DECLINE",
+        "source": "LLM_FAST",
+        "seconds": 4.021371099865064,
+        "reason": "LLM_FAST: The card number is invalid, so retrying the same card will never work. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 2.7820166999008507,
+            "valid": true,
+            "prompt_tokens": 1125,
+            "completion_tokens": 55,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.2387421000748873,
+            "valid": true,
+            "prompt_tokens": 1150,
+            "completion_tokens": 74,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_096",
+      "amount_paise": 6000000,
+      "method": "CARD",
+      "channel": "RECURRING",
+      "error_code": "INV_CARD",
+      "error_description": "Card number is not valid",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "HARD_DECLINE",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "HARD_DECLINE",
+        "source": "LLM_FAST",
+        "seconds": 2.396229499951005,
+        "reason": "LLM_FAST: The card number is invalid, so retrying the same card can never work. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 1.0027417000383139,
+            "valid": true,
+            "prompt_tokens": 1126,
+            "completion_tokens": 55,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.393027599900961,
+            "valid": true,
+            "prompt_tokens": 1151,
+            "completion_tokens": 73,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_097",
+      "amount_paise": 49900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "CARD_EXPIRED",
+      "error_description": "Card has expired",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "HARD_DECLINE",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "HARD_DECLINE",
+        "source": "LLM_FAST",
+        "seconds": 2.3008134001865983,
+        "reason": "LLM_FAST: The card is expired and cannot work without a new card. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 0.8763969000428915,
+            "valid": true,
+            "prompt_tokens": 1123,
+            "completion_tokens": 51,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.4239491000771523,
+            "valid": true,
+            "prompt_tokens": 1148,
+            "completion_tokens": 71,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_098",
+      "amount_paise": 129900,
+      "method": "CARD",
+      "channel": "RECURRING",
+      "error_code": "CARD_EXPIRED",
+      "error_description": "Card has expired",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "HARD_DECLINE",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "HARD_DECLINE",
+        "source": "LLM_FAST",
+        "seconds": 3.972810700070113,
+        "reason": "LLM_FAST: The card is expired and cannot work without the customer providing a new card. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 1.3202919999603182,
+            "valid": true,
+            "prompt_tokens": 1124,
+            "completion_tokens": 54,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 2.6521388001274318,
+            "valid": true,
+            "prompt_tokens": 1149,
+            "completion_tokens": 76,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_099",
+      "amount_paise": 19900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "ACCT_CLOSED",
+      "error_description": "Account linked to card is closed",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "HARD_DECLINE",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "HARD_DECLINE",
+        "source": "LLM_FAST",
+        "seconds": 3.147467500064522,
+        "reason": "LLM_FAST: The card's linked account is closed, so retrying can never succeed. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 2.2328479001298547,
+            "valid": true,
+            "prompt_tokens": 1127,
+            "completion_tokens": 54,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 0.9141575000248849,
+            "valid": true,
+            "prompt_tokens": 1152,
+            "completion_tokens": 81,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_100",
+      "amount_paise": 6000000,
+      "method": "CARD",
+      "channel": "RECURRING",
+      "error_code": "ACCT_CLOSED",
+      "error_description": "Account linked to card is closed",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "HARD_DECLINE",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "HARD_DECLINE",
+        "source": "LLM_FAST",
+        "seconds": 3.7960115000605583,
+        "reason": "LLM_FAST: The card's linked account is closed, so retrying can never succeed. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 1.7971592000685632,
+            "valid": true,
+            "prompt_tokens": 1128,
+            "completion_tokens": 54,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.99838380003348,
+            "valid": true,
+            "prompt_tokens": 1153,
+            "completion_tokens": 82,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_101",
+      "amount_paise": 49900,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "INV_VPA",
+      "error_description": "Invalid VPA, account does not exist",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "HARD_DECLINE",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "HARD_DECLINE",
+        "source": "LLM_FAST",
+        "seconds": 5.17314159986563,
+        "reason": "LLM_FAST: The UPI VPA is invalid and the account does not exist, so retrying the same ID can never work. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 0.9495732998475432,
+            "valid": true,
+            "prompt_tokens": 1129,
+            "completion_tokens": 63,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 4.223013699986041,
+            "valid": true,
+            "prompt_tokens": 1154,
+            "completion_tokens": 133,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_102",
+      "amount_paise": 129900,
+      "method": "UPI",
+      "channel": "RECURRING",
+      "error_code": "MANDATE_REVOKED",
+      "error_description": "Mandate has been revoked by the customer",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "HARD_DECLINE",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "CUSTOMER_ACTION",
+        "source": "LLM_FAST",
+        "seconds": 3.5793314001057297,
+        "reason": "LLM_FAST: The customer revoked the mandate, so a new mandate must be actively set up before any retry can work. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 1.0928619999904186,
+            "valid": true,
+            "prompt_tokens": 1132,
+            "completion_tokens": 61,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 2.4860755999106914,
+            "valid": true,
+            "prompt_tokens": 1157,
+            "completion_tokens": 236,
+            "cached_tokens": 1152
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_103",
+      "amount_paise": 19900,
+      "method": "UPI",
+      "channel": "RECURRING",
+      "error_code": "VPA_DEACTIVATED",
+      "error_description": "UPI ID is no longer active",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "HARD_DECLINE",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "HARD_DECLINE",
+        "source": "LLM_FAST",
+        "seconds": 2.8814882999286056,
+        "reason": "LLM_FAST: The UPI ID is deactivated and cannot work without the customer registering a new one. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 1.225009299814701,
+            "valid": true,
+            "prompt_tokens": 1130,
+            "completion_tokens": 57,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.6561055998317897,
+            "valid": true,
+            "prompt_tokens": 1155,
+            "completion_tokens": 95,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_104",
+      "amount_paise": 6000000,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "ACCT_DORMANT",
+      "error_description": "Remitter account is dormant",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "HARD_DECLINE",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "CUSTOMER_ACTION",
+        "source": "LLM_ULTRA",
+        "seconds": 6.836486699990928,
+        "reason": "LLM_ULTRA: The customer's bank account is dormant, so a retry cannot work until the customer reactivates it with their bank. (broke a tie between Nano reads)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 1.1986537999473512,
+            "valid": true,
+            "prompt_tokens": 1128,
+            "completion_tokens": 61,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.9644311000593007,
+            "valid": true,
+            "prompt_tokens": 1153,
+            "completion_tokens": 202,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "zai-org/GLM-5.3-Flash",
+            "thinking": true,
+            "seconds": 3.6728662999812514,
+            "valid": true,
+            "prompt_tokens": 1076,
+            "completion_tokens": 262,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_105",
+      "amount_paise": 49900,
+      "method": "UPI",
+      "channel": "RECURRING",
+      "error_code": "ACCT_DORMANT",
+      "error_description": "Remitter account is dormant",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "HARD_DECLINE",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "HARD_DECLINE",
+        "source": "LLM_ULTRA",
+        "seconds": 8.155814499827102,
+        "reason": "LLM_ULTRA: The remitter account is dormant, so a retry cannot work until the customer reactivates the account. (broke a tie between Nano reads)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 1.7463215000461787,
+            "valid": true,
+            "prompt_tokens": 1127,
+            "completion_tokens": 63,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 4.312598600052297,
+            "valid": true,
+            "prompt_tokens": 1152,
+            "completion_tokens": 184,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "zai-org/GLM-5.3-Flash",
+            "thinking": true,
+            "seconds": 2.0963615998625755,
+            "valid": true,
+            "prompt_tokens": 1076,
+            "completion_tokens": 139,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_106",
+      "amount_paise": 129900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "TXN_NOT_PERMITTED",
+      "error_description": "Transaction not permitted to cardholder",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "HARD_DECLINE",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "HUMAN_REVIEW",
+        "category": "UNKNOWN",
+        "source": "FALLBACK",
+        "seconds": 7.804767400026321,
+        "reason": "Sent to human review: two Nano reads disagreed (HARD_DECLINE vs CUSTOMER_ACTION); LLM_ULTRA was unsure (0.55)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 2.5085276002064347,
+            "valid": true,
+            "prompt_tokens": 1129,
+            "completion_tokens": 56,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.9314846000634134,
+            "valid": true,
+            "prompt_tokens": 1154,
+            "completion_tokens": 296,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "zai-org/GLM-5.3-Flash",
+            "thinking": true,
+            "seconds": 3.3642688000109047,
+            "valid": true,
+            "prompt_tokens": 1077,
+            "completion_tokens": 263,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": false,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_107",
+      "amount_paise": 19900,
+      "method": "CARD",
+      "channel": "RECURRING",
+      "error_code": "TXN_NOT_PERMITTED",
+      "error_description": "Transaction not permitted to cardholder",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "HARD_DECLINE",
+      "expected_action": "STOP",
+      "got": {
+        "action": "HUMAN_REVIEW",
+        "category": "UNKNOWN",
+        "source": "FALLBACK",
+        "seconds": 9.04349229997024,
+        "reason": "Sent to human review: two Nano reads disagreed (HARD_DECLINE vs CUSTOMER_ACTION); LLM_ULTRA was unsure (0.50)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 0.8980288000311702,
+            "valid": true,
+            "prompt_tokens": 1128,
+            "completion_tokens": 55,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 2.1183658000081778,
+            "valid": true,
+            "prompt_tokens": 1153,
+            "completion_tokens": 227,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "zai-org/GLM-5.3-Flash",
+            "thinking": true,
+            "seconds": 6.026623199926689,
+            "valid": true,
+            "prompt_tokens": 1076,
+            "completion_tokens": 389,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": false,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_108",
+      "amount_paise": 6000000,
+      "method": "NETBANKING",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "NB_ACCT_CLOSED",
+      "error_description": "Account closed",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "HARD_DECLINE",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "HARD_DECLINE",
+        "source": "LLM_FAST",
+        "seconds": 2.1469753000419587,
+        "reason": "LLM_FAST: The bank account is closed, so retrying can never succeed. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 1.358538799919188,
+            "valid": true,
+            "prompt_tokens": 1129,
+            "completion_tokens": 52,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 0.7880001999437809,
+            "valid": true,
+            "prompt_tokens": 1154,
+            "completion_tokens": 74,
+            "cached_tokens": 1152
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_109",
+      "amount_paise": 49900,
+      "method": "NETBANKING",
+      "channel": "RECURRING",
+      "error_code": "NB_ACCT_CLOSED",
+      "error_description": "Account closed",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "HARD_DECLINE",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "HARD_DECLINE",
+        "source": "LLM_FAST",
+        "seconds": 2.246944800019264,
+        "reason": "LLM_FAST: The bank account is closed, so retrying can never succeed. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 1.1172648000065237,
+            "valid": true,
+            "prompt_tokens": 1128,
+            "completion_tokens": 52,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.1292566999327391,
+            "valid": true,
+            "prompt_tokens": 1153,
+            "completion_tokens": 72,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_110",
+      "amount_paise": 129900,
+      "method": "CARD",
+      "channel": "RECURRING",
+      "error_code": "CARD_REPLACED",
+      "error_description": "Card has been replaced, old card number no longer valid",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "HARD_DECLINE",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "HARD_DECLINE",
+        "source": "LLM_FAST",
+        "seconds": 2.7021599002182484,
+        "reason": "LLM_FAST: The old card number is no longer valid, so retrying it can never work. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 1.4339918000623584,
+            "valid": true,
+            "prompt_tokens": 1133,
+            "completion_tokens": 56,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.2678353998344392,
+            "valid": true,
+            "prompt_tokens": 1158,
+            "completion_tokens": 84,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_111",
+      "amount_paise": 19900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "FRAUD_SUSPECT",
+      "error_description": "Transaction flagged as suspected fraud by issuer",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "RISK",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "RISK",
+        "source": "LLM_FAST",
+        "seconds": 2.9620805999729782,
+        "reason": "LLM_FAST: The issuer flagged the transaction as suspected fraud, so it must not be retried. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 2.3719359000679106,
+            "valid": true,
+            "prompt_tokens": 1129,
+            "completion_tokens": 53,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 0.5892627998255193,
+            "valid": true,
+            "prompt_tokens": 1154,
+            "completion_tokens": 72,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_112",
+      "amount_paise": 6000000,
+      "method": "CARD",
+      "channel": "RECURRING",
+      "error_code": "FRAUD_SUSPECT",
+      "error_description": "Transaction flagged as suspected fraud by issuer",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "RISK",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "RISK",
+        "source": "LLM_FAST",
+        "seconds": 3.7969204001128674,
+        "reason": "LLM_FAST: The issuer flagged the transaction as suspected fraud, so it must never be retried. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 2.5207883999682963,
+            "valid": true,
+            "prompt_tokens": 1130,
+            "completion_tokens": 53,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.2757670998107642,
+            "valid": true,
+            "prompt_tokens": 1155,
+            "completion_tokens": 71,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_113",
+      "amount_paise": 49900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "STOLEN",
+      "error_description": "Card reported stolen",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "RISK",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "RISK",
+        "source": "LLM_FAST",
+        "seconds": 2.6405106000602245,
+        "reason": "LLM_FAST: The card is reported stolen, so it must never be retried. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 1.639452900039032,
+            "valid": true,
+            "prompt_tokens": 1122,
+            "completion_tokens": 50,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.0006136998999864,
+            "valid": true,
+            "prompt_tokens": 1147,
+            "completion_tokens": 70,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_114",
+      "amount_paise": 129900,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "RISK_BLOCK",
+      "error_description": "Payment blocked by PSP risk engine",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "RISK",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "RISK",
+        "source": "LLM_FAST",
+        "seconds": 2.5935938998591155,
+        "reason": "LLM_FAST: The PSP risk engine blocked the payment, so retrying is not appropriate. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 0.8688079998828471,
+            "valid": true,
+            "prompt_tokens": 1128,
+            "completion_tokens": 51,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.7244524999987334,
+            "valid": true,
+            "prompt_tokens": 1153,
+            "completion_tokens": 80,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_115",
+      "amount_paise": 19900,
+      "method": "UPI",
+      "channel": "RECURRING",
+      "error_code": "RISK_BLOCK",
+      "error_description": "Payment blocked by PSP risk engine",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "RISK",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "RISK",
+        "source": "LLM_FAST",
+        "seconds": 1.6755924001336098,
+        "reason": "LLM_FAST: The PSP risk engine blocked the payment, indicating suspected fraud, so retrying is not allowed. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 0.8711018001195043,
+            "valid": true,
+            "prompt_tokens": 1127,
+            "completion_tokens": 55,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 0.8040641997940838,
+            "valid": true,
+            "prompt_tokens": 1152,
+            "completion_tokens": 81,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_116",
+      "amount_paise": 6000000,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "VELOCITY",
+      "error_description": "Velocity check failed: too many attempts in short time",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "RISK",
+      "expected_action": "STOP",
+      "got": {
+        "action": "HUMAN_REVIEW",
+        "category": "CUSTOMER_ACTION",
+        "source": "LLM_FAST",
+        "seconds": 4.80001030000858,
+        "reason": "LLM_FAST: Velocity limit from too many attempts is a temporary block that resets over time without anyone logging in. (two independent reads agreed) | Safety check 'low_confidence': confidence 0.60 is too low",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 1.1228769000153989,
+            "valid": true,
+            "prompt_tokens": 1131,
+            "completion_tokens": 60,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 3.676654700189829,
+            "valid": true,
+            "prompt_tokens": 1156,
+            "completion_tokens": 454,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": false,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_117",
+      "amount_paise": 49900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "RISK_SCORE",
+      "error_description": "High risk score from merchant fraud screening",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "RISK",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "RISK",
+        "source": "LLM_FAST",
+        "seconds": 1.8158247000537813,
+        "reason": "LLM_FAST: Merchant fraud screening flagged the payment as high risk, so it should not be retried. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 0.5327630999963731,
+            "valid": true,
+            "prompt_tokens": 1127,
+            "completion_tokens": 55,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.2825726000592113,
+            "valid": true,
+            "prompt_tokens": 1152,
+            "completion_tokens": 94,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_118",
+      "amount_paise": 129900,
+      "method": "CARD",
+      "channel": "RECURRING",
+      "error_code": "GW_FRAUD",
+      "error_description": "Gateway fraud rule triggered",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "RISK",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "RISK",
+        "source": "LLM_FAST",
+        "seconds": 2.023046499816701,
+        "reason": "LLM_FAST: A gateway fraud rule was triggered, so the payment must not be retried. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 1.0367757000494748,
+            "valid": true,
+            "prompt_tokens": 1125,
+            "completion_tokens": 52,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 0.9859448000788689,
+            "valid": true,
+            "prompt_tokens": 1150,
+            "completion_tokens": 76,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_119",
+      "amount_paise": 19900,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "SUSP_PAYER",
+      "error_description": "Payer VPA on suspicious list",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "RISK",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "RISK",
+        "source": "LLM_FAST",
+        "seconds": 2.9071154000703245,
+        "reason": "LLM_FAST: The payer's VPA is flagged as suspicious, indicating suspected fraud that retrying won't fix. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 0.8001516000367701,
+            "valid": true,
+            "prompt_tokens": 1129,
+            "completion_tokens": 56,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 2.106585499830544,
+            "valid": true,
+            "prompt_tokens": 1154,
+            "completion_tokens": 86,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_120",
+      "amount_paise": 6000000,
+      "method": "NETBANKING",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "NB_RISK",
+      "error_description": "Bank declined: suspicious activity on account",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "RISK",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "RISK",
+        "source": "LLM_FAST",
+        "seconds": 2.0772488999646157,
+        "reason": "LLM_FAST: The bank flagged suspicious activity, so retrying is unsafe and won't help. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 1.1966278001200408,
+            "valid": true,
+            "prompt_tokens": 1131,
+            "completion_tokens": 52,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 0.880224899854511,
+            "valid": true,
+            "prompt_tokens": 1156,
+            "completion_tokens": 73,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_121",
+      "amount_paise": 49900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "LOST_CARD",
+      "error_description": "Card reported lost, pick up card",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "RISK",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "RISK",
+        "source": "LLM_FAST",
+        "seconds": 2.4632785997819155,
+        "reason": "LLM_FAST: The card is reported lost, so it must never be retried. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 0.9644987999927253,
+            "valid": true,
+            "prompt_tokens": 1126,
+            "completion_tokens": 50,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.4982251999899745,
+            "valid": true,
+            "prompt_tokens": 1151,
+            "completion_tokens": 70,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_122",
+      "amount_paise": 129900,
+      "method": "UPI",
+      "channel": "RECURRING",
+      "error_code": "AML_HOLD",
+      "error_description": "Transaction held for compliance review",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "RISK",
+      "expected_action": "STOP",
+      "got": {
+        "action": "HUMAN_REVIEW",
+        "category": "UNKNOWN",
+        "source": "FALLBACK",
+        "seconds": 3.5872760000638664,
+        "reason": "Sent to human review: LLM_FAST was unsure (0.50); LLM_ULTRA was unsure (0.60)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 0.7884943999815732,
+            "valid": true,
+            "prompt_tokens": 1126,
+            "completion_tokens": 53,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "zai-org/GLM-5.3-Flash",
+            "thinking": true,
+            "seconds": 2.7984176999889314,
+            "valid": true,
+            "prompt_tokens": 1073,
+            "completion_tokens": 179,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": false,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_123",
+      "amount_paise": 19900,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "U30",
+      "error_description": "debit failed",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "UNKNOWN",
+      "expected_action": "HUMAN_REVIEW",
+      "got": {
+        "action": "HUMAN_REVIEW",
+        "category": "UNKNOWN",
+        "source": "FALLBACK",
+        "seconds": 3.0566040000412613,
+        "reason": "Sent to human review: LLM_FAST was unsure (0.30); LLM_ULTRA was unsure (0.30)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 0.7667636999394745,
+            "valid": true,
+            "prompt_tokens": 1122,
+            "completion_tokens": 54,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "zai-org/GLM-5.3-Flash",
+            "thinking": true,
+            "seconds": 2.289446599781513,
+            "valid": true,
+            "prompt_tokens": 1069,
+            "completion_tokens": 135,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_124",
+      "amount_paise": 6000000,
+      "method": "UPI",
+      "channel": "RECURRING",
+      "error_code": "U30",
+      "error_description": "debit failed",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "UNKNOWN",
+      "expected_action": "HUMAN_REVIEW",
+      "got": {
+        "action": "HUMAN_REVIEW",
+        "category": "UNKNOWN",
+        "source": "FALLBACK",
+        "seconds": 2.544620599830523,
+        "reason": "Sent to human review: LLM_FAST was unsure (0.30); LLM_ULTRA was unsure (0.30)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 0.9921790999360383,
+            "valid": true,
+            "prompt_tokens": 1123,
+            "completion_tokens": 55,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "zai-org/GLM-5.3-Flash",
+            "thinking": true,
+            "seconds": 1.5520243998616934,
+            "valid": true,
+            "prompt_tokens": 1070,
+            "completion_tokens": 92,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_125",
+      "amount_paise": 49900,
+      "method": "UPI",
+      "channel": "RECURRING",
+      "error_code": "U30",
+      "error_description": "Debit has been failed",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "UNKNOWN",
+      "expected_action": "HUMAN_REVIEW",
+      "got": {
+        "action": "HUMAN_REVIEW",
+        "category": "UNKNOWN",
+        "source": "FALLBACK",
+        "seconds": 2.0737678001169115,
+        "reason": "Sent to human review: LLM_FAST was unsure (0.30); LLM_ULTRA was unsure (0.30)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 0.8214014999102801,
+            "valid": true,
+            "prompt_tokens": 1124,
+            "completion_tokens": 55,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "zai-org/GLM-5.3-Flash",
+            "thinking": true,
+            "seconds": 1.2519165999256074,
+            "valid": true,
+            "prompt_tokens": 1073,
+            "completion_tokens": 84,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_126",
+      "amount_paise": 129900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "05",
+      "error_description": "Do not honour",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "UNKNOWN",
+      "expected_action": "HUMAN_REVIEW",
+      "got": {
+        "action": "HUMAN_REVIEW",
+        "category": "UNKNOWN",
+        "source": "FALLBACK",
+        "seconds": 2.6685905000194907,
+        "reason": "Sent to human review: LLM_FAST was unsure (0.35); LLM_ULTRA was unsure (0.30)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 1.03172089997679,
+            "valid": true,
+            "prompt_tokens": 1121,
+            "completion_tokens": 55,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "zai-org/GLM-5.3-Flash",
+            "thinking": true,
+            "seconds": 1.6365102001000196,
+            "valid": true,
+            "prompt_tokens": 1070,
+            "completion_tokens": 60,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_127",
+      "amount_paise": 19900,
+      "method": "CARD",
+      "channel": "RECURRING",
+      "error_code": "05",
+      "error_description": "Do not honour",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "UNKNOWN",
+      "expected_action": "HUMAN_REVIEW",
+      "got": {
+        "action": "HUMAN_REVIEW",
+        "category": "UNKNOWN",
+        "source": "FALLBACK",
+        "seconds": 3.0301546999253333,
+        "reason": "Sent to human review: LLM_FAST was unsure (0.35); LLM_ULTRA was unsure (0.30)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 0.917056200094521,
+            "valid": true,
+            "prompt_tokens": 1120,
+            "completion_tokens": 55,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "zai-org/GLM-5.3-Flash",
+            "thinking": true,
+            "seconds": 2.112669700058177,
+            "valid": true,
+            "prompt_tokens": 1069,
+            "completion_tokens": 96,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_128",
+      "amount_paise": 6000000,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "ERR_GENERIC",
+      "error_description": "Something went wrong",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "UNKNOWN",
+      "expected_action": "HUMAN_REVIEW",
+      "got": {
+        "action": "HUMAN_REVIEW",
+        "category": "UNKNOWN",
+        "source": "FALLBACK",
+        "seconds": 2.1804402000270784,
+        "reason": "Sent to human review: LLM_FAST was unsure (0.30); LLM_ULTRA was unsure (0.30)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 1.056794200092554,
+            "valid": true,
+            "prompt_tokens": 1125,
+            "completion_tokens": 50,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "zai-org/GLM-5.3-Flash",
+            "thinking": true,
+            "seconds": 1.1230742998886853,
+            "valid": true,
+            "prompt_tokens": 1071,
+            "completion_tokens": 71,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_129",
+      "amount_paise": 49900,
+      "method": "NETBANKING",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "NB_ERR",
+      "error_description": "Transaction failed",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "UNKNOWN",
+      "expected_action": "HUMAN_REVIEW",
+      "got": {
+        "action": "HUMAN_REVIEW",
+        "category": "UNKNOWN",
+        "source": "FALLBACK",
+        "seconds": 2.7541932999156415,
+        "reason": "Sent to human review: LLM_FAST was unsure (0.30); LLM_ULTRA was unsure (0.35)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 1.1581919000018388,
+            "valid": true,
+            "prompt_tokens": 1124,
+            "completion_tokens": 51,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "zai-org/GLM-5.3-Flash",
+            "thinking": true,
+            "seconds": 1.5955007001757622,
+            "valid": true,
+            "prompt_tokens": 1073,
+            "completion_tokens": 68,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_130",
+      "amount_paise": 129900,
+      "method": "UPI",
+      "channel": "RECURRING",
+      "error_code": "UNKNOWN_ERR",
+      "error_description": "Payment could not be processed",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "UNKNOWN",
+      "expected_action": "HUMAN_REVIEW",
+      "got": {
+        "action": "HUMAN_REVIEW",
+        "category": "UNKNOWN",
+        "source": "FALLBACK",
+        "seconds": 2.103629000019282,
+        "reason": "Sent to human review: LLM_FAST was unsure (0.30); LLM_ULTRA was unsure (0.30)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 1.1561394999735057,
+            "valid": true,
+            "prompt_tokens": 1127,
+            "completion_tokens": 51,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "zai-org/GLM-5.3-Flash",
+            "thinking": true,
+            "seconds": 0.9469922001007944,
+            "valid": true,
+            "prompt_tokens": 1073,
+            "completion_tokens": 68,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_131",
+      "amount_paise": 19900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "DECLINED",
+      "error_description": "Transaction declined",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "UNKNOWN",
+      "expected_action": "HUMAN_REVIEW",
+      "got": {
+        "action": "HUMAN_REVIEW",
+        "category": "UNKNOWN",
+        "source": "FALLBACK",
+        "seconds": 2.9432465001009405,
+        "reason": "Sent to human review: LLM_FAST was unsure (0.35); LLM_ULTRA was unsure (0.30)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 1.282092500012368,
+            "valid": true,
+            "prompt_tokens": 1121,
+            "completion_tokens": 53,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "zai-org/GLM-5.3-Flash",
+            "thinking": true,
+            "seconds": 1.6607647999189794,
+            "valid": true,
+            "prompt_tokens": 1069,
+            "completion_tokens": 98,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_132",
+      "amount_paise": 6000000,
+      "method": "CARD",
+      "channel": "RECURRING",
+      "error_code": "DECLINED",
+      "error_description": "Transaction declined",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "UNKNOWN",
+      "expected_action": "HUMAN_REVIEW",
+      "got": {
+        "action": "HUMAN_REVIEW",
+        "category": "UNKNOWN",
+        "source": "FALLBACK",
+        "seconds": 4.6361422999762,
+        "reason": "Sent to human review: LLM_FAST was unsure (0.30); LLM_ULTRA was unsure (0.30)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 1.0174686999525875,
+            "valid": true,
+            "prompt_tokens": 1122,
+            "completion_tokens": 54,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "zai-org/GLM-5.3-Flash",
+            "thinking": true,
+            "seconds": 3.6182567002251744,
+            "valid": true,
+            "prompt_tokens": 1070,
+            "completion_tokens": 80,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_133",
+      "amount_paise": 49900,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "TXN_FAIL",
+      "error_description": "",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "UNKNOWN",
+      "expected_action": "HUMAN_REVIEW",
+      "got": {
+        "action": "HUMAN_REVIEW",
+        "category": "UNKNOWN",
+        "source": "FALLBACK",
+        "seconds": 1.9643079000525177,
+        "reason": "Sent to human review: LLM_FAST was unsure (0.30); LLM_ULTRA was unsure (0.30)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 0.6782720999326557,
+            "valid": true,
+            "prompt_tokens": 1119,
+            "completion_tokens": 54,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "zai-org/GLM-5.3-Flash",
+            "thinking": true,
+            "seconds": 1.2856091000139713,
+            "valid": true,
+            "prompt_tokens": 1068,
+            "completion_tokens": 72,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_134",
+      "amount_paise": 129900,
+      "method": "NETBANKING",
+      "channel": "RECURRING",
+      "error_code": "NB_FAILED",
+      "error_description": "Failed",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "UNKNOWN",
+      "expected_action": "HUMAN_REVIEW",
+      "got": {
+        "action": "HUMAN_REVIEW",
+        "category": "UNKNOWN",
+        "source": "FALLBACK",
+        "seconds": 3.77527859993279,
+        "reason": "Sent to human review: LLM_FAST was unsure (0.30); LLM_ULTRA was unsure (0.30)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 2.206177300075069,
+            "valid": true,
+            "prompt_tokens": 1124,
+            "completion_tokens": 54,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "zai-org/GLM-5.3-Flash",
+            "thinking": true,
+            "seconds": 1.568749399855733,
+            "valid": true,
+            "prompt_tokens": 1072,
+            "completion_tokens": 67,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_135",
+      "amount_paise": 19900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "ERR_01",
+      "error_description": "Error",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "UNKNOWN",
+      "expected_action": "HUMAN_REVIEW",
+      "got": {
+        "action": "HUMAN_REVIEW",
+        "category": "UNKNOWN",
+        "source": "FALLBACK",
+        "seconds": 2.2111631999723613,
+        "reason": "Sent to human review: LLM_FAST was unsure (0.30); LLM_ULTRA was unsure (0.30)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 1.0262935000937432,
+            "valid": true,
+            "prompt_tokens": 1120,
+            "completion_tokens": 51,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "zai-org/GLM-5.3-Flash",
+            "thinking": true,
+            "seconds": 1.1844822000712156,
+            "valid": true,
+            "prompt_tokens": 1069,
+            "completion_tokens": 64,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_136",
+      "amount_paise": 6000000,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "PAYMENT_FAILED",
+      "error_description": "Payment failed",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "UNKNOWN",
+      "expected_action": "HUMAN_REVIEW",
+      "got": {
+        "action": "HUMAN_REVIEW",
+        "category": "UNKNOWN",
+        "source": "FALLBACK",
+        "seconds": 2.150695600081235,
+        "reason": "Sent to human review: LLM_FAST was unsure (0.30); LLM_ULTRA was unsure (0.30)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 0.9017719998955727,
+            "valid": true,
+            "prompt_tokens": 1125,
+            "completion_tokens": 51,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "zai-org/GLM-5.3-Flash",
+            "thinking": true,
+            "seconds": 1.248555300058797,
+            "valid": true,
+            "prompt_tokens": 1071,
+            "completion_tokens": 79,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_137",
+      "amount_paise": 49900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "GENERIC_DECLINE",
+      "error_description": "Your card was declined",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "UNKNOWN",
+      "expected_action": "HUMAN_REVIEW",
+      "got": {
+        "action": "HUMAN_REVIEW",
+        "category": "UNKNOWN",
+        "source": "FALLBACK",
+        "seconds": 2.6898546000011265,
+        "reason": "Sent to human review: LLM_FAST was unsure (0.30); LLM_ULTRA was unsure (0.30)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 1.4851317000575364,
+            "valid": true,
+            "prompt_tokens": 1126,
+            "completion_tokens": 50,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "zai-org/GLM-5.3-Flash",
+            "thinking": true,
+            "seconds": 1.2043915998656303,
+            "valid": true,
+            "prompt_tokens": 1074,
+            "completion_tokens": 75,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_138",
+      "amount_paise": 129900,
+      "method": "UPI",
+      "channel": "RECURRING",
+      "error_code": "X1",
+      "error_description": "Failure",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "UNKNOWN",
+      "expected_action": "HUMAN_REVIEW",
+      "got": {
+        "action": "HUMAN_REVIEW",
+        "category": "UNKNOWN",
+        "source": "FALLBACK",
+        "seconds": 2.697231899946928,
+        "reason": "Sent to human review: LLM_FAST was unsure (0.30); LLM_ULTRA was unsure (0.30)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 0.9971160001587123,
+            "valid": true,
+            "prompt_tokens": 1120,
+            "completion_tokens": 51,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "zai-org/GLM-5.3-Flash",
+            "thinking": true,
+            "seconds": 1.699759199982509,
+            "valid": true,
+            "prompt_tokens": 1068,
+            "completion_tokens": 71,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_139",
+      "amount_paise": 19900,
+      "method": "UPI",
+      "channel": "RECURRING",
+      "error_code": "PG_TIMEOUT",
+      "error_description": "Gateway timed out waiting for PSP response",
+      "attempt_number": 3,
+      "acquirer": "ACQ_A",
+      "expected_category": "GATEWAY_TEMPORARY",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "GATEWAY_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 2.9606672001536936,
+        "reason": "LLM_FAST: The gateway timed out waiting for the PSP, a temporary glitch that can clear on retry. (two independent reads agreed) | Safety check 'retry_cap': attempt 3 reached the cap",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 1.8691360000520945,
+            "valid": true,
+            "prompt_tokens": 1128,
+            "completion_tokens": 62,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.0911812998820096,
+            "valid": true,
+            "prompt_tokens": 1153,
+            "completion_tokens": 93,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_140",
+      "amount_paise": 6000000,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "PG_E102",
+      "error_description": "Payment gateway internal error, please retry",
+      "attempt_number": 3,
+      "acquirer": "ACQ_A",
+      "expected_category": "GATEWAY_TEMPORARY",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "GATEWAY_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 4.966840100008994,
+        "reason": "LLM_FAST: The gateway reported an internal error and explicitly asks to retry, which is a temporary glitch. (two independent reads agreed) | Safety check 'retry_cap': attempt 3 reached the cap",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 2.8258310998789966,
+            "valid": true,
+            "prompt_tokens": 1128,
+            "completion_tokens": 61,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 2.1406852998770773,
+            "valid": true,
+            "prompt_tokens": 1153,
+            "completion_tokens": 94,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_141",
+      "amount_paise": 49900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "ACQ_502",
+      "error_description": "Acquirer returned HTTP 502 Bad Gateway",
+      "attempt_number": 3,
+      "acquirer": "ACQ_A",
+      "expected_category": "GATEWAY_TEMPORARY",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "GATEWAY_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 2.0967762998770922,
+        "reason": "LLM_FAST: The acquirer returned a 502 Bad Gateway, a temporary gateway glitch that another acquirer may bypass. (two independent reads agreed) | Safety check 'retry_cap': attempt 3 reached the cap",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 1.0544469999149442,
+            "valid": true,
+            "prompt_tokens": 1128,
+            "completion_tokens": 63,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.0419850000180304,
+            "valid": true,
+            "prompt_tokens": 1153,
+            "completion_tokens": 97,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_142",
+      "amount_paise": 129900,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "GW_RATE_LIMIT",
+      "error_description": "Too many requests to PSP, throttled by gateway",
+      "attempt_number": 3,
+      "acquirer": "ACQ_A",
+      "expected_category": "GATEWAY_TEMPORARY",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "GATEWAY_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 3.7318102000281215,
+        "reason": "LLM_FAST: The gateway throttled the request due to rate limiting, which clears on its own over time. (two independent reads agreed) | Safety check 'retry_cap': attempt 3 reached the cap",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 2.477596700191498,
+            "valid": true,
+            "prompt_tokens": 1134,
+            "completion_tokens": 61,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.253779700025916,
+            "valid": true,
+            "prompt_tokens": 1159,
+            "completion_tokens": 97,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_143",
+      "amount_paise": 19900,
+      "method": "UPI",
+      "channel": "RECURRING",
+      "error_code": "BANK_503",
+      "error_description": "Remitter bank CBS not available",
+      "attempt_number": 3,
+      "acquirer": "ACQ_A",
+      "expected_category": "ISSUER_TEMPORARY",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "ISSUER_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 2.6598064999561757,
+        "reason": "LLM_FAST: The remitter bank's core banking system is unavailable, which is typically temporary. (two independent reads agreed) | Safety check 'retry_cap': attempt 3 reached the cap",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 0.8048703998792917,
+            "valid": true,
+            "prompt_tokens": 1126,
+            "completion_tokens": 58,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.8544441000558436,
+            "valid": true,
+            "prompt_tokens": 1151,
+            "completion_tokens": 105,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_144",
+      "amount_paise": 6000000,
+      "method": "CARD",
+      "channel": "RECURRING",
+      "error_code": "ISS_TIMEOUT",
+      "error_description": "Issuer did not respond to authorisation request",
+      "attempt_number": 3,
+      "acquirer": "ACQ_A",
+      "expected_category": "ISSUER_TEMPORARY",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "ISSUER_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 2.2592839999124408,
+        "reason": "LLM_FAST: The customer's bank did not respond to the authorisation request, which is typically a temporary outage. (two independent reads agreed) | Safety check 'retry_cap': attempt 3 reached the cap",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 1.2215507999062538,
+            "valid": true,
+            "prompt_tokens": 1130,
+            "completion_tokens": 62,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.0372717001009732,
+            "valid": true,
+            "prompt_tokens": 1155,
+            "completion_tokens": 85,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_145",
+      "amount_paise": 49900,
+      "method": "UPI",
+      "channel": "RECURRING",
+      "error_code": "RB_TIMEOUT",
+      "error_description": "Remitter bank did not respond in time",
+      "attempt_number": 5,
+      "acquirer": "ACQ_A",
+      "expected_category": "ISSUER_TEMPORARY",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "ISSUER_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 2.6198734999634326,
+        "reason": "LLM_FAST: The remitter bank timed out, which is usually temporary and can clear on its own. (two independent reads agreed) | Safety check 'retry_cap': attempt 5 reached the cap",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 1.333024599822238,
+            "valid": true,
+            "prompt_tokens": 1129,
+            "completion_tokens": 60,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.286377300042659,
+            "valid": true,
+            "prompt_tokens": 1154,
+            "completion_tokens": 105,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_146",
+      "amount_paise": 129900,
+      "method": "UPI",
+      "channel": "RECURRING",
+      "error_code": "INSUFF_BAL",
+      "error_description": "Payer account has insufficient balance",
+      "attempt_number": 3,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "CUSTOMER_ACTION",
+        "source": "LLM_FAST",
+        "seconds": 3.485289999982342,
+        "reason": "LLM_FAST: The payer's account lacks funds, which can clear once money is added, with no login needed for a retry. (two independent reads agreed) | Safety check 'retry_cap': attempt 3 reached the cap",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 2.0442313998937607,
+            "valid": true,
+            "prompt_tokens": 1129,
+            "completion_tokens": 65,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.4405697998590767,
+            "valid": true,
+            "prompt_tokens": 1154,
+            "completion_tokens": 126,
+            "cached_tokens": 1152
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_147",
+      "amount_paise": 19900,
+      "method": "NETBANKING",
+      "channel": "RECURRING",
+      "error_code": "NSF",
+      "error_description": "Not sufficient funds in the linked account",
+      "attempt_number": 3,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "CUSTOMER_ACTION",
+        "source": "LLM_FAST",
+        "seconds": 4.138105100020766,
+        "reason": "LLM_FAST: Insufficient funds can clear on its own once money arrives in the account. (two independent reads agreed) | Safety check 'retry_cap': attempt 3 reached the cap",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 2.6545798999723047,
+            "valid": true,
+            "prompt_tokens": 1128,
+            "completion_tokens": 57,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.4830451998859644,
+            "valid": true,
+            "prompt_tokens": 1153,
+            "completion_tokens": 153,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_148",
+      "amount_paise": 6000000,
+      "method": "CARD",
+      "channel": "RECURRING",
+      "error_code": "LOW_FUNDS",
+      "error_description": "Insufficient credit limit on card",
+      "attempt_number": 4,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "CUSTOMER_ACTION",
+        "source": "LLM_FAST",
+        "seconds": 4.016988700022921,
+        "reason": "LLM_FAST: The card's credit limit is insufficient, which can clear if the limit resets or the balance is paid down. (two independent reads agreed) | Safety check 'retry_cap': attempt 4 reached the cap",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 1.6787711000069976,
+            "valid": true,
+            "prompt_tokens": 1128,
+            "completion_tokens": 64,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 2.3377572000026703,
+            "valid": true,
+            "prompt_tokens": 1153,
+            "completion_tokens": 174,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_149",
+      "amount_paise": 49900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "ISS_UNAVAIL",
+      "error_description": "Issuer or switch inoperative",
+      "attempt_number": 3,
+      "acquirer": "ACQ_A",
+      "expected_category": "ISSUER_TEMPORARY",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "ISSUER_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 2.8579521998763084,
+        "reason": "LLM_FAST: The issuer or switch is inoperative, which is typically a temporary outage. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 1.6640017000027,
+            "valid": true,
+            "prompt_tokens": 1127,
+            "completion_tokens": 57,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.1935752001591027,
+            "valid": true,
+            "prompt_tokens": 1152,
+            "completion_tokens": 84,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_150",
+      "amount_paise": 129900,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "INSUFF_BAL",
+      "error_description": "Payer account has insufficient balance",
+      "attempt_number": 3,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "CUSTOMER_ACTION",
+        "source": "LLM_FAST",
+        "seconds": 2.5460046001244336,
+        "reason": "LLM_FAST: The payer's account lacks funds, which can clear once money is added. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": false,
+            "seconds": 1.012443499872461,
+            "valid": true,
+            "prompt_tokens": 1129,
+            "completion_tokens": 56,
+            "cached_tokens": 1024
+          },
+          {
+            "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "thinking": true,
+            "seconds": 1.533239800017327,
+            "valid": true,
+            "prompt_tokens": 1154,
+            "completion_tokens": 127,
+            "cached_tokens": 1024
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    }
+  ]
+}

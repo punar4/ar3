@@ -124,8 +124,8 @@ def thinking_extra(thinking: bool | None) -> dict:
         return {"extra_body": {"enable_thinking": thinking}}
     if style == "thinking_type":
         return {"extra_body": {"thinking": {"type": "enabled" if thinking else "disabled"}}}
-    if style == "reasoning_effort":   # Isoquant: a level name, set in .env
-        level = os.environ.get("ISOQUANT_REASONING_ON" if thinking else "ISOQUANT_REASONING_OFF", "")
+    if style == "reasoning_effort":   # a level name per provider, set in .env
+        level = config.REASONING_ON if thinking else config.REASONING_OFF
         return {"extra_body": {"reasoning_effort": level}} if level else {}
     raise ValueError(f"Unknown THINKING_STYLE: {style!r}")
 

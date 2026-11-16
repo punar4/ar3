@@ -1,4 +1,8 @@
 {
   "deepseek-v4.1-flash-1017-fast": {"in": 0.035, "out": 0.37, "cached": 0.005},
-  "glm-5.3-flash": {"in": 0.07, "out": 0.15, "cached": 0.025}
+  "glm-5.3-flash": {"in": 0.07, "out": 0.15, "cached": 0.025},
+  "deepseek-ai/DeepSeek-V4.1-Flash-1017": {"in": 0.30, "out": 1.20, "cached": 0.006},
+  "zai-org/GLM-5.3-Flash": {"in": 0.15, "out": 0.50, "cached": 0.03},
+  "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B": {"in": 0.06, "out": 0.24, "cached": 0.012},
+  "nvidia/Nemotron-3-Ultra-550b-a55b": {"in": 1.00, "out": 3.00, "cached": 0.12}
 }
