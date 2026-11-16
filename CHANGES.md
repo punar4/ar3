@@ -70,3 +70,4 @@ AR3 v2, rebuilt from scratch for the Nebius × NVIDIA Global AI Hackathon.
 - New app design: Inter font, a card per step in the PayPal tab, a progress bar, and an AR3 tab icon
 - requirements.txt: streamlit-aggrid 1.2.1 and mcp 1.30.0, both pinned
 - Tests: 74, all pass
+

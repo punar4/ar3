@@ -6,6 +6,7 @@ The model only recommends; safety checks (policy.py) review every answer.
 
 import logging
 import os
+import time
 from collections.abc import Callable
 
 from dotenv import load_dotenv
@@ -105,18 +106,33 @@ def _get_client() -> OpenAI:
     if _client is None:
         _client = OpenAI(
             base_url=config.BASE_URL,
-            api_key=os.environ["NEBIUS_API_KEY"],
+            api_key=os.environ[config.API_KEY_ENV],
             timeout=config.LLM_TIMEOUT_SECONDS,
             max_retries=1,
         )
     return _client
 
 
-def ask_nemotron(model: str, prompt: str, thinking: bool | None) -> str:
-    """One live, one-shot call to Nemotron on Token Factory. Returns the raw reply text."""
-    extra = {}
-    if thinking is not None:
-        extra["extra_body"] = {"chat_template_kwargs": {"enable_thinking": thinking}}
+def thinking_extra(thinking: bool | None) -> dict:
+    """The request extras that switch reasoning on or off. Providers do this differently."""
+    style = config.THINKING_STYLE
+    if thinking is None or style == "none":
+        return {}
+    if style == "chat_template":      # Nebius Token Factory (Nemotron)
+        return {"extra_body": {"chat_template_kwargs": {"enable_thinking": thinking}}}
+    if style == "enable_thinking":
+        return {"extra_body": {"enable_thinking": thinking}}
+    if style == "thinking_type":
+        return {"extra_body": {"thinking": {"type": "enabled" if thinking else "disabled"}}}
+    if style == "reasoning_effort":   # Isoquant: a level name, set in .env
+        level = os.environ.get("ISOQUANT_REASONING_ON" if thinking else "ISOQUANT_REASONING_OFF", "")
+        return {"extra_body": {"reasoning_effort": level}} if level else {}
+    raise ValueError(f"Unknown THINKING_STYLE: {style!r}")
+
+
+def ask_full(model: str, prompt: str, thinking: bool | None) -> tuple[str, dict, float]:
+    """One live, one-shot call. Returns (reply text, token usage, seconds)."""
+    start = time.perf_counter()
     response = _get_client().chat.completions.create(
         model=model,
         messages=[
@@ -125,9 +141,23 @@ def ask_nemotron(model: str, prompt: str, thinking: bool | None) -> str:
         ],
         temperature=0,
         max_tokens=config.LLM_MAX_TOKENS,
-        **extra,
+        **thinking_extra(thinking),
     )
-    return response.choices[0].message.content or ""
+    seconds = time.perf_counter() - start
+    u = response.usage
+    details = getattr(u, "prompt_tokens_details", None) if u else None
+    usage = {
+        "prompt_tokens": getattr(u, "prompt_tokens", 0) or 0,
+        "completion_tokens": getattr(u, "completion_tokens", 0) or 0,
+        "cached_tokens": getattr(details, "cached_tokens", 0) or 0,
+    }
+    return response.choices[0].message.content or "", usage, seconds
+
+
+def ask_nemotron(model: str, prompt: str, thinking: bool | None) -> str:
+    """One live call to the configured provider. Returns the raw reply text.
+    (The name is historical: it calls whichever provider and models config.py selects.)"""
+    return ask_full(model, prompt, thinking)[0]
 
 
 def describe(payment: FailedPayment) -> str:

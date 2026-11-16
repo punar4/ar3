@@ -2,9 +2,12 @@
 
 python evaluate.py           # baseline ladder (calls Nemotron for the messy cases)
 python evaluate.py --tiers   # also compares Nemotron tiers on the messy cases (more calls)
+python evaluate.py --label isoquant_run1   # save under a name instead of overwriting the last run;
+                                           # also records tokens and time per model call (see compare.py)
 """
 
 import argparse
+import datetime
 import json
 import statistics
 import time
@@ -44,10 +47,22 @@ def retry_all(case: dict) -> dict:
 
 
 def run_engine(case: dict, use_llm: bool) -> dict:
+    calls: list[dict] = []   # one entry per model call for this case: model, reasoning, tokens, seconds
+
+    def ask(model: str, prompt: str, thinking: bool | None) -> str:
+        try:
+            text, usage, seconds = llm.ask_full(model, prompt, thinking)
+        except Exception as error:
+            calls.append({"model": model, "thinking": thinking, "error": type(error).__name__})
+            raise
+        calls.append({"model": model, "thinking": thinking, "seconds": seconds,
+                      "valid": llm.parse_reply(text) is not None, **usage})
+        return text
+
     start = time.perf_counter()
-    d = decide(payment(case), use_llm=use_llm)
+    d = decide(payment(case), ask=ask, use_llm=use_llm)
     return {"action": d.action, "category": d.category, "source": d.source,
-            "seconds": time.perf_counter() - start, "reason": d.reason}
+            "seconds": time.perf_counter() - start, "reason": d.reason, "calls": calls}
 
 
 def run_policy(fn) -> list[dict]:
@@ -77,7 +92,7 @@ def ask_with_usage(model: str, thinking: bool, prompt: str) -> tuple[str, int, f
         messages=[{"role": "system", "content": llm.SYSTEM_PROMPT}, {"role": "user", "content": prompt}],
         temperature=0,
         max_tokens=config.LLM_MAX_TOKENS,
-        extra_body={"chat_template_kwargs": {"enable_thinking": thinking}},
+        **llm.thinking_extra(thinking),
     )
     return response.choices[0].message.content or "", response.usage.total_tokens, time.perf_counter() - start
 
@@ -109,7 +124,10 @@ def run_tier(model: str, thinking: bool) -> dict:
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--tiers", action="store_true", help="also compare Nemotron tiers (more API calls)")
+    parser.add_argument("--label", default="", help="save as results/eval_<label>.md and decisions_<label>.json")
     args = parser.parse_args()
+    print(f"Provider: {config.PROVIDER} | fast: {config.FAST_MODEL} | ultra: {config.ULTRA_MODEL} "
+          f"| reasoning switch: {config.THINKING_STYLE}")
 
     print(f"Running {len(CASES)} cases ({len(MESSY)} messy)...")
     names = ["Retry everything once", "AR3, rules only", "AR3 with Nemotron"]
@@ -158,10 +176,17 @@ def main() -> None:
     report = "\n".join(out)
     print("\n" + report)
     Path("results").mkdir(exist_ok=True)
-    Path("results/eval.md").write_text(report, encoding="utf-8")
-    Path("results/full_decisions.json").write_text(json.dumps(
-        [{**c, "got": r} for c, r in zip(CASES, full)], indent=2, default=str), encoding="utf-8")
-    print("\nSaved results/eval.md and results/full_decisions.json")
+    meta = {"provider": config.PROVIDER, "fast_model": config.FAST_MODEL, "ultra_model": config.ULTRA_MODEL,
+            "thinking_style": config.THINKING_STYLE, "label": args.label,
+            "run_at": datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds")}
+    md = f"results/eval_{args.label}.md" if args.label else "results/eval.md"
+    js = f"results/decisions_{args.label}.json" if args.label else "results/full_decisions.json"
+    header = f"Provider: {meta['provider']} | fast: {meta['fast_model']} | ultra: {meta['ultra_model']} | {meta['run_at']}\n\n"
+    Path(md).write_text((header if args.label else "") + report, encoding="utf-8")
+    cases = [{**c, "got": r} for c, r in zip(CASES, full)]
+    Path(js).write_text(json.dumps({"meta": meta, "cases": cases} if args.label else cases,
+                                   indent=2, default=str), encoding="utf-8")
+    print(f"\nSaved {md} and {js}")
 
 
 if __name__ == "__main__":

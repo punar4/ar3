@@ -1,9 +1,31 @@
 """AR3 settings. Secrets (the API key) stay in .env; everything here is safe to publish."""
 
-BASE_URL = "https://api.tokenfactory.nebius.com/v1/"
+import os
 
-FAST_MODEL = "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B"
-ULTRA_MODEL = "nvidia/Nemotron-3-Ultra-550b-a55b"
+from dotenv import load_dotenv
+
+load_dotenv()
+
+# Which inference provider serves the models. Set AR3_PROVIDER=isoquant in .env to switch;
+# nothing else in AR3 (prompt, rules, safety checks, decision code) changes.
+PROVIDER = os.environ.get("AR3_PROVIDER", "nebius").lower()
+
+if PROVIDER == "isoquant":
+    BASE_URL = os.environ.get("ISOQUANT_BASE_URL", "")
+    API_KEY_ENV = "ISOQUANT_API_KEY"
+    FAST_MODEL = os.environ.get("ISOQUANT_FAST_MODEL", "")
+    ULTRA_MODEL = os.environ.get("ISOQUANT_ULTRA_MODEL", "")
+    # How this provider switches reasoning on and off (see llm.thinking_extra):
+    # chat_template | enable_thinking | thinking_type | none
+    THINKING_STYLE = os.environ.get("ISOQUANT_THINKING_STYLE", "none")
+elif PROVIDER == "nebius":
+    BASE_URL = "https://api.tokenfactory.nebius.com/v1/"
+    API_KEY_ENV = "NEBIUS_API_KEY"
+    FAST_MODEL = "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B"
+    ULTRA_MODEL = "nvidia/Nemotron-3-Ultra-550b-a55b"
+    THINKING_STYLE = "chat_template"
+else:
+    raise ValueError(f"Unknown AR3_PROVIDER: {PROVIDER!r} (use nebius or isoquant)")
 
 FAST_THINKING = False    # fast tier: reasoning off (2.5 s vs 14 s in N1); revisit with T18 numbers
 ULTRA_THINKING = True    # Ultra: reasoning on; it only sees hard cases

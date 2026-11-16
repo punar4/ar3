@@ -1,0 +1,4 @@
+{
+  "deepseek-v4.1-flash-1017-fast": {"in": 0.035, "out": 0.37, "cached": 0.005},
+  "glm-5.3-flash": {"in": 0.07, "out": 0.15, "cached": 0.025}
+}
