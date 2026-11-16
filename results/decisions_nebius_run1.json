@@ -1,0 +1,5796 @@
+{
+  "meta": {
+    "provider": "nebius",
+    "fast_model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+    "ultra_model": "nvidia/Nemotron-3-Ultra-550b-a55b",
+    "thinking_style": "chat_template",
+    "label": "nebius_run1",
+    "run_at": "2026-11-16T21:15:28+00:00"
+  },
+  "cases": [
+    {
+      "kind": "known",
+      "payment_id": "tc_001",
+      "amount_paise": 49900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "14",
+      "error_description": "Invalid card number",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "HARD_DECLINE",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "HARD_DECLINE",
+        "source": "RULE",
+        "seconds": 0.00015650014393031597,
+        "reason": "Rule: CARD 14 = Invalid card number, so PROMPT_CUSTOMER for LIVE_CHECKOUT",
+        "calls": [],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "known",
+      "payment_id": "tc_002",
+      "amount_paise": 129900,
+      "method": "CARD",
+      "channel": "RECURRING",
+      "error_code": "14",
+      "error_description": "Invalid card number",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "HARD_DECLINE",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "HARD_DECLINE",
+        "source": "RULE",
+        "seconds": 6.910017691552639e-05,
+        "reason": "Rule: CARD 14 = Invalid card number, so STOP for RECURRING",
+        "calls": [],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "known",
+      "payment_id": "tc_003",
+      "amount_paise": 19900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "41",
+      "error_description": "Lost, stolen or suspected fraud",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "RISK",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "RISK",
+        "source": "RULE",
+        "seconds": 4.630000330507755e-05,
+        "reason": "Rule: CARD 41 = Lost, stolen or suspected fraud, so STOP for LIVE_CHECKOUT",
+        "calls": [],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "known",
+      "payment_id": "tc_004",
+      "amount_paise": 6000000,
+      "method": "CARD",
+      "channel": "RECURRING",
+      "error_code": "41",
+      "error_description": "Lost, stolen or suspected fraud",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "RISK",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "RISK",
+        "source": "RULE",
+        "seconds": 8.330005221068859e-05,
+        "reason": "Rule: CARD 41 = Lost, stolen or suspected fraud, so STOP for RECURRING",
+        "calls": [],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "known",
+      "payment_id": "tc_005",
+      "amount_paise": 49900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "43",
+      "error_description": "Lost, stolen or suspected fraud",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "RISK",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "RISK",
+        "source": "RULE",
+        "seconds": 0.00025969999842345715,
+        "reason": "Rule: CARD 43 = Lost, stolen or suspected fraud, so STOP for LIVE_CHECKOUT",
+        "calls": [],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "known",
+      "payment_id": "tc_006",
+      "amount_paise": 129900,
+      "method": "CARD",
+      "channel": "RECURRING",
+      "error_code": "43",
+      "error_description": "Lost, stolen or suspected fraud",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "RISK",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "RISK",
+        "source": "RULE",
+        "seconds": 9.980006143450737e-05,
+        "reason": "Rule: CARD 43 = Lost, stolen or suspected fraud, so STOP for RECURRING",
+        "calls": [],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "known",
+      "payment_id": "tc_007",
+      "amount_paise": 19900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "51",
+      "error_description": "Insufficient funds",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "CUSTOMER_ACTION",
+        "source": "RULE",
+        "seconds": 0.00015570013783872128,
+        "reason": "Rule: CARD 51 = Insufficient funds, so PROMPT_CUSTOMER for LIVE_CHECKOUT",
+        "calls": [],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "known",
+      "payment_id": "tc_008",
+      "amount_paise": 6000000,
+      "method": "CARD",
+      "channel": "RECURRING",
+      "error_code": "51",
+      "error_description": "Insufficient funds",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "RETRY_SCHEDULED",
+      "got": {
+        "action": "RETRY_SCHEDULED",
+        "category": "CUSTOMER_ACTION",
+        "source": "RULE",
+        "seconds": 0.00024889991618692875,
+        "reason": "Rule: CARD 51 = Insufficient funds, so RETRY_SCHEDULED for RECURRING",
+        "calls": [],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "known",
+      "payment_id": "tc_009",
+      "amount_paise": 49900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "54",
+      "error_description": "Expired card",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "HARD_DECLINE",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "HARD_DECLINE",
+        "source": "RULE",
+        "seconds": 0.00012870016507804394,
+        "reason": "Rule: CARD 54 = Expired card, so PROMPT_CUSTOMER for LIVE_CHECKOUT",
+        "calls": [],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "known",
+      "payment_id": "tc_010",
+      "amount_paise": 129900,
+      "method": "CARD",
+      "channel": "RECURRING",
+      "error_code": "54",
+      "error_description": "Expired card",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "HARD_DECLINE",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "HARD_DECLINE",
+        "source": "RULE",
+        "seconds": 5.079992115497589e-05,
+        "reason": "Rule: CARD 54 = Expired card, so STOP for RECURRING",
+        "calls": [],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "known",
+      "payment_id": "tc_011",
+      "amount_paise": 19900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "59",
+      "error_description": "Lost, stolen or suspected fraud",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "RISK",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "RISK",
+        "source": "RULE",
+        "seconds": 0.00011079991236329079,
+        "reason": "Rule: CARD 59 = Lost, stolen or suspected fraud, so STOP for LIVE_CHECKOUT",
+        "calls": [],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "known",
+      "payment_id": "tc_012",
+      "amount_paise": 6000000,
+      "method": "CARD",
+      "channel": "RECURRING",
+      "error_code": "59",
+      "error_description": "Lost, stolen or suspected fraud",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "RISK",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "RISK",
+        "source": "RULE",
+        "seconds": 9.220000356435776e-05,
+        "reason": "Rule: CARD 59 = Lost, stolen or suspected fraud, so STOP for RECURRING",
+        "calls": [],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "known",
+      "payment_id": "tc_013",
+      "amount_paise": 49900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "61",
+      "error_description": "Exceeds amount limit",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "CUSTOMER_ACTION",
+        "source": "RULE",
+        "seconds": 0.00010680011473596096,
+        "reason": "Rule: CARD 61 = Exceeds amount limit, so PROMPT_CUSTOMER for LIVE_CHECKOUT",
+        "calls": [],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "known",
+      "payment_id": "tc_014",
+      "amount_paise": 129900,
+      "method": "CARD",
+      "channel": "RECURRING",
+      "error_code": "61",
+      "error_description": "Exceeds amount limit",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "RETRY_SCHEDULED",
+      "got": {
+        "action": "RETRY_SCHEDULED",
+        "category": "CUSTOMER_ACTION",
+        "source": "RULE",
+        "seconds": 0.0001718001440167427,
+        "reason": "Rule: CARD 61 = Exceeds amount limit, so RETRY_SCHEDULED for RECURRING",
+        "calls": [],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "known",
+      "payment_id": "tc_015",
+      "amount_paise": 19900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "91",
+      "error_description": "Issuer bank unavailable",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "ISSUER_TEMPORARY",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "ISSUER_TEMPORARY",
+        "source": "RULE",
+        "seconds": 3.6400044336915016e-05,
+        "reason": "Rule: CARD 91 = Issuer bank unavailable, so PROMPT_CUSTOMER for LIVE_CHECKOUT",
+        "calls": [],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "known",
+      "payment_id": "tc_016",
+      "amount_paise": 6000000,
+      "method": "CARD",
+      "channel": "RECURRING",
+      "error_code": "91",
+      "error_description": "Issuer bank unavailable",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "ISSUER_TEMPORARY",
+      "expected_action": "RETRY_SCHEDULED",
+      "got": {
+        "action": "RETRY_SCHEDULED",
+        "category": "ISSUER_TEMPORARY",
+        "source": "RULE",
+        "seconds": 7.049995474517345e-05,
+        "reason": "Rule: CARD 91 = Issuer bank unavailable, so RETRY_SCHEDULED for RECURRING",
+        "calls": [],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "known",
+      "payment_id": "tc_017",
+      "amount_paise": 49900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "96",
+      "error_description": "Gateway or acquirer glitch",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "GATEWAY_TEMPORARY",
+      "expected_action": "RETRY_ALT_ACQUIRER",
+      "got": {
+        "action": "RETRY_ALT_ACQUIRER",
+        "category": "GATEWAY_TEMPORARY",
+        "source": "RULE",
+        "seconds": 4.9900030717253685e-05,
+        "reason": "Rule: CARD 96 = Gateway or acquirer glitch, so RETRY_ALT_ACQUIRER for LIVE_CHECKOUT",
+        "calls": [],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "known",
+      "payment_id": "tc_018",
+      "amount_paise": 129900,
+      "method": "CARD",
+      "channel": "RECURRING",
+      "error_code": "96",
+      "error_description": "Gateway or acquirer glitch",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "GATEWAY_TEMPORARY",
+      "expected_action": "RETRY_SCHEDULED",
+      "got": {
+        "action": "RETRY_SCHEDULED",
+        "category": "GATEWAY_TEMPORARY",
+        "source": "RULE",
+        "seconds": 3.6999816074967384e-05,
+        "reason": "Rule: CARD 96 = Gateway or acquirer glitch, so RETRY_SCHEDULED for RECURRING",
+        "calls": [],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "known",
+      "payment_id": "tc_019",
+      "amount_paise": 19900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "ACQ_TIMEOUT",
+      "error_description": "Gateway or acquirer glitch",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "GATEWAY_TEMPORARY",
+      "expected_action": "RETRY_ALT_ACQUIRER",
+      "got": {
+        "action": "RETRY_ALT_ACQUIRER",
+        "category": "GATEWAY_TEMPORARY",
+        "source": "RULE",
+        "seconds": 4.12999652326107e-05,
+        "reason": "Rule: CARD ACQ_TIMEOUT = Gateway or acquirer glitch, so RETRY_ALT_ACQUIRER for LIVE_CHECKOUT",
+        "calls": [],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "known",
+      "payment_id": "tc_020",
+      "amount_paise": 6000000,
+      "method": "CARD",
+      "channel": "RECURRING",
+      "error_code": "ACQ_TIMEOUT",
+      "error_description": "Gateway or acquirer glitch",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "GATEWAY_TEMPORARY",
+      "expected_action": "RETRY_SCHEDULED",
+      "got": {
+        "action": "RETRY_SCHEDULED",
+        "category": "GATEWAY_TEMPORARY",
+        "source": "RULE",
+        "seconds": 5.479995161294937e-05,
+        "reason": "Rule: CARD ACQ_TIMEOUT = Gateway or acquirer glitch, so RETRY_SCHEDULED for RECURRING | Safety check 'minimum_wait': scheduled retries wait at least 30 minutes",
+        "calls": [],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "known",
+      "payment_id": "tc_021",
+      "amount_paise": 49900,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "Z9",
+      "error_description": "Insufficient funds",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "CUSTOMER_ACTION",
+        "source": "RULE",
+        "seconds": 3.160000778734684e-05,
+        "reason": "Rule: UPI Z9 = Insufficient funds, so PROMPT_CUSTOMER for LIVE_CHECKOUT",
+        "calls": [],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "known",
+      "payment_id": "tc_022",
+      "amount_paise": 129900,
+      "method": "UPI",
+      "channel": "RECURRING",
+      "error_code": "Z9",
+      "error_description": "Insufficient funds",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "RETRY_SCHEDULED",
+      "got": {
+        "action": "RETRY_SCHEDULED",
+        "category": "CUSTOMER_ACTION",
+        "source": "RULE",
+        "seconds": 4.460010677576065e-05,
+        "reason": "Rule: UPI Z9 = Insufficient funds, so RETRY_SCHEDULED for RECURRING",
+        "calls": [],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "known",
+      "payment_id": "tc_023",
+      "amount_paise": 19900,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "ZM",
+      "error_description": "Wrong UPI PIN",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "CUSTOMER_ACTION",
+        "source": "RULE",
+        "seconds": 2.7999980375170708e-05,
+        "reason": "Rule: UPI ZM = Wrong UPI PIN, so PROMPT_CUSTOMER for LIVE_CHECKOUT",
+        "calls": [],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "known",
+      "payment_id": "tc_024",
+      "amount_paise": 6000000,
+      "method": "UPI",
+      "channel": "RECURRING",
+      "error_code": "ZM",
+      "error_description": "Wrong UPI PIN",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "CUSTOMER_ACTION",
+        "source": "RULE",
+        "seconds": 2.659996971487999e-05,
+        "reason": "Rule: UPI ZM = Wrong UPI PIN, so STOP for RECURRING",
+        "calls": [],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "known",
+      "payment_id": "tc_025",
+      "amount_paise": 49900,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "Z8",
+      "error_description": "Per-transaction limit exceeded",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "CUSTOMER_ACTION",
+        "source": "RULE",
+        "seconds": 2.8999987989664078e-05,
+        "reason": "Rule: UPI Z8 = Per-transaction limit exceeded, so PROMPT_CUSTOMER for LIVE_CHECKOUT",
+        "calls": [],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "known",
+      "payment_id": "tc_026",
+      "amount_paise": 129900,
+      "method": "UPI",
+      "channel": "RECURRING",
+      "error_code": "Z8",
+      "error_description": "Per-transaction limit exceeded",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "CUSTOMER_ACTION",
+        "source": "RULE",
+        "seconds": 2.7600210160017014e-05,
+        "reason": "Rule: UPI Z8 = Per-transaction limit exceeded, so STOP for RECURRING",
+        "calls": [],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "known",
+      "payment_id": "tc_027",
+      "amount_paise": 19900,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "U69",
+      "error_description": "Collect request expired",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "CUSTOMER_ACTION",
+        "source": "RULE",
+        "seconds": 2.8900103643536568e-05,
+        "reason": "Rule: UPI U69 = Collect request expired, so PROMPT_CUSTOMER for LIVE_CHECKOUT",
+        "calls": [],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "known",
+      "payment_id": "tc_028",
+      "amount_paise": 6000000,
+      "method": "UPI",
+      "channel": "RECURRING",
+      "error_code": "U69",
+      "error_description": "Collect request expired",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "CUSTOMER_ACTION",
+        "source": "RULE",
+        "seconds": 2.5799963623285294e-05,
+        "reason": "Rule: UPI U69 = Collect request expired, so STOP for RECURRING",
+        "calls": [],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "known",
+      "payment_id": "tc_029",
+      "amount_paise": 49900,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "ACQ_TIMEOUT",
+      "error_description": "Gateway or acquirer glitch",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "GATEWAY_TEMPORARY",
+      "expected_action": "RETRY_ALT_ACQUIRER",
+      "got": {
+        "action": "RETRY_ALT_ACQUIRER",
+        "category": "GATEWAY_TEMPORARY",
+        "source": "RULE",
+        "seconds": 3.969995304942131e-05,
+        "reason": "Rule: UPI ACQ_TIMEOUT = Gateway or acquirer glitch, so RETRY_ALT_ACQUIRER for LIVE_CHECKOUT",
+        "calls": [],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "known",
+      "payment_id": "tc_030",
+      "amount_paise": 129900,
+      "method": "UPI",
+      "channel": "RECURRING",
+      "error_code": "ACQ_TIMEOUT",
+      "error_description": "Gateway or acquirer glitch",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "GATEWAY_TEMPORARY",
+      "expected_action": "RETRY_SCHEDULED",
+      "got": {
+        "action": "RETRY_SCHEDULED",
+        "category": "GATEWAY_TEMPORARY",
+        "source": "RULE",
+        "seconds": 3.560003824532032e-05,
+        "reason": "Rule: UPI ACQ_TIMEOUT = Gateway or acquirer glitch, so RETRY_SCHEDULED for RECURRING",
+        "calls": [],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_031",
+      "amount_paise": 19900,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "PG_TIMEOUT",
+      "error_description": "Gateway timed out waiting for PSP response",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "GATEWAY_TEMPORARY",
+      "expected_action": "RETRY_ALT_ACQUIRER",
+      "got": {
+        "action": "RETRY_ALT_ACQUIRER",
+        "category": "GATEWAY_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 6.044447199907154,
+        "reason": "LLM_FAST: The gateway timed out; a retry may succeed without user action. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 3.435102599905804,
+            "valid": true,
+            "prompt_tokens": 1180,
+            "completion_tokens": 65,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 2.608609300106764,
+            "valid": true,
+            "prompt_tokens": 1180,
+            "completion_tokens": 250,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_032",
+      "amount_paise": 6000000,
+      "method": "UPI",
+      "channel": "RECURRING",
+      "error_code": "PG_TIMEOUT",
+      "error_description": "Gateway timed out waiting for PSP response",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "GATEWAY_TEMPORARY",
+      "expected_action": "RETRY_SCHEDULED",
+      "got": {
+        "action": "RETRY_SCHEDULED",
+        "category": "GATEWAY_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 5.953588499920443,
+        "reason": "LLM_FAST: Gateway timeout is usually temporary and may clear on retry. (two independent reads agreed) | Safety check 'minimum_wait': scheduled retries wait at least 30 minutes",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 3.41958409990184,
+            "valid": true,
+            "prompt_tokens": 1184,
+            "completion_tokens": 63,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 2.5267258000094444,
+            "valid": true,
+            "prompt_tokens": 1184,
+            "completion_tokens": 289,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_033",
+      "amount_paise": 49900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "PG_E102",
+      "error_description": "Payment gateway internal error, please retry",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "GATEWAY_TEMPORARY",
+      "expected_action": "RETRY_ALT_ACQUIRER",
+      "got": {
+        "action": "RETRY_ALT_ACQUIRER",
+        "category": "GATEWAY_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 6.277290200116113,
+        "reason": "LLM_FAST: The payment gateway experienced an internal error, which is typically temporary and may resolve on retry. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 3.4431152001488954,
+            "valid": true,
+            "prompt_tokens": 1182,
+            "completion_tokens": 70,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 2.833844600012526,
+            "valid": true,
+            "prompt_tokens": 1182,
+            "completion_tokens": 295,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_034",
+      "amount_paise": 129900,
+      "method": "CARD",
+      "channel": "RECURRING",
+      "error_code": "PG_E102",
+      "error_description": "Payment gateway internal error, please retry",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "GATEWAY_TEMPORARY",
+      "expected_action": "RETRY_SCHEDULED",
+      "got": {
+        "action": "RETRY_SCHEDULED",
+        "category": "GATEWAY_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 6.127145000034943,
+        "reason": "LLM_FAST: The gateway reported an internal error, which is usually temporary and may clear on retry. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 3.437275999924168,
+            "valid": true,
+            "prompt_tokens": 1185,
+            "completion_tokens": 69,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 2.689462000038475,
+            "valid": true,
+            "prompt_tokens": 1185,
+            "completion_tokens": 269,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_035",
+      "amount_paise": 19900,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "PSP_UNAVAILABLE",
+      "error_description": "PSP server not reachable",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "GATEWAY_TEMPORARY",
+      "expected_action": "RETRY_ALT_ACQUIRER",
+      "got": {
+        "action": "RETRY_ALT_ACQUIRER",
+        "category": "GATEWAY_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 3.455040300032124,
+        "reason": "LLM_FAST: The PSP server was unreachable, which is typically a temporary issue. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 1.1083190999925137,
+            "valid": true,
+            "prompt_tokens": 1183,
+            "completion_tokens": 66,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 2.3462890000082552,
+            "valid": true,
+            "prompt_tokens": 1183,
+            "completion_tokens": 301,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_036",
+      "amount_paise": 6000000,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "ACQ_502",
+      "error_description": "Acquirer returned HTTP 502 Bad Gateway",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "GATEWAY_TEMPORARY",
+      "expected_action": "RETRY_ALT_ACQUIRER",
+      "got": {
+        "action": "RETRY_ALT_ACQUIRER",
+        "category": "GATEWAY_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 3.3509084000252187,
+        "reason": "LLM_FAST: The acquirer returned a 502 error, which is typically a temporary network issue. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 1.095180100062862,
+            "valid": true,
+            "prompt_tokens": 1189,
+            "completion_tokens": 71,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 2.2552581999916583,
+            "valid": true,
+            "prompt_tokens": 1189,
+            "completion_tokens": 299,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_037",
+      "amount_paise": 49900,
+      "method": "CARD",
+      "channel": "RECURRING",
+      "error_code": "ACQ_502",
+      "error_description": "Acquirer returned HTTP 502 Bad Gateway",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "GATEWAY_TEMPORARY",
+      "expected_action": "RETRY_SCHEDULED",
+      "got": {
+        "action": "RETRY_SCHEDULED",
+        "category": "GATEWAY_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 3.3350298998411745,
+        "reason": "LLM_FAST: The acquirer returned a 502 error, which is typically a temporary network issue. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 1.0141831999644637,
+            "valid": true,
+            "prompt_tokens": 1189,
+            "completion_tokens": 71,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 2.3203597001265734,
+            "valid": true,
+            "prompt_tokens": 1189,
+            "completion_tokens": 313,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_038",
+      "amount_paise": 129900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "ACQ_CONN_RESET",
+      "error_description": "Connection reset by acquirer host",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "GATEWAY_TEMPORARY",
+      "expected_action": "RETRY_ALT_ACQUIRER",
+      "got": {
+        "action": "RETRY_ALT_ACQUIRER",
+        "category": "GATEWAY_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 3.1256136998999864,
+        "reason": "LLM_FAST: The acquirer connection was reset, which is typically a temporary network issue. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 0.8503860000055283,
+            "valid": true,
+            "prompt_tokens": 1182,
+            "completion_tokens": 67,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 2.2748328000307083,
+            "valid": true,
+            "prompt_tokens": 1182,
+            "completion_tokens": 301,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_039",
+      "amount_paise": 19900,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "GW_RATE_LIMIT",
+      "error_description": "Too many requests to PSP, throttled by gateway",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "GATEWAY_TEMPORARY",
+      "expected_action": "RETRY_ALT_ACQUIRER",
+      "got": {
+        "action": "RETRY_ALT_ACQUIRER",
+        "category": "GATEWAY_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 4.479695899877697,
+        "reason": "LLM_FAST: The gateway is throttling requests; retrying later may succeed. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 2.0349722001701593,
+            "valid": true,
+            "prompt_tokens": 1184,
+            "completion_tokens": 64,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 2.4414039000403136,
+            "valid": true,
+            "prompt_tokens": 1184,
+            "completion_tokens": 287,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_040",
+      "amount_paise": 6000000,
+      "method": "UPI",
+      "channel": "RECURRING",
+      "error_code": "GW_RATE_LIMIT",
+      "error_description": "Too many requests to PSP, throttled by gateway",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "GATEWAY_TEMPORARY",
+      "expected_action": "RETRY_SCHEDULED",
+      "got": {
+        "action": "RETRY_SCHEDULED",
+        "category": "GATEWAY_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 4.610738799907267,
+        "reason": "LLM_FAST: The gateway is throttling requests; retrying later may succeed. (two independent reads agreed) | Safety check 'minimum_wait': scheduled retries wait at least 30 minutes",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 2.0381637001410127,
+            "valid": true,
+            "prompt_tokens": 1188,
+            "completion_tokens": 65,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 2.5720792000647634,
+            "valid": true,
+            "prompt_tokens": 1188,
+            "completion_tokens": 306,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_041",
+      "amount_paise": 49900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "3DS_SERVER_ERR",
+      "error_description": "3DS server error at acquirer, authentication not started",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "GATEWAY_TEMPORARY",
+      "expected_action": "RETRY_ALT_ACQUIRER",
+      "got": {
+        "action": "RETRY_ALT_ACQUIRER",
+        "category": "GATEWAY_TEMPORARY",
+        "source": "LLM_ULTRA",
+        "seconds": 12.936875900020823,
+        "reason": "LLM_ULTRA: The acquirer's 3DS server had an error preventing authentication from starting; this is a temporary gateway issue. (broke a tie between Nano reads)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 2.042125100037083,
+            "valid": true,
+            "prompt_tokens": 1185,
+            "completion_tokens": 65,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 3.86096250009723,
+            "valid": true,
+            "prompt_tokens": 1185,
+            "completion_tokens": 365,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/Nemotron-3-Ultra-550b-a55b",
+            "thinking": true,
+            "seconds": 7.031116500031203,
+            "valid": true,
+            "prompt_tokens": 1185,
+            "completion_tokens": 2067,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_042",
+      "amount_paise": 129900,
+      "method": "NETBANKING",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "NB_GW_TIMEOUT",
+      "error_description": "Aggregator timed out before reaching the bank",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "GATEWAY_TEMPORARY",
+      "expected_action": "RETRY_ALT_ACQUIRER",
+      "got": {
+        "action": "RETRY_ALT_ACQUIRER",
+        "category": "GATEWAY_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 4.444554999936372,
+        "reason": "LLM_FAST: The aggregator timed out, which is usually temporary and may succeed on retry. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 1.997767399996519,
+            "valid": true,
+            "prompt_tokens": 1186,
+            "completion_tokens": 68,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 2.4463219000026584,
+            "valid": true,
+            "prompt_tokens": 1186,
+            "completion_tokens": 288,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_043",
+      "amount_paise": 19900,
+      "method": "NETBANKING",
+      "channel": "RECURRING",
+      "error_code": "NB_GW_TIMEOUT",
+      "error_description": "Aggregator timed out before reaching the bank",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "GATEWAY_TEMPORARY",
+      "expected_action": "RETRY_SCHEDULED",
+      "got": {
+        "action": "RETRY_SCHEDULED",
+        "category": "GATEWAY_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 4.8538245998788625,
+        "reason": "LLM_FAST: The aggregator timed out; retrying may succeed without user action. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 1.7203059999737889,
+            "valid": true,
+            "prompt_tokens": 1187,
+            "completion_tokens": 66,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 3.132992099970579,
+            "valid": true,
+            "prompt_tokens": 1187,
+            "completion_tokens": 370,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_044",
+      "amount_paise": 6000000,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "PSP_5XX",
+      "error_description": "PSP returned 503 Service Unavailable",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "GATEWAY_TEMPORARY",
+      "expected_action": "RETRY_ALT_ACQUIRER",
+      "got": {
+        "action": "RETRY_ALT_ACQUIRER",
+        "category": "GATEWAY_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 4.318362900055945,
+        "reason": "LLM_FAST: The PSP returned a 503, which is a temporary service outage. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 1.7257914999499917,
+            "valid": true,
+            "prompt_tokens": 1188,
+            "completion_tokens": 69,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 2.5921209999360144,
+            "valid": true,
+            "prompt_tokens": 1188,
+            "completion_tokens": 310,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_045",
+      "amount_paise": 49900,
+      "method": "UPI",
+      "channel": "RECURRING",
+      "error_code": "PSP_5XX",
+      "error_description": "PSP returned 503 Service Unavailable",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "GATEWAY_TEMPORARY",
+      "expected_action": "RETRY_SCHEDULED",
+      "got": {
+        "action": "RETRY_SCHEDULED",
+        "category": "GATEWAY_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 4.441292099887505,
+        "reason": "LLM_FAST: The PSP returned a 503, which is a temporary service outage. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 1.6278528000693768,
+            "valid": true,
+            "prompt_tokens": 1188,
+            "completion_tokens": 69,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 2.812969599850476,
+            "valid": true,
+            "prompt_tokens": 1188,
+            "completion_tokens": 340,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_046",
+      "amount_paise": 129900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "ACQ_SOCKET_TIMEOUT",
+      "error_description": "Socket read timeout from acquiring bank",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "GATEWAY_TEMPORARY",
+      "expected_action": "RETRY_ALT_ACQUIRER",
+      "got": {
+        "action": "RETRY_ALT_ACQUIRER",
+        "category": "GATEWAY_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 4.052038900088519,
+        "reason": "LLM_FAST: Socket read timeout is a temporary network glitch that can clear on retry. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 1.0177044000010937,
+            "valid": true,
+            "prompt_tokens": 1182,
+            "completion_tokens": 67,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 3.0338190000038594,
+            "valid": true,
+            "prompt_tokens": 1182,
+            "completion_tokens": 327,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_047",
+      "amount_paise": 19900,
+      "method": "CARD",
+      "channel": "RECURRING",
+      "error_code": "ACQ_SOCKET_TIMEOUT",
+      "error_description": "Socket read timeout from acquiring bank",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "GATEWAY_TEMPORARY",
+      "expected_action": "RETRY_SCHEDULED",
+      "got": {
+        "action": "RETRY_SCHEDULED",
+        "category": "GATEWAY_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 3.3581693000160158,
+        "reason": "LLM_FAST: The acquiring bank's socket timed out, which is usually temporary. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 0.9270418998785317,
+            "valid": true,
+            "prompt_tokens": 1183,
+            "completion_tokens": 65,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 2.4306499999947846,
+            "valid": true,
+            "prompt_tokens": 1183,
+            "completion_tokens": 273,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_048",
+      "amount_paise": 6000000,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "COLLECT_PUSH_FAIL",
+      "error_description": "Gateway failed to push collect request to PSP",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "GATEWAY_TEMPORARY",
+      "expected_action": "RETRY_ALT_ACQUIRER",
+      "got": {
+        "action": "RETRY_ALT_ACQUIRER",
+        "category": "GATEWAY_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 4.274586800020188,
+        "reason": "LLM_FAST: The gateway failed to push the collect request, which is typically a temporary issue. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 1.0211318000219762,
+            "valid": true,
+            "prompt_tokens": 1186,
+            "completion_tokens": 67,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 3.2529096000362188,
+            "valid": true,
+            "prompt_tokens": 1186,
+            "completion_tokens": 359,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_049",
+      "amount_paise": 49900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "GW_INTERNAL",
+      "error_description": "Internal server error at payment gateway",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "GATEWAY_TEMPORARY",
+      "expected_action": "RETRY_ALT_ACQUIRER",
+      "got": {
+        "action": "RETRY_ALT_ACQUIRER",
+        "category": "GATEWAY_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 3.528990800026804,
+        "reason": "LLM_FAST: The gateway had an internal error, which is usually temporary. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 1.0258749998174608,
+            "valid": true,
+            "prompt_tokens": 1179,
+            "completion_tokens": 64,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 2.50263849995099,
+            "valid": true,
+            "prompt_tokens": 1179,
+            "completion_tokens": 248,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_050",
+      "amount_paise": 129900,
+      "method": "CARD",
+      "channel": "RECURRING",
+      "error_code": "GW_INTERNAL",
+      "error_description": "Internal server error at payment gateway",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "GATEWAY_TEMPORARY",
+      "expected_action": "RETRY_SCHEDULED",
+      "got": {
+        "action": "RETRY_SCHEDULED",
+        "category": "GATEWAY_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 5.932166999904439,
+        "reason": "LLM_FAST: The gateway had an internal error, which is usually temporary and may resolve on retry. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 1.1399717999156564,
+            "valid": true,
+            "prompt_tokens": 1182,
+            "completion_tokens": 69,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 4.791804200038314,
+            "valid": true,
+            "prompt_tokens": 1182,
+            "completion_tokens": 504,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_051",
+      "amount_paise": 19900,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "PSP_DNS_FAIL",
+      "error_description": "Gateway could not resolve PSP host",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "GATEWAY_TEMPORARY",
+      "expected_action": "RETRY_ALT_ACQUIRER",
+      "got": {
+        "action": "RETRY_ALT_ACQUIRER",
+        "category": "GATEWAY_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 4.410894899861887,
+        "reason": "LLM_FAST: DNS resolution failure is typically a temporary network issue. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 1.0492845000699162,
+            "valid": true,
+            "prompt_tokens": 1182,
+            "completion_tokens": 62,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 3.3610807999502867,
+            "valid": true,
+            "prompt_tokens": 1182,
+            "completion_tokens": 334,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_052",
+      "amount_paise": 6000000,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "ACQ_MAINT",
+      "error_description": "Acquirer under scheduled maintenance",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "GATEWAY_TEMPORARY",
+      "expected_action": "RETRY_ALT_ACQUIRER",
+      "got": {
+        "action": "RETRY_ALT_ACQUIRER",
+        "category": "GATEWAY_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 3.231220900081098,
+        "reason": "LLM_FAST: The acquirer is under scheduled maintenance, which is a temporary issue. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 0.9672631998546422,
+            "valid": true,
+            "prompt_tokens": 1182,
+            "completion_tokens": 65,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 2.2635179001372308,
+            "valid": true,
+            "prompt_tokens": 1182,
+            "completion_tokens": 232,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_053",
+      "amount_paise": 49900,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "BANK_503",
+      "error_description": "Remitter bank CBS not available",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "ISSUER_TEMPORARY",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "ISSUER_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 6.239306199830025,
+        "reason": "LLM_FAST: The remitter bank's CBS system being unavailable is typically a temporary issue. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 0.8696451000869274,
+            "valid": true,
+            "prompt_tokens": 1183,
+            "completion_tokens": 66,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 5.369331100024283,
+            "valid": true,
+            "prompt_tokens": 1183,
+            "completion_tokens": 554,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_054",
+      "amount_paise": 129900,
+      "method": "UPI",
+      "channel": "RECURRING",
+      "error_code": "BANK_503",
+      "error_description": "Remitter bank CBS not available",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "ISSUER_TEMPORARY",
+      "expected_action": "RETRY_SCHEDULED",
+      "got": {
+        "action": "RETRY_SCHEDULED",
+        "category": "ISSUER_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 6.740880199940875,
+        "reason": "LLM_FAST: The remitter bank's CBS system being unavailable is typically a temporary issue. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 1.0266897999681532,
+            "valid": true,
+            "prompt_tokens": 1186,
+            "completion_tokens": 66,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 5.713751600123942,
+            "valid": true,
+            "prompt_tokens": 1186,
+            "completion_tokens": 599,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_055",
+      "amount_paise": 19900,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "XY",
+      "error_description": "Remitter CBS offline",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "ISSUER_TEMPORARY",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "ISSUER_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 6.40356760006398,
+        "reason": "LLM_FAST: The remitter's CBS system is offline, which is typically a temporary issue. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 0.9339203000999987,
+            "valid": true,
+            "prompt_tokens": 1176,
+            "completion_tokens": 66,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 5.469343699980527,
+            "valid": true,
+            "prompt_tokens": 1176,
+            "completion_tokens": 577,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_056",
+      "amount_paise": 6000000,
+      "method": "UPI",
+      "channel": "RECURRING",
+      "error_code": "XY",
+      "error_description": "Remitter CBS offline",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "ISSUER_TEMPORARY",
+      "expected_action": "RETRY_SCHEDULED",
+      "got": {
+        "action": "RETRY_SCHEDULED",
+        "category": "ISSUER_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 6.563571200007573,
+        "reason": "LLM_FAST: The remitter's bank (CBS) is offline, which is typically a temporary issue. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 0.8682031000498682,
+            "valid": true,
+            "prompt_tokens": 1180,
+            "completion_tokens": 68,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 5.694983199937269,
+            "valid": true,
+            "prompt_tokens": 1180,
+            "completion_tokens": 600,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_057",
+      "amount_paise": 49900,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "RB_TIMEOUT",
+      "error_description": "Remitter bank did not respond in time",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "ISSUER_TEMPORARY",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "ISSUER_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 5.594126700190827,
+        "reason": "LLM_FAST: The remitter bank timed out, which is usually temporary. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 0.9020493999123573,
+            "valid": true,
+            "prompt_tokens": 1181,
+            "completion_tokens": 65,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 4.691783300135285,
+            "valid": true,
+            "prompt_tokens": 1181,
+            "completion_tokens": 534,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_058",
+      "amount_paise": 129900,
+      "method": "UPI",
+      "channel": "RECURRING",
+      "error_code": "RB_TIMEOUT",
+      "error_description": "Remitter bank did not respond in time",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "ISSUER_TEMPORARY",
+      "expected_action": "RETRY_SCHEDULED",
+      "got": {
+        "action": "RETRY_SCHEDULED",
+        "category": "ISSUER_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 5.199963100021705,
+        "reason": "LLM_FAST: The remitter bank timed out, which is usually temporary. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 0.9241964998655021,
+            "valid": true,
+            "prompt_tokens": 1184,
+            "completion_tokens": 63,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 4.275339199928567,
+            "valid": true,
+            "prompt_tokens": 1184,
+            "completion_tokens": 492,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_059",
+      "amount_paise": 19900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "ISS_UNAVAIL",
+      "error_description": "Issuer or switch inoperative",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "ISSUER_TEMPORARY",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "ISSUER_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 6.11667239991948,
+        "reason": "LLM_FAST: The issuer or switch is unavailable, which is usually temporary. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 0.8308960001450032,
+            "valid": true,
+            "prompt_tokens": 1180,
+            "completion_tokens": 64,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 5.285373799968511,
+            "valid": true,
+            "prompt_tokens": 1180,
+            "completion_tokens": 614,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_060",
+      "amount_paise": 6000000,
+      "method": "CARD",
+      "channel": "RECURRING",
+      "error_code": "ISS_UNAVAIL",
+      "error_description": "Issuer or switch inoperative",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "ISSUER_TEMPORARY",
+      "expected_action": "RETRY_SCHEDULED",
+      "got": {
+        "action": "RETRY_SCHEDULED",
+        "category": "ISSUER_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 3.4852664000354707,
+        "reason": "LLM_FAST: The issuer or switch is down, which is usually temporary. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 0.8141717999242246,
+            "valid": true,
+            "prompt_tokens": 1184,
+            "completion_tokens": 64,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 2.670757499989122,
+            "valid": true,
+            "prompt_tokens": 1184,
+            "completion_tokens": 308,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_061",
+      "amount_paise": 49900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "ISS_TIMEOUT",
+      "error_description": "Issuer did not respond to authorisation request",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "ISSUER_TEMPORARY",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "ISSUER_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 4.662327999947593,
+        "reason": "LLM_FAST: The issuer was unreachable, which is usually temporary. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 0.8174628999549896,
+            "valid": true,
+            "prompt_tokens": 1181,
+            "completion_tokens": 63,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 3.8445144998840988,
+            "valid": true,
+            "prompt_tokens": 1181,
+            "completion_tokens": 393,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_062",
+      "amount_paise": 129900,
+      "method": "CARD",
+      "channel": "RECURRING",
+      "error_code": "ISS_TIMEOUT",
+      "error_description": "Issuer did not respond to authorisation request",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "ISSUER_TEMPORARY",
+      "expected_action": "RETRY_SCHEDULED",
+      "got": {
+        "action": "RETRY_SCHEDULED",
+        "category": "ISSUER_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 3.7628719999920577,
+        "reason": "LLM_FAST: The issuer was unreachable, which is usually temporary. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 0.8836160998325795,
+            "valid": true,
+            "prompt_tokens": 1184,
+            "completion_tokens": 63,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 2.8788580999244004,
+            "valid": true,
+            "prompt_tokens": 1184,
+            "completion_tokens": 293,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_063",
+      "amount_paise": 19900,
+      "method": "NETBANKING",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "NB_BANK_DOWN",
+      "error_description": "Bank's netbanking site is down for maintenance",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "ISSUER_TEMPORARY",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "ISSUER_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 5.543620100012049,
+        "reason": "LLM_FAST: The bank's netbanking site is down for maintenance, which is typically temporary. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 0.9440899000037462,
+            "valid": true,
+            "prompt_tokens": 1187,
+            "completion_tokens": 67,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 4.599120000144467,
+            "valid": true,
+            "prompt_tokens": 1187,
+            "completion_tokens": 522,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_064",
+      "amount_paise": 6000000,
+      "method": "NETBANKING",
+      "channel": "RECURRING",
+      "error_code": "NB_BANK_DOWN",
+      "error_description": "Bank's netbanking site is down for maintenance",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "ISSUER_TEMPORARY",
+      "expected_action": "RETRY_SCHEDULED",
+      "got": {
+        "action": "RETRY_SCHEDULED",
+        "category": "ISSUER_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 5.114969399990514,
+        "reason": "LLM_FAST: The bank's netbanking site is down for maintenance, which is typically temporary. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 1.0881350000854582,
+            "valid": true,
+            "prompt_tokens": 1191,
+            "completion_tokens": 67,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 4.026384599972516,
+            "valid": true,
+            "prompt_tokens": 1191,
+            "completion_tokens": 485,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_065",
+      "amount_paise": 49900,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "BANK_MAINT",
+      "error_description": "Payer bank under scheduled downtime",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "ISSUER_TEMPORARY",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "ISSUER_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 6.007842699997127,
+        "reason": "LLM_FAST: The payer's bank is under scheduled downtime, which is typically temporary. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 0.913771899882704,
+            "valid": true,
+            "prompt_tokens": 1182,
+            "completion_tokens": 67,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 5.093636200064793,
+            "valid": true,
+            "prompt_tokens": 1182,
+            "completion_tokens": 564,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_066",
+      "amount_paise": 129900,
+      "method": "UPI",
+      "channel": "RECURRING",
+      "error_code": "BANK_MAINT",
+      "error_description": "Payer bank under scheduled downtime",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "ISSUER_TEMPORARY",
+      "expected_action": "RETRY_SCHEDULED",
+      "got": {
+        "action": "RETRY_SCHEDULED",
+        "category": "ISSUER_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 3.8588996999897063,
+        "reason": "LLM_FAST: The payer's bank is scheduled to be down, which is usually temporary. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 0.8217800001148134,
+            "valid": true,
+            "prompt_tokens": 1185,
+            "completion_tokens": 67,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 3.036697000032291,
+            "valid": true,
+            "prompt_tokens": 1185,
+            "completion_tokens": 330,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_067",
+      "amount_paise": 19900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "ISS_SYS_ERR",
+      "error_description": "System malfunction at issuing bank",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "ISSUER_TEMPORARY",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "ISSUER_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 3.9009461998939514,
+        "reason": "LLM_FAST: The issuing bank's system is down, which is typically temporary. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 0.7766258001793176,
+            "valid": true,
+            "prompt_tokens": 1179,
+            "completion_tokens": 64,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 3.1240091999061406,
+            "valid": true,
+            "prompt_tokens": 1179,
+            "completion_tokens": 315,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_068",
+      "amount_paise": 6000000,
+      "method": "CARD",
+      "channel": "RECURRING",
+      "error_code": "ISS_SYS_ERR",
+      "error_description": "System malfunction at issuing bank",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "ISSUER_TEMPORARY",
+      "expected_action": "RETRY_SCHEDULED",
+      "got": {
+        "action": "RETRY_SCHEDULED",
+        "category": "ISSUER_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 3.849352299934253,
+        "reason": "LLM_FAST: The issuing bank's system is down, which is usually temporary. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 0.9578539000358433,
+            "valid": true,
+            "prompt_tokens": 1183,
+            "completion_tokens": 64,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 2.8911069999448955,
+            "valid": true,
+            "prompt_tokens": 1183,
+            "completion_tokens": 277,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_069",
+      "amount_paise": 49900,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "RB_CBS_ERR",
+      "error_description": "Remitter bank core banking error, try after some time",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "ISSUER_TEMPORARY",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "ISSUER_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 7.296938800020143,
+        "reason": "LLM_FAST: The remitter bank's core banking system is temporarily unavailable, which usually resolves after some time. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 0.8753659001085907,
+            "valid": true,
+            "prompt_tokens": 1186,
+            "completion_tokens": 74,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 6.421223100041971,
+            "valid": true,
+            "prompt_tokens": 1186,
+            "completion_tokens": 669,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_070",
+      "amount_paise": 129900,
+      "method": "UPI",
+      "channel": "RECURRING",
+      "error_code": "RB_CBS_ERR",
+      "error_description": "Remitter bank core banking error, try after some time",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "ISSUER_TEMPORARY",
+      "expected_action": "RETRY_SCHEDULED",
+      "got": {
+        "action": "RETRY_SCHEDULED",
+        "category": "ISSUER_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 5.277094899909571,
+        "reason": "LLM_FAST: The remitter bank's core system is temporarily unavailable, which can resolve over time. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 1.2273917000275105,
+            "valid": true,
+            "prompt_tokens": 1189,
+            "completion_tokens": 68,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 4.049373999936506,
+            "valid": true,
+            "prompt_tokens": 1189,
+            "completion_tokens": 454,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_071",
+      "amount_paise": 19900,
+      "method": "NETBANKING",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "NB_503",
+      "error_description": "Bank server busy, please try later",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "ISSUER_TEMPORARY",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "ISSUER_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 5.9419240998104215,
+        "reason": "LLM_FAST: The bank server was busy, which is usually temporary. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 1.079098700080067,
+            "valid": true,
+            "prompt_tokens": 1185,
+            "completion_tokens": 64,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 4.86246780003421,
+            "valid": true,
+            "prompt_tokens": 1185,
+            "completion_tokens": 542,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_072",
+      "amount_paise": 6000000,
+      "method": "CARD",
+      "channel": "RECURRING",
+      "error_code": "ISS_BUSY",
+      "error_description": "Issuer busy, retry later",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "ISSUER_TEMPORARY",
+      "expected_action": "RETRY_SCHEDULED",
+      "got": {
+        "action": "RETRY_SCHEDULED",
+        "category": "ISSUER_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 4.858422699850053,
+        "reason": "LLM_FAST: The issuer was busy, which is usually temporary and may clear on retry. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 1.6694577999878675,
+            "valid": true,
+            "prompt_tokens": 1184,
+            "completion_tokens": 67,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 3.188605099916458,
+            "valid": true,
+            "prompt_tokens": 1184,
+            "completion_tokens": 389,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_073",
+      "amount_paise": 49900,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "INSUFF_BAL",
+      "error_description": "Payer account has insufficient balance",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "CUSTOMER_ACTION",
+        "source": "LLM_FAST",
+        "seconds": 6.259481200017035,
+        "reason": "LLM_FAST: Insufficient balance can be resolved by adding funds, which may happen automatically or via a retry. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 1.0285921001341194,
+            "valid": true,
+            "prompt_tokens": 1182,
+            "completion_tokens": 67,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 5.2305236998945475,
+            "valid": true,
+            "prompt_tokens": 1182,
+            "completion_tokens": 606,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_074",
+      "amount_paise": 129900,
+      "method": "UPI",
+      "channel": "RECURRING",
+      "error_code": "INSUFF_BAL",
+      "error_description": "Payer account has insufficient balance",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "RETRY_SCHEDULED",
+      "got": {
+        "action": "RETRY_SCHEDULED",
+        "category": "CUSTOMER_ACTION",
+        "source": "LLM_FAST",
+        "seconds": 6.188541200011969,
+        "reason": "LLM_FAST: Insufficient balance can be resolved by adding funds, which may happen automatically or via a later attempt. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 0.9334551999345422,
+            "valid": true,
+            "prompt_tokens": 1185,
+            "completion_tokens": 68,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 5.254748000064865,
+            "valid": true,
+            "prompt_tokens": 1185,
+            "completion_tokens": 615,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_075",
+      "amount_paise": 19900,
+      "method": "UPI",
+      "channel": "RECURRING",
+      "error_code": "MANDATE_BAL",
+      "error_description": "Mandate execution failed: balance insufficient",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "RETRY_SCHEDULED",
+      "got": {
+        "action": "RETRY_SCHEDULED",
+        "category": "CUSTOMER_ACTION",
+        "source": "LLM_FAST",
+        "seconds": 7.746057599782944,
+        "reason": "LLM_FAST: Insufficient balance can be resolved by the customer adding funds. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 0.8756705999840051,
+            "valid": true,
+            "prompt_tokens": 1186,
+            "completion_tokens": 60,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 6.870001799892634,
+            "valid": true,
+            "prompt_tokens": 1186,
+            "completion_tokens": 778,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_076",
+      "amount_paise": 6000000,
+      "method": "NETBANKING",
+      "channel": "RECURRING",
+      "error_code": "NSF",
+      "error_description": "Not sufficient funds in the linked account",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "RETRY_SCHEDULED",
+      "got": {
+        "action": "RETRY_SCHEDULED",
+        "category": "CUSTOMER_ACTION",
+        "source": "LLM_FAST",
+        "seconds": 9.87076469999738,
+        "reason": "LLM_FAST: Insufficient funds can be resolved by the customer adding money, which may happen automatically over time. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 1.506525999866426,
+            "valid": true,
+            "prompt_tokens": 1186,
+            "completion_tokens": 67,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 8.363815600052476,
+            "valid": true,
+            "prompt_tokens": 1186,
+            "completion_tokens": 1031,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_077",
+      "amount_paise": 49900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "LOW_FUNDS",
+      "error_description": "Insufficient credit limit on card",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "CUSTOMER_ACTION",
+        "source": "LLM_FAST",
+        "seconds": 6.304402400040999,
+        "reason": "LLM_FAST: Insufficient funds can be resolved by the customer adding money or using another payment method. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 1.0594528000801802,
+            "valid": true,
+            "prompt_tokens": 1181,
+            "completion_tokens": 66,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 5.244500499917194,
+            "valid": true,
+            "prompt_tokens": 1181,
+            "completion_tokens": 602,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_078",
+      "amount_paise": 129900,
+      "method": "CARD",
+      "channel": "RECURRING",
+      "error_code": "LOW_FUNDS",
+      "error_description": "Insufficient credit limit on card",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "RETRY_SCHEDULED",
+      "got": {
+        "action": "STOP",
+        "category": "CUSTOMER_ACTION",
+        "source": "LLM_FAST",
+        "seconds": 6.445659799966961,
+        "reason": "LLM_FAST: Insufficient credit limit requires customer to take action. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 0.9792265000287443,
+            "valid": true,
+            "prompt_tokens": 1184,
+            "completion_tokens": 59,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 5.466079500038177,
+            "valid": true,
+            "prompt_tokens": 1184,
+            "completion_tokens": 635,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": false,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_079",
+      "amount_paise": 19900,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "WRONG_PIN",
+      "error_description": "Incorrect UPI PIN entered",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "CUSTOMER_ACTION",
+        "source": "LLM_FAST",
+        "seconds": 3.5191653999499977,
+        "reason": "LLM_FAST: The PIN can be corrected by the customer without external intervention. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 0.8643349998164922,
+            "valid": true,
+            "prompt_tokens": 1179,
+            "completion_tokens": 60,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 2.654435300035402,
+            "valid": true,
+            "prompt_tokens": 1179,
+            "completion_tokens": 287,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_080",
+      "amount_paise": 6000000,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "PIN_TRIES",
+      "error_description": "Number of PIN tries exceeded",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "CUSTOMER_ACTION",
+        "source": "LLM_FAST",
+        "seconds": 5.454169099917635,
+        "reason": "LLM_FAST: PIN tries exceeded requires customer to reset PIN before retry. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 0.8601483998354524,
+            "valid": true,
+            "prompt_tokens": 1183,
+            "completion_tokens": 59,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 4.593595799989998,
+            "valid": true,
+            "prompt_tokens": 1183,
+            "completion_tokens": 437,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_081",
+      "amount_paise": 49900,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "TXN_DECLINED_BY_USER",
+      "error_description": "Customer declined the collect request",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "CUSTOMER_ACTION",
+        "source": "LLM_FAST",
+        "seconds": 4.644066700013354,
+        "reason": "LLM_FAST: The customer explicitly declined the collect request, requiring active action to retry. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 0.9492408998776227,
+            "valid": true,
+            "prompt_tokens": 1184,
+            "completion_tokens": 62,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 3.694435799960047,
+            "valid": true,
+            "prompt_tokens": 1184,
+            "completion_tokens": 294,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_082",
+      "amount_paise": 129900,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "COLLECT_EXPIRED",
+      "error_description": "Collect request expired, payer did not approve",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "CUSTOMER_ACTION",
+        "source": "LLM_FAST",
+        "seconds": 6.711749900132418,
+        "reason": "LLM_FAST: The payment requires the payer to approve the request again, which cannot happen without user interaction. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 1.6967317000962794,
+            "valid": true,
+            "prompt_tokens": 1185,
+            "completion_tokens": 65,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 5.014676599996164,
+            "valid": true,
+            "prompt_tokens": 1185,
+            "completion_tokens": 507,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_083",
+      "amount_paise": 19900,
+      "method": "UPI",
+      "channel": "RECURRING",
+      "error_code": "MANDATE_PAUSED",
+      "error_description": "Customer has paused the AutoPay mandate",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "CUSTOMER_ACTION",
+        "source": "LLM_FAST",
+        "seconds": 3.35567620000802,
+        "reason": "LLM_FAST: The mandate is paused by the customer, requiring manual action to resume. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 1.4963702000677586,
+            "valid": true,
+            "prompt_tokens": 1185,
+            "completion_tokens": 62,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 1.858857300132513,
+            "valid": true,
+            "prompt_tokens": 1185,
+            "completion_tokens": 190,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_084",
+      "amount_paise": 6000000,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "DAILY_LIMIT",
+      "error_description": "Payer has exceeded daily UPI transaction limit",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "CUSTOMER_ACTION",
+        "source": "LLM_FAST",
+        "seconds": 8.874306499958038,
+        "reason": "LLM_FAST: The daily UPI limit was exceeded, requiring a new payment attempt. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 1.0540674000512809,
+            "valid": true,
+            "prompt_tokens": 1186,
+            "completion_tokens": 62,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 7.819922699825838,
+            "valid": true,
+            "prompt_tokens": 1186,
+            "completion_tokens": 833,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_085",
+      "amount_paise": 49900,
+      "method": "UPI",
+      "channel": "RECURRING",
+      "error_code": "DAILY_LIMIT",
+      "error_description": "Payer has exceeded daily UPI transaction limit",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "RETRY_SCHEDULED",
+      "got": {
+        "action": "STOP",
+        "category": "CUSTOMER_ACTION",
+        "source": "LLM_FAST",
+        "seconds": 7.3074318000581115,
+        "reason": "LLM_FAST: The daily UPI limit was exceeded, requiring a new payment attempt. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 0.976352899800986,
+            "valid": true,
+            "prompt_tokens": 1186,
+            "completion_tokens": 62,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 6.330693199997768,
+            "valid": true,
+            "prompt_tokens": 1186,
+            "completion_tokens": 669,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": false,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_086",
+      "amount_paise": 129900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "OTP_FAILED",
+      "error_description": "OTP authentication failed",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "CUSTOMER_ACTION",
+        "source": "LLM_FAST",
+        "seconds": 4.321229600114748,
+        "reason": "LLM_FAST: OTP authentication failed requires customer to re-enter credentials. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 0.9294726999942213,
+            "valid": true,
+            "prompt_tokens": 1178,
+            "completion_tokens": 59,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 3.3913310999050736,
+            "valid": true,
+            "prompt_tokens": 1178,
+            "completion_tokens": 276,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_087",
+      "amount_paise": 19900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "3DS_ABANDONED",
+      "error_description": "Customer closed the 3D Secure page",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "CUSTOMER_ACTION",
+        "source": "LLM_FAST",
+        "seconds": 5.06281099980697,
+        "reason": "LLM_FAST: The customer closed the 3D Secure page, requiring active re-engagement to retry. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 1.21082039992325,
+            "valid": true,
+            "prompt_tokens": 1185,
+            "completion_tokens": 67,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 3.8515618999954313,
+            "valid": true,
+            "prompt_tokens": 1185,
+            "completion_tokens": 455,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_088",
+      "amount_paise": 6000000,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "OTP_TIMEOUT",
+      "error_description": "OTP not entered within time",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "CUSTOMER_ACTION",
+        "source": "LLM_FAST",
+        "seconds": 3.623230299912393,
+        "reason": "LLM_FAST: OTP timeout requires customer to re-enter OTP to retry. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 0.9397100999485701,
+            "valid": true,
+            "prompt_tokens": 1181,
+            "completion_tokens": 61,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 2.6825172000098974,
+            "valid": true,
+            "prompt_tokens": 1181,
+            "completion_tokens": 308,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_089",
+      "amount_paise": 49900,
+      "method": "NETBANKING",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "NB_USER_CANCEL",
+      "error_description": "User cancelled at bank login page",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "CUSTOMER_ACTION",
+        "source": "LLM_FAST",
+        "seconds": 5.138418100075796,
+        "reason": "LLM_FAST: User cancelled at bank login page; requires active user action to retry. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 0.8590760000515729,
+            "valid": true,
+            "prompt_tokens": 1184,
+            "completion_tokens": 62,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 4.278933800058439,
+            "valid": true,
+            "prompt_tokens": 1184,
+            "completion_tokens": 338,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_090",
+      "amount_paise": 129900,
+      "method": "NETBANKING",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "NB_LOW_BAL",
+      "error_description": "Insufficient balance in account",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "CUSTOMER_ACTION",
+        "source": "LLM_FAST",
+        "seconds": 4.289353900123388,
+        "reason": "LLM_FAST: Insufficient balance requires customer to add funds before retry. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 0.9871501000598073,
+            "valid": true,
+            "prompt_tokens": 1184,
+            "completion_tokens": 60,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 3.301776400068775,
+            "valid": true,
+            "prompt_tokens": 1184,
+            "completion_tokens": 255,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_091",
+      "amount_paise": 19900,
+      "method": "CARD",
+      "channel": "RECURRING",
+      "error_code": "LIMIT_EXCEEDED",
+      "error_description": "Card's spending limit exceeded for the month",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "RETRY_SCHEDULED",
+      "got": {
+        "action": "RETRY_SCHEDULED",
+        "category": "CUSTOMER_ACTION",
+        "source": "LLM_FAST",
+        "seconds": 6.979865500004962,
+        "reason": "LLM_FAST: The spending limit can reset automatically, allowing future payments without user action. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 1.1309440999757499,
+            "valid": true,
+            "prompt_tokens": 1186,
+            "completion_tokens": 61,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 5.848523200023919,
+            "valid": true,
+            "prompt_tokens": 1186,
+            "completion_tokens": 571,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_092",
+      "amount_paise": 6000000,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "CVV_MISMATCH",
+      "error_description": "Incorrect CVV entered",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "CUSTOMER_ACTION",
+        "source": "LLM_FAST",
+        "seconds": 5.143472299911082,
+        "reason": "LLM_FAST: The CVV mismatch can be fixed by the customer re-entering the correct CVV. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 1.0702631000895053,
+            "valid": true,
+            "prompt_tokens": 1182,
+            "completion_tokens": 67,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 4.072919900063425,
+            "valid": true,
+            "prompt_tokens": 1182,
+            "completion_tokens": 338,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_093",
+      "amount_paise": 49900,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "APP_TIMEOUT",
+      "error_description": "Customer did not complete payment in UPI app",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "CUSTOMER_ACTION",
+        "source": "LLM_FAST",
+        "seconds": 5.604943899903446,
+        "reason": "LLM_FAST: Customer must reinitiate payment; no automatic retry possible. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 0.982584600104019,
+            "valid": true,
+            "prompt_tokens": 1182,
+            "completion_tokens": 60,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 4.6219462000299245,
+            "valid": true,
+            "prompt_tokens": 1182,
+            "completion_tokens": 545,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_094",
+      "amount_paise": 129900,
+      "method": "UPI",
+      "channel": "RECURRING",
+      "error_code": "BAL_LOW_AUTOPAY",
+      "error_description": "AutoPay debit failed: account balance too low",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "RETRY_SCHEDULED",
+      "got": {
+        "action": "RETRY_SCHEDULED",
+        "category": "CUSTOMER_ACTION",
+        "source": "LLM_FAST",
+        "seconds": 7.701954599935561,
+        "reason": "LLM_FAST: Balance issue can be resolved by adding funds, which may happen automatically. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 0.8087629000656307,
+            "valid": true,
+            "prompt_tokens": 1189,
+            "completion_tokens": 61,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 6.892843199893832,
+            "valid": true,
+            "prompt_tokens": 1189,
+            "completion_tokens": 811,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_095",
+      "amount_paise": 19900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "INV_CARD",
+      "error_description": "Card number is not valid",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "HARD_DECLINE",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "HARD_DECLINE",
+        "source": "LLM_FAST",
+        "seconds": 3.797506600152701,
+        "reason": "LLM_FAST: The card number is invalid, which cannot be fixed without a new card. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 0.9826684000436217,
+            "valid": true,
+            "prompt_tokens": 1179,
+            "completion_tokens": 64,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 2.814497899962589,
+            "valid": true,
+            "prompt_tokens": 1179,
+            "completion_tokens": 315,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_096",
+      "amount_paise": 6000000,
+      "method": "CARD",
+      "channel": "RECURRING",
+      "error_code": "INV_CARD",
+      "error_description": "Card number is not valid",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "HARD_DECLINE",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "HARD_DECLINE",
+        "source": "LLM_FAST",
+        "seconds": 2.552902599796653,
+        "reason": "LLM_FAST: The card number is invalid, which cannot be fixed without a new card. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 0.8996965000405908,
+            "valid": true,
+            "prompt_tokens": 1183,
+            "completion_tokens": 64,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 1.6528140001464635,
+            "valid": true,
+            "prompt_tokens": 1183,
+            "completion_tokens": 173,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_097",
+      "amount_paise": 49900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "CARD_EXPIRED",
+      "error_description": "Card has expired",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "HARD_DECLINE",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "HARD_DECLINE",
+        "source": "LLM_FAST",
+        "seconds": 4.152134499978274,
+        "reason": "LLM_FAST: The card is expired, which cannot be fixed without a new card. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 1.090567999985069,
+            "valid": true,
+            "prompt_tokens": 1177,
+            "completion_tokens": 63,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 3.0611761999316514,
+            "valid": true,
+            "prompt_tokens": 1177,
+            "completion_tokens": 299,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_098",
+      "amount_paise": 129900,
+      "method": "CARD",
+      "channel": "RECURRING",
+      "error_code": "CARD_EXPIRED",
+      "error_description": "Card has expired",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "HARD_DECLINE",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "HARD_DECLINE",
+        "source": "LLM_FAST",
+        "seconds": 4.277514399960637,
+        "reason": "LLM_FAST: The card is expired, which cannot be fixed without a new card. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 1.056156399892643,
+            "valid": true,
+            "prompt_tokens": 1180,
+            "completion_tokens": 63,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 3.2209838000126183,
+            "valid": true,
+            "prompt_tokens": 1180,
+            "completion_tokens": 324,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_099",
+      "amount_paise": 19900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "ACCT_CLOSED",
+      "error_description": "Account linked to card is closed",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "HARD_DECLINE",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "HARD_DECLINE",
+        "source": "LLM_FAST",
+        "seconds": 2.8847389000002295,
+        "reason": "LLM_FAST: The account linked to the card is closed, which cannot be resolved automatically. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 0.9805655998643488,
+            "valid": true,
+            "prompt_tokens": 1180,
+            "completion_tokens": 64,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 1.9038575999438763,
+            "valid": true,
+            "prompt_tokens": 1180,
+            "completion_tokens": 165,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_100",
+      "amount_paise": 6000000,
+      "method": "CARD",
+      "channel": "RECURRING",
+      "error_code": "ACCT_CLOSED",
+      "error_description": "Account linked to card is closed",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "HARD_DECLINE",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "HARD_DECLINE",
+        "source": "LLM_FAST",
+        "seconds": 4.47732950001955,
+        "reason": "LLM_FAST: The account linked to the card is permanently closed, so no retry can succeed without new card details. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 0.9277305998839438,
+            "valid": true,
+            "prompt_tokens": 1184,
+            "completion_tokens": 69,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 3.5492132999934256,
+            "valid": true,
+            "prompt_tokens": 1184,
+            "completion_tokens": 345,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_101",
+      "amount_paise": 49900,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "INV_VPA",
+      "error_description": "Invalid VPA, account does not exist",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "HARD_DECLINE",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "HARD_DECLINE",
+        "source": "LLM_FAST",
+        "seconds": 4.853637299966067,
+        "reason": "LLM_FAST: The VPA is invalid and cannot be fixed without a new payment attempt. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 0.9891582999844104,
+            "valid": true,
+            "prompt_tokens": 1183,
+            "completion_tokens": 64,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 3.8640912999399006,
+            "valid": true,
+            "prompt_tokens": 1183,
+            "completion_tokens": 386,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_102",
+      "amount_paise": 129900,
+      "method": "UPI",
+      "channel": "RECURRING",
+      "error_code": "MANDATE_REVOKED",
+      "error_description": "Mandate has been revoked by the customer",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "HARD_DECLINE",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "CUSTOMER_ACTION",
+        "source": "LLM_ULTRA",
+        "seconds": 7.01957150013186,
+        "reason": "LLM_ULTRA: The customer revoked the UPI mandate, so a new mandate must be created. (broke a tie between Nano reads)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 0.9541894001886249,
+            "valid": true,
+            "prompt_tokens": 1191,
+            "completion_tokens": 63,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 3.684812600025907,
+            "valid": true,
+            "prompt_tokens": 1191,
+            "completion_tokens": 362,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/Nemotron-3-Ultra-550b-a55b",
+            "thinking": true,
+            "seconds": 2.380097100045532,
+            "valid": true,
+            "prompt_tokens": 1191,
+            "completion_tokens": 510,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_103",
+      "amount_paise": 19900,
+      "method": "UPI",
+      "channel": "RECURRING",
+      "error_code": "VPA_DEACTIVATED",
+      "error_description": "UPI ID is no longer active",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "HARD_DECLINE",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "HARD_DECLINE",
+        "source": "LLM_FAST",
+        "seconds": 4.329707399941981,
+        "reason": "LLM_FAST: The UPI ID is permanently deactivated, which cannot be resolved automatically. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 0.9787744998466223,
+            "valid": true,
+            "prompt_tokens": 1186,
+            "completion_tokens": 64,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 3.350615300005302,
+            "valid": true,
+            "prompt_tokens": 1186,
+            "completion_tokens": 319,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_104",
+      "amount_paise": 6000000,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "ACCT_DORMANT",
+      "error_description": "Remitter account is dormant",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "HARD_DECLINE",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "HARD_DECLINE",
+        "source": "LLM_FAST",
+        "seconds": 4.0078839000780135,
+        "reason": "LLM_FAST: The account is dormant and cannot be reactivated without customer action. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 0.8923571000341326,
+            "valid": true,
+            "prompt_tokens": 1183,
+            "completion_tokens": 61,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 3.11516430019401,
+            "valid": true,
+            "prompt_tokens": 1183,
+            "completion_tokens": 341,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_105",
+      "amount_paise": 49900,
+      "method": "UPI",
+      "channel": "RECURRING",
+      "error_code": "ACCT_DORMANT",
+      "error_description": "Remitter account is dormant",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "HARD_DECLINE",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "HARD_DECLINE",
+        "source": "LLM_FAST",
+        "seconds": 4.757555000018328,
+        "reason": "LLM_FAST: Dormant account cannot be reactivated without customer action. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 0.8068319999147207,
+            "valid": true,
+            "prompt_tokens": 1183,
+            "completion_tokens": 61,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 3.95033589983359,
+            "valid": true,
+            "prompt_tokens": 1183,
+            "completion_tokens": 404,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_106",
+      "amount_paise": 129900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "TXN_NOT_PERMITTED",
+      "error_description": "Transaction not permitted to cardholder",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "HARD_DECLINE",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "CUSTOMER_ACTION",
+        "source": "LLM_FAST",
+        "seconds": 12.525318200001493,
+        "reason": "LLM_FAST: The block is due to a customer-side restriction that requires active action to resolve. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 1.0163497999310493,
+            "valid": true,
+            "prompt_tokens": 1184,
+            "completion_tokens": 63,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 11.508577700005844,
+            "valid": true,
+            "prompt_tokens": 1184,
+            "completion_tokens": 1314,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_107",
+      "amount_paise": 19900,
+      "method": "CARD",
+      "channel": "RECURRING",
+      "error_code": "TXN_NOT_PERMITTED",
+      "error_description": "Transaction not permitted to cardholder",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "HARD_DECLINE",
+      "expected_action": "STOP",
+      "got": {
+        "action": "HUMAN_REVIEW",
+        "category": "UNKNOWN",
+        "source": "FALLBACK",
+        "seconds": 10.183624800061807,
+        "reason": "Sent to human review: two Nano reads disagreed (CUSTOMER_ACTION vs HARD_DECLINE); LLM_ULTRA was unsure (0.35)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 0.918608000036329,
+            "valid": true,
+            "prompt_tokens": 1185,
+            "completion_tokens": 62,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 6.303111899876967,
+            "valid": true,
+            "prompt_tokens": 1185,
+            "completion_tokens": 689,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/Nemotron-3-Ultra-550b-a55b",
+            "thinking": true,
+            "seconds": 2.9608938999008387,
+            "valid": true,
+            "prompt_tokens": 1185,
+            "completion_tokens": 587,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": false,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_108",
+      "amount_paise": 6000000,
+      "method": "NETBANKING",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "NB_ACCT_CLOSED",
+      "error_description": "Account closed",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "HARD_DECLINE",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "HARD_DECLINE",
+        "source": "LLM_FAST",
+        "seconds": 3.3094422998838127,
+        "reason": "LLM_FAST: Account is permanently closed, cannot recover. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 0.8785265998449177,
+            "valid": true,
+            "prompt_tokens": 1182,
+            "completion_tokens": 57,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 2.4303311000112444,
+            "valid": true,
+            "prompt_tokens": 1182,
+            "completion_tokens": 265,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_109",
+      "amount_paise": 49900,
+      "method": "NETBANKING",
+      "channel": "RECURRING",
+      "error_code": "NB_ACCT_CLOSED",
+      "error_description": "Account closed",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "HARD_DECLINE",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "HARD_DECLINE",
+        "source": "LLM_FAST",
+        "seconds": 3.755626199999824,
+        "reason": "LLM_FAST: Account is permanently closed, cannot recover without new account. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 0.8821668999735266,
+            "valid": true,
+            "prompt_tokens": 1182,
+            "completion_tokens": 60,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 2.873022999847308,
+            "valid": true,
+            "prompt_tokens": 1182,
+            "completion_tokens": 276,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_110",
+      "amount_paise": 129900,
+      "method": "CARD",
+      "channel": "RECURRING",
+      "error_code": "CARD_REPLACED",
+      "error_description": "Card has been replaced, old card number no longer valid",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "HARD_DECLINE",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "HARD_DECLINE",
+        "source": "LLM_FAST",
+        "seconds": 3.9729269999079406,
+        "reason": "LLM_FAST: The card has been replaced, making the payment impossible without customer action. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 0.9811865999363363,
+            "valid": true,
+            "prompt_tokens": 1189,
+            "completion_tokens": 63,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 2.9912491999566555,
+            "valid": true,
+            "prompt_tokens": 1189,
+            "completion_tokens": 334,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_111",
+      "amount_paise": 19900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "FRAUD_SUSPECT",
+      "error_description": "Transaction flagged as suspected fraud by issuer",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "RISK",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "RISK",
+        "source": "LLM_FAST",
+        "seconds": 3.677006999962032,
+        "reason": "LLM_FAST: The transaction is flagged as suspected fraud, which is a permanent block. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 0.9105587999802083,
+            "valid": true,
+            "prompt_tokens": 1184,
+            "completion_tokens": 62,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 2.766129700001329,
+            "valid": true,
+            "prompt_tokens": 1184,
+            "completion_tokens": 304,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_112",
+      "amount_paise": 6000000,
+      "method": "CARD",
+      "channel": "RECURRING",
+      "error_code": "FRAUD_SUSPECT",
+      "error_description": "Transaction flagged as suspected fraud by issuer",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "RISK",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "RISK",
+        "source": "LLM_FAST",
+        "seconds": 2.8787973998114467,
+        "reason": "LLM_FAST: The transaction is flagged as suspected fraud, which is a permanent block. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 0.9193824999965727,
+            "valid": true,
+            "prompt_tokens": 1188,
+            "completion_tokens": 62,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 1.959000299917534,
+            "valid": true,
+            "prompt_tokens": 1188,
+            "completion_tokens": 184,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_113",
+      "amount_paise": 49900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "STOLEN",
+      "error_description": "Card reported stolen",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "RISK",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "RISK",
+        "source": "LLM_FAST",
+        "seconds": 3.6312112000305206,
+        "reason": "LLM_FAST: Card reported stolen indicates fraud risk, which never retries. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 0.9900740999728441,
+            "valid": true,
+            "prompt_tokens": 1177,
+            "completion_tokens": 58,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 2.6407775999978185,
+            "valid": true,
+            "prompt_tokens": 1177,
+            "completion_tokens": 218,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_114",
+      "amount_paise": 129900,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "RISK_BLOCK",
+      "error_description": "Payment blocked by PSP risk engine",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "RISK",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "RISK",
+        "source": "LLM_FAST",
+        "seconds": 4.215997099876404,
+        "reason": "LLM_FAST: Payment blocked by PSP risk engine, which is a fraud or security block that cannot be resolved automatically. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 1.1735938000492752,
+            "valid": true,
+            "prompt_tokens": 1182,
+            "completion_tokens": 67,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 3.042102999985218,
+            "valid": true,
+            "prompt_tokens": 1182,
+            "completion_tokens": 270,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_115",
+      "amount_paise": 19900,
+      "method": "UPI",
+      "channel": "RECURRING",
+      "error_code": "RISK_BLOCK",
+      "error_description": "Payment blocked by PSP risk engine",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "RISK",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "RISK",
+        "source": "LLM_FAST",
+        "seconds": 3.984991499921307,
+        "reason": "LLM_FAST: Payment blocked by PSP risk engine indicates fraud or security risk, which cannot be resolved automatically. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 1.0814555000979453,
+            "valid": true,
+            "prompt_tokens": 1183,
+            "completion_tokens": 65,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 2.9031779000069946,
+            "valid": true,
+            "prompt_tokens": 1183,
+            "completion_tokens": 250,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_116",
+      "amount_paise": 6000000,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "VELOCITY",
+      "error_description": "Velocity check failed: too many attempts in short time",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "RISK",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "GATEWAY_TEMPORARY",
+        "source": "LLM_ULTRA",
+        "seconds": 8.588532899972051,
+        "reason": "LLM_ULTRA: The gateway's velocity limit was exceeded, which resets automatically over time. (broke a tie between Nano reads) | Safety check 'risk_words_never_retried': error text mentions 'velocity': never retry or prompt",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 0.902746899984777,
+            "valid": true,
+            "prompt_tokens": 1186,
+            "completion_tokens": 64,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 5.549506700132042,
+            "valid": true,
+            "prompt_tokens": 1186,
+            "completion_tokens": 521,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/Nemotron-3-Ultra-550b-a55b",
+            "thinking": true,
+            "seconds": 2.1357007001060992,
+            "valid": true,
+            "prompt_tokens": 1186,
+            "completion_tokens": 372,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_117",
+      "amount_paise": 49900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "RISK_SCORE",
+      "error_description": "High risk score from merchant fraud screening",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "RISK",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "RISK",
+        "source": "LLM_FAST",
+        "seconds": 3.180093500064686,
+        "reason": "LLM_FAST: High risk score indicates fraud suspicion, which cannot be resolved automatically. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 0.894978400086984,
+            "valid": true,
+            "prompt_tokens": 1183,
+            "completion_tokens": 60,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 2.2848301001358777,
+            "valid": true,
+            "prompt_tokens": 1183,
+            "completion_tokens": 178,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_118",
+      "amount_paise": 129900,
+      "method": "CARD",
+      "channel": "RECURRING",
+      "error_code": "GW_FRAUD",
+      "error_description": "Gateway fraud rule triggered",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "RISK",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "RISK",
+        "source": "LLM_FAST",
+        "seconds": 4.201049099909142,
+        "reason": "LLM_FAST: Fraud rule triggered, retry requires active customer action. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 1.0370732999872416,
+            "valid": true,
+            "prompt_tokens": 1181,
+            "completion_tokens": 58,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 3.163557799998671,
+            "valid": true,
+            "prompt_tokens": 1181,
+            "completion_tokens": 258,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_119",
+      "amount_paise": 19900,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "SUSP_PAYER",
+      "error_description": "Payer VPA on suspicious list",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "RISK",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "RISK",
+        "source": "LLM_FAST",
+        "seconds": 3.438208600040525,
+        "reason": "LLM_FAST: Payer VPA flagged as suspicious, indicating potential fraud or risk. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 0.9677999000996351,
+            "valid": true,
+            "prompt_tokens": 1184,
+            "completion_tokens": 62,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 2.4700462000910193,
+            "valid": true,
+            "prompt_tokens": 1184,
+            "completion_tokens": 195,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_120",
+      "amount_paise": 6000000,
+      "method": "NETBANKING",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "NB_RISK",
+      "error_description": "Bank declined: suspicious activity on account",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "RISK",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "RISK",
+        "source": "LLM_FAST",
+        "seconds": 3.7572761999908835,
+        "reason": "LLM_FAST: Suspicious activity indicates fraud risk, which must not be retried. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 0.9589350000023842,
+            "valid": true,
+            "prompt_tokens": 1186,
+            "completion_tokens": 62,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 2.7979710998479277,
+            "valid": true,
+            "prompt_tokens": 1186,
+            "completion_tokens": 214,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_121",
+      "amount_paise": 49900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "LOST_CARD",
+      "error_description": "Card reported lost, pick up card",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "RISK",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "RISK",
+        "source": "LLM_FAST",
+        "seconds": 2.9703627000562847,
+        "reason": "LLM_FAST: Card reported lost indicates fraud risk, which cannot be resolved automatically. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 0.9140112998429686,
+            "valid": true,
+            "prompt_tokens": 1181,
+            "completion_tokens": 60,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 2.0559232998639345,
+            "valid": true,
+            "prompt_tokens": 1181,
+            "completion_tokens": 177,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_122",
+      "amount_paise": 129900,
+      "method": "UPI",
+      "channel": "RECURRING",
+      "error_code": "AML_HOLD",
+      "error_description": "Transaction held for compliance review",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "RISK",
+      "expected_action": "STOP",
+      "got": {
+        "action": "HUMAN_REVIEW",
+        "category": "UNKNOWN",
+        "source": "FALLBACK",
+        "seconds": 16.322414899943396,
+        "reason": "Sent to human review: two Nano reads disagreed (CUSTOMER_ACTION vs UNKNOWN); LLM_ULTRA gave a third answer (GATEWAY_TEMPORARY)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 1.2198725999332964,
+            "valid": true,
+            "prompt_tokens": 1182,
+            "completion_tokens": 58,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 11.58999380003661,
+            "valid": true,
+            "prompt_tokens": 1182,
+            "completion_tokens": 1066,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/Nemotron-3-Ultra-550b-a55b",
+            "thinking": true,
+            "seconds": 3.511751100188121,
+            "valid": true,
+            "prompt_tokens": 1182,
+            "completion_tokens": 753,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": false,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_123",
+      "amount_paise": 19900,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "U30",
+      "error_description": "debit failed",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "UNKNOWN",
+      "expected_action": "HUMAN_REVIEW",
+      "got": {
+        "action": "HUMAN_REVIEW",
+        "category": "UNKNOWN",
+        "source": "FALLBACK",
+        "seconds": 2.9373822000343353,
+        "reason": "Sent to human review: LLM_FAST was unsure (0.30); LLM_ULTRA was unsure (0.35)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 0.9876544000580907,
+            "valid": true,
+            "prompt_tokens": 1177,
+            "completion_tokens": 63,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/Nemotron-3-Ultra-550b-a55b",
+            "thinking": true,
+            "seconds": 1.9491921998560429,
+            "valid": true,
+            "prompt_tokens": 1177,
+            "completion_tokens": 478,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_124",
+      "amount_paise": 6000000,
+      "method": "UPI",
+      "channel": "RECURRING",
+      "error_code": "U30",
+      "error_description": "debit failed",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "UNKNOWN",
+      "expected_action": "HUMAN_REVIEW",
+      "got": {
+        "action": "HUMAN_REVIEW",
+        "category": "UNKNOWN",
+        "source": "FALLBACK",
+        "seconds": 3.5425425998400897,
+        "reason": "Sent to human review: LLM_FAST was unsure (0.35); LLM_ULTRA was unsure (0.30)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 1.0421754999551922,
+            "valid": true,
+            "prompt_tokens": 1181,
+            "completion_tokens": 64,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/Nemotron-3-Ultra-550b-a55b",
+            "thinking": true,
+            "seconds": 2.4999325000680983,
+            "valid": true,
+            "prompt_tokens": 1181,
+            "completion_tokens": 523,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_125",
+      "amount_paise": 49900,
+      "method": "UPI",
+      "channel": "RECURRING",
+      "error_code": "U30",
+      "error_description": "Debit has been failed",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "UNKNOWN",
+      "expected_action": "HUMAN_REVIEW",
+      "got": {
+        "action": "HUMAN_REVIEW",
+        "category": "UNKNOWN",
+        "source": "FALLBACK",
+        "seconds": 3.3107987998519093,
+        "reason": "Sent to human review: LLM_FAST was unsure (0.30); LLM_ULTRA was unsure (0.35)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 0.9705827999860048,
+            "valid": true,
+            "prompt_tokens": 1181,
+            "completion_tokens": 62,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/Nemotron-3-Ultra-550b-a55b",
+            "thinking": true,
+            "seconds": 2.339741699863225,
+            "valid": true,
+            "prompt_tokens": 1181,
+            "completion_tokens": 718,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_126",
+      "amount_paise": 129900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "05",
+      "error_description": "Do not honour",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "UNKNOWN",
+      "expected_action": "HUMAN_REVIEW",
+      "got": {
+        "action": "HUMAN_REVIEW",
+        "category": "UNKNOWN",
+        "source": "FALLBACK",
+        "seconds": 6.961318799993023,
+        "reason": "Sent to human review: two Nano reads disagreed (HARD_DECLINE vs UNKNOWN); LLM_ULTRA was unsure (0.35)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 1.8218540998641402,
+            "valid": true,
+            "prompt_tokens": 1176,
+            "completion_tokens": 63,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 3.132099000038579,
+            "valid": true,
+            "prompt_tokens": 1176,
+            "completion_tokens": 279,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/Nemotron-3-Ultra-550b-a55b",
+            "thinking": true,
+            "seconds": 2.0065939999185503,
+            "valid": true,
+            "prompt_tokens": 1176,
+            "completion_tokens": 278,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_127",
+      "amount_paise": 19900,
+      "method": "CARD",
+      "channel": "RECURRING",
+      "error_code": "05",
+      "error_description": "Do not honour",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "UNKNOWN",
+      "expected_action": "HUMAN_REVIEW",
+      "got": {
+        "action": "HUMAN_REVIEW",
+        "category": "UNKNOWN",
+        "source": "FALLBACK",
+        "seconds": 2.6020521000027657,
+        "reason": "Sent to human review: LLM_FAST was unsure (0.30); LLM_ULTRA was unsure (0.35)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 1.0201008999720216,
+            "valid": true,
+            "prompt_tokens": 1177,
+            "completion_tokens": 68,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/Nemotron-3-Ultra-550b-a55b",
+            "thinking": true,
+            "seconds": 1.5816168000455946,
+            "valid": true,
+            "prompt_tokens": 1177,
+            "completion_tokens": 227,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_128",
+      "amount_paise": 6000000,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "ERR_GENERIC",
+      "error_description": "Something went wrong",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "UNKNOWN",
+      "expected_action": "HUMAN_REVIEW",
+      "got": {
+        "action": "HUMAN_REVIEW",
+        "category": "UNKNOWN",
+        "source": "FALLBACK",
+        "seconds": 2.22459840006195,
+        "reason": "Sent to human review: LLM_FAST was unsure (0.30); LLM_ULTRA was unsure (0.30)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 0.9435138001572341,
+            "valid": true,
+            "prompt_tokens": 1180,
+            "completion_tokens": 58,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/Nemotron-3-Ultra-550b-a55b",
+            "thinking": true,
+            "seconds": 1.280644299928099,
+            "valid": true,
+            "prompt_tokens": 1180,
+            "completion_tokens": 281,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_129",
+      "amount_paise": 49900,
+      "method": "NETBANKING",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "NB_ERR",
+      "error_description": "Transaction failed",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "UNKNOWN",
+      "expected_action": "HUMAN_REVIEW",
+      "got": {
+        "action": "HUMAN_REVIEW",
+        "category": "UNKNOWN",
+        "source": "FALLBACK",
+        "seconds": 3.346103300107643,
+        "reason": "Sent to human review: LLM_FAST was unsure (0.35); LLM_ULTRA was unsure (0.35)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 0.9653841000981629,
+            "valid": true,
+            "prompt_tokens": 1177,
+            "completion_tokens": 58,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/Nemotron-3-Ultra-550b-a55b",
+            "thinking": true,
+            "seconds": 2.380422699963674,
+            "valid": true,
+            "prompt_tokens": 1177,
+            "completion_tokens": 367,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_130",
+      "amount_paise": 129900,
+      "method": "UPI",
+      "channel": "RECURRING",
+      "error_code": "UNKNOWN_ERR",
+      "error_description": "Payment could not be processed",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "UNKNOWN",
+      "expected_action": "HUMAN_REVIEW",
+      "got": {
+        "action": "HUMAN_REVIEW",
+        "category": "UNKNOWN",
+        "source": "FALLBACK",
+        "seconds": 2.7000795998610556,
+        "reason": "Sent to human review: LLM_FAST was unsure (0.35); LLM_ULTRA was unsure (0.30)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 0.8837822999339551,
+            "valid": true,
+            "prompt_tokens": 1182,
+            "completion_tokens": 58,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/Nemotron-3-Ultra-550b-a55b",
+            "thinking": true,
+            "seconds": 1.8158221999183297,
+            "valid": true,
+            "prompt_tokens": 1182,
+            "completion_tokens": 293,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_131",
+      "amount_paise": 19900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "DECLINED",
+      "error_description": "Transaction declined",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "UNKNOWN",
+      "expected_action": "HUMAN_REVIEW",
+      "got": {
+        "action": "HUMAN_REVIEW",
+        "category": "UNKNOWN",
+        "source": "FALLBACK",
+        "seconds": 2.556277700001374,
+        "reason": "Sent to human review: LLM_FAST was unsure (0.35); LLM_ULTRA was unsure (0.35)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 1.1487667001783848,
+            "valid": true,
+            "prompt_tokens": 1176,
+            "completion_tokens": 58,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/Nemotron-3-Ultra-550b-a55b",
+            "thinking": true,
+            "seconds": 1.4070981000550091,
+            "valid": true,
+            "prompt_tokens": 1176,
+            "completion_tokens": 230,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_132",
+      "amount_paise": 6000000,
+      "method": "CARD",
+      "channel": "RECURRING",
+      "error_code": "DECLINED",
+      "error_description": "Transaction declined",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "UNKNOWN",
+      "expected_action": "HUMAN_REVIEW",
+      "got": {
+        "action": "HUMAN_REVIEW",
+        "category": "UNKNOWN",
+        "source": "FALLBACK",
+        "seconds": 2.4552050998900086,
+        "reason": "Sent to human review: LLM_FAST was unsure (0.35); LLM_ULTRA was unsure (0.35)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 1.029453600058332,
+            "valid": true,
+            "prompt_tokens": 1180,
+            "completion_tokens": 58,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/Nemotron-3-Ultra-550b-a55b",
+            "thinking": true,
+            "seconds": 1.4253062999341637,
+            "valid": true,
+            "prompt_tokens": 1180,
+            "completion_tokens": 266,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_133",
+      "amount_paise": 49900,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "TXN_FAIL",
+      "error_description": "",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "UNKNOWN",
+      "expected_action": "HUMAN_REVIEW",
+      "got": {
+        "action": "HUMAN_REVIEW",
+        "category": "UNKNOWN",
+        "source": "FALLBACK",
+        "seconds": 2.87650250014849,
+        "reason": "Sent to human review: LLM_FAST was unsure (0.35); LLM_ULTRA was unsure (0.35)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 0.8637717999517918,
+            "valid": true,
+            "prompt_tokens": 1174,
+            "completion_tokens": 58,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/Nemotron-3-Ultra-550b-a55b",
+            "thinking": true,
+            "seconds": 2.012449200032279,
+            "valid": true,
+            "prompt_tokens": 1174,
+            "completion_tokens": 389,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_134",
+      "amount_paise": 129900,
+      "method": "NETBANKING",
+      "channel": "RECURRING",
+      "error_code": "NB_FAILED",
+      "error_description": "Failed",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "UNKNOWN",
+      "expected_action": "HUMAN_REVIEW",
+      "got": {
+        "action": "HUMAN_REVIEW",
+        "category": "UNKNOWN",
+        "source": "FALLBACK",
+        "seconds": 2.6536901998333633,
+        "reason": "Sent to human review: LLM_FAST was unsure (0.30); LLM_ULTRA was unsure (0.30)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 1.0827790999319404,
+            "valid": true,
+            "prompt_tokens": 1179,
+            "completion_tokens": 62,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/Nemotron-3-Ultra-550b-a55b",
+            "thinking": true,
+            "seconds": 1.570532799931243,
+            "valid": true,
+            "prompt_tokens": 1179,
+            "completion_tokens": 182,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_135",
+      "amount_paise": 19900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "ERR_01",
+      "error_description": "Error",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "UNKNOWN",
+      "expected_action": "HUMAN_REVIEW",
+      "got": {
+        "action": "HUMAN_REVIEW",
+        "category": "UNKNOWN",
+        "source": "FALLBACK",
+        "seconds": 2.7540092000272125,
+        "reason": "Sent to human review: LLM_FAST was unsure (0.30); LLM_ULTRA was unsure (0.30)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 1.061924200039357,
+            "valid": true,
+            "prompt_tokens": 1175,
+            "completion_tokens": 65,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/Nemotron-3-Ultra-550b-a55b",
+            "thinking": true,
+            "seconds": 1.6917236999142915,
+            "valid": true,
+            "prompt_tokens": 1175,
+            "completion_tokens": 253,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_136",
+      "amount_paise": 6000000,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "PAYMENT_FAILED",
+      "error_description": "Payment failed",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "UNKNOWN",
+      "expected_action": "HUMAN_REVIEW",
+      "got": {
+        "action": "HUMAN_REVIEW",
+        "category": "UNKNOWN",
+        "source": "FALLBACK",
+        "seconds": 2.7245674000587314,
+        "reason": "Sent to human review: LLM_FAST was unsure (0.30); LLM_ULTRA was unsure (0.35)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 0.9269112998154014,
+            "valid": true,
+            "prompt_tokens": 1179,
+            "completion_tokens": 64,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/Nemotron-3-Ultra-550b-a55b",
+            "thinking": true,
+            "seconds": 1.7972427001222968,
+            "valid": true,
+            "prompt_tokens": 1179,
+            "completion_tokens": 445,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_137",
+      "amount_paise": 49900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "GENERIC_DECLINE",
+      "error_description": "Your card was declined",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "UNKNOWN",
+      "expected_action": "HUMAN_REVIEW",
+      "got": {
+        "action": "HUMAN_REVIEW",
+        "category": "UNKNOWN",
+        "source": "FALLBACK",
+        "seconds": 3.4376566000282764,
+        "reason": "Sent to human review: LLM_FAST was unsure (0.35); LLM_ULTRA was unsure (0.35)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 1.4849868000019342,
+            "valid": true,
+            "prompt_tokens": 1180,
+            "completion_tokens": 58,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/Nemotron-3-Ultra-550b-a55b",
+            "thinking": true,
+            "seconds": 1.9522747001610696,
+            "valid": true,
+            "prompt_tokens": 1180,
+            "completion_tokens": 274,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_138",
+      "amount_paise": 129900,
+      "method": "UPI",
+      "channel": "RECURRING",
+      "error_code": "X1",
+      "error_description": "Failure",
+      "attempt_number": 1,
+      "acquirer": "ACQ_A",
+      "expected_category": "UNKNOWN",
+      "expected_action": "HUMAN_REVIEW",
+      "got": {
+        "action": "HUMAN_REVIEW",
+        "category": "UNKNOWN",
+        "source": "FALLBACK",
+        "seconds": 2.5639979999978095,
+        "reason": "Sent to human review: LLM_FAST was unsure (0.30); LLM_ULTRA was unsure (0.35)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 1.3589800000190735,
+            "valid": true,
+            "prompt_tokens": 1177,
+            "completion_tokens": 58,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/Nemotron-3-Ultra-550b-a55b",
+            "thinking": true,
+            "seconds": 1.2045986999291927,
+            "valid": true,
+            "prompt_tokens": 1177,
+            "completion_tokens": 180,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_139",
+      "amount_paise": 19900,
+      "method": "UPI",
+      "channel": "RECURRING",
+      "error_code": "PG_TIMEOUT",
+      "error_description": "Gateway timed out waiting for PSP response",
+      "attempt_number": 3,
+      "acquirer": "ACQ_A",
+      "expected_category": "GATEWAY_TEMPORARY",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "GATEWAY_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 5.695919099962339,
+        "reason": "LLM_FAST: The gateway timed out, which is usually temporary and may succeed on retry. (two independent reads agreed) | Safety check 'retry_cap': attempt 3 reached the cap",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 1.09965920005925,
+            "valid": true,
+            "prompt_tokens": 1182,
+            "completion_tokens": 67,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 4.5956741000991315,
+            "valid": true,
+            "prompt_tokens": 1182,
+            "completion_tokens": 422,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_140",
+      "amount_paise": 6000000,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "PG_E102",
+      "error_description": "Payment gateway internal error, please retry",
+      "attempt_number": 3,
+      "acquirer": "ACQ_A",
+      "expected_category": "GATEWAY_TEMPORARY",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "GATEWAY_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 4.219738299958408,
+        "reason": "LLM_FAST: The payment gateway reported an internal error, which is typically temporary and may resolve on retry. (two independent reads agreed) | Safety check 'retry_cap': attempt 3 reached the cap",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 1.0703795000445098,
+            "valid": true,
+            "prompt_tokens": 1184,
+            "completion_tokens": 70,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 3.148861699970439,
+            "valid": true,
+            "prompt_tokens": 1184,
+            "completion_tokens": 281,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_141",
+      "amount_paise": 49900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "ACQ_502",
+      "error_description": "Acquirer returned HTTP 502 Bad Gateway",
+      "attempt_number": 3,
+      "acquirer": "ACQ_A",
+      "expected_category": "GATEWAY_TEMPORARY",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "GATEWAY_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 3.9275066000409424,
+        "reason": "LLM_FAST: The acquirer returned a 502 error, which is typically a temporary network issue. (two independent reads agreed) | Safety check 'retry_cap': attempt 3 reached the cap",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 1.0224263998679817,
+            "valid": true,
+            "prompt_tokens": 1187,
+            "completion_tokens": 70,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 2.9047109000384808,
+            "valid": true,
+            "prompt_tokens": 1187,
+            "completion_tokens": 257,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_142",
+      "amount_paise": 129900,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "GW_RATE_LIMIT",
+      "error_description": "Too many requests to PSP, throttled by gateway",
+      "attempt_number": 3,
+      "acquirer": "ACQ_A",
+      "expected_category": "GATEWAY_TEMPORARY",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "GATEWAY_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 5.504117999924347,
+        "reason": "LLM_FAST: The gateway is throttling requests, which typically resolves after a delay. (two independent reads agreed) | Safety check 'retry_cap': attempt 3 reached the cap",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 1.029247999889776,
+            "valid": true,
+            "prompt_tokens": 1185,
+            "completion_tokens": 68,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 4.47436310001649,
+            "valid": true,
+            "prompt_tokens": 1185,
+            "completion_tokens": 360,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_143",
+      "amount_paise": 19900,
+      "method": "UPI",
+      "channel": "RECURRING",
+      "error_code": "BANK_503",
+      "error_description": "Remitter bank CBS not available",
+      "attempt_number": 3,
+      "acquirer": "ACQ_A",
+      "expected_category": "ISSUER_TEMPORARY",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "ISSUER_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 7.9658840000629425,
+        "reason": "LLM_FAST: The remitter bank's CBS system being unavailable is typically a temporary issue. (two independent reads agreed) | Safety check 'retry_cap': attempt 3 reached the cap",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 1.2338753999210894,
+            "valid": true,
+            "prompt_tokens": 1185,
+            "completion_tokens": 66,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 6.731625699903816,
+            "valid": true,
+            "prompt_tokens": 1185,
+            "completion_tokens": 627,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_144",
+      "amount_paise": 6000000,
+      "method": "CARD",
+      "channel": "RECURRING",
+      "error_code": "ISS_TIMEOUT",
+      "error_description": "Issuer did not respond to authorisation request",
+      "attempt_number": 3,
+      "acquirer": "ACQ_A",
+      "expected_category": "ISSUER_TEMPORARY",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "ISSUER_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 4.920870500151068,
+        "reason": "LLM_FAST: The issuer was unreachable, which is usually temporary. (two independent reads agreed) | Safety check 'retry_cap': attempt 3 reached the cap",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 0.9636641000397503,
+            "valid": true,
+            "prompt_tokens": 1185,
+            "completion_tokens": 63,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 3.9567672999110073,
+            "valid": true,
+            "prompt_tokens": 1185,
+            "completion_tokens": 336,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_145",
+      "amount_paise": 49900,
+      "method": "UPI",
+      "channel": "RECURRING",
+      "error_code": "RB_TIMEOUT",
+      "error_description": "Remitter bank did not respond in time",
+      "attempt_number": 5,
+      "acquirer": "ACQ_A",
+      "expected_category": "ISSUER_TEMPORARY",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "ISSUER_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 7.870081500150263,
+        "reason": "LLM_FAST: The remitter bank timed out, which is usually temporary and may resolve automatically. (two independent reads agreed) | Safety check 'retry_cap': attempt 5 reached the cap",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 0.9237160000484437,
+            "valid": true,
+            "prompt_tokens": 1183,
+            "completion_tokens": 66,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 6.945904199965298,
+            "valid": true,
+            "prompt_tokens": 1183,
+            "completion_tokens": 672,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_146",
+      "amount_paise": 129900,
+      "method": "UPI",
+      "channel": "RECURRING",
+      "error_code": "INSUFF_BAL",
+      "error_description": "Payer account has insufficient balance",
+      "attempt_number": 3,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "CUSTOMER_ACTION",
+        "source": "LLM_FAST",
+        "seconds": 7.293921600095928,
+        "reason": "LLM_FAST: Insufficient balance can be resolved by adding funds, which may happen automatically or via a retry. (two independent reads agreed) | Safety check 'retry_cap': attempt 3 reached the cap",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 0.9245250001549721,
+            "valid": true,
+            "prompt_tokens": 1185,
+            "completion_tokens": 67,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 6.36891010007821,
+            "valid": true,
+            "prompt_tokens": 1185,
+            "completion_tokens": 676,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_147",
+      "amount_paise": 19900,
+      "method": "NETBANKING",
+      "channel": "RECURRING",
+      "error_code": "NSF",
+      "error_description": "Not sufficient funds in the linked account",
+      "attempt_number": 3,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "CUSTOMER_ACTION",
+        "source": "LLM_FAST",
+        "seconds": 4.991869100136682,
+        "reason": "LLM_FAST: Insufficient funds can be resolved by adding money, which may happen automatically or later without user action. (two independent reads agreed) | Safety check 'retry_cap': attempt 3 reached the cap",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 0.9605789999477565,
+            "valid": true,
+            "prompt_tokens": 1184,
+            "completion_tokens": 68,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 4.030831800075248,
+            "valid": true,
+            "prompt_tokens": 1184,
+            "completion_tokens": 408,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_148",
+      "amount_paise": 6000000,
+      "method": "CARD",
+      "channel": "RECURRING",
+      "error_code": "LOW_FUNDS",
+      "error_description": "Insufficient credit limit on card",
+      "attempt_number": 4,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "STOP",
+      "got": {
+        "action": "STOP",
+        "category": "CUSTOMER_ACTION",
+        "source": "LLM_FAST",
+        "seconds": 5.255957099841908,
+        "reason": "LLM_FAST: Insufficient funds can be resolved by the customer adding money or using another payment method. (two independent reads agreed) | Safety check 'retry_cap': attempt 4 reached the cap",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 0.8994581000879407,
+            "valid": true,
+            "prompt_tokens": 1185,
+            "completion_tokens": 65,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 4.356165899895132,
+            "valid": true,
+            "prompt_tokens": 1185,
+            "completion_tokens": 487,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_149",
+      "amount_paise": 49900,
+      "method": "CARD",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "ISS_UNAVAIL",
+      "error_description": "Issuer or switch inoperative",
+      "attempt_number": 3,
+      "acquirer": "ACQ_A",
+      "expected_category": "ISSUER_TEMPORARY",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "ISSUER_TEMPORARY",
+        "source": "LLM_FAST",
+        "seconds": 5.575667400145903,
+        "reason": "LLM_FAST: The issuer or switch is unavailable, which is typically a temporary issue. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 0.9482638000044972,
+            "valid": true,
+            "prompt_tokens": 1180,
+            "completion_tokens": 66,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 4.626995300175622,
+            "valid": true,
+            "prompt_tokens": 1180,
+            "completion_tokens": 585,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    },
+    {
+      "kind": "messy",
+      "payment_id": "tc_150",
+      "amount_paise": 129900,
+      "method": "UPI",
+      "channel": "LIVE_CHECKOUT",
+      "error_code": "INSUFF_BAL",
+      "error_description": "Payer account has insufficient balance",
+      "attempt_number": 3,
+      "acquirer": "ACQ_A",
+      "expected_category": "CUSTOMER_ACTION",
+      "expected_action": "PROMPT_CUSTOMER",
+      "got": {
+        "action": "PROMPT_CUSTOMER",
+        "category": "CUSTOMER_ACTION",
+        "source": "LLM_FAST",
+        "seconds": 3.7336727001238614,
+        "reason": "LLM_FAST: Insufficient balance can be resolved by adding funds, which may happen automatically or via a retry without user interaction. (two independent reads agreed)",
+        "calls": [
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": false,
+            "seconds": 1.0180943000596017,
+            "valid": true,
+            "prompt_tokens": 1183,
+            "completion_tokens": 70,
+            "cached_tokens": 0
+          },
+          {
+            "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+            "thinking": true,
+            "seconds": 2.7151792999356985,
+            "valid": true,
+            "prompt_tokens": 1183,
+            "completion_tokens": 335,
+            "cached_tokens": 0
+          }
+        ],
+        "correct": true,
+        "unsafe": false
+      }
+    }
+  ]
+}
