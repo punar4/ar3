@@ -71,3 +71,13 @@ AR3 v2, rebuilt from scratch for the Nebius × NVIDIA Global AI Hackathon.
 - requirements.txt: streamlit-aggrid 1.2.1 and mcp 1.30.0, both pinned
 - Tests: 74, all pass
 
+## 2026-11-17 (branch `isoquant`)
+
+- config.py: provider switch. `AR3_PROVIDER=isoquant` in `.env` moves every model call to Isoquant; unset means Nebius. Model IDs and the reasoning on/off setting can be set per provider
+- llm.py: `thinking_extra()` for each provider's way of switching reasoning, and `ask_full()` returning the text, token usage and seconds
+- evaluate.py `--label NAME`: saves `results/eval_NAME.md` and `results/decisions_NAME.json` with tokens and time per model call
+- compare.py: side-by-side table of runs plus every decision that changed between them; `--prices prices.json` adds cost
+- reasoning_probe.py: about 20 small calls to find which reasoning setting a provider honours
+- Ran the 150-case set twice each on: Nemotron on Nebius, DeepSeek V4.1 Flash + GLM-5.3-Flash on Isoquant, and the same two models on Nebius. Same models: 149-150 of 150 decisions identical across providers, 0 unsafe everywhere, Isoquant about 3x faster and about 3.5-4x cheaper
+- README: same-model results at the top; removed the outreach paragraph; the PayPal set is no longer called held-out
+- Prompt, rules, safety checks and decision code unchanged. Tests: 74, all pass

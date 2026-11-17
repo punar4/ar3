@@ -10,6 +10,30 @@ AR3 (**A**ssess, then **R**etry, **R**eroute or **R**efuse) is an open-source de
 
 ---
 
+## Same models, two providers (Nebius vs Isoquant)
+
+AR3's 150 labelled UPI and card failures, run twice on each provider with the same two models: DeepSeek V4.1 Flash 1017 (read twice, reasoning off then high) and GLM-5.3-Flash as tie-breaker. Prompt, rules, safety checks and decision code were unchanged.
+
+| | Nebius Token Factory | Isoquant |
+| --- | --- | --- |
+| Correct decisions | 97.3%, 97.3% | 98.0%, 97.3% |
+| Unsafe actions | 0, 0 | 0, 0 |
+| Sent to a person | 13%, 13% | 13%, 13% |
+| Decisions that flipped between a provider's own two runs | 0 of 150 | 1 of 150 |
+| Time per model call, p50 | 1.35 s, 1.37 s | 0.41 s, 0.48 s |
+| Time per messy case, p50 | 2.8 s, 2.8 s | 0.9 s, 1.0 s |
+| Time per messy case, p95 | 4.9 s, 5.2 s | 2.2 s, 2.7 s |
+| Output tokens | 23,746 / 22,064 | 22,310 / 21,836 |
+| Cost per 1,000 payments | $0.275, $0.231 | $0.071, $0.067 |
+
+- **The decisions did not shift.** Isoquant's second run matched Nebius on all 150 decisions. Its first run differed on one case (`tc_116`, a velocity-check failure: stop vs send to a person), the same case that flipped between Isoquant's own two runs.
+- **About 3x faster and about 3.5-4x cheaper on Isoquant.** Output tokens are nearly the same on both, so the speed gap is serving, not shorter answers. Both providers cached most input tokens, so the cost gap is price.
+- **Limits:** 150 author-written cases, two runs each, one workload, one night (16-17 Nov 2026), measured from India. Isoquant's model is labelled "Fast" and may not be the identical build to the one on Nebius.
+
+Full tables and every changed decision: [`results/compare_same_model.md`](results/compare_same_model.md). The original Nemotron setup against Isoquant (different models): [`results/compare.md`](results/compare.md). To rerun: set the provider in `.env` (see `config.py`), then `python evaluate.py --label NAME` and `python compare.py`.
+
+---
+
 ## AR3 for PayPal
 
 ### The problem
@@ -91,7 +115,7 @@ AR3 began in October 2026 as a UPI and card decision engine (Razorpay AI Buildat
 - Idempotent retries with `PayPal-Request-Id`, shown live by counting captures
 - PayPal error codes in the rule table, and a PayPal adapter
 - The second read, and "the model diagnoses, code decides"
-- A 31-case held-out PayPal evaluation (`paypal_eval.py`)
+- A 31-case PayPal evaluation, labelled before any model run (`paypal_eval.py`)
 - AI-agent access through MCP (`ar3_mcp.py`)
 - An AG Grid recovery queue in the Batch tab; hosting on Render
 - Tests: 45 → 74
@@ -156,8 +180,6 @@ These fixes were found on the same test set they are measured on, so this is not
 When a UPI or card payment fails, gateways already retry. But many failures come back vague, like UPI's U30 "debit failed", and nobody knows *why*. Retrying blindly wastes money and annoys banks and customers. Giving up loses the sale.
 
 **Who it's for:** Indian subscription businesses that collect through UPI AutoPay and cards, often across more than one gateway, and need a consistent, explainable answer to "what do we do with this failed payment?"
-
-**Talking to the people who'd use it:** I reached out to 29 people, including 22 founders across 17 Indian fintech and consumer startups that collect payments (among them Juspay, Jar, Rupifi, Drona Pay, Fundly.ai, Credfix and topmate.io), plus employees at several of them. No replies to the question yet; their answers will shape v2.1.
 
 ## The finding that shaped AR3
 
@@ -282,7 +304,7 @@ Copy `.env.example` to `.env` and add your Nebius Token Factory API key. For the
 | --- | --- |
 | `python -m pytest` | Runs all 74 tests (no API keys needed; the model and PayPal are faked) |
 | `python paypal_check.py` | Creates a sandbox order and forces seven real PayPal failures |
-| `python paypal_eval.py --runs 2` | The 31-case held-out PayPal evaluation |
+| `python paypal_eval.py --runs 2` | The 31-case PayPal evaluation |
 | `python ar3_mcp.py` | Starts AR3 as an MCP server (see docs/mcp.md) |
 | `python agent_demo.py` | A scripted MCP client asks AR3 about three failed PayPal payments |
 | `python smoke_test.py` | Lists the Nemotron models and makes one live call |
@@ -319,7 +341,7 @@ One failed payment per row, as CSV or JSON (the demo's Batch tab has a template)
 | `actions.py` | Plans an action; carries it out only with a named approver |
 | `ar3_mcp.py` | AR3 as an MCP tool for AI agents |
 | `agent_demo.py` | A scripted MCP client calling that tool |
-| `paypal_eval.py` | The held-out PayPal evaluation |
+| `paypal_eval.py` | The 31-case PayPal evaluation |
 | `policy.py` | Independent safety checks |
 | `engine.py` | The full flow: rules → Nemotron → safety checks |
 | `config.py` | Model IDs, thresholds and limits |
